@@ -1,0 +1,18 @@
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0 text-dark">{{ title | translate }}</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <div *ngIf="showButton && addFeatureEnabled === false">
+                        <button type="button" class="btn btn-primary" (click)="triggerButtonClickEvent()">
+                            <i class="fa fa-plus"></i> {{  buttonText | translate }}
+                        </button>
+                    </div>                
+                </ol>
+            </div>
+        </div>
+    </div>
+  </div>

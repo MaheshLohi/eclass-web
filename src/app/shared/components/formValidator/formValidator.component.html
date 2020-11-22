@@ -1,0 +1,16 @@
+<div class="form-error-container">
+    <div *ngIf="data.invalid && (data.dirty || data.touched);">
+        <span class="form-input-error" *ngIf="validateRequired && data.errors.required">
+            {{ 'INPUT_MANDATORY_ERROR' | translate }}
+        </span>
+        <span class="form-input-error" *ngIf="validateEmail && data.errors.email">
+            {{ 'EMAIL_ADDRESS_ERROR' | translate }}
+        </span>
+        <span class="form-input-error" *ngIf="validatePasswordLength && data.errors.minlength">
+            {{ 'PASSWORD_ERROR' | translate }}
+        </span>
+        <span class="form-input-error" *ngIf="validateNameMinLength && data.errors.minlength">
+            {{ 'NAME_ERROR' | translate }}
+        </span>
+    </div>
+</div>
