@@ -10,8 +10,8 @@
         </app-breadcrumb>
       	<section class="content">
         	<div class="container-fluid row" *ngIf="showAddFeature === false" [@slideInOut]>
-                <div class="col-lg-7" *ngIf="instituteDataStatus === 1">
-                    <div class="card">
+                <div class="col-lg-12" *ngIf="instituteDataStatus === 1">
+                    <div class="card card-primary card-outline">
                         <div class="card-header">
                             <h3 class="card-title">{{ 'INSTITUTES' | translate}}</h3>
                         </div>
@@ -32,13 +32,13 @@
                                             {{ i + 1 }}
                                         </td>
                                         <td>
-                                            {{ institute.name }}
+                                            {{ institute.name | verifyData }}
                                         </td>
                                         <td>
-                                            {{ institute.phone_number }}
+                                            {{ institute.phone_number | verifyData }}
                                         </td>
                                         <td>
-                                            {{ institute.address }}
+                                            {{ institute.address | verifyData }}
                                         </td>
                                         <td>
                                             <span *ngIf="institute.status === constants.STATUS_ACTIVE">
@@ -62,44 +62,48 @@
                 </div>
             </div>
             <div class="container-fluid row" *ngIf="showAddFeature === true">
-                <div class="card card-primary col-lg-8 m-0-auto">
-                    <div class="card-header">
-                        <h3 class="card-title">{{ 'ADD_INSTITUTE' | translate}}</h3>
-                        <div class="card-tools">
-                            <button type="button" class="btn btn-tool" (click)="showAddFeatureView(false)">
-                                <i class="fas fa-times"></i>
-                            </button>
+                <div class="col-lg-12">
+                    <div class="card card-primary m-0-auto">
+                        <div class="card-header">
+                            <h3 class="card-title">{{ 'ADD_INSTITUTE' | translate}}</h3>
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" (click)="showAddFeatureView(false)">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addInstituteForm">
-                        <div class="card-body">
-                            <div class="form-group m-b-0">
-                                <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
-                                <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
-                            </div>
-                            <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
-                            <div class="form-group m-b-0">
-                                <label for="address">{{ 'ADDRESS' | translate}} *</label>
-                                <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
-                            </div>
-                            <app-form-validator [data]="address"></app-form-validator>
-                            <div class="form-group m-b-0">
-                                <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
-                                <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
-                            </div>
-                            <app-form-validator [data]="phone"></app-form-validator>
-                            <div class="form-group">
-                                <label for="customFile">{{ 'LOGO' | translate}}</label>
-                                <div>
-                                    <input type="file" id="institute_logo" formControlName="institute_logo" (change)="onFileChange($event)">
+                        <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addInstituteForm">
+                            <div class="card-body">
+                                <div class="form-group m-b-0">
+                                    <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
+                                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                 </div>
+                                <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
+                                <div class="form-group m-b-0">
+                                    <label for="address">{{ 'ADDRESS' | translate}} *</label>
+                                    <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
+                                </div>
+                                <app-form-validator [data]="address"></app-form-validator>
+                                <div class="form-group m-b-0">
+                                    <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
+                                    <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
+                                </div>
+                                <app-form-validator [data]="phone"></app-form-validator>
+                                <div class="form-group">
+                                    <label for="customFile">{{ 'LOGO' | translate}}</label>
+                                    <div>
+                                        <input type="file" id="institute_logo" formControlName="institute_logo" (change)="onFileChange($event)">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                    <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                </button>
+                                <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                    <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                </button>
                             </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-default" (click)="showAddFeatureView(false)">{{ 'CANCEL' | translate}}</button>
-                            <button type="submit" class="btn btn-primary float-right" [disabled]="disableAddFeatureForm()">{{ 'ADD' | translate}}</button>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
       	</section>

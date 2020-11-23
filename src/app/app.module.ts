@@ -36,6 +36,7 @@ import { AdminStudentsComponent } from '@adminComponents/students/students.compo
 import { SuperAdminAdminsComponent } from '@superAdminComponents/admins/admins.component';
 import { AdminDepartmentComponent } from '@adminComponents/department/department.component';
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
+import { VerifyDataPipe } from './shared/pipes/verifyData/verify-data.pipe';
 
 @NgModule({
 	declarations: [
@@ -56,7 +57,8 @@ import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.compo
 		AdminStudentsComponent,
 		SuperAdminAdminsComponent,
 		AdminDepartmentComponent,
-		AdminSubjectsComponent
+		AdminSubjectsComponent,
+		VerifyDataPipe
 	],
 	imports: [
 		BrowserModule,

@@ -54,13 +54,13 @@
                                             {{ i + 1 }}
                                         </td>
                                         <td>
-                                            {{ student.name }}
+                                            {{ student.name | verifyData }}
                                         </td>
                                         <td>
-                                            {{ student.email }}
+                                            {{ student.email | verifyData }}
                                         </td>
                                         <td>
-                                            {{ student.phone_number }}
+                                            {{ student.phone_number | verifyData }}
                                         </td>
                                     </tr>
                                 </tbody>

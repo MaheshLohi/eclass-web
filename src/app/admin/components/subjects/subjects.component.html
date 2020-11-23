@@ -53,10 +53,10 @@
                                             {{ i + 1 }}
                                         </td>
                                         <td>
-                                            {{ subject.name }}
+                                            {{ subject.name | verifyData }}
                                         </td>
                                         <td>
-                                            {{ subject.code }}
+                                            {{ subject.code | verifyData }}
                                         </td>
                                     </tr>
                                 </tbody>
