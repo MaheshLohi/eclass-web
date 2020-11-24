@@ -9,9 +9,9 @@ export class DownloadService {
 
   	constructor(private constants: Constants) { }
 
-	download(filePath) {
+	download(file) {
 		var aTag = document.createElement("a");
-		aTag.setAttribute('href', this.constants.DOMAIN_URL + filePath);
+		aTag.setAttribute('href', this.constants.FILES_PATH + file);
 		aTag.setAttribute('download', '');
 		aTag.setAttribute('visibility', 'hidden');
 		aTag.setAttribute('display', 'none');

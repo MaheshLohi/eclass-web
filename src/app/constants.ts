@@ -1,5 +1,6 @@
 export class Constants {
     DOMAIN_URL = 'http://159.89.167.37/'
+    FILES_PATH = this.DOMAIN_URL + 'public/' 
     BASE_URL = this.DOMAIN_URL + 'api/';
     LANGUAGE_ARRAY = ['en','ka'];
     DEFAULT_LANGUAGE = this.LANGUAGE_ARRAY[0];

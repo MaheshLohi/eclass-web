@@ -13,7 +13,6 @@ import { LoginService } from '@sharedServices/login/login.service';
 export class LoginComponent {
 
 	loginForm: any;
-	token: string;
 
 	constructor(private router: Router,
 	private loader: LoaderService,
@@ -50,15 +49,30 @@ export class LoginComponent {
 
 	getUserDetails() {
 		this.loginService.getUserDetails()
-		.then(() => {
+		.then((response:any) => {
 			this.loader.hideLoader();
-			if (this.router.url === "/superAdmin/login") {
-				this.router.navigate(['/superAdmin/dashboard']);
-			} else {
-				this.router.navigate(['/admin/dashboard']);
-			}
+			this.navigateToDashboard(response.type)
 		}, () => {
 			this.loader.hideLoader();
 		});
-	}
+	};
+
+	navigateToDashboard(typeOfUser) {
+		switch(typeOfUser) {
+			case 1:
+				this.router.navigate(['/superAdmin/dashboard']);
+				  break;
+			case 2:
+				this.router.navigate(['/dashboard']);
+				break;
+			case 3:
+				this.router.navigate(['/admin/dashboard']);
+				  break;
+			case 4:
+				this.router.navigate(['/faculty/dashboard']);
+				  break;
+			default:
+				this.router.navigate(['/superAdmin/dashboard']);
+		}
+	};
 }
