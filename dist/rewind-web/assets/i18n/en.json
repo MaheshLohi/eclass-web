@@ -62,6 +62,7 @@
     "STUDENTS" : "Students",
     "DEPARTMENTS" : "Departments",
     "SUBJECTS" : "Subjects",
+    "DEPARTMENT" : "Department",
 
     "ADD_INSTITUTE" : "Add Institute",
     "ADD_ADMIN" : "Add Admin",

@@ -41,7 +41,6 @@ export class HttpClientService {
 		console.log(Authorization)
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Content-Type' : 'multipart/form-data',
 				'Authorization': "Bearer" + Authorization.token
 			}),
 			params : params
