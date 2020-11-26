@@ -24,7 +24,8 @@ export class Constants {
     LOGIN_URL = this.BASE_URL + 'login';
     USER_DETAILS_URL = this.BASE_URL + 'student/user';
     ADMINS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'inst-admin';
-    FACULTIES_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faculties';
+    FACULTIES_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faculties/';
+    ADD_FACULTIES_URL = this.BASE_URL + this.ADMIN_URL + 'add-faculties';
     ADD_ADMIN_URL = this.BASE_URL + this.ADMIN_URL + 'add-inst-admin';
     LOGOUT_URL = this.BASE_URL + 'logout';
     DEPARTMENTS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'departments';

@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
-import { SlideInOutAnimation } from '@app/animations';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminFacultiesService } from '@adminServices/faculties/faculties.service';
@@ -13,8 +12,7 @@ import { DownloadService } from '@sharedServices/download/download.service';
 @Component({
   	selector: 'app-admin-faculties',
   	templateUrl: './faculties.component.html',
-  	styleUrls: ['./faculties.component.scss'],
-  	animations: [SlideInOutAnimation]
+  	styleUrls: ['./faculties.component.scss']
 })
 export class AdminFacultiesComponent implements OnInit {
 
@@ -22,9 +20,8 @@ export class AdminFacultiesComponent implements OnInit {
 	facultiesDataStatus : number = 2;
 	showAddFeature : boolean = false;
 	departments : any = [];
-	sections : any = [];
-	departmentAndSectionDataStatus = 2;
-	facultiesFilterForm : any;
+	filterDataStatus = 2;
+	filterForm : any;
 	addFacultiesForm : any;
   
 	constructor(public constants : Constants,
@@ -34,57 +31,43 @@ export class AdminFacultiesComponent implements OnInit {
 	private facultyService : AdminFacultiesService,
 	private departmentService : AdminDepartmentService,
 	private downloadService : DownloadService) {
-		this.facultiesFilterForm = new FormGroup({
+		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'inst_class_id' : new FormControl(null, [
 				Validators.required
 			])
 		});
 		this.addFacultiesForm = new FormGroup({
-			'faculties_file' : new FormControl("", [])
+			'faculties_file' : new FormControl("", [
+				Validators.required
+			])
 		});
 	};
 
 	get department_id() { 
-		return this.facultiesFilterForm.get('department_id'); 
-	};
-
-	get inst_class_id() { 
-		return this.facultiesFilterForm.get('inst_class_id'); 
+		return this.filterForm.get('department_id'); 
 	};
 
 	ngOnInit() {
-		this.getDepartmentsAndSectionsList();
+		this.getDepartmentsList();
 	};
 
-	resetDepartmentsAndSections() {
-		this.departmentAndSectionDataStatus = 2;
+	resetDepartmentsDetails() {
+		this.filterDataStatus = 2;
 		this.departments = [];
-		this.sections = [];
 		this.loader.showLoader();
 	};
 
-	getDepartmentsAndSectionsList() {
-		this.resetDepartmentsAndSections();
+	getDepartmentsList() {
+		this.resetDepartmentsDetails();
 		this.departmentService.getDepartmentsAndSections()
 		.then((response:any) => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = 1;
+			this.filterDataStatus = 1;
 			this.departments = response.departments;
-			this.sections = response.inst_class;
 		}, () => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = 0;
+			this.filterDataStatus = 0;
 		});
-	};
-
-	getFacultiesData() {
-		let data = this.facultiesFilterForm.value;
-		if(data.department_id && data.inst_class_id) {
-			this.getFaculties(data)
-		}
 	};
 
 	resetFaculties() {
@@ -93,9 +76,10 @@ export class AdminFacultiesComponent implements OnInit {
 		this.loader.showLoader();
 	};
 
-	getFaculties(data) {
+	getFaculties() {
 		this.resetFaculties();
-		this.facultyService.getFaculties(data.department_id, data.inst_class_id)
+		let data = this.filterForm.value;
+		this.facultyService.getFaculties(data)
 		.then((response:any) => {
 			this.loader.hideLoader();
 			this.facultiesDataStatus = 1;
@@ -114,7 +98,7 @@ export class AdminFacultiesComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addFacultiesForm.valid && this.facultiesFilterForm.valid) ? false : true;
+		return (this.addFacultiesForm.valid && this.filterForm.valid) ? false : true;
 	};
 
 	onFileChange(event) {
@@ -128,11 +112,11 @@ export class AdminFacultiesComponent implements OnInit {
 
 	addFaculties() {
 		this.loader.showLoader();
-		this.facultyService.addFaculties(this.addFacultiesForm.value,this.facultiesFilterForm.value)
+		this.facultyService.addFaculties(this.addFacultiesForm.value,this.filterForm.value)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
-			this.getFaculties(this.facultiesFilterForm.value);
+			this.getFaculties();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("FACULTIES")} ));
 		}, () => {
 			this.loader.hideLoader();
@@ -140,6 +124,6 @@ export class AdminFacultiesComponent implements OnInit {
 	};
 
 	downloadFile() {
-		this.downloadService.download('subjects.csv');
+		this.downloadService.download('faculties.csv');
 	};
 }

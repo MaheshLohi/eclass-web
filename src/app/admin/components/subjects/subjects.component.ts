@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
-import { SlideInOutAnimation } from '@app/animations';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
@@ -13,8 +12,7 @@ import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
 @Component({
   	selector: 'app-admin-subjects',
   	templateUrl: './subjects.component.html',
-  	styleUrls: ['./subjects.component.scss'],
-  	animations: [SlideInOutAnimation]
+  	styleUrls: ['./subjects.component.scss']
 })
 export class AdminSubjectsComponent implements OnInit {
 
@@ -24,7 +22,7 @@ export class AdminSubjectsComponent implements OnInit {
 	departments : any = [];
 	semisters : any = [];
 	departmentAndSectionDataStatus = 2;
-	subjectsFilterForm : any;
+	filterForm : any;
 	addSubjectsForm : any;
   
 	constructor(public constants : Constants,
@@ -34,7 +32,7 @@ export class AdminSubjectsComponent implements OnInit {
 	private subjectsService : AdminSubjectsService,
 	private departmentService : AdminDepartmentService,
 	private downloadService : DownloadService) {
-		this.subjectsFilterForm = new FormGroup({
+		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
 				Validators.required
 			]),
@@ -48,11 +46,11 @@ export class AdminSubjectsComponent implements OnInit {
 	};
 
 	get department_id() { 
-		return this.subjectsFilterForm.get('department_id'); 
+		return this.filterForm.get('department_id'); 
 	};
 
 	get inst_class_id() { 
-		return this.subjectsFilterForm.get('inst_class_id'); 
+		return this.filterForm.get('inst_class_id'); 
 	};
 
 	ngOnInit() {
@@ -81,7 +79,7 @@ export class AdminSubjectsComponent implements OnInit {
 	};
 
 	getSubjectsData() {
-		let data = this.subjectsFilterForm.value;
+		let data = this.filterForm.value;
 		if(data.department_id && data.inst_class_id) {
 			this.getSubjects(data)
 		}
@@ -114,7 +112,7 @@ export class AdminSubjectsComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addSubjectsForm.valid && this.subjectsFilterForm.valid) ? false : true;
+		return (this.addSubjectsForm.valid && this.filterForm.valid) ? false : true;
 	};
 
 	onFileChange(event) {
@@ -128,11 +126,11 @@ export class AdminSubjectsComponent implements OnInit {
 
 	addSubjects() {
 		this.loader.showLoader();
-		this.subjectsService.addSubjects(this.addSubjectsForm.value,this.subjectsFilterForm.value)
+		this.subjectsService.addSubjects(this.addSubjectsForm.value,this.filterForm.value)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
-			this.getSubjects(this.subjectsFilterForm.value);
+			this.getSubjects(this.filterForm.value);
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("SUBJECTS")} ));
 		}, () => {
 			this.loader.hideLoader();

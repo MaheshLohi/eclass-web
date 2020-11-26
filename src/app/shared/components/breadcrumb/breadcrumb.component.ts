@@ -1,4 +1,4 @@
-import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 @Component({
   	selector: 'app-breadcrumb',
@@ -8,14 +8,6 @@ import { Component, OnChanges, SimpleChanges, Input, Output, EventEmitter } from
 export class BreadcrumbComponent implements OnChanges{
 
 	@Input() title: string;
-	@Input() showButton = false;
-	@Input() buttonText: string;
-	@Input() addFeatureEnabled = false;
-	@Output() buttonClickedEvent = new EventEmitter();
-
-	triggerButtonClickEvent() {
-		this.buttonClickedEvent.emit();
-	};
 
 	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 

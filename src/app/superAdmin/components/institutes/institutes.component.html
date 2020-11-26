@@ -2,111 +2,101 @@
     <app-navbar></app-navbar>
     <app-super-admin-sidebar></app-super-admin-sidebar>
     <div class="content-wrapper">
-        <app-breadcrumb [title]="'INSTITUTES'"
-        [showButton]=true
-        [buttonText]="'ADD_INSTITUTE'"
-        (buttonClickedEvent)="showAddFeatureView(true)"
-        [addFeatureEnabled]=showAddFeature>
-        </app-breadcrumb>
-      	<section class="content">
-        	<div class="container-fluid row" *ngIf="showAddFeature === false" [@slideInOut]>
-                <div class="col-lg-12" *ngIf="instituteDataStatus === 1">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h3 class="card-title">{{ 'INSTITUTES' | translate}}</h3>
-                        </div>
-                        <div class="card-body p-t-0">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{ 'NAME' | translate}}</th>
-                                        <th>{{ 'PHONE_NUMBER' | translate}}</th>
-                                        <th>{{ 'ADDRESS' | translate}}</th>
-                                        <th>{{ 'STATUS' | translate}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let institute of institutes;let i = index">
-                                        <td>
-                                            {{ i + 1 }}
-                                        </td>
-                                        <td>
-                                            {{ institute.name | verifyData }}
-                                        </td>
-                                        <td>
-                                            {{ institute.phone_number | verifyData }}
-                                        </td>
-                                        <td>
-                                            {{ institute.address | verifyData }}
-                                        </td>
-                                        <td>
-                                            <span *ngIf="institute.status === constants.STATUS_ACTIVE">
-                                                {{ 'ACTIVE' | translate }}
-                                            </span>
-                                            <span *ngIf="institute.status === constants.STATUS_INACTIVE">
-                                                {{ 'INACTIVE' | translate }}
-                                            </span>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
+        <app-breadcrumb [title]="'INSTITUTES'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title">{{ 'INSTITUTES' | translate}}</h3>
+                                <div class="col-7 card-tools text-right">
+                                    <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <i class="fa fa-plus"></i> {{ 'ADD_INSTITUTE' | translate}}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="showAddFeature === false && instituteDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="instituteDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ 'NAME' | translate}}</th>
+                                                <th>{{ 'PHONE_NUMBER' | translate}}</th>
+                                                <th>{{ 'ADDRESS' | translate}}</th>
+                                                <th>{{ 'STATUS' | translate}}</th>
+                                            </tr>
+                                            <tr *ngFor="let institute of institutes;let i = index">
+                                                <td>
+                                                    {{ i + 1 }}
+                                                </td>
+                                                <td>
+                                                    {{ institute.name | verifyData }}
+                                                </td>
+                                                <td>
+                                                    {{ institute.phone_number | verifyData }}
+                                                </td>
+                                                <td>
+                                                    {{ institute.address | verifyData }}
+                                                </td>
+                                                <td>
+                                                    <span *ngIf="institute.status === constants.STATUS_ACTIVE">
+                                                        {{ 'ACTIVE' | translate }}
+                                                    </span>
+                                                    <span *ngIf="institute.status === constants.STATUS_INACTIVE">
+                                                        {{ 'INACTIVE' | translate }}
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-12" *ngIf="instituteDataStatus === 0 || instituteDataStatus === 3">
+                                    <app-list-error-handler 
+                                    [status]=instituteDataStatus 
+                                    [title]="'INSTITUTES'">
+                                    </app-list-error-handler>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="showAddFeature === true">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addInstituteForm">
+                                        <div class="form-group m-b-0">
+                                            <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
+                                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                                        </div>
+                                        <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
+                                        <div class="form-group m-b-0">
+                                            <label for="address">{{ 'ADDRESS' | translate}} *</label>
+                                            <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
+                                        </div>
+                                        <app-form-validator [data]="address"></app-form-validator>
+                                        <div class="form-group m-b-0">
+                                            <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
+                                            <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
+                                        </div>
+                                        <app-form-validator [data]="phone"></app-form-validator>
+                                        <div class="form-group">
+                                            <label for="customFile">{{ 'LOGO' | translate}}</label>
+                                            <div>
+                                                <input type="file" id="institute_logo" formControlName="institute_logo" (change)="onFileChange($event)">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-12" *ngIf="instituteDataStatus === 0 || instituteDataStatus === 3">
-                    <app-list-error-handler 
-                    [status]=instituteDataStatus 
-                    [title]="'INSTITUTES'">
-                    </app-list-error-handler>
-                </div>
             </div>
-            <div class="container-fluid row" *ngIf="showAddFeature === true">
-                <div class="col-lg-12">
-                    <div class="card card-primary m-0-auto">
-                        <div class="card-header">
-                            <h3 class="card-title">{{ 'ADD_INSTITUTE' | translate}}</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" (click)="showAddFeatureView(false)">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addInstituteForm">
-                            <div class="card-body">
-                                <div class="form-group m-b-0">
-                                    <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
-                                    <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
-                                </div>
-                                <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
-                                <div class="form-group m-b-0">
-                                    <label for="address">{{ 'ADDRESS' | translate}} *</label>
-                                    <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
-                                </div>
-                                <app-form-validator [data]="address"></app-form-validator>
-                                <div class="form-group m-b-0">
-                                    <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
-                                    <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
-                                </div>
-                                <app-form-validator [data]="phone"></app-form-validator>
-                                <div class="form-group">
-                                    <label for="customFile">{{ 'LOGO' | translate}}</label>
-                                    <div>
-                                        <input type="file" id="institute_logo" formControlName="institute_logo" (change)="onFileChange($event)">
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
-                                    <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
-                                </button>
-                                <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                    <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-      	</section>
+        </section>
     </div>
     <app-footer></app-footer>
 </div>

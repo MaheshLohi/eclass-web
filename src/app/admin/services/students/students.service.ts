@@ -38,10 +38,12 @@ export class AdminStudentsService {
 	};
 	  
 	addStudents(studentsData, filterData) {
+		this.userDetails = this.storageService.getData("User_Information");
 		const formData = new FormData();
 		formData.append('students', studentsData.students_file);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_class_id', filterData.inst_class_id);
+		formData.append('inst_id', this.userDetails.inst_id);
 		return new Promise((resolve, reject) => {
 			this.httpService.postWithFormData(this.constants.ADD_STUDENTS_URL, formData)
 			.subscribe((response) => {

@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
-import { SlideInOutAnimation } from '@app/animations';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
@@ -12,8 +11,7 @@ import { AdminDepartmentService } from '@adminServices/department/department.ser
 @Component({
   	selector: 'app-admin-department',
   	templateUrl: './department.component.html',
-  	styleUrls: ['./department.component.scss'],
-  	animations: [SlideInOutAnimation]
+  	styleUrls: ['./department.component.scss']
 })
 export class AdminDepartmentComponent implements OnInit {
 

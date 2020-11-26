@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
-import { SlideInOutAnimation } from '@app/animations';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
@@ -13,8 +12,7 @@ import { AdminStudentsService } from '@adminServices/students/students.service';
 @Component({
   	selector: 'app-admin-students',
   	templateUrl: './students.component.html',
-  	styleUrls: ['./students.component.scss'],
-  	animations: [SlideInOutAnimation]
+  	styleUrls: ['./students.component.scss']
 })
 export class AdminStudentsComponent implements OnInit {
 
@@ -24,7 +22,7 @@ export class AdminStudentsComponent implements OnInit {
 	departments : any = [];
 	semisters : any = [];
 	departmentAndSectionDataStatus = 2;
-	studentsFilterForm : any;
+	filterForm : any;
 	addStudentsForm : any;
   
 	constructor(public constants : Constants,
@@ -34,7 +32,7 @@ export class AdminStudentsComponent implements OnInit {
 	private studentService : AdminStudentsService,
 	private departmentService : AdminDepartmentService,
 	private downloadService : DownloadService) {
-		this.studentsFilterForm = new FormGroup({
+		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
 				Validators.required
 			]),
@@ -43,16 +41,18 @@ export class AdminStudentsComponent implements OnInit {
 			])
 		});
 		this.addStudentsForm = new FormGroup({
-			'students_file' : new FormControl("", [])
+			'students_file' : new FormControl("", [
+				Validators.required
+			])
 		});
 	};
 
 	get department_id() { 
-		return this.studentsFilterForm.get('department_id'); 
+		return this.filterForm.get('department_id'); 
 	};
 
 	get inst_class_id() { 
-		return this.studentsFilterForm.get('inst_class_id'); 
+		return this.filterForm.get('inst_class_id'); 
 	};
 
 	ngOnInit() {
@@ -81,7 +81,7 @@ export class AdminStudentsComponent implements OnInit {
 	};
 
 	getStudentsData() {
-		let data = this.studentsFilterForm.value;
+		let data = this.filterForm.value;
 		if(data.department_id && data.inst_class_id) {
 			this.getStudents(data)
 		}
@@ -114,7 +114,7 @@ export class AdminStudentsComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addStudentsForm.valid && this.studentsFilterForm.valid) ? false : true;
+		return (this.addStudentsForm.valid && this.filterForm.valid) ? false : true;
 	};
 
 	onFileChange(event) {
@@ -128,11 +128,11 @@ export class AdminStudentsComponent implements OnInit {
 
 	addStudents() {
 		this.loader.showLoader();
-		this.studentService.addStudents(this.addStudentsForm.value,this.studentsFilterForm.value)
+		this.studentService.addStudents(this.addStudentsForm.value,this.filterForm.value)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
-			this.getStudents(this.studentsFilterForm.value);
+			this.getStudents(this.filterForm.value);
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("STUDENTS")} ));
 		}, () => {
 			this.loader.hideLoader();

@@ -2,81 +2,74 @@
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
     <div class="content-wrapper">
-        <app-breadcrumb [title]="'DEPARTMENTS'"
-        [showButton]=true
-        [buttonText]="'ADD_DEPARTMENTS'"
-        (buttonClickedEvent)="showAddFeatureView(true)"
-        [addFeatureEnabled]=showAddFeature></app-breadcrumb>
-      	<section class="content">
-        	<div class="container-fluid row" *ngIf="showAddFeature === false" [@slideInOut]>
-                <div class="col-lg-12">
-                    <div class="card card-primary card-outline">
-                        <div class="card-header">
-                            <h3 class="card-title">{{ 'DEPARTMENTS' | translate}}</h3>
-                        </div>
-                        <div class="card-body p-t-0"  *ngIf="departmentDataStatus === 1">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>{{ 'NAME' | translate}}</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr *ngFor="let department of departments;let i = index">
-                                        <td>
-                                            {{ i + 1 }}
-                                        </td>
-                                        <td>
-                                            {{ department.name | verifyData }}
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="col-lg-12" *ngIf="departmentDataStatus === 0 || departmentDataStatus === 3">
-                            <app-list-error-handler 
-                            [status]=departmentDataStatus 
-                            [title]="'DEPARTMENTS'">
-                            </app-list-error-handler>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="container-fluid row" *ngIf="showAddFeature === true">
-                <div class="col-lg-12">
-                    <div class="card card-primary m-0-auto">
-                        <div class="card-header">
-                            <h3 class="card-title">{{ 'ADD_DEPARTMENTS' | translate}}</h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool f-18px" (click)="downloadFile()">
-                                    <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
-                                </button>
-                                <button type="button" class="btn btn-tool" (click)="showAddFeatureView(false)">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <form role="form" (ngSubmit)="addDepartment()" [formGroup]="addDepartmentForm">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label for="customFile">{{ 'File' | translate}}</label>
-                                    <div>
-                                        <input type="file" id="department_file" formControlName="department_file" (change)="onFileChange($event)">
-                                    </div>
+        <app-breadcrumb [title]="'DEPARTMENTS'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title custom-title">
+                                    {{ 'DEPARTMENTS' | translate }}
+                                </h3>
+                                <div class="col-7 card-tools text-right">
+                                    <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <i class="fa fa-plus"></i> {{ 'ADD_DEPARTMENTS' | translate}}
+                                    </button>
+                                    <button type="button" class="btn btn-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
+                                        <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
+                                    </button>
                                 </div>
-                                <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
-                                    <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
-                                </button>
-                                <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                    <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                </button>
                             </div>
-                        </form>
+                            <div class="card-body" *ngIf="showAddFeature === false">
+                                <div class="col-lg-12" *ngIf="departmentDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ 'NAME' | translate}}</th>
+                                            </tr>
+                                            <tr *ngFor="let department of departments;let i = index">
+                                                <td>
+                                                    {{ i + 1 }}
+                                                </td>
+                                                <td>
+                                                    {{ department.name | verifyData }}
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-lg-12" *ngIf="departmentDataStatus === 0 || departmentDataStatus === 3">
+                                    <app-list-error-handler 
+                                    [status]=departmentDataStatus 
+                                    [title]="'DEPARTMENTS'">
+                                    </app-list-error-handler>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="showAddFeature === true">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addDepartment()" [formGroup]="addDepartmentForm">
+                                        <div class="form-group">
+                                            <label for="customFile">{{ 'File' | translate}}</label>
+                                            <div>
+                                                <input type="file" id="department_file" formControlName="department_file" (change)="onFileChange($event)">
+                                            </div>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-      	</section>
+        </section>
     </div>
     <app-footer></app-footer>
 </div>

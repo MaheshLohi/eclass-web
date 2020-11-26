@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
-import { SlideInOutAnimation } from '@app/animations';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { SuperAdminInstitutesService } from '@app/superAdmin/services/institutes/institutes.service';
@@ -12,8 +11,7 @@ import { SuperAdminAdminsService } from '@app/superAdmin/services/admins/admins.
 @Component({
 	selector: 'app-super-admin-admins',
 	templateUrl: './admins.component.html',
-	styleUrls: ['./admins.component.scss'],
-	animations: [SlideInOutAnimation]
+	styleUrls: ['./admins.component.scss']
 })
 export class SuperAdminAdminsComponent implements OnInit {
 
