@@ -30,7 +30,7 @@
                                 </div>
                             </div>
                             <div class="card-body" *ngIf="showAddFeature === false && facultiesDataStatus != 2">
-                                <div class="col-lg-12" *ngIf="facultiesDataStatus === 1">
+                                <div class="col-lg-6" *ngIf="facultiesDataStatus === 1">
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
@@ -38,6 +38,8 @@
                                                 <th>{{ 'NAME' | translate}}</th>
                                                 <th>{{ 'EMAIL_ADDRESS' | translate}}</th>
                                                 <th>{{ 'PHONE_NUMBER' | translate}}</th>
+                                                <th></th>
+                                                <th></th>
                                             </tr>
                                             <tr *ngFor="let faculty of faculties;let i = index">
                                                 <td>
@@ -52,6 +54,16 @@
                                                 <td>
                                                     {{ faculty.phone_number | verifyData}}
                                                 </td>
+                                                <td class="td-small">
+                                                    <button type="button" class="btn btn-outline-primary btn-sm btn-sm-circle">
+                                                        <i class="fa fa-pencil-alt"></i>
+                                                    </button>
+                                                </td>
+                                                <td class="td-small">
+                                                    <button type="button" class="btn btn-outline-danger btn-sm btn-sm-circle" (click)="deleteFaculty(faculty)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>        
                                             </tr>
                                         </tbody>
                                     </table>

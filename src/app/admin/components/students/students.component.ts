@@ -24,6 +24,7 @@ export class AdminStudentsComponent implements OnInit {
 	departmentAndSectionDataStatus = 2;
 	filterForm : any;
 	addStudentsForm : any;
+	selectedFile: File = null;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -53,6 +54,10 @@ export class AdminStudentsComponent implements OnInit {
 
 	get inst_class_id() { 
 		return this.filterForm.get('inst_class_id'); 
+	};
+
+	get students_file() { 
+		return this.addStudentsForm.get('students_file'); 
 	};
 
 	ngOnInit() {
@@ -110,25 +115,24 @@ export class AdminStudentsComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addStudentsForm.reset();
+			this.selectedFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addStudentsForm.valid && this.filterForm.valid) ? false : true;
+		return (this.addStudentsForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
 	};
 
 	onFileChange(event) {
+		this.selectedFile = null;
 		if (event.target.files.length > 0) {
-			const file = event.target.files[0];
-			this.addStudentsForm.patchValue({
-				students_file: file
-			});
+			this.selectedFile = event.target.files[0];
 		}
 	};
 
 	addStudents() {
 		this.loader.showLoader();
-		this.studentService.addStudents(this.addStudentsForm.value,this.filterForm.value)
+		this.studentService.addStudents(this.filterForm.value, this.selectedFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);

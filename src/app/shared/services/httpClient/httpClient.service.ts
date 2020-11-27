@@ -38,7 +38,6 @@ export class HttpClientService {
 
 	postWithFormData(url, formData, params?:any): Observable<any> {
 		let Authorization = this.storageService.getData("Authorization");
-		console.log(Authorization)
 		const httpOptions = {
 			headers: new HttpHeaders({
 				'Authorization': "Bearer" + Authorization.token
@@ -46,5 +45,10 @@ export class HttpClientService {
 			params : params
 		};
 		return this.http.post<any>(url, formData, httpOptions);
+	};
+
+	delete(url, params?:any): Observable<any> {
+		const httpOptions = this.getHttpOptions(params);
+		return this.http.delete<any>(url, httpOptions);
 	};
 }

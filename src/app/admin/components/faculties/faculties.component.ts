@@ -23,6 +23,7 @@ export class AdminFacultiesComponent implements OnInit {
 	filterDataStatus = 2;
 	filterForm : any;
 	addFacultiesForm : any;
+	selectedFile: File = null;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -46,6 +47,10 @@ export class AdminFacultiesComponent implements OnInit {
 	get department_id() { 
 		return this.filterForm.get('department_id'); 
 	};
+
+	get faculties_file() { 
+		return this.addFacultiesForm.get('faculties_file'); 
+	}; 
 
 	ngOnInit() {
 		this.getDepartmentsList();
@@ -94,25 +99,27 @@ export class AdminFacultiesComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addFacultiesForm.reset();
+			this.selectedFile = null;
+		}
+		else {
+			this.getFaculties();
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addFacultiesForm.valid && this.filterForm.valid) ? false : true;
+		return (this.addFacultiesForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
 	};
 
 	onFileChange(event) {
+		this.selectedFile = null;
 		if (event.target.files.length > 0) {
-			const file = event.target.files[0];
-			this.addFacultiesForm.patchValue({
-				faculties_file: file
-			});
+			this.selectedFile = event.target.files[0];
 		}
 	};
 
 	addFaculties() {
 		this.loader.showLoader();
-		this.facultyService.addFaculties(this.addFacultiesForm.value,this.filterForm.value)
+		this.facultyService.addFaculties(this.filterForm.value, this.selectedFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -126,4 +133,16 @@ export class AdminFacultiesComponent implements OnInit {
 	downloadFile() {
 		this.downloadService.download('faculties.csv');
 	};
+
+	deleteFaculty(faculty) {
+		this.loader.showLoader();
+		this.facultyService.deleteFaculty(faculty)
+		.then(() => {
+			this.loader.hideLoader();
+			this.getFaculties();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("FACULTY")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	}
 }

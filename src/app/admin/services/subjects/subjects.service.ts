@@ -32,9 +32,9 @@ export class AdminSubjectsService {
 		});
 	};
 	  
-	addSubjects(subjectsData, filterData) {
+	addSubjects(filterData, selectedFile) {
 		const formData = new FormData();
-		formData.append('subjects', subjectsData.subjects_file);
+		formData.append('subjects', selectedFile);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_class_id', filterData.inst_class_id);
 		return new Promise((resolve, reject) => {

@@ -19,17 +19,18 @@ export class Constants {
 
     ADMIN_URL = "admin/"
 
-    INSTITUTES_LIST_URL = this.BASE_URL + 'all-institutes';
-    ADD_INSTITUTE_URL = this.BASE_URL + this.ADMIN_URL + 'add-institute';
     LOGIN_URL = this.BASE_URL + 'login';
     USER_DETAILS_URL = this.BASE_URL + 'student/user';
+    LOGOUT_URL = this.BASE_URL + 'logout';
+    INSTITUTES_LIST_URL = this.BASE_URL + 'all-institutes';
+    ADD_INSTITUTE_URL = this.BASE_URL + this.ADMIN_URL + 'add-institute';
     ADMINS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'inst-admin';
+    ADD_ADMIN_URL = this.BASE_URL + this.ADMIN_URL + 'add-inst-admin';
+    DEPARTMENTS_AND_SECTIONS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'get-department-classes';
     FACULTIES_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faculties/';
     ADD_FACULTIES_URL = this.BASE_URL + this.ADMIN_URL + 'add-faculties';
-    ADD_ADMIN_URL = this.BASE_URL + this.ADMIN_URL + 'add-inst-admin';
-    LOGOUT_URL = this.BASE_URL + 'logout';
+    FACULTY_DELETE_URL = this.BASE_URL + this.ADMIN_URL + 'faculty/';
     DEPARTMENTS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'departments';
-    DEPARTMENTS_AND_SECTIONS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'get-department-classes';
     ADD_DEPARTMENT_URL = this.BASE_URL + this.ADMIN_URL + 'add-department';
     STUDENTS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'students/';
     ADD_STUDENTS_URL = this.BASE_URL + this.ADMIN_URL + 'add-students';

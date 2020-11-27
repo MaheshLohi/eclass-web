@@ -32,9 +32,9 @@ export class SuperAdminInstitutesService {
       	});
 	};
 	
-	addInstitute(instituteData) {
+	addInstitute(instituteData,selectedFile) {
 		const formData = new FormData();
-		formData.append('logo', instituteData.institute_logo);
+		formData.append('logo', selectedFile);
 		formData.append('name', instituteData.name);
 		formData.append('phone_number', instituteData.phone);
 		formData.append('address', instituteData.address);

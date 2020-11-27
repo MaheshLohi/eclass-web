@@ -37,10 +37,10 @@ export class AdminStudentsService {
 		});
 	};
 	  
-	addStudents(studentsData, filterData) {
+	addStudents(filterData, selectedFile) {
 		this.userDetails = this.storageService.getData("User_Information");
 		const formData = new FormData();
-		formData.append('students', studentsData.students_file);
+		formData.append('students', selectedFile);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_class_id', filterData.inst_class_id);
 		formData.append('inst_id', this.userDetails.inst_id);

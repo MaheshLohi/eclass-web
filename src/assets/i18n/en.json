@@ -23,6 +23,7 @@
     "NO_DATA_MESSAGE2_WITH_VALUE" : "Please add {{value}} to continue",
     "STANDARD_ERROR": "Something went wrong, Please try again later",
     "FEATURE_ADDED_SUCCESSFULLY" : "{{value}} added successfully",
+    "FEATURE_DELETED_SUCCESSFULLY" : "{{value}} deleted successfully",
 
     "ADD" : "Add",
     "CANCEL" : "Cancel",
@@ -59,6 +60,7 @@
     "INSTITUTE" : "Institute",
     "ADMIN" : "Admin",
     "FACULTIES" : "Faculties",
+    "FACULTY" : "Faculty",
     "STUDENTS" : "Students",
     "DEPARTMENTS" : "Departments",
     "SUBJECTS" : "Subjects",

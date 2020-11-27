@@ -55,9 +55,9 @@ export class AdminDepartmentService {
 	  	});
 	};
 
-	addDepartment(departmentData) {
+	addDepartment(selectedFile) {
 		const formData = new FormData();
-		formData.append('subjects', departmentData.department_file);
+		formData.append('departments', selectedFile);
 		return new Promise((resolve, reject) => {
 			this.httpService.postWithFormData(this.constants.ADD_DEPARTMENT_URL, formData)
 			.subscribe((response) => {

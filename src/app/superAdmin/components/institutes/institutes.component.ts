@@ -18,6 +18,7 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	instituteDataStatus : number = 2;
 	showAddFeature : boolean = false;
 	addInstituteForm : any;
+	selectedFile: File = null;
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -35,7 +36,9 @@ export class SuperAdminInstitutesComponent implements OnInit {
 			'phone' : new FormControl("", [
 				Validators.required
 			]),
-			'institute_logo' : new FormControl("", [])
+			'institute_logo' : new FormControl("", [
+				Validators.required
+			])
 		});
 	};
 
@@ -82,25 +85,24 @@ export class SuperAdminInstitutesComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addInstituteForm.reset();
+			this.selectedFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return this.addInstituteForm.valid ? false : true;
+		return (this.addInstituteForm.valid && this.selectedFile) ? false : true;
 	};
 
 	onFileChange(event) {
+		this.selectedFile = null;
 		if (event.target.files.length > 0) {
-			const file = event.target.files[0];
-			this.addInstituteForm.patchValue({
-				institute_logo: file
-			});
+			this.selectedFile = event.target.files[0];
 		}
 	};
 
 	addInstitute() {
 		this.loader.showLoader();
-		this.instituteService.addInstitute(this.addInstituteForm.value)
+		this.instituteService.addInstitute(this.addInstituteForm.value, this.selectedFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);

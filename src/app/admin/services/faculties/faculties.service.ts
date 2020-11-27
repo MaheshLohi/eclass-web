@@ -37,12 +37,12 @@ export class AdminFacultiesService {
 		});
 	};
 	  
-	addFaculties(facultiesData, filterData) {
+	addFaculties(filterData, selectedFile) {
 		this.userDetails = this.storageService.getData("User_Information");
 		const formData = new FormData();
-		formData.append('faculties', facultiesData.faculties_file);
+		formData.append('faculties', selectedFile);
 		formData.append('department_id', filterData.department_id);
-		formData.append('inst_id', filterData.inst_id);
+		formData.append('inst_id', this.userDetails.inst_id);
 		return new Promise((resolve, reject) => {
 			this.httpService.postWithFormData(this.constants.ADD_FACULTIES_URL, formData)
 			.subscribe((response) => {
@@ -51,6 +51,18 @@ export class AdminFacultiesService {
 				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
+		});
+	};
+
+	deleteFaculty(facultyData) {
+		return new Promise((resolve, reject) => {
+		  	this.httpService.delete(this.constants.FACULTY_DELETE_URL + facultyData.id)
+		  	.subscribe((response) => {
+				resolve(response);
+		  	}, (error) => {
+			  	this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
+			  	reject(error);
+		  	});
 		});
 	};
 }

@@ -19,6 +19,7 @@ export class AdminDepartmentComponent implements OnInit {
 	departmentDataStatus : number = 2;
 	showAddFeature : boolean = false;
 	addDepartmentForm : any;
+	selectedFile: File = null;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -27,8 +28,14 @@ export class AdminDepartmentComponent implements OnInit {
 	private departmentService : AdminDepartmentService,
 	private downloadService : DownloadService) { 
 		this.addDepartmentForm = new FormGroup({
-			'department_file' : new FormControl("", [])
+			'department_file' : new FormControl("", [
+				Validators.required
+			])
 		});
+	};
+
+	get department_file() { 
+		return this.addDepartmentForm.get('department_file'); 
 	};
 
 	ngOnInit() {
@@ -58,25 +65,24 @@ export class AdminDepartmentComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addDepartmentForm.reset();
+			this.selectedFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return this.addDepartmentForm.valid ? false : true;
+		return ( this.addDepartmentForm.valid  && this.selectedFile ) ? false : true;
 	};
 
 	onFileChange(event) {
+		this.selectedFile = null;
 		if (event.target.files.length > 0) {
-			const file = event.target.files[0];
-			this.addDepartmentForm.patchValue({
-				department_file: file
-			});
+			this.selectedFile = event.target.files[0];
 		}
 	};
 
 	addDepartment() {
 		this.loader.showLoader();
-		this.departmentService.addDepartment(this.addDepartmentForm.value)
+		this.departmentService.addDepartment(this.selectedFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -88,6 +94,6 @@ export class AdminDepartmentComponent implements OnInit {
 	};
 
 	downloadFile() {
-		this.downloadService.download('subjects.csv');
+		this.downloadService.download('departents.csv');
 	}
 }
