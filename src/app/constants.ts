@@ -15,9 +15,11 @@ export class Constants {
     UNAUTHORISED_ERROR = 503;
 
     SUPER_ADMIN = "superAdmin";
-    ADMIN = "admin"
+    ADMIN = "admin";
+    STUDENT = "student";
 
-    ADMIN_URL = "admin/"
+    ADMIN_URL = "admin/";
+    STUDENT_URL = "student/";
 
     LOGIN_URL = this.BASE_URL + 'login';
     USER_DETAILS_URL = this.BASE_URL + 'student/user';
@@ -39,4 +41,10 @@ export class Constants {
     CHAPTERS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'subject/';
     ADD_CHAPTERS_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter';
     ADD_TOPIC_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter-details';
+
+
+    //students API
+    STUDENT_SUBJECTS_LIST_URL = this.BASE_URL + this.STUDENT_URL + 'student-subjects/';
+    STUDENT_CHAPTERS_LIST_URL = this.BASE_URL + this.STUDENT_URL + 'subject/';
+    STUDENT_TOPICS_LIST_URL = this.BASE_URL + this.STUDENT_URL + 'chapter/';
 }

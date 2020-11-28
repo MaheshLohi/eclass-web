@@ -16,9 +16,11 @@
       "@sharedComponents/*" : ["src/app/shared/components/*"],
       "@superAdminComponents/*" : ["src/app/superAdmin/components/*"],
       "@adminComponents/*" : ["src/app/admin/components/*"],
+      "@studentComponents/*" : ["src/app/student/components/*"],
       "@sharedServices/*" : ["src/app/shared/services/*"],
       "@superAdminServices/*" : ["src/app/superAdmin/services/*"],
-      "@adminServices/*" : ["src/app/admin/services/*"]
+      "@adminServices/*" : ["src/app/admin/services/*"],
+      "@studentServices/*" : ["src/app/student/services/*"],
     },
     "typeRoots": [
       "node_modules/@types"

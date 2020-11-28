@@ -150,6 +150,36 @@ a.table-link:active {
     line-height: 40px;
     font-size: 20px;
 }
+.filter-boxes {
+    min-height: 55px;
+    cursor: pointer;
+}
+.filter-boxes:hover {
+    background-color: red;
+    color: #ffffff;
+}
+.topics-list {
+    height: 300px;
+    overflow-y: auto;
+    .topic-heading {
+        font-size: 15px;
+    }
+    .fas {
+        font-size: 25px;
+    }
+    .active-topic {
+        border-color: #0068d0;
+        .fas {
+            color: #0068d0 !important;
+        }
+    }
+    .callout {
+        cursor: pointer;
+    }
+}
+.info-box-content {
+    width: 100%;
+}
 @media only screen and (max-width: 812px) {
     .basic-form-page {
         .basic-form-container {

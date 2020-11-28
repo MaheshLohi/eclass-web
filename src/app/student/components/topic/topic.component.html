@@ -1,0 +1,36 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-student-sidebar></app-student-sidebar>
+    <div class="content-wrapper">
+      	<app-breadcrumb [title]="'TOPICS'"></app-breadcrumb>
+      	<section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="col-12 row">
+                            <div class="col-8">
+                                <video src="{{videoUrl}}" width="100%" height="386px" controls>
+                                </video>
+                            </div>
+                            <div class="col-4">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <h3 class="pb-1">{{ 'TOPICS' | translate}}</h3>
+                                        <div class="topics-list">
+                                            <div class="callout p-2 mb-2 callout-muted" *ngFor="let topic of topics" (click)="selectTopic(topic)" 
+                                            [ngClass]="{'active-topic': topic.id === selectedTopic.id}">
+                                                <span class="topic-heading">{{topic.name}}</span>
+                                                <i class="fas fa-play-circle pr-1 text-muted float-right"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+  </div>

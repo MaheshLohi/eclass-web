@@ -38,6 +38,10 @@ import { AdminDepartmentComponent } from '@adminComponents/department/department
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
 import { VerifyDataPipe } from './shared/pipes/verifyData/verify-data.pipe';
 import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
+import { StudentHomeComponent } from '@studentComponents/home/home.component';
+import { StudentSidebarComponent } from '@studentComponents/sidebar/sidebar.component';
+import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
+import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
 
 @NgModule({
 	declarations: [
@@ -60,7 +64,11 @@ import { AdminChapterComponent } from '@adminComponents/chapter/chapter.componen
 		AdminDepartmentComponent,
 		AdminSubjectsComponent,
 		VerifyDataPipe,
-		AdminChapterComponent
+		AdminChapterComponent,
+		StudentHomeComponent,
+		StudentSidebarComponent,
+		StudentChapterComponent,
+		StudentTopicComponent
 	],
 	imports: [
 		BrowserModule,

@@ -13,6 +13,9 @@ import { AdminStudentsComponent } from '@adminComponents/students/students.compo
 import { AdminDepartmentComponent } from '@adminComponents/department/department.component';
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
 import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
+import { StudentHomeComponent } from '@studentComponents/home/home.component';
+import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
+import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -28,6 +31,9 @@ const routes: Routes = [
 	{ path: 'admin/departments', component: AdminDepartmentComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/subjects', component: AdminSubjectsComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/chapters', component: AdminChapterComponent, canActivate: [AuthGuard]},
+	{ path: 'student/home', component: StudentHomeComponent, canActivate: [AuthGuard]},
+	{ path: 'student/chapters/:subjectId', component: StudentChapterComponent, canActivate: [AuthGuard]},
+	{ path: 'student/topics/:chapterId', component: StudentTopicComponent, canActivate: [AuthGuard]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

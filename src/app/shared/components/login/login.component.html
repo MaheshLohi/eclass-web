@@ -11,8 +11,8 @@
                 </p>
                 <form (ngSubmit)="doLogin()" [formGroup]="loginForm">
                     <div class="form-group m-b-0">
-                        <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
-                        <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                        <label for="email">{{ (loginType === 2) ? ('USN_NUMBER' | translate) : ('EMAIL_ADDRESS' | translate) }} *</label>
+                        <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ (loginType === 2) ? ('ENTER_USN' | translate) : ('EMAIL_ADDRESS' | translate) }}" required>
                     </div>
                     <app-form-validator [data]="email" [validateEmail]=true></app-form-validator>
                     <div class="form-group m-b-0">
