@@ -37,6 +37,7 @@ import { SuperAdminAdminsComponent } from '@superAdminComponents/admins/admins.c
 import { AdminDepartmentComponent } from '@adminComponents/department/department.component';
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
 import { VerifyDataPipe } from './shared/pipes/verifyData/verify-data.pipe';
+import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
 
 @NgModule({
 	declarations: [
@@ -58,7 +59,8 @@ import { VerifyDataPipe } from './shared/pipes/verifyData/verify-data.pipe';
 		SuperAdminAdminsComponent,
 		AdminDepartmentComponent,
 		AdminSubjectsComponent,
-		VerifyDataPipe
+		VerifyDataPipe,
+		AdminChapterComponent
 	],
 	imports: [
 		BrowserModule,

@@ -53,6 +53,11 @@
     "ADMIN_NAME" : "Admin Name",
     "LOGO" : "Logo",
     "SUBJECT_CODE" : "Subject Code",
+    "CHAPTER_NAME" : "Chapter Name",
+    "FILE" : "File",
+    "CHAPTER_TITLE" : "Chapter Title",
+    "TOPIC_NAME" : "Topic Name",
+    "SELECT_CHAPTER" : "Select Chapter",
 
     "DASHBOARD" : "Dashboard",
     "INSTITUTES" : "Institutes",
@@ -65,9 +70,12 @@
     "DEPARTMENTS" : "Departments",
     "SUBJECTS" : "Subjects",
     "DEPARTMENT" : "Department",
+    "CHAPTERS" : "Chapters",
+    "CHAPTER" : "Chapters",
 
     "ADD_INSTITUTE" : "Add Institute",
     "ADD_ADMIN" : "Add Admin",
+    "ADD_CHAPTER" : "Add Chapter",
     
     "SELECT_INSTITUTE" : "Select Institute",
     "PLEASE_ADD_INSTITUTES_TO_CONTINUE" : "Please add Institutes to continue",
@@ -77,6 +85,11 @@
     "SELECT_DEPARTMENT" : "Select Department",
     "SELECT_SEMISTER" : "Select Semister",
     "ADD_STUDENTS" : "Add Students",
-    "ADD_SUBJECTS" : "Add Subjects"
-    
+    "ADD_SUBJECTS" : "Add Subjects",
+    "SELECT_SUBJECT" : "Select Subject",
+    "RELATED_VIDEOS" : "Related Videos",
+    "KEYWORDS" : "Keywords",
+    "ENTER_KEYWORDS" : "Enter Keywords",
+    "ENTER_RELATED_VIDEOS" : "Enter Related Videos",
+    "FILES" : "Files"
 }

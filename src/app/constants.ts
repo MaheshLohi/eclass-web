@@ -36,4 +36,7 @@ export class Constants {
     ADD_STUDENTS_URL = this.BASE_URL + this.ADMIN_URL + 'add-students';
     SUBJECTS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'subject/';
     ADD_SUBJECTS_URL = this.BASE_URL + this.ADMIN_URL + 'upload-department-subjects';
+    CHAPTERS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'subject/';
+    ADD_CHAPTERS_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter';
+    ADD_TOPIC_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter-details';
 }

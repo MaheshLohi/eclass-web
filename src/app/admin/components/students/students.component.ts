@@ -21,7 +21,7 @@ export class AdminStudentsComponent implements OnInit {
 	showAddFeature : boolean = false;
 	departments : any = [];
 	semisters : any = [];
-	departmentAndSectionDataStatus = 2;
+	departmentAndSemisterDataStatus = 2;
 	filterForm : any;
 	addStudentsForm : any;
 	selectedFile: File = null;
@@ -65,7 +65,7 @@ export class AdminStudentsComponent implements OnInit {
 	};
 
 	resetDepartmentsAndSections() {
-		this.departmentAndSectionDataStatus = 2;
+		this.departmentAndSemisterDataStatus = 2;
 		this.departments = [];
 		this.semisters = [];
 		this.loader.showLoader();
@@ -76,12 +76,12 @@ export class AdminStudentsComponent implements OnInit {
 		this.departmentService.getDepartmentsAndSections()
 		.then((response:any) => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = 1;
+			this.departmentAndSemisterDataStatus = 1;
 			this.departments = response.departments;
 			this.semisters = response.inst_class;
 		}, () => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = 0;
+			this.departmentAndSemisterDataStatus = 0;
 		});
 	};
 

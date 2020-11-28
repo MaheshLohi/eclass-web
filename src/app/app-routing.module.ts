@@ -12,6 +12,7 @@ import { AdminFacultiesComponent } from '@adminComponents/faculties/faculties.co
 import { AdminStudentsComponent } from '@adminComponents/students/students.component';
 import { AdminDepartmentComponent } from '@adminComponents/department/department.component';
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
+import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
 	{ path: 'admin/students', component: AdminStudentsComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/departments', component: AdminDepartmentComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/subjects', component: AdminSubjectsComponent, canActivate: [AuthGuard]},
+	{ path: 'admin/chapters', component: AdminChapterComponent, canActivate: [AuthGuard]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

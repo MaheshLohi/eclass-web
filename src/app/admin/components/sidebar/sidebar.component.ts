@@ -44,6 +44,11 @@ export class AdminSidebarComponent implements OnInit {
 			name : "SUBJECTS",
 			icon : "fas fa-book-open",
 			link : '/'+ this.userType +"/subjects"
+		},
+		{
+			name : "CHAPTERS",
+			icon : "fas fa-pen",
+			link : '/'+ this.userType +"/chapters"
 		}];
   	};
 }

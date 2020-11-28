@@ -73,20 +73,18 @@
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addSubjects()" [formGroup]="addSubjectsForm">
-                                        <div class="card-body">
-                                            <div class="form-group">
-                                                <label for="customFile">{{ 'FILE' | translate}}</label>
-                                                <div>
-                                                    <input type="file" id="subjects_file" formControlName="subjects_file" (change)="onFileChange($event)">
-                                                </div>
+                                        <div class="form-group">
+                                            <label for="customFile">{{ 'FILE' | translate}}</label>
+                                            <div>
+                                                <input type="file" id="subjects_file" formControlName="subjects_file" (change)="onFileChange($event)">
                                             </div>
-                                            <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
-                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
-                                            </button>
-                                            <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                            </button>
                                         </div>
+                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                        </button>
                                     </form>
                                 </div>
                             </div>
