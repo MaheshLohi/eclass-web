@@ -131,7 +131,7 @@ export class AdminFacultiesComponent implements OnInit {
 	};
 
 	downloadFile() {
-		this.downloadService.download('faculties.csv');
+		this.downloadService.download('public/faculties.csv');
 	};
 
 	deleteFaculty(faculty) {

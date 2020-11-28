@@ -16,8 +16,8 @@
                         <button class="btn btn-primary float-right" (click)="navigateToTopics(chapter)">
                             {{ 'VIEW_TOPICS' | translate}} <i class="pl-1 fa fa-angle-double-right"></i>
                         </button>
-                        <button class="btn btn-info">
-                            <i class="pr-1 fa fa-teal"></i> {{ 'DOWNLOAD_NOTES' | translate}}
+                        <button class="btn btn-default" (click)="downloadFile(chapter)">
+                            <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_NOTES' | translate}}
                         </button>
                     </div>
                 </div>

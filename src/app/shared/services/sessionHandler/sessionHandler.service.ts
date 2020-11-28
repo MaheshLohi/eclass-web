@@ -23,10 +23,10 @@ export class SessionHandlerService {
 		this.httpService.post(this.constants.LOGOUT_URL, {})
 		.subscribe(() => {
 			this.storage.clear();
-			this.router.navigate(['/login']);
+			this.router.navigate(['/']);
 		}, () => {
 			this.storage.clear();
-			this.router.navigate(['/login']);
+			this.router.navigate(['/']);
 		});
 	};
 	

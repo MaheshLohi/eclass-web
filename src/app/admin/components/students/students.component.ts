@@ -144,7 +144,7 @@ export class AdminStudentsComponent implements OnInit {
 	};
 
 	downloadFile() {
-		this.downloadService.download('student.csv');
+		this.downloadService.download('public/student.csv');
 	};
 
 }

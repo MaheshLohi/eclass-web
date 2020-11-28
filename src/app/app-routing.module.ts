@@ -19,7 +19,6 @@ import { StudentTopicComponent } from '@studentComponents/topic/topic.component'
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
-	{ path: 'login', component: LoginComponent },
 	{ path: 'superAdmin/login', component: LoginComponent },
 	{ path: 'superAdmin/dashboard', component: SuperAdminDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'superAdmin/institutes', component: SuperAdminInstitutesComponent, canActivate: [AuthGuard]},

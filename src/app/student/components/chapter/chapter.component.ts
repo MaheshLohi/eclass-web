@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
+import { DownloadService } from '@sharedServices/download/download.service';
 import { StudentChapterService } from '@studentServices/chapter/chapter.service';
 
 @Component({
@@ -26,6 +27,7 @@ export class StudentChapterComponent implements OnInit {
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	public router: Router,
+	private downloadService : DownloadService,
 	private studentChapterService : StudentChapterService) {
     	this.route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
@@ -64,6 +66,10 @@ export class StudentChapterComponent implements OnInit {
 	navigateToTopics(chapter) {
 		this.selectedChapter = chapter;
 		this.router.navigate(['student/topics', this.selectedChapter.id]);
+	};
+
+	downloadFile(chapter) {
+		this.downloadService.download(chapter.notes);
 	};
 
 }

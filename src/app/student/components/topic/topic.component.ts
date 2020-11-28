@@ -59,7 +59,6 @@ export class StudentTopicComponent implements OnInit {
 	selectTopic(topic) {
 		this.selectedTopic = topic; 
 		let videoBasePath = JSON.parse(topic.video);
-		this.videoUrl = this.constants.DOMAIN_URL + videoBasePath.video_path['360'];
+		this.videoUrl = this.constants.DOMAIN_URL + videoBasePath.video_path['480'];
 	}
-
 }

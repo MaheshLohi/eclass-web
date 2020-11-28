@@ -142,7 +142,7 @@ export class AdminSubjectsComponent implements OnInit {
 	};
 
 	downloadFile() {
-		this.downloadService.download('subjects.csv');
+		this.downloadService.download('public/subjects.csv');
 	};
 
 }

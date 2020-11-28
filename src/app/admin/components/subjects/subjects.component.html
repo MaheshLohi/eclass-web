@@ -25,7 +25,7 @@
                                             (change)="getSubjectsData()">
                                                 <option [value]=null selected disabled>{{ 'SELECT_SEMISTER' | translate}}</option>
                                                 <option *ngFor="let semister of semisters" [ngValue]="semister.id">
-                                                    SEMESTER {{semister.name}}
+                                                    {{ 'SEMISTER' | translate }} {{semister.name}}
                                                 </option>
                                             </select>
                                         </div>
