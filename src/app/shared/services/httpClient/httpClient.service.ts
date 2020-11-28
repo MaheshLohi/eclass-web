@@ -18,7 +18,7 @@ export class HttpClientService {
 		}
 		let Authorization = this.storageService.getData("Authorization");
 		if(Authorization && Authorization.token) {
-			headerData['Authorization'] = "Bearer" + Authorization.token;
+			headerData['Authorization'] = "Bearer " + Authorization.token;
 		}
 		return {
 			headers : new HttpHeaders(headerData),
@@ -40,7 +40,7 @@ export class HttpClientService {
 		let Authorization = this.storageService.getData("Authorization");
 		const httpOptions = {
 			headers: new HttpHeaders({
-				'Authorization': "Bearer" + Authorization.token
+				'Authorization': "Bearer " + Authorization.token
 			}),
 			params : params
 		};
