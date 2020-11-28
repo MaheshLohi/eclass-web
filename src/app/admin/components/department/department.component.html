@@ -12,16 +12,8 @@
                                 <h3 class="card-title custom-title">
                                     {{ 'DEPARTMENTS' | translate }}
                                 </h3>
-                                <div class="col-7 card-tools text-right">
-                                    <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
-                                        <i class="fa fa-plus"></i> {{ 'ADD_DEPARTMENTS' | translate}}
-                                    </button>
-                                    <button type="button" class="btn btn-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
-                                        <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
-                                    </button>
-                                </div>
                             </div>
-                            <div class="card-body" *ngIf="showAddFeature === false">
+                            <div class="card-body">
                                 <div class="col-lg-12" *ngIf="departmentDataStatus === 1">
                                     <table class="table table-striped">
                                         <tbody>
@@ -45,24 +37,6 @@
                                     [status]=departmentDataStatus 
                                     [title]="'DEPARTMENTS'">
                                     </app-list-error-handler>
-                                </div>
-                            </div>
-                            <div class="card-body" *ngIf="showAddFeature === true">
-                                <div class="col-lg-12">
-                                    <form role="form" (ngSubmit)="addDepartment()" [formGroup]="addDepartmentForm">
-                                        <div class="form-group">
-                                            <label for="customFile">{{ 'File' | translate}}</label>
-                                            <div>
-                                                <input type="file" id="department_file" formControlName="department_file" (change)="onFileChange($event)">
-                                            </div>
-                                        </div>
-                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
-                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
-                                        </button>
-                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                        </button>
-                                    </form>
                                 </div>
                             </div>
                         </div>
