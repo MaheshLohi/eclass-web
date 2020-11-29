@@ -22,7 +22,13 @@ export class StudentTopicService {
 			this.httpService.get(this.constants.STUDENT_TOPICS_LIST_URL +  chapterId)
 			.subscribe((response) => {
 				if(response && response.data && response.data.length) {
-					resolve(response.data);
+					let result = response.data[0];
+					if(result.chapter_details && result.chapter_details.data && result.chapter_details.data.length) {
+						resolve(result);
+					}
+					else {
+						reject();
+					}
 				}
 				else {
 					reject();

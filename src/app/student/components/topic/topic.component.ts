@@ -5,6 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
+import { DownloadService } from '@sharedServices/download/download.service';
 import { StudentTopicService } from '@studentServices/topic/topic.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class StudentTopicComponent implements OnInit {
 	topics : any = [];
 	selectedTopic : any = {};
 	videoUrl : any = null;
+	chapterDetails : any = {};
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -26,6 +28,7 @@ export class StudentTopicComponent implements OnInit {
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	public router: Router,
+	private downloadService : DownloadService,
 	private studentTopicService : StudentTopicService) {
 		this.route.params.subscribe((params: Params) => {
 			this.chapterId = params['chapterId'];
@@ -39,6 +42,7 @@ export class StudentTopicComponent implements OnInit {
 	resetTopicsList() {
 		this.topicsDataStatus = 2;
 		this.topics = [];
+		this.chapterDetails = {};
 		this.loader.showLoader();
 	};
 
@@ -48,7 +52,9 @@ export class StudentTopicComponent implements OnInit {
 		.then((response:any) => {
 			this.loader.hideLoader();
 			this.topicsDataStatus = 1;
-			this.topics = response[0].chapter_details.data;
+			this.chapterDetails = response;
+			console.log(JSON.stringify(this.chapterDetails))
+			this.topics = response.chapter_details.data;
 			this.selectTopic(this.topics[0]);
 		}, () => {
 			this.loader.hideLoader();
@@ -60,5 +66,9 @@ export class StudentTopicComponent implements OnInit {
 		this.selectedTopic = topic; 
 		let videoBasePath = JSON.parse(topic.video);
 		this.videoUrl = this.constants.DOMAIN_URL + videoBasePath.video_path['480'];
-	}
+	};
+
+	downloadFile(chapter) {
+		this.downloadService.download(chapter.notes);
+	};
 }

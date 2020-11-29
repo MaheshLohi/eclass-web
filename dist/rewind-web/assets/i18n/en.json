@@ -92,12 +92,13 @@
     "ADD_STUDENTS" : "Add Students",
     "ADD_SUBJECTS" : "Add Subjects",
     "SELECT_SUBJECT" : "Select Subject",
-    "RELATED_VIDEOS" : "Related Videos",
+    "RELATED_VIDEOS" : "Related videos",
     "KEYWORDS" : "Keywords",
     "ENTER_KEYWORDS" : "Enter Keywords",
     "ENTER_RELATED_VIDEOS" : "Enter Related Videos",
     "FILES" : "Files",
     "CHAPTER_DESCRIPTION" : "Chapter Description",
     "VIEW_TOPICS" : "View Topics",
-    "DOWNLOAD_NOTES" : "Download Notes"
+    "DOWNLOAD_NOTES" : "Download Notes",
+    "COURSE_CONTENT" : "Course content"
 }

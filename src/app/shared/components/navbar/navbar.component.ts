@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
@@ -8,9 +8,10 @@ import { StorageService } from '@sharedServices/storage/storage.service';
 	templateUrl: './navbar.component.html',
 	styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnChanges {
 
 	userDetails : any = {};
+	@Input() loginType? : number;
 
 	constructor(private sessionHandler : SessionHandlerService,
 	private storageService: StorageService) { }
@@ -23,4 +24,10 @@ export class NavbarComponent implements OnInit {
 		this.sessionHandler.handleLogout();
 	}
 
+	ngOnChanges(changes: SimpleChanges) {
+		for (let propName in changes) { 
+			let change = changes[propName];
+			this[propName] = change.currentValue;
+		}
+	};
 }

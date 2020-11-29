@@ -159,7 +159,7 @@ a.table-link:active {
     color: #ffffff;
 }
 .topics-list {
-    height: 300px;
+    height: 400px;
     overflow-y: auto;
     .topic-heading {
         font-size: 15px;
@@ -168,7 +168,7 @@ a.table-link:active {
         font-size: 25px;
     }
     .active-topic {
-        border-color: #0068d0;
+        font-weight: bold;
         .fas {
             color: #0068d0 !important;
         }
@@ -179,6 +179,12 @@ a.table-link:active {
 }
 .info-box-content {
     width: 100%;
+}
+.topic-title {
+    font-size: 18px;
+}
+.video-player {
+    background-color: #000;
 }
 @media only screen and (max-width: 812px) {
     .basic-form-page {
