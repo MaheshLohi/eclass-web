@@ -5,38 +5,8 @@
       	<app-breadcrumb [title]="'HOME'"></app-breadcrumb>
       	<section class="content">
           	<div class="col-md-12">
-				<div class="card" *ngIf="!isSemisterSelected">
-					<div class="card-header">
-						<h5 class="mb-2">{{ 'SELECT_SEMISTER' | translate }}</h5>
-					</div>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-3 col-sm-6 col-12" *ngFor="let semister of semisters" (click)="selectSemister(semister)">
-								<div class="info-box filter-boxes">
-									<div class="info-box-content">
-										<span class="info-box-text">SEMISTER {{semister.name}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="card" *ngIf="isSemisterSelected && !isSubjectSelected">
-					<div class="card-header">
-						<h5 class="mb-2">{{ 'SELECT_SUBJECT' | translate }}</h5>
-					</div>
-					<div class="card-body">
-						<div class="row">
-							<div class="col-md-3 col-sm-6 col-12" *ngFor="let subject of subjects" (click)="selectSubject(subject)">
-								<div class="info-box filter-boxes">
-									<div class="info-box-content">
-										<span class="info-box-text">{{subject.name}}</span>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<app-student-semister *ngIf="!isSemisterSelected" (semisterSelected)="onSemisterSelection($event)"></app-student-semister>
+				<app-student-subject *ngIf="isSemisterSelected && !isSubjectSelected" [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
           	</div>
 		</section>
     </div>

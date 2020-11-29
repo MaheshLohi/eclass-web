@@ -42,6 +42,8 @@ import { StudentHomeComponent } from '@studentComponents/home/home.component';
 import { StudentSidebarComponent } from '@studentComponents/sidebar/sidebar.component';
 import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
+import { StudentSemisterComponent } from '@studentComponents/semister/semister.component';
+import { StudentSubjectComponent } from '@studentComponents/subject/subject.component';
 
 @NgModule({
 	declarations: [
@@ -68,7 +70,9 @@ import { StudentTopicComponent } from '@studentComponents/topic/topic.component'
 		StudentHomeComponent,
 		StudentSidebarComponent,
 		StudentChapterComponent,
-		StudentTopicComponent
+		StudentTopicComponent,
+		StudentSemisterComponent,
+		StudentSubjectComponent
 	],
 	imports: [
 		BrowserModule,

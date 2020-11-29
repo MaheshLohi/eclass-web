@@ -9,7 +9,7 @@ import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpEr
 @Injectable({
   	providedIn: 'root'
 })
-export class StudentHomeService {
+export class StudentSubjectService {
 
 	userDetails : any = {};
 
@@ -18,29 +18,6 @@ export class StudentHomeService {
 	private constants: Constants,
 	private storageService : StorageService,
 	private httpErrorHandler : HttpErrorHandlerService) { }
-
-	getSemistersList() {
-		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL)
-			.subscribe((response) => {
-				if(response && response.data) {
-					let result = response.data;
-					if(result.departments && result.inst_class && result.departments.length && result.inst_class.length) {
-						resolve(response.data);
-					}
-					else {
-						reject();
-					}
-				}
-				else {
-					reject();
-				}
-			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
-				reject(error);
-			});
-	  	});
-	};
 
 	getSubjectsList(semisterDetails) {
 		this.userDetails = this.storageService.getData("User_Information");
