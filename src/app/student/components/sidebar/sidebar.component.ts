@@ -24,6 +24,10 @@ export class StudentSidebarComponent implements OnInit {
 			name : "HOME",
 			icon : "fas fa-tachometer-alt",
 			link : '/'+ this.userType +'/home'
+		},{
+			name : "EXAMINATION",
+			icon : "fas fa-clipboard",
+			link : '/'+ this.userType +'/examination'
 		}];
   	};
 }

@@ -44,6 +44,8 @@ import { StudentChapterComponent } from '@studentComponents/chapter/chapter.comp
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
 import { StudentSemisterComponent } from '@studentComponents/semister/semister.component';
 import { StudentSubjectComponent } from '@studentComponents/subject/subject.component';
+import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
+import { PrepareObjectPipe } from './shared/pipes/prepareObject/prepare-object.pipe';
 
 @NgModule({
 	declarations: [
@@ -72,7 +74,9 @@ import { StudentSubjectComponent } from '@studentComponents/subject/subject.comp
 		StudentChapterComponent,
 		StudentTopicComponent,
 		StudentSemisterComponent,
-		StudentSubjectComponent
+		StudentSubjectComponent,
+		StudentExaminationComponent,
+		PrepareObjectPipe
 	],
 	imports: [
 		BrowserModule,

@@ -16,6 +16,7 @@ import { AdminChapterComponent } from '@adminComponents/chapter/chapter.componen
 import { StudentHomeComponent } from '@studentComponents/home/home.component';
 import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
+import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
 	{ path: 'student/home', component: StudentHomeComponent, canActivate: [AuthGuard]},
 	{ path: 'student/chapters/:subjectId', component: StudentChapterComponent, canActivate: [AuthGuard]},
 	{ path: 'student/topics/:chapterId', component: StudentTopicComponent, canActivate: [AuthGuard]},
+	{ path: 'student/examination', component: StudentExaminationComponent, canActivate: [AuthGuard]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

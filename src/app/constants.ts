@@ -18,7 +18,7 @@ export class Constants {
     STUDENT = "student";
 
     ADMIN_URL = "admin/";
-    STUDENT_URL = "student/";
+    STUDENT_URL = this.BASE_URL + "student/";
 
     LOGIN_URL = this.BASE_URL + 'login';
     USER_DETAILS_URL = this.BASE_URL + 'student/user';
@@ -41,9 +41,9 @@ export class Constants {
     ADD_CHAPTERS_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter';
     ADD_TOPIC_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter-details';
 
-
     //students API
-    STUDENT_SUBJECTS_LIST_URL = this.BASE_URL + this.STUDENT_URL + 'student-subjects/';
-    STUDENT_CHAPTERS_LIST_URL = this.BASE_URL + this.STUDENT_URL + 'subject/';
-    STUDENT_TOPICS_LIST_URL = this.BASE_URL + this.STUDENT_URL + 'chapter/';
+    STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';
+    STUDENT_CHAPTERS_LIST_URL = this.STUDENT_URL + 'subject/';
+    STUDENT_TOPICS_LIST_URL = this.STUDENT_URL + 'chapter/';
+    STUDENT_EXAMS_LIST_URL = this.STUDENT_URL + 'examination/'
 }
