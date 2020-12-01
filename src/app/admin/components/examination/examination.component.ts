@@ -62,33 +62,13 @@ export class AdminExaminationComponent implements OnInit {
 		});
 	}
 
-	get department_id() { 
-		return this.filterForm.get('department_id'); 
-	};
-
-	get inst_class_id() { 
-		return this.filterForm.get('inst_class_id'); 
-	};
-
-	get subject_id() { 
-		return this.filterForm.get('subject_id'); 
-	};
-
-	get name() { 
-		return this.addDataForm.get('name'); 
-	};
-
-	get year() { 
-		return this.addDataForm.get('year'); 
-	};
-
-	get paper() { 
-		return this.addDataForm.get('paper'); 
+	validateAddFormValue(formName) {
+		return this.addDataForm.get(formName); 
 	};
 
 	ngOnInit() {
 		this.getDepartmentsAndSectionsList();
-	}
+	};
 
 	resetDepartmentsAndSections() {
 		this.departmentAndSemisterDataStatus = 2;

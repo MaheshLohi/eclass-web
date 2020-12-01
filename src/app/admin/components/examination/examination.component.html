@@ -81,7 +81,7 @@
                                         <label for="name">{{ 'EXAM_NAME' | translate}} *</label>
                                         <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                     </div>
-                                    <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
+                                    <app-form-validator [data]="validateAddFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                     <div class="form-group m-b-0">
                                         <label for="name">{{ 'SELECT_YEAR' | translate}} *</label>
                                         <select class="custom-select form-control select2" id="year" formControlName="year" required>
@@ -91,7 +91,7 @@
                                             </option>
                                         </select>
                                     </div>
-                                    <app-form-validator [data]="year" [validateNameMinLength]=true></app-form-validator>
+                                    <app-form-validator [data]="validateAddFormValue('year')" [validateNameMinLength]=true></app-form-validator>
                                     <div class="form-group">
                                         <label for="customFile">{{ 'FILE' | translate}}</label>
                                         <div>
