@@ -1,0 +1,116 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper" *ngIf="departmentAndSemisterDataStatus === 1">
+        <app-breadcrumb [title]="'EXAMINATION'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <div class="col-12 row">
+                                    <form class="col-9 row" role="form" [formGroup]="filterForm">
+                                        <div class="col-4">
+                                            <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
+                                            (change)="getSubjectsData()">
+                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
+                                                <option *ngFor="let department of departments" [ngValue]="department.id">
+                                                    {{ department.name }}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
+                                            (change)="getSubjectsData()">
+                                                <option [value]=null selected disabled>{{ 'SELECT_SEMISTER' | translate}}</option>
+                                                <option *ngFor="let semister of semisters" [ngValue]="semister.id">
+                                                    {{ 'SEMISTER' | translate }} {{semister.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-4">
+                                            <select class="custom-select form-control select2" id="subject_id" formControlName="subject_id" required
+                                            (change)="getExamsList()">
+                                                <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate}}</option>
+                                                <option *ngFor="let subject of subjects" [ngValue]="subject.id">
+                                                    {{ 'SUBJECT' | translate }} {{subject.name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </form>
+                                    <div class="col-3 card-tools text-right">
+                                        <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
+                                        [disabled]="!this.filterForm.valid">
+                                            <i class="fa fa-plus"></i> {{ 'ADD_EXAMINATION' | translate}}
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="showAddFeature === false && examDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="examDataStatus === 1">
+                                    <div class="card mb-4" *ngFor="let exam of examsList">
+                                        <div *ngFor="let year of exam | prepareObject">
+                                            <div class="card-header">
+                                                <h5 class="mb-2">{{ year.key }} examination papers</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="downloadFile(paper)">
+                                                        <div class="info-box filter-boxes">
+                                                            <div class="info-box-content">
+                                                                <span class="info-box-text">{{ paper.name | verifyData}}</span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-12" *ngIf="examDataStatus === 0 || examDataStatus === 3">
+                                    <app-list-error-handler 
+                                    [status]=examDataStatus 
+                                    [title]="'EXAMINATION'">
+                                    </app-list-error-handler>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="showAddFeature === true">
+                                <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
+                                    <div class="form-group m-b-0">
+                                        <label for="name">{{ 'EXAM_NAME' | translate}} *</label>
+                                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                                    </div>
+                                    <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
+                                    <div class="form-group m-b-0">
+                                        <label for="name">{{ 'SELECT_YEAR' | translate}} *</label>
+                                        <select class="custom-select form-control select2" id="year" formControlName="year" required>
+                                            <option [value]=null selected disabled>{{ 'SELECT_YEAR' | translate}}</option>
+                                            <option *ngFor="let year of years" [ngValue]="year">
+                                                {{year}}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <app-form-validator [data]="year" [validateNameMinLength]=true></app-form-validator>
+                                    <div class="form-group">
+                                        <label for="customFile">{{ 'FILE' | translate}}</label>
+                                        <div>
+                                            <input type="file" id="paper" formControlName="paper" (change)="onFileChange($event)">
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                        <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                    </button>
+                                    <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>

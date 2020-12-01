@@ -17,6 +17,7 @@ import { StudentHomeComponent } from '@studentComponents/home/home.component';
 import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
 import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
+import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
 	{ path: 'admin/departments', component: AdminDepartmentComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/subjects', component: AdminSubjectsComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/chapters', component: AdminChapterComponent, canActivate: [AuthGuard]},
+	{ path: 'admin/examination', component: AdminExaminationComponent, canActivate: [AuthGuard]},
 	{ path: 'student/home', component: StudentHomeComponent, canActivate: [AuthGuard]},
 	{ path: 'student/chapters/:subjectId', component: StudentChapterComponent, canActivate: [AuthGuard]},
 	{ path: 'student/topics/:chapterId', component: StudentTopicComponent, canActivate: [AuthGuard]},

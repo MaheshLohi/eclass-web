@@ -40,6 +40,8 @@ export class Constants {
     CHAPTERS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'subject/';
     ADD_CHAPTERS_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter';
     ADD_TOPIC_URL = this.BASE_URL + this.ADMIN_URL + 'add-chapter-details';
+    EXAMINATION_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'examination/';
+    ADD_EXAMINATION_URL = this.BASE_URL + this.ADMIN_URL + 'examination';
 
     //students API
     STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';

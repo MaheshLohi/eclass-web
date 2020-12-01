@@ -6,37 +6,38 @@ import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
-import { AdminChapterService } from '@adminServices/chapter/chapter.service';
 import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
+import { DownloadService } from '@sharedServices/download/download.service';
+import { AdminExaminationService } from '@adminServices/examination/examination.service';
 
 @Component({
-  	selector: 'app-admin-chapter',
-  	templateUrl: './chapter.component.html',
-  	styleUrls: ['./chapter.component.scss']
+  selector: 'app-admin-examination',
+  templateUrl: './examination.component.html',
+  styleUrls: ['./examination.component.scss']
 })
-export class AdminChapterComponent implements OnInit {
+export class AdminExaminationComponent implements OnInit {
 
-	chapters : any = [];
-	chaptersDataStatus : number = 2;
-	showAddFeature : boolean = false;
 	departments : any = [];
 	semisters : any = [];
 	departmentAndSemisterDataStatus = 2;
-	filterForm : any;
-	addChapterForm : any;
-	selectedFile: File = null;
 	subjects : any = [];
 	subjectsDataStatus : number = 2;
-	addTopicForm : any;
-	videoFiles: File = null;
-	  
+	showAddFeature : boolean = false;
+	filterForm : any;
+	addDataForm : any;
+	selectedFile: File = null;
+	examDataStatus : number = 2;
+	examsList : any = [];
+	years = [2020,2019,2018,2017,2016,2015];
+
 	constructor(public constants : Constants,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
-	private chapterService : AdminChapterService,
+	private downloadService : DownloadService,
 	private departmentService : AdminDepartmentService,
-	private subjectsService : AdminSubjectsService) {
+	private adminExaminationService : AdminExaminationService,
+	private subjectsService : AdminSubjectsService) { 
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
 				Validators.required
@@ -48,35 +49,18 @@ export class AdminChapterComponent implements OnInit {
 				Validators.required
 			])
 		});
-		this.addChapterForm = new FormGroup({
+		this.addDataForm = new FormGroup({
 			'name' : new FormControl("", [
 				Validators.required
 			]),
-			'description' : new FormControl("", [
+			'year' : new FormControl("", [
 				Validators.required
 			]),
-			'notes_file' : new FormControl("", [
+			'paper' : new FormControl("", [
 				Validators.required
 			])
 		});
-		this.addTopicForm = new FormGroup({
-			'name' : new FormControl("", [
-				Validators.required
-			]),
-			'chapter_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'video_file' : new FormControl("", [
-				Validators.required
-			]),
-			'keywords' : new FormControl("", [
-				Validators.required
-			]),
-			'related_videos' : new FormControl("", [
-				Validators.required
-			])
-		});
-	};
+	}
 
 	get department_id() { 
 		return this.filterForm.get('department_id'); 
@@ -86,36 +70,20 @@ export class AdminChapterComponent implements OnInit {
 		return this.filterForm.get('inst_class_id'); 
 	};
 
+	get subject_id() { 
+		return this.filterForm.get('subject_id'); 
+	};
+
 	get name() { 
-		return this.addChapterForm.get('name'); 
+		return this.addDataForm.get('name'); 
 	};
 
-	get description() { 
-		return this.addChapterForm.get('description'); 
+	get year() { 
+		return this.addDataForm.get('year'); 
 	};
 
-	get notes_file() { 
-		return this.addChapterForm.get('notes_file'); 
-	};
-
-	get topic_name() { 
-		return this.addTopicForm.get('name'); 
-	};
-
-	get chapter_id() { 
-		return this.addTopicForm.get('chapter_id'); 
-	};
-
-	get video_file() { 
-		return this.addTopicForm.get('video_file'); 
-	};
-
-	get keywords() { 
-		return this.addTopicForm.get('keywords'); 
-	};
-
-	get related_videos() { 
-		return this.addTopicForm.get('related_videos'); 
+	get paper() { 
+		return this.addDataForm.get('paper'); 
 	};
 
 	ngOnInit() {
@@ -169,42 +137,38 @@ export class AdminChapterComponent implements OnInit {
 		});
 	};
 
-	resetChapters() {
-		this.chaptersDataStatus = 2;
-		this.chapters = [];
+	resetExamsList() {
+		this.examDataStatus = 2;
+		this.examsList = [];
 		this.loader.showLoader();
 	};
 
-	getChapters() {
-		this.resetChapters();
-		this.chapterService.getChapters(this.filterForm.value)
+	getExamsList() {
+		this.resetExamsList();
+		this.adminExaminationService.getExamsList(this.filterForm.value)
 		.then((response:any) => {
 			this.loader.hideLoader();
-			this.chaptersDataStatus = 1;
-			this.chapters = response;
+			this.examDataStatus = 1;
+			this.examsList = response;
+			console.log(JSON.stringify(this.examsList))
 		}, () => {
 			this.loader.hideLoader();
-			this.chaptersDataStatus = 0;
+			this.examDataStatus = 0;
 		});
 	};
+
 
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addChapterForm.reset();
+			this.addDataForm.reset();
 			this.selectedFile = null;
-			this.addTopicForm.reset();
-			this.videoFiles = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addChapterForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
+		return (this.addDataForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
 	};
-
-	disableAddTopicFeatureForm() {
-		return (this.addTopicForm.valid && this.filterForm.valid && this.videoFiles) ? false : true;
-	}
 
 	onFileChange(event) {
 		this.selectedFile = null;
@@ -213,36 +177,20 @@ export class AdminChapterComponent implements OnInit {
 		}
 	};
 
-	onVideoFileChange(event) {
-		this.videoFiles = null;
-		if (event.target.files.length > 0) {
-			this.videoFiles = event.target.files;
-		}
-	};
-
-	addChapter() {
+	addExam() {
 		this.loader.showLoader();
-		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.selectedFile)
+		this.adminExaminationService.addExamination(this.filterForm.value, this.addDataForm.value, this.selectedFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
-			this.getChapters();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("CHAPTERS")} ));
+			this.getExamsList();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("EXAMINATION")} ));
 		}, () => {
 			this.loader.hideLoader();
 		});
 	};
 
-	addTopic() {
-		this.loader.showLoader();
-		this.chapterService.addTopic(this.addTopicForm.value, this.videoFiles)
-		.then(() => {
-			this.loader.hideLoader();
-			this.showAddFeatureView(false);
-			this.getChapters();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("TOPIC")} ));
-		}, () => {
-			this.loader.hideLoader();
-		});
+	downloadFile(paper) {
+		this.downloadService.download(paper.paper);
 	};
 }

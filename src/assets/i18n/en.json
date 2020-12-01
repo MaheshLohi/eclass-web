@@ -82,6 +82,7 @@
     "ADD_INSTITUTE" : "Add Institute",
     "ADD_ADMIN" : "Add Admin",
     "ADD_CHAPTER" : "Add Chapter",
+    "ADD_EXAMINATION" : "Add Examination",
     
     "SELECT_INSTITUTE" : "Select Institute",
     "PLEASE_ADD_INSTITUTES_TO_CONTINUE" : "Please add Institutes to continue",
@@ -101,5 +102,7 @@
     "CHAPTER_DESCRIPTION" : "Chapter Description",
     "VIEW_TOPICS" : "View Topics",
     "DOWNLOAD_NOTES" : "Download Notes",
-    "COURSE_CONTENT" : "Course content"
+    "COURSE_CONTENT" : "Course content",
+    "EXAM_NAME" : "Exam name",
+    "SELECT_YEAR" : "Select year" 
 }

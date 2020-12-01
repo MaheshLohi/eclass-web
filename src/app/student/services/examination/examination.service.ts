@@ -22,7 +22,7 @@ export class StudentExaminationService {
 			this.httpService.get(this.constants.STUDENT_EXAMS_LIST_URL + selectedSubject.id)
 			.subscribe((response) => {
 				if(response && response.data && response.data.length) {
-					resolve(response.data[0]);
+					resolve(response.data);
 				}
 				else {
 					reject();

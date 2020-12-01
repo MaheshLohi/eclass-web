@@ -45,6 +45,7 @@ import { StudentTopicComponent } from '@studentComponents/topic/topic.component'
 import { StudentSemisterComponent } from '@studentComponents/semister/semister.component';
 import { StudentSubjectComponent } from '@studentComponents/subject/subject.component';
 import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
+import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { PrepareObjectPipe } from './shared/pipes/prepareObject/prepare-object.pipe';
 
 @NgModule({
@@ -76,6 +77,7 @@ import { PrepareObjectPipe } from './shared/pipes/prepareObject/prepare-object.p
 		StudentSemisterComponent,
 		StudentSubjectComponent,
 		StudentExaminationComponent,
+		AdminExaminationComponent,
 		PrepareObjectPipe
 	],
 	imports: [
