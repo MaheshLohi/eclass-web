@@ -78,11 +78,13 @@
     "ENTER_USN" : "Enter USN",
     "SEMISTER" : "Semister",
     "EXAMINATION" : "Examination",
+    "SUBJECT_FACULTY" : "Subject faculty",
 
     "ADD_INSTITUTE" : "Add Institute",
     "ADD_ADMIN" : "Add Admin",
     "ADD_CHAPTER" : "Add Chapter",
     "ADD_EXAMINATION" : "Add Examination",
+    "ADD_SUBJECT_FACULTY" : "Add Subject Faculty",
     
     "SELECT_INSTITUTE" : "Select Institute",
     "PLEASE_ADD_INSTITUTES_TO_CONTINUE" : "Please add Institutes to continue",
@@ -104,5 +106,6 @@
     "DOWNLOAD_NOTES" : "Download Notes",
     "COURSE_CONTENT" : "Course content",
     "EXAM_NAME" : "Exam name",
-    "SELECT_YEAR" : "Select year" 
+    "SELECT_YEAR" : "Select year",
+    "SELECT_FACULTY" : "Select faculty"
 }

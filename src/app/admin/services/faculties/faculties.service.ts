@@ -24,8 +24,8 @@ export class AdminFacultiesService {
 		return new Promise((resolve, reject) => {
 		  	this.httpService.get(this.constants.FACULTIES_LIST_URL + this.userDetails.inst_id + '/' + filterData.department_id)
 		  	.subscribe((response) => {
-			  	if(response && response.users && response.users.length) {
-				  	resolve(response.users);
+			  	if(response && response.data && response.data.length) {
+				  	resolve(response.data);
 			  	}
 			  	else {
 				  	reject();

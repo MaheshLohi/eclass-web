@@ -6,18 +6,18 @@ import { LoggerService } from '@sharedServices/logger/logger.service';
 import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
 
 @Injectable({
-    providedIn: 'root'
+  	providedIn: 'root'
 })
-export class AdminExaminationService {
+export class AdminSubjectFacultyService {
 
 	constructor(private httpService: HttpClientService,
 	public loggerService: LoggerService,
 	private constants: Constants,
 	private httpErrorHandler : HttpErrorHandlerService) { }
 
-	getExamsList(data) {
+	getSubjectFaculties(data) {
 		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.EXAMINATION_LIST_URL +  data.subject_id)
+		  	this.httpService.get(this.constants.SUBJECT_FAULTY_LIST_URL +  data.subject_id)
 		  	.subscribe((response) => {
 			  	if(response && response.data && response.data.length) {
 				  	resolve(response.data);
@@ -32,14 +32,12 @@ export class AdminExaminationService {
 		});
 	};
 	  
-	addExamination(filterData, addFormValue, selectedFile) {
+	addSubjectFaculties(filterData, addFormValue) {
 		const formData = new FormData();
-		formData.append('name', addFormValue.name);
 		formData.append('subject_id', filterData.subject_id);
-		formData.append('year', addFormValue.year);
-		formData.append('paper', selectedFile);
+		formData.append('faculty_id', addFormValue.faculty_id);
 		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.ADD_EXAMINATION_URL, formData)
+			this.httpService.postWithFormData(this.constants.ADD_SUBJECT_FACULTY_URL, formData)
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {

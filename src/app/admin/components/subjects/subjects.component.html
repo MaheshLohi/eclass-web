@@ -48,6 +48,7 @@
                                                 <th>#</th>
                                                 <th>{{ 'NAME' | translate}}</th>
                                                 <th>{{ 'SUBJECT_CODE' | translate}}</th>
+                                                <th>{{ 'FACULTY' | translate}}</th>
                                             </tr>
                                             <tr *ngFor="let subject of subjects;let i = index">
                                                 <td>
@@ -58,6 +59,9 @@
                                                 </td>
                                                 <td>
                                                     {{ subject.code | verifyData }}
+                                                </td>
+                                                <td>
+                                                    {{ subject.faculty | verifyData }}
                                                 </td>
                                             </tr>
                                         </tbody>
