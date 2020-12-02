@@ -49,5 +49,7 @@ export class Constants {
     STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';
     STUDENT_CHAPTERS_LIST_URL = this.STUDENT_URL + 'subject/';
     STUDENT_TOPICS_LIST_URL = this.STUDENT_URL + 'chapter/';
-    STUDENT_EXAMS_LIST_URL = this.STUDENT_URL + 'examination/'
+    STUDENT_EXAMS_LIST_URL = this.STUDENT_URL + 'examination/';
+    STUDENT_QUESTIONS_LIST_URL = this.STUDENT_URL + 'questions/';
+    STUDENT_ADD_QUESTION_URL = this.STUDENT_URL + 'question';
 }

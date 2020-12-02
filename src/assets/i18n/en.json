@@ -78,7 +78,9 @@
     "ENTER_USN" : "Enter USN",
     "SEMISTER" : "Semister",
     "EXAMINATION" : "Examination",
+    "QUESTION" : "Question",
     "SUBJECT_FACULTY" : "Subject faculty",
+    "QUESTIONS" : "Questions",
 
     "ADD_INSTITUTE" : "Add Institute",
     "ADD_ADMIN" : "Add Admin",
@@ -107,5 +109,6 @@
     "COURSE_CONTENT" : "Course content",
     "EXAM_NAME" : "Exam name",
     "SELECT_YEAR" : "Select year",
-    "SELECT_FACULTY" : "Select faculty"
+    "SELECT_FACULTY" : "Select faculty",
+    "ENTER_QUESTION" : "Enter Question"
 }

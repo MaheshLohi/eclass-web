@@ -186,6 +186,10 @@ a.table-link:active {
 .video-player {
     background-color: #000;
 }
+.questions-list {
+    max-height: 300px;
+    overflow-y: auto;
+}
 @media only screen and (max-width: 812px) {
     .basic-form-page {
         .basic-form-container {

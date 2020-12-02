@@ -48,6 +48,7 @@ import { StudentExaminationComponent } from '@studentComponents/examination/exam
 import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { PrepareObjectPipe } from './shared/pipes/prepareObject/prepare-object.pipe';
 import { AdminSubjectFacultyComponent } from '@adminComponents/subject-faculty/subject-faculty.component';
+import { StudentQuestionsComponent } from '@studentComponents/questions/questions.component';
 
 @NgModule({
 	declarations: [
@@ -80,7 +81,8 @@ import { AdminSubjectFacultyComponent } from '@adminComponents/subject-faculty/s
 		StudentExaminationComponent,
 		AdminExaminationComponent,
 		PrepareObjectPipe,
-		AdminSubjectFacultyComponent
+		AdminSubjectFacultyComponent,
+		StudentQuestionsComponent
 	],
 	imports: [
 		BrowserModule,
