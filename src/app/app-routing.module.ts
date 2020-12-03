@@ -19,6 +19,9 @@ import { StudentTopicComponent } from '@studentComponents/topic/topic.component'
 import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
 import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { AdminSubjectFacultyComponent } from '@adminComponents/subject-faculty/subject-faculty.component';
+import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.component';
+import { StudentDownloadsComponent } from '@studentComponents/downloads/downloads.component';
+import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -39,6 +42,9 @@ const routes: Routes = [
 	{ path: 'student/chapters/:subjectId', component: StudentChapterComponent, canActivate: [AuthGuard]},
 	{ path: 'student/topics/:chapterId', component: StudentTopicComponent, canActivate: [AuthGuard]},
 	{ path: 'student/examination', component: StudentExaminationComponent, canActivate: [AuthGuard]},
+	{ path: 'student/wishlist', component: StudentWishlistComponent, canActivate: [AuthGuard]},
+	{ path: 'student/downloads', component: StudentDownloadsComponent, canActivate: [AuthGuard]},
+	{ path: 'student/feedback', component: StudentFeedbackComponent, canActivate: [AuthGuard]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

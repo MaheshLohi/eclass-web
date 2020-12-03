@@ -49,6 +49,7 @@
                                                 <th>{{ 'NAME' | translate}}</th>
                                                 <th>{{ 'SUBJECT_CODE' | translate}}</th>
                                                 <th>{{ 'FACULTY' | translate}}</th>
+                                                <th>{{ 'SYLLABUS' | translate}}</th>
                                             </tr>
                                             <tr *ngFor="let subject of subjects;let i = index">
                                                 <td>
@@ -62,6 +63,19 @@
                                                 </td>
                                                 <td>
                                                     {{ subject.faculty | verifyData }}
+                                                </td>
+                                                <td *ngIf="subject.syllabus">
+                                                    <button class="btn btn-outline-primary btn-sm" (click)="downloadSyllabus(subject)">
+                                                        <i class="pr-1 fa fa-download"></i> Download
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="!subject.syllabus">
+                                                    <div class="form-group mb-1">
+                                                        <input type="file" id="syllabus_file" (change)="onSyllabusFileChange($event,subject)">
+                                                    </div>
+                                                    <button class="btn btn-outline-danger btn-sm" *ngIf="subject.id === selectedSubjectId" (click)="uploadSubjectSyllabus()">
+                                                        <i class="pr-1 fa fa-upload"></i> Upload
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>

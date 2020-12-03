@@ -81,6 +81,9 @@
     "QUESTION" : "Question",
     "SUBJECT_FACULTY" : "Subject faculty",
     "QUESTIONS" : "Questions",
+    "FEEDBACK" : "Feedback",
+    "DOWNLOADS" : "Downloads",
+    "WISHLIST" : "Wishlist",
 
     "ADD_INSTITUTE" : "Add Institute",
     "ADD_ADMIN" : "Add Admin",
@@ -110,5 +113,7 @@
     "EXAM_NAME" : "Exam name",
     "SELECT_YEAR" : "Select year",
     "SELECT_FACULTY" : "Select faculty",
-    "ENTER_QUESTION" : "Enter Question"
+    "ENTER_QUESTION" : "Enter Question",
+    "FACULTY_NAME" : "Faculty Name",
+    "DOWNLOAD_SYLLABUS" : "Download Syllabus"
 }

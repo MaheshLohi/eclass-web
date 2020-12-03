@@ -28,6 +28,18 @@ export class StudentSidebarComponent implements OnInit {
 			name : "EXAMINATION",
 			icon : "fas fa-clipboard",
 			link : '/'+ this.userType +'/examination'
+		},{
+			name : "WISHLIST",
+			icon : "fa fa-heart",
+			link : '/'+ this.userType +'/wishlist'
+		},{
+			name : "DOWNLOADS",
+			icon : "fa fa-download",
+			link : '/'+ this.userType +'/downloads'
+		},{
+			name : "FEEDBACK",
+			icon : "fas fa-comments",
+			link : '/'+ this.userType +'/feedback'
 		}];
   	};
 }

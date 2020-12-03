@@ -25,6 +25,8 @@ export class AdminSubjectsComponent implements OnInit {
 	filterForm : any;
 	addSubjectsForm : any;
 	selectedFile: File = null;
+	syllabusFile : File = null;
+	selectedSubjectId : number;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -128,6 +130,15 @@ export class AdminSubjectsComponent implements OnInit {
 		}
 	};
 
+	onSyllabusFileChange(event,subject) {
+		this.syllabusFile = null;
+		this.selectedSubjectId = null;
+		if (event.target.files.length > 0) {
+			this.syllabusFile = event.target.files[0];
+			this.selectedSubjectId = subject.id;
+		}
+	};
+
 	addSubjects() {
 		this.loader.showLoader();
 		this.subjectsService.addSubjects(this.filterForm.value, this.selectedFile)
@@ -141,8 +152,24 @@ export class AdminSubjectsComponent implements OnInit {
 		});
 	};
 
+	uploadSubjectSyllabus() {
+		this.loader.showLoader();
+		this.subjectsService.addSubjectSyllabus(this.selectedSubjectId, this.syllabusFile)
+		.then(() => {
+			this.loader.hideLoader();
+			this.getSubjects(this.filterForm.value);
+			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("SYLLABUS")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	}
+
 	downloadFile() {
 		this.downloadService.download('public/subjects.csv');
 	};
+
+	downloadSyllabus(subject) {
+		this.downloadService.download(subject.syllabus);
+	}
 
 }

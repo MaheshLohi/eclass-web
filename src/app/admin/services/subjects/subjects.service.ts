@@ -47,4 +47,19 @@ export class AdminSubjectsService {
 			});
 		});
 	};
+
+	addSubjectSyllabus(subject_id, selectedFile) {
+		const formData = new FormData();
+		formData.append('syllabus', selectedFile);
+		formData.append('subject_id', subject_id);
+		return new Promise((resolve, reject) => {
+			this.httpService.postWithFormData(this.constants.ADD_SUBJECT_SYLLABUS_URL, formData)
+			.subscribe((response) => {
+				resolve(response);
+			}, (error) => {
+				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
+				reject(error);
+			});
+		});
+	};
 }

@@ -36,4 +36,21 @@ export class StudentSubjectService {
 		  	});
 		});
 	};
+
+	getSubjectDetails(subjectId) {
+		return new Promise((resolve, reject) => {
+		  	this.httpService.get(this.constants.ADMIN_SUBJECTS_DETAILS_URL + subjectId)
+		  	.subscribe((response) => {
+			  	if(response && response.data) {
+				  	resolve(response.data);
+			  	}
+			  	else {
+				  	reject();
+			  	}
+		  	}, (error) => {
+			  	this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
+			  	reject(error);
+		  	});
+		});
+	};
 }

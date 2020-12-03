@@ -45,6 +45,8 @@ export class Constants {
     SUBJECT_FAULTY_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'subject-faculties/';
     ADD_SUBJECT_FACULTY_URL = this.BASE_URL + this.ADMIN_URL + 'add-subject-faculty';
     ADMIN_DASHBOARD_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'dashboard/';
+    ADMIN_SUBJECTS_DETAILS_URL = this.BASE_URL + this.ADMIN_URL + 'subject-info/';
+    ADD_SUBJECT_SYLLABUS_URL = this.BASE_URL + this.ADMIN_URL + 'subject-syllabus';
 
     //students API
     STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';
@@ -53,4 +55,5 @@ export class Constants {
     STUDENT_EXAMS_LIST_URL = this.STUDENT_URL + 'examination/';
     STUDENT_QUESTIONS_LIST_URL = this.STUDENT_URL + 'questions/';
     STUDENT_ADD_QUESTION_URL = this.STUDENT_URL + 'question';
+    
 }

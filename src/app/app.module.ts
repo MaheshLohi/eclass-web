@@ -49,6 +49,9 @@ import { AdminExaminationComponent } from '@adminComponents/examination/examinat
 import { PrepareObjectPipe } from './shared/pipes/prepareObject/prepare-object.pipe';
 import { AdminSubjectFacultyComponent } from '@adminComponents/subject-faculty/subject-faculty.component';
 import { StudentQuestionsComponent } from '@studentComponents/questions/questions.component';
+import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.component';
+import { StudentDownloadsComponent } from '@studentComponents/downloads/downloads.component';
+import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 
 @NgModule({
 	declarations: [
@@ -82,7 +85,10 @@ import { StudentQuestionsComponent } from '@studentComponents/questions/question
 		AdminExaminationComponent,
 		PrepareObjectPipe,
 		AdminSubjectFacultyComponent,
-		StudentQuestionsComponent
+		StudentQuestionsComponent,
+		StudentWishlistComponent,
+		StudentDownloadsComponent,
+		StudentFeedbackComponent
 	],
 	imports: [
 		BrowserModule,
