@@ -1,34 +1,39 @@
 <div class="wrapper">
-    <app-navbar></app-navbar>
+    <app-student-navbar></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
-      	<app-breadcrumb *ngIf="subjectDetailsDataStatus === 1" [title]="subjectDetails.name+(subjectDetails.code)"></app-breadcrumb>
-      	<section class="content col-12 row">
-            <div class="col-lg-12">
-                <div class="card mb-2">
-                    <div class="card-body">
-                        <div>{{ 'FACULTY_NAME' | translate }} : {{subjectDetails.faculty}}</div><br/>
-                        <button class="btn btn-default" (click)="downloadSyllabus(subjectDetails)">
-                            <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_SYLLABUS' | translate}}
-                        </button>
+        <div class="w-100">
+            <div class="card mb-2">
+                <div class="card-body bg-light-black">
+                    <div class="col-12 row p-3">
+                        <div class="col-lg-4 col-12 bg-white p-0 br-12">
+                            <img class="img-fluid heading-cd-imgtmb" src="assets/images/default_thumb.jpg" alt="Photo">
+                        </div>
+                        <div class="col-lg-8 col-12 pl-3">
+                            <h4 class="text-bold">{{ 'SUBJECT' | translate }} : {{subjectDetails.name}}({{subjectDetails.code}})</h4>
+                            <div>{{ 'FACULTY_NAME' | translate }} : {{subjectDetails.faculty}}</div>
+                            <button class="btn btn-danger mt-3 br-20" (click)="downloadSyllabus(subjectDetails)">
+                                <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_SYLLABUS' | translate}}
+                            </button>
+                        </div>
                     </div>
                 </div>
+                <div class="bg-white text-center">
+                    <div class="card-nav-heading">Chapters</div>
+                </div>
             </div>
-          	<div class="col-6" *ngFor="let chapter of chapters">
-				<div class="card card-outline mb-5" [ngClass]=getColor()>
-                    <div class="card-header">
-                        <h3 class="card-title">
-                            {{ 'CHAPTER_NAME' | translate }} : {{chapter.name}}
-                        </h3>
-                    </div>
-                    <div class="card-body">
-                        <div>{{ 'CHAPTER_DESCRIPTION' | translate }} : {{chapter.description}}</div><br/>
-                        <button class="btn btn-primary float-right" (click)="navigateToTopics(chapter)">
-                            {{ 'VIEW_TOPICS' | translate}} <i class="pl-1 fa fa-angle-double-right"></i>
-                        </button>
-                        <button class="btn btn-default" (click)="downloadFile(chapter)">
-                            <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_NOTES' | translate}}
-                        </button>
+        </div>
+      	<section class="content col-12 row p-4">
+          	<div class="col-lg-3 col-12 mt-1" *ngFor="let chapter of chapters">
+				<div class="card card-widget mb-3">
+                    <div class="card-body p-2">
+                        <img class="img-fluid pad br-4" src="assets/images/default_thumb.jpg" alt="Photo" (click)="navigateToTopics(chapter)">
+                        <div class="card-header-portion">
+                            {{subjectDetails.code}}
+                        </div>
+                        <div class="card-header-title" (click)="navigateToTopics(chapter)">
+                            {{chapter.name}}
+                        </div>
                     </div>
                 </div>
           	</div>

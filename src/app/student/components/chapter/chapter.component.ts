@@ -20,7 +20,6 @@ export class StudentChapterComponent implements OnInit {
 	chaptersDataStatus : number = 2;
 	chapters : any = [];
 	selectedChapter : any = {};
-	classNames = ['card-primary','card-secondary','card-success','card-info','card-warning','card-danger','card-dark'];
 	subjectDetailsDataStatus : number = 2;
 	subjectDetails : any = {};
 
@@ -41,12 +40,6 @@ export class StudentChapterComponent implements OnInit {
 	ngOnInit() {
 		this.getChaptersList();
 		this.getSubjectDetails();
-	};
-
-	getColor() {
-		return this.classNames[
-			Math.floor(Math.random()*7)
-		]
 	};
 
 	resetSubjectDetailsList() {

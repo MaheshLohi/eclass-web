@@ -23,6 +23,7 @@ import { LoginComponent } from '@sharedComponents/login/login.component';
 import { FooterComponent } from '@sharedComponents/footer/footer.component';
 import { BreadcrumbComponent } from '@sharedComponents/breadcrumb/breadcrumb.component';
 import { NavbarComponent } from '@sharedComponents/navbar/navbar.component';
+import { StudentNavbarComponent } from '@studentComponents/navbar/navbar.component';
 import { SuperAdminSidebarComponent } from '@superAdminComponents/sidebar/sidebar.component';
 import { AdminSidebarComponent } from '@adminComponents/sidebar/sidebar.component';
 import { ListErrorHandlerComponent } from '@sharedComponents/listErrorHandler/listErrorHandler.component';
@@ -88,7 +89,8 @@ import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.c
 		StudentQuestionsComponent,
 		StudentWishlistComponent,
 		StudentDownloadsComponent,
-		StudentFeedbackComponent
+		StudentFeedbackComponent,
+		StudentNavbarComponent
 	],
 	imports: [
 		BrowserModule,

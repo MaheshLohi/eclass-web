@@ -190,6 +190,53 @@ a.table-link:active {
     max-height: 300px;
     overflow-y: auto;
 }
+.card-header-portion {
+    font-size: 12px;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    color: #686f7a;
+    text-align: left;
+    display: block;
+    padding-top: 10px;
+}
+.card-header-title {
+    padding: 10px 0px;
+    display: block;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: 'Roboto', sans-serif;
+    color: #333;
+    text-align: left;
+    line-height: 24px;
+}
+.heading-cd-imgtmb {
+    padding: 10px 10px;
+    border-radius: 20px;
+}
+.br-12 {
+    border-radius: 12px;
+}
+.br-4 {
+    border-radius: 4px;
+}
+.br-20 {
+    border-radius: 20px;
+}
+.bg-light-black {
+    background-color: #333;
+    color: #ffffff;
+}
+.card-nav-heading {
+    color: #333 !important;
+    background-color: transparent !important;
+    border-color: inherit !important;
+    border-top: 0 !important;
+    border-bottom: 2px solid #ed2a26 !important;
+    border-left: 0 !important;
+    border-right: 0 !important;
+    display: inline-block;
+    padding: 20px 5px 3px 5px;
+}
 @media only screen and (max-width: 812px) {
     .basic-form-page {
         .basic-form-container {
