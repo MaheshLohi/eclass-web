@@ -22,15 +22,15 @@ export class StudentSidebarComponent implements OnInit {
 		this.userDetails = this.storageService.getData("User_Information");
 		this.sidemenus = [{
 			name : "HOME",
-			icon : "fas fa-tachometer-alt",
+			icon : "fa fa-home",
 			link : '/'+ this.userType +'/home'
 		},{
 			name : "EXAMINATION",
-			icon : "fas fa-clipboard",
+			icon : "fa fa-graduation-cap",
 			link : '/'+ this.userType +'/examination'
 		},{
 			name : "WISHLIST",
-			icon : "fa fa-heart",
+			icon : "far fa-heart",
 			link : '/'+ this.userType +'/wishlist'
 		},{
 			name : "DOWNLOADS",

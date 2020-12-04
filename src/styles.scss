@@ -237,6 +237,12 @@ a.table-link:active {
     display: inline-block;
     padding: 20px 5px 3px 5px;
 }
+.cursor-pointer {
+    cursor: pointer;
+}
+.card-md {
+    min-height: 250px;
+}
 @media only screen and (max-width: 812px) {
     .basic-form-page {
         .basic-form-container {
@@ -262,6 +268,40 @@ a.table-link:active {
             background: transparent;
             box-shadow: none;
             border-radius: 0px;
+        }
+    }
+}
+
+.sidebar-light-primary.student-sidebar {
+    .sidebar {
+        padding: 0px;
+    }
+    .os-content {
+        padding: 0px !important;
+    }
+    .nav-sidebar>.nav-item>.nav-link.active {
+        background-color: #ffecec;
+        color: red;
+        box-shadow: none;
+        border-radius: 0px;
+    } 
+    .nav-item>.nav-link {
+        margin-bottom: 0px;
+    }
+    .nav-sidebar>.nav-item:hover>.nav-link {
+        background-color: #ffecec;
+        color: red;
+    }
+}
+.sidebar-collapse {
+    .sidebar-light-primary.student-sidebar {
+        .nav-item>.nav-link {
+            text-align: center;
+        }
+    }
+    .sidebar-light-primary.student-sidebar:hover {
+        .nav-item>.nav-link {
+            text-align: left;
         }
     }
 }

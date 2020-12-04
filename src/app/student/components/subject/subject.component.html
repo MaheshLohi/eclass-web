@@ -1,16 +1,15 @@
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-2">{{ 'SELECT_SUBJECT' | translate }}</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-12" *ngFor="let subject of subjects" (click)="selectSubject(subject)">
-                <div class="info-box filter-boxes">
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{subject.name}}</span>
-                    </div>
+<section class="row">
+    <div class="col-lg-3 col-12 mt-1" *ngFor="let subject of subjects">
+        <div class="card card-widget mb-3 card-md cursor-pointer" (click)="selectSubject(subject)">
+            <div class="card-body p-2">
+                <img class="img-fluid pad br-4" src="assets/images/default_thumb.jpg" alt="Photo">
+                <div class="card-header-portion">
+                    {{subject.code}}
+                </div>
+                <div class="card-header-title">
+                    {{subject.name}}
                 </div>
             </div>
         </div>
     </div>
-</div>
+</section>

@@ -7,6 +7,7 @@ import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { StudentTopicService } from '@studentServices/topic/topic.service';
+import { StudentWishlistService } from '@studentServices/wishlist/wishlist.service';
 
 @Component({
   	selector: 'app-student-topic',
@@ -29,7 +30,8 @@ export class StudentTopicComponent implements OnInit {
 	private route: ActivatedRoute,
 	public router: Router,
 	private downloadService : DownloadService,
-	private studentTopicService : StudentTopicService) {
+	private studentTopicService : StudentTopicService,
+	private studentWishlistService : StudentWishlistService) {
 		this.route.params.subscribe((params: Params) => {
 			this.chapterId = params['chapterId'];
 		});
@@ -53,7 +55,6 @@ export class StudentTopicComponent implements OnInit {
 			this.loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.chapterDetails = response;
-			console.log(JSON.stringify(this.chapterDetails))
 			this.topics = response.chapter_details.data;
 			this.selectTopic(this.topics[0]);
 		}, () => {
@@ -68,7 +69,20 @@ export class StudentTopicComponent implements OnInit {
 		this.videoUrl = this.constants.DOMAIN_URL + videoBasePath.video_path['480'];
 	};
 
-	downloadFile(chapter) {
-		this.downloadService.download(chapter.notes);
+	downloadFile() {
+		this.downloadService.download(this.chapterDetails.notes);
 	};
+
+	addTopicToWishlist() {
+		this.loader.showLoader();
+		this.studentWishlistService.addTopicToWishlist(this.selectedTopic.id)
+		.then(() => {
+			this.loader.hideLoader();
+			this.selectedTopic.isWishlisted = true;
+			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
+
 }

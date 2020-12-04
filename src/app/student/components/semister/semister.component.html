@@ -1,15 +1,8 @@
-<div class="card">
-    <div class="card-header">
-        <h5 class="mb-2">{{ 'SELECT_SEMISTER' | translate }}</h5>
-    </div>
-    <div class="card-body">
-        <div class="row">
-            <div class="col-md-3 col-sm-6 col-12" *ngFor="let semister of semisters" (click)="selectSemister(semister)">
-                <div class="info-box filter-boxes">
-                    <div class="info-box-content">
-                        <span class="info-box-text">{{ 'SEMISTER' | translate }} {{semister.name}}</span>
-                    </div>
-                </div>
+<div class="row">
+    <div class="col-md-3 col-sm-6 col-12" *ngFor="let semister of semisters" (click)="selectSemister(semister)">
+        <div class="info-box filter-boxes">
+            <div class="info-box-content">
+                <span class="info-box-text">{{ 'SEMISTER' | translate }} {{semister.name}}</span>
             </div>
         </div>
     </div>

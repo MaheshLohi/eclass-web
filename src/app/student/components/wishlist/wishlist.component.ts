@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router, Params } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
+import { Constants } from '@app/constants';
+import { ToasterService } from '@sharedServices/toaster/toaster.service';
+import { LoaderService } from '@sharedServices/loader/loader.service';
+import { StudentWishlistService } from '@studentServices/wishlist/wishlist.service';
 
 @Component({
   	selector: 'app-student-wishlist',
@@ -7,9 +14,38 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentWishlistComponent implements OnInit {
 
-  	constructor() { }
+	wishlistDataStatus : number = 2;
+	wishlists : any = [];
+
+	constructor(public constants : Constants,
+	private translate: TranslateService,
+	private toaster: ToasterService,
+	private loader: LoaderService,
+	private route: ActivatedRoute,
+	public router: Router,
+	private studentWishlistService : StudentWishlistService) {	}
 
 	ngOnInit() {
+		this.getWishlistDetails();
+	};
+
+	resetWishlistDetails() {
+		this.wishlistDataStatus = 2;
+		this.wishlists = [];
+		this.loader.showLoader();
+	};
+
+	getWishlistDetails() {
+		this.resetWishlistDetails();
+		this.studentWishlistService.getWishlistDetails()
+		.then((response:any) => {
+			this.loader.hideLoader();
+			this.wishlistDataStatus = 1;
+			this.wishlists = response;
+		}, () => {
+			this.loader.hideLoader();
+			this.wishlistDataStatus = 0;
+		});
 	}
 
 }

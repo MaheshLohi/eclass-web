@@ -115,5 +115,6 @@
     "SELECT_FACULTY" : "Select faculty",
     "ENTER_QUESTION" : "Enter Question",
     "FACULTY_NAME" : "Faculty Name",
-    "DOWNLOAD_SYLLABUS" : "Download Syllabus"
+    "DOWNLOAD_SYLLABUS" : "Download Syllabus",
+    "FAQS" : "FAQ'S"
 }

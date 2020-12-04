@@ -3,7 +3,21 @@
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
       	<app-breadcrumb [title]="'WISHLIST'"></app-breadcrumb>
-      
+        <section class="content col-12 row p-4">
+            <div class="col-lg-3 col-12 mt-1" *ngFor="let wishlist of wishlists">
+                <div class="card card-widget mb-3 card-md cursor-pointer">
+                    <div class="card-body p-2">
+                        <img class="img-fluid pad br-4" src="assets/images/default_thumb.jpg" alt="Photo">
+                        <div class="card-header-portion">
+                            {{wishlist.chapter_details.data[0].name}}
+                        </div>
+                        <div>
+                            {{'RELATED_VIDEOS' | translate}} : {{wishlist.chapter_details.data[0].related_videos[0] | verifyData}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
     <app-footer></app-footer>
 </div>

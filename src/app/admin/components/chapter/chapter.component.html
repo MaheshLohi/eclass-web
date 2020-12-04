@@ -34,7 +34,7 @@
                                             (change)="getChapters()">
                                                 <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate}}</option>
                                                 <option *ngFor="let subject of subjects" [ngValue]="subject.id">
-                                                    {{ 'SUBJECT' | translate }} {{subject.name}}
+                                                    {{subject.name}}
                                                 </option>
                                             </select>
                                         </div>
