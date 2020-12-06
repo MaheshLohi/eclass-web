@@ -43,11 +43,11 @@ export class AdminDashboardComponent implements OnInit {
 	  
 	prepareDashboardReportCards() {
 		this.dashboardReportCards = [{
-			name : "FACULTIES",
-			link : '/admin/faculties',
-			className : 'bg-warning',
-			icon : 'fas fa-chalkboard-teacher',
-			value : this.dashboardData.faculties_count
+			name : "DEPARTMENTS",
+			link : '/admin/departments',
+			className : 'bg-red',
+			icon : 'fas fa-university',
+			value : this.dashboardData.depts_count
 		},
 		{
 			name : "STUDENTS",
@@ -57,11 +57,11 @@ export class AdminDashboardComponent implements OnInit {
 			value : this.dashboardData.student_count
 		},
 		{
-			name : "DEPARTMENTS",
-			link : '/admin/departments',
-			className : 'bg-red',
-			icon : 'fas fa-university',
-			value : this.dashboardData.depts_count
+			name : "FACULTIES",
+			link : '/admin/faculties',
+			className : 'bg-warning',
+			icon : 'fas fa-chalkboard-teacher',
+			value : this.dashboardData.faculties_count
 		},
 		{
 			name : "SUBJECTS",

@@ -47,6 +47,7 @@ export class Constants {
     ADMIN_DASHBOARD_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'dashboard/';
     ADMIN_SUBJECTS_DETAILS_URL = this.BASE_URL + this.ADMIN_URL + 'subject-info/';
     ADD_SUBJECT_SYLLABUS_URL = this.BASE_URL + this.ADMIN_URL + 'subject-syllabus';
+    FAQS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faqs/';
 
     //students API
     STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';

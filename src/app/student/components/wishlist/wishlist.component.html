@@ -5,7 +5,7 @@
       	<app-breadcrumb [title]="'WISHLIST'"></app-breadcrumb>
         <section class="content col-12 row p-4">
             <div class="col-lg-3 col-12 mt-1" *ngFor="let wishlist of wishlists">
-                <div class="card card-widget mb-3 card-md cursor-pointer">
+                <div class="card card-widget mb-3 card-md cursor-pointer" (click)="navigateToTopics(wishlist.chapter_details.data[0])">
                     <div class="card-body p-2">
                         <img class="img-fluid pad br-4" src="assets/images/default_thumb.jpg" alt="Photo">
                         <div class="card-header-portion">

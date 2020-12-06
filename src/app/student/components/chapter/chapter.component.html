@@ -2,7 +2,7 @@
     <app-student-navbar></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
-        <div class="w-100">
+        <div class="w-100" *ngIf="subjectDetailsDataStatus === 1">
             <div class="card mb-2">
                 <div class="card-body bg-light-black">
                     <div class="col-12 row p-3">
@@ -10,8 +10,8 @@
                             <img class="img-fluid heading-cd-imgtmb" src="assets/images/default_thumb.jpg" alt="Photo">
                         </div>
                         <div class="col-lg-8 col-12 pl-3">
-                            <h4 class="text-bold">{{ 'SUBJECT' | translate }} : {{subjectDetails.name}}({{subjectDetails.code}})</h4>
-                            <div>{{ 'FACULTY_NAME' | translate }} : {{subjectDetails.faculty}}</div>
+                            <h4 class="text-bold">{{ 'SUBJECT' | translate }} : {{subjectDetails.name | verifyData}}({{subjectDetails.code | verifyData}})</h4>
+                            <div>{{ 'FACULTY_NAME' | translate }} : {{subjectDetails.faculty | verifyData}}</div>
                             <button class="btn btn-danger mt-3 br-20" (click)="downloadSyllabus(subjectDetails)">
                                 <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_SYLLABUS' | translate}}
                             </button>
@@ -19,25 +19,25 @@
                     </div>
                 </div>
                 <div class="bg-white text-center">
-                    <div class="card-nav-heading">Chapters</div>
+                    <div class="card-nav-heading"><b>{{ 'CHAPTERS' | translate }}</b></div>
                 </div>
             </div>
         </div>
-      	<section class="content col-12 row p-4">
+      	<section class="content col-12 row p-4" *ngIf="chaptersDataStatus === 1">
           	<div class="col-lg-3 col-12 mt-1" *ngFor="let chapter of chapters">
 				<div class="card card-widget mb-3 card-md cursor-pointer">
                     <div class="card-body p-2">
                         <img class="img-fluid pad br-4" src="assets/images/default_thumb.jpg" alt="Photo" (click)="navigateToTopics(chapter)">
                         <div class="card-header-portion">
-                            {{subjectDetails.code}}
+                            {{subjectDetails.code | verifyData}}
                         </div>
                         <div class="card-header-title" (click)="navigateToTopics(chapter)">
-                            {{chapter.name}}
+                            {{chapter.name | verifyData}}
                         </div>
                     </div>
                 </div>
           	</div>
-		</section>
+        </section>
     </div>
     <app-footer></app-footer>
   </div>

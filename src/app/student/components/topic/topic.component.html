@@ -4,7 +4,7 @@
     <div class="content-wrapper">
       	<section class="content">
             <div class="container-fluid">
-                <div class="w-100 pt-4">
+                <div class="w-100 pt-4" *ngIf="topicsDataStatus === 1">
                     <div class="card card-primary card-outline">
                         <div class="col-12 row card-body">
                             <div class="col-8 pr-0">
@@ -13,7 +13,7 @@
                             </div>
                             <div class="col-4 pl-0">
                                 <div class="topics-list bg-light">
-                                    <table class="table table-bordered table-head-fixed text-nowrap">
+                                    <table class="table table-bordered table-head-fixed text-nowrap m-0">
                                         <tbody>
                                             <tr><td><b>{{ 'COURSE_CONTENT' | translate }}</b></td></tr>
                                             <tr class="bg-white" *ngFor="let topic of topics" (click)="selectTopic(topic)"
@@ -69,7 +69,7 @@
                                                 <app-student-questions [topicId]="selectedTopic.id"></app-student-questions>
                                             </div>
                                             <div class="tab-pane fade" id="faqs" role="tabpanel" aria-labelledby="faqs">
-                                                N/A
+                                                <app-student-faq [topicId]="selectedTopic.id"></app-student-faq>
                                             </div>
                                         </div>
                                     </div>

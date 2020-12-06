@@ -26,9 +26,9 @@ export class AdminSidebarComponent implements OnInit {
 			link : '/'+ this.userType +'/dashboard'
 		},
 		{
-			name : "FACULTIES",
-			icon : "fas fa-chalkboard-teacher",
-			link : '/'+ this.userType +"/faculties"
+			name : "DEPARTMENTS",
+			icon : "fas fa-university",
+			link : '/'+ this.userType +"/departments"
 		},
 		{
 			name : "STUDENTS",
@@ -36,9 +36,9 @@ export class AdminSidebarComponent implements OnInit {
 			link : '/'+ this.userType +"/students"
 		},
 		{
-			name : "DEPARTMENTS",
-			icon : "fas fa-university",
-			link : '/'+ this.userType +"/departments"
+			name : "FACULTIES",
+			icon : "fas fa-chalkboard-teacher",
+			link : '/'+ this.userType +"/faculties"
 		},
 		{
 			name : "SUBJECTS",

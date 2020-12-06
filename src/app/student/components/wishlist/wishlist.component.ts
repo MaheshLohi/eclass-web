@@ -48,4 +48,10 @@ export class StudentWishlistComponent implements OnInit {
 		});
 	}
 
+	navigateToTopics(topic) {
+		let data = {};
+		data['topicId'] = topic.id;
+		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
+	}
+
 }
