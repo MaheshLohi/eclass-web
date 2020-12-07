@@ -48,10 +48,8 @@ import { StudentSubjectComponent } from '@studentComponents/subject/subject.comp
 import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
 import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { PrepareObjectPipe } from './shared/pipes/prepareObject/prepare-object.pipe';
-import { AdminSubjectFacultyComponent } from '@adminComponents/subject-faculty/subject-faculty.component';
 import { StudentQuestionsComponent } from '@studentComponents/questions/questions.component';
 import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.component';
-import { StudentDownloadsComponent } from '@studentComponents/downloads/downloads.component';
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 import { StudentFaqComponent } from '@studentComponents/faq/faq.component';
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
@@ -87,10 +85,8 @@ import { StudentHelpComponent } from '@studentComponents/help/help.component';
 		StudentExaminationComponent,
 		AdminExaminationComponent,
 		PrepareObjectPipe,
-		AdminSubjectFacultyComponent,
 		StudentQuestionsComponent,
 		StudentWishlistComponent,
-		StudentDownloadsComponent,
 		StudentFeedbackComponent,
 		StudentNavbarComponent,
 		StudentFaqComponent,

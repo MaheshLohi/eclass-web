@@ -33,9 +33,10 @@ export class AdminChapterService {
 		});
 	};
 	  
-	addChapter(filterData, addFormValue, selectedFile) {
+	addChapter(filterData, addFormValue, selectedFile, thumbnailFile) {
 		const formData = new FormData();
 		formData.append('notes', selectedFile);
+		formData.append('thumbnail', thumbnailFile);
 		formData.append('name', addFormValue.name);
 		formData.append('subject_id', filterData.subject_id);
 		formData.append('description', addFormValue.description);

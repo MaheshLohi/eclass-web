@@ -117,5 +117,11 @@
     "ENTER_QUESTION" : "Enter Question",
     "FACULTY_NAME" : "Faculty Name",
     "DOWNLOAD_SYLLABUS" : "Download Syllabus",
-    "FAQS" : "FAQ'S"
+    "FAQS" : "FAQ'S",
+    "SYLLABUS_FILE" : "Syllabus file",
+    "UPLOAD_SYLLABUS" : "Upload Syllabus",
+    "UPLOAD_THUMBNAIL" : "Upload Thumbnail",
+    "SYLLABUS" : "Syllabus",
+    "NOTES" : "Notes",
+    "ASSIGN_FACULTY" : "Assign Faculty"
 }

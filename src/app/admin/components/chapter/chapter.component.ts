@@ -29,6 +29,7 @@ export class AdminChapterComponent implements OnInit {
 	subjectsDataStatus : number = 2;
 	addTopicForm : any;
 	videoFiles: File = null;
+	thumbnailFile : File = null;
 	  
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -56,6 +57,9 @@ export class AdminChapterComponent implements OnInit {
 				Validators.required
 			]),
 			'notes_file' : new FormControl("", [
+				Validators.required
+			]),
+			'thumbnail_file' : new FormControl("", [
 				Validators.required
 			])
 		});
@@ -199,7 +203,7 @@ export class AdminChapterComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addChapterForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
+		return (this.addChapterForm.valid && this.filterForm.valid && this.selectedFile && this.thumbnailFile) ? false : true;
 	};
 
 	disableAddTopicFeatureForm() {
@@ -213,6 +217,13 @@ export class AdminChapterComponent implements OnInit {
 		}
 	};
 
+	onThumbnailFileChange(event) {
+		this.thumbnailFile = null;
+		if (event.target.files.length > 0) {
+			this.thumbnailFile = event.target.files[0];
+		}
+	};
+
 	onVideoFileChange(event) {
 		this.videoFiles = null;
 		if (event.target.files.length > 0) {
@@ -222,7 +233,7 @@ export class AdminChapterComponent implements OnInit {
 
 	addChapter() {
 		this.loader.showLoader();
-		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.selectedFile)
+		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.selectedFile, this.thumbnailFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);

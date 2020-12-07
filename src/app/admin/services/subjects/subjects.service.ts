@@ -62,4 +62,19 @@ export class AdminSubjectsService {
 			});
 		});
 	};
+
+	assignFaculties(assignFacultyForm, subjectId) {
+		const formData = new FormData();
+		formData.append('subject_id', subjectId);
+		formData.append('faculty_id', assignFacultyForm.faculty_id);
+		return new Promise((resolve, reject) => {
+			this.httpService.postWithFormData(this.constants.ADD_SUBJECT_FACULTY_URL, formData)
+			.subscribe((response) => {
+				resolve(response);
+			}, (error) => {
+				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
+				reject(error);
+			});
+		});
+	};
 }

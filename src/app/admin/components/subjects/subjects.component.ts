@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any; 
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -8,6 +9,7 @@ import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
+import { AdminFacultiesService } from '@adminServices/faculties/faculties.service';
 
 @Component({
   	selector: 'app-admin-subjects',
@@ -25,8 +27,12 @@ export class AdminSubjectsComponent implements OnInit {
 	filterForm : any;
 	addSubjectsForm : any;
 	selectedFile: File = null;
-	syllabusFile : File = null;
+	attachmentFile : File = null;
 	selectedSubjectId : number;
+	fileType : number;
+	assignFacultyForm : any;
+	faculties : any = [];
+	facultiesDataStatus : number = 2;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -34,6 +40,7 @@ export class AdminSubjectsComponent implements OnInit {
 	private loader: LoaderService,
 	private subjectsService : AdminSubjectsService,
 	private departmentService : AdminDepartmentService,
+	private facultyService : AdminFacultiesService,
 	private downloadService : DownloadService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
@@ -45,6 +52,11 @@ export class AdminSubjectsComponent implements OnInit {
 		});
 		this.addSubjectsForm = new FormGroup({
 			'subjects_file' : new FormControl("", [])
+		});
+		this.assignFacultyForm = new FormGroup({
+			'faculty_id' : new FormControl(null, [
+				Validators.required
+			])
 		});
 	};
 
@@ -60,8 +72,32 @@ export class AdminSubjectsComponent implements OnInit {
 		return this.addSubjectsForm.get('subjects_file'); 
 	};
 
+	validateAssignFacultyFormValue(formName) {
+		return this.assignFacultyForm.get(formName); 
+	};
+
 	ngOnInit() {
 		this.getDepartmentsAndSectionsList();
+	};
+
+	resetFaculties() {
+		this.facultiesDataStatus = 2;
+		this.faculties = [];
+		this.loader.showLoader();
+	};
+
+	getFaculties() {
+		this.resetFaculties();
+		let data = this.filterForm.value;
+		this.facultyService.getFaculties(data)
+		.then((response:any) => {
+			this.loader.hideLoader();
+			this.facultiesDataStatus = 1;
+			this.faculties = response;
+		}, () => {
+			this.loader.hideLoader();
+			this.facultiesDataStatus = 0;
+		});
 	};
 
 	resetDepartmentsAndSections() {
@@ -88,7 +124,8 @@ export class AdminSubjectsComponent implements OnInit {
 	getSubjectsData() {
 		let data = this.filterForm.value;
 		if(data.department_id && data.inst_class_id) {
-			this.getSubjects(data)
+			this.getSubjects(data);
+			this.getFaculties();
 		}
 	};
 
@@ -130,12 +167,10 @@ export class AdminSubjectsComponent implements OnInit {
 		}
 	};
 
-	onSyllabusFileChange(event,subject) {
-		this.syllabusFile = null;
-		this.selectedSubjectId = null;
+	onAttachmentChange(event) {
+		this.attachmentFile = null;
 		if (event.target.files.length > 0) {
-			this.syllabusFile = event.target.files[0];
-			this.selectedSubjectId = subject.id;
+			this.attachmentFile = event.target.files[0];
 		}
 	};
 
@@ -152,12 +187,13 @@ export class AdminSubjectsComponent implements OnInit {
 		});
 	};
 
-	uploadSubjectSyllabus() {
+	uploadSubjectAttachment() {
 		this.loader.showLoader();
-		this.subjectsService.addSubjectSyllabus(this.selectedSubjectId, this.syllabusFile)
+		this.subjectsService.addSubjectSyllabus(this.selectedSubjectId, this.attachmentFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.getSubjects(this.filterForm.value);
+			$('#upload-files').modal('hide');
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("SYLLABUS")} ));
 		}, () => {
 			this.loader.hideLoader();
@@ -168,8 +204,30 @@ export class AdminSubjectsComponent implements OnInit {
 		this.downloadService.download('public/subjects.csv');
 	};
 
-	downloadSyllabus(subject) {
-		this.downloadService.download(subject.syllabus);
+	downloadAttachment(filePath) {
+		this.downloadService.download(filePath);
 	}
+
+	initialiseModal(fileType,subject) {
+		this.fileType = fileType;
+		this.selectedSubjectId = subject.id;
+	}
+
+	initialiseAssignModal(subject) {
+		this.selectedSubjectId = subject.id;
+	}
+
+	assignFaculties() {
+		this.loader.showLoader();
+		this.subjectsService.assignFaculties(this.assignFacultyForm.value, this.selectedSubjectId)
+		.then(() => {
+			this.loader.hideLoader();
+			this.getSubjects(this.filterForm.value);
+			$('#assign-faculty').modal('hide');
+			this.toaster.showSuccess(this.translate.instant("FACULTY_ASSIGNED_TO_SUBJECT_SUCCESSFULLY"));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
 
 }

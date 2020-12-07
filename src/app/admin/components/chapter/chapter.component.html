@@ -100,9 +100,15 @@
                                             </div>
                                             <app-form-validator [data]="description"></app-form-validator>
                                             <div class="form-group">
-                                                <label for="customFile">{{ 'FILE' | translate}}</label>
+                                                <label for="customFile">{{ 'NOTES' | translate}}</label>
                                                 <div>
                                                     <input type="file" id="notes_file" formControlName="notes_file" (change)="onFileChange($event)">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
+                                                <div>
+                                                    <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onThumbnailFileChange($event)">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
