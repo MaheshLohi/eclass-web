@@ -16,7 +16,6 @@ import { StudentExaminationService } from '@studentServices/examination/examinat
 export class StudentExaminationComponent {
 
 	selectedSemister : any = {};
-	isSemisterSelected : boolean = false;
 	selectedSubject : any = {};
 	isSubjectSelected : boolean = false;
 	examDataStatus : number = 2;
@@ -31,7 +30,6 @@ export class StudentExaminationComponent {
 	private studentExaminationService : StudentExaminationService) { };
 
 	onSemisterSelection(semister) {
-		this.isSemisterSelected = true;
 		this.selectedSemister = semister;
 	};
 

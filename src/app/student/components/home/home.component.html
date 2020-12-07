@@ -1,12 +1,11 @@
 <div class="wrapper">
-    <app-student-navbar></app-student-navbar>
+    <app-student-navbar (semisterChanged)="onSemisterSelection($event)"></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
       	<app-breadcrumb [title]="'HOME'"></app-breadcrumb>
       	<section class="content">
           	<div class="col-md-12">
-				<app-student-semister *ngIf="!isSemisterSelected" (semisterSelected)="onSemisterSelection($event)"></app-student-semister>
-				<app-student-subject *ngIf="isSemisterSelected && !isSubjectSelected" [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
+				<app-student-subject [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
           	</div>
 		</section>
     </div>

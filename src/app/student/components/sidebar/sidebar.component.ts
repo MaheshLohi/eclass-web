@@ -33,13 +33,13 @@ export class StudentSidebarComponent implements OnInit {
 			icon : "far fa-heart",
 			link : '/'+ this.userType +'/wishlist'
 		},{
-			name : "DOWNLOADS",
-			icon : "fa fa-download",
-			link : '/'+ this.userType +'/downloads'
-		},{
 			name : "FEEDBACK",
 			icon : "fas fa-comments",
 			link : '/'+ this.userType +'/feedback'
+		},{
+			name : "HELP",
+			icon : "fa fa-question-circle",
+			link : '/'+ this.userType +'/help'
 		}];
   	};
 }

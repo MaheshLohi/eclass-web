@@ -54,6 +54,7 @@ import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.c
 import { StudentDownloadsComponent } from '@studentComponents/downloads/downloads.component';
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 import { StudentFaqComponent } from '@studentComponents/faq/faq.component';
+import { StudentHelpComponent } from '@studentComponents/help/help.component';
 
 @NgModule({
 	declarations: [
@@ -92,7 +93,8 @@ import { StudentFaqComponent } from '@studentComponents/faq/faq.component';
 		StudentDownloadsComponent,
 		StudentFeedbackComponent,
 		StudentNavbarComponent,
-		StudentFaqComponent
+		StudentFaqComponent,
+		StudentHelpComponent
 	],
 	imports: [
 		BrowserModule,

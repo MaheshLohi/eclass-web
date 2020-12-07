@@ -14,7 +14,6 @@ import { LoaderService } from '@sharedServices/loader/loader.service';
 export class StudentHomeComponent {
 
 	selectedSemister : any = {};
-	isSemisterSelected : boolean = false;
 	selectedSubject : any = {};
 	isSubjectSelected : boolean = false;
 
@@ -25,7 +24,6 @@ export class StudentHomeComponent {
 	public router: Router) { };
 
 	onSemisterSelection(semister) {
-		this.isSemisterSelected = true;
 		this.selectedSemister = semister;
 	};
 
