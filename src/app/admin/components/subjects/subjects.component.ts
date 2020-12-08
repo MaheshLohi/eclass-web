@@ -189,7 +189,7 @@ export class AdminSubjectsComponent implements OnInit {
 
 	uploadSubjectAttachment() {
 		this.loader.showLoader();
-		this.subjectsService.addSubjectSyllabus(this.selectedSubjectId, this.attachmentFile)
+		this.subjectsService.uploadSubjectAttachment(this.selectedSubjectId, this.attachmentFile, this.fileType)
 		.then(() => {
 			this.loader.hideLoader();
 			this.getSubjects(this.filterForm.value);

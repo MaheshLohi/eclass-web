@@ -58,4 +58,8 @@ export class StudentChapterComponent implements OnChanges {
 	downloadFile(chapter) {
 		this.downloadService.download(chapter.notes);
 	};
+	
+	changeImageSource(event) {
+		event.target.src = "assets/images/default_thumb.jpg";
+	}
 }

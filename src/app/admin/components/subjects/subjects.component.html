@@ -86,8 +86,8 @@
                                                         <i class="pr-1 fa fa-upload"></i> Upload
                                                     </button>
                                                 </td>
-                                                <td *ngIf="subject.thumbnail">
-                                                    <button class="btn btn-outline-primary btn-sm" (click)="downloadAttachment(subject.thumbnail)">
+                                                <td *ngIf="subject.bg_image">
+                                                    <button class="btn btn-outline-primary btn-sm" (click)="downloadAttachment(subject.bg_image)">
                                                         <i class="fa fa-download"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-outline-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
@@ -95,7 +95,7 @@
                                                         <i class="fas fa-pen"></i>
                                                     </button>
                                                 </td>
-                                                <td *ngIf="!subject.thumbnail">
+                                                <td *ngIf="!subject.bg_image">
                                                     <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
                                                     (click)="initialiseModal(1,subject)">
                                                         <i class="pr-1 fa fa-upload"></i> Upload
@@ -178,7 +178,7 @@
             </div>
             <div class="modal-body">
                 <form role="form" (ngSubmit)="assignFaculties()" [formGroup]="assignFacultyForm">
-                    <div class="form-group m-b-0">
+                    <div class="form-group mb-0">
                         <label for="name">{{ 'SELECT_FACULTY' | translate}} *</label>
                         <select class="custom-select form-control select2" id="faculty_id" formControlName="faculty_id" required>
                             <option [value]=null selected disabled>{{ 'SELECT_FACULTY' | translate}}</option>

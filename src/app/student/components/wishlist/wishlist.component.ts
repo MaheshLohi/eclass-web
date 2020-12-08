@@ -54,4 +54,8 @@ export class StudentWishlistComponent implements OnInit {
 		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
 	}
 
+	changeImageSource(event) {
+		event.target.src = "assets/images/default_thumb.jpg";
+	};
+
 }

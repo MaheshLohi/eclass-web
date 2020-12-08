@@ -89,16 +89,16 @@
                                 <div class="tab-content pt-3">
                                     <div class="col-lg-6 tab-pane fade show active" id="add-chapter" role="tabpanel">
                                         <form role="form" (ngSubmit)="addChapter()" [formGroup]="addChapterForm">
-                                            <div class="form-group m-b-0">
+                                            <div class="form-group mb-0">
                                                 <label for="name">{{ 'CHAPTER_NAME' | translate}} *</label>
                                                 <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
-                                            <div class="form-group m-b-0">
+                                            <app-form-validator [data]="validateAddChapterFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                                            <div class="form-group mb-0">
                                                 <label for="description">{{ 'DESCRIPTION' | translate}} *</label>
                                                 <input type="text" class="form-control" id="description" formControlName="description" placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="description"></app-form-validator>
+                                            <app-form-validator [data]="validateAddChapterFormValue('description')"></app-form-validator>
                                             <div class="form-group">
                                                 <label for="customFile">{{ 'NOTES' | translate}}</label>
                                                 <div>
@@ -121,12 +121,12 @@
                                     </div>
                                     <div class="col-lg-6 tab-pane fade" id="add-topic" role="tabpanel">
                                         <form role="form" (ngSubmit)="addTopic()" [formGroup]="addTopicForm">
-                                            <div class="form-group m-b-0">
+                                            <div class="form-group mb-0">
                                                 <label for="name">{{ 'TOPIC_NAME' | translate}} *</label>
                                                 <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="topic_name" [validateNameMinLength]=true></app-form-validator>
-                                            <div class="form-group m-b-0">
+                                            <app-form-validator [data]="validateAddTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                                            <div class="form-group mb-0">
                                                 <label for="name">{{ 'SELECT_CHAPTER' | translate}} *</label>
                                                 <select class="custom-select form-control select2" id="chapter_id" formControlName="chapter_id" required>
                                                     <option [value]=null selected disabled>{{ 'SELECT_CHAPTER' | translate}}</option>
@@ -135,17 +135,17 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <app-form-validator [data]="chapter_id" [validateNameMinLength]=true></app-form-validator>
-                                            <div class="form-group m-b-0">
+                                            <app-form-validator [data]="validateAddTopicFormValue('chapter_id')" [validateNameMinLength]=true></app-form-validator>
+                                            <div class="form-group mb-0">
                                                 <label for="name">{{ 'KEYWORDS' | translate}} *</label>
                                                 <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="keywords" [validateNameMinLength]=true></app-form-validator>
-                                            <div class="form-group m-b-0">
+                                            <app-form-validator [data]="validateAddTopicFormValue('keywords')" [validateNameMinLength]=true></app-form-validator>
+                                            <div class="form-group mb-0">
                                                 <label for="name">{{ 'RELATED_VIDEOS' | translate}} *</label>
                                                 <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="related_videos" [validateNameMinLength]=true></app-form-validator>
+                                            <app-form-validator [data]="validateAddTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group">
                                                 <label for="customFile">{{ 'FILES' | translate}}</label>
                                                 <div>

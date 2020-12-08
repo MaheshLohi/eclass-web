@@ -48,9 +48,14 @@ export class AdminSubjectsService {
 		});
 	};
 
-	addSubjectSyllabus(subject_id, selectedFile) {
+	uploadSubjectAttachment(subject_id, selectedFile, fileType) {
 		const formData = new FormData();
-		formData.append('syllabus', selectedFile);
+		if(fileType === 0) {
+			formData.append('syllabus', selectedFile);
+		}
+		else {
+			formData.append('bg_image', selectedFile);
+		}
 		formData.append('subject_id', subject_id);
 		return new Promise((resolve, reject) => {
 			this.httpService.postWithFormData(this.constants.ADD_SUBJECT_SYLLABUS_URL, formData)

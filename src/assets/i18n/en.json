@@ -34,7 +34,7 @@
     "SESSION_EXPIRED" : "Session Expired..!",
     
     "NAME" : "Name",
-    "EMAIL_ADDRESS" : "Email address",
+    "EMAIL_ADDRESS" : "Email Address",
     "PASSWORD" : "Password",
     "PHONE_NUMBER" : "Phone number",
     "PINCODE" : "Pincode",
@@ -123,5 +123,6 @@
     "UPLOAD_THUMBNAIL" : "Upload Thumbnail",
     "SYLLABUS" : "Syllabus",
     "NOTES" : "Notes",
-    "ASSIGN_FACULTY" : "Assign Faculty"
+    "ASSIGN_FACULTY" : "Assign Faculty",
+    "LOGIN" : "Log In"
 }

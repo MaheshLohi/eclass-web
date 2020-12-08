@@ -10,12 +10,12 @@
                     {{ 'SIGNIN_TITLE' | translate }}
                 </p>
                 <form (ngSubmit)="doLogin()" [formGroup]="loginForm">
-                    <div class="form-group m-b-0">
+                    <div class="form-group mb-0">
                         <label for="email">{{ (loginType === 2) ? ('USN_NUMBER' | translate) : ('EMAIL_ADDRESS' | translate) }} *</label>
                         <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ (loginType === 2) ? ('ENTER_USN' | translate) : ('EMAIL_ADDRESS' | translate) }}" required>
                     </div>
                     <app-form-validator [data]="email" [validateEmail]=true></app-form-validator>
-                    <div class="form-group m-b-0">
+                    <div class="form-group mb-0">
                         <label for="password">{{ 'PASSWORD' | translate }} *</label>
                         <input type="password" class="form-control" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}" required>
                     </div>

@@ -62,17 +62,17 @@
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addInstituteForm">
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
                                             <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                         </div>
                                         <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label for="address">{{ 'ADDRESS' | translate}} *</label>
                                             <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
                                         </div>
                                         <app-form-validator [data]="address"></app-form-validator>
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
                                             <input type="number" class="form-control" id="phone" formControlName="phone" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
                                         </div>

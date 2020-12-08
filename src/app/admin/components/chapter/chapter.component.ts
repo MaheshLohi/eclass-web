@@ -82,44 +82,16 @@ export class AdminChapterComponent implements OnInit {
 		});
 	};
 
-	get department_id() { 
-		return this.filterForm.get('department_id'); 
+	validateFilterFormValue(formName) {
+		return this.filterForm.get(formName); 
 	};
 
-	get inst_class_id() { 
-		return this.filterForm.get('inst_class_id'); 
+	validateAddChapterFormValue(formName) {
+		return this.addChapterForm.get(formName); 
 	};
 
-	get name() { 
-		return this.addChapterForm.get('name'); 
-	};
-
-	get description() { 
-		return this.addChapterForm.get('description'); 
-	};
-
-	get notes_file() { 
-		return this.addChapterForm.get('notes_file'); 
-	};
-
-	get topic_name() { 
-		return this.addTopicForm.get('name'); 
-	};
-
-	get chapter_id() { 
-		return this.addTopicForm.get('chapter_id'); 
-	};
-
-	get video_file() { 
-		return this.addTopicForm.get('video_file'); 
-	};
-
-	get keywords() { 
-		return this.addTopicForm.get('keywords'); 
-	};
-
-	get related_videos() { 
-		return this.addTopicForm.get('related_videos'); 
+	validateAddTopicFormValue(formName) {
+		return this.addTopicForm.get(formName); 
 	};
 
 	ngOnInit() {

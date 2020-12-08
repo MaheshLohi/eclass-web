@@ -77,12 +77,12 @@
                             </div>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
-                                    <div class="form-group m-b-0">
+                                    <div class="form-group mb-0">
                                         <label for="name">{{ 'EXAM_NAME' | translate}} *</label>
                                         <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                     </div>
                                     <app-form-validator [data]="validateAddFormValue('name')" [validateNameMinLength]=true></app-form-validator>
-                                    <div class="form-group m-b-0">
+                                    <div class="form-group mb-0">
                                         <label for="name">{{ 'SELECT_YEAR' | translate}} *</label>
                                         <select class="custom-select form-control select2" id="year" formControlName="year" required>
                                             <option [value]=null selected disabled>{{ 'SELECT_YEAR' | translate}}</option>

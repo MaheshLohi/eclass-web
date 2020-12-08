@@ -52,4 +52,8 @@ export class StudentSubjectComponent implements OnInit {
 		data['contentType'] = (this.router.url === "/student/home") ? 1 : 2;
 		this.router.navigate(['student/contents', subject.id],{ queryParams: data });
 	};
+
+	changeImageSource(event) {
+		event.target.src = "assets/images/default_thumb.jpg";
+	};
 }

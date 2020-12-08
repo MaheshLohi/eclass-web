@@ -58,22 +58,22 @@
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addAdmin()" [formGroup]="addAdminForm">
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label for="name">{{ 'ADMIN_NAME' | translate}} *</label>
                                             <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                         </div>
                                         <app-form-validator [data]="name" [validateNameMinLength]=true></app-form-validator>
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
                                             <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="email" [validateEmail]=true></app-form-validator>
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label for="password">{{ 'PASSWORD' | translate }} *</label>
                                             <input type="password" class="form-control" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="password" [validatePasswordLength]=true></app-form-validator>
-                                        <div class="form-group m-b-0">
+                                        <div class="form-group mb-0">
                                             <label>{{ 'INSTITUTE_NAME' | translate}} *</label>
                                             <select class="custom-select" id="inst_id" formControlName="inst_id" *ngIf="instituteDataStatus === 1" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_INSTITUTE' | translate}}</option>
