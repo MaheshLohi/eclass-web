@@ -118,7 +118,7 @@
                                         <div class="form-group">
                                             <label for="customFile">{{ 'FILE' | translate}}</label>
                                             <div>
-                                                <input type="file" id="subjects_file" formControlName="subjects_file" (change)="onFileChange($event)">
+                                                <input type="file" id="subjects_file" formControlName="subjects_file" (change)="onFileChange($event,'subjectsFile')">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
@@ -153,7 +153,7 @@
                     <label for="customFile" *ngIf="fileType === 0">{{ 'SYLLABUS_FILE' | translate}}</label>
                     <label for="customFile" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate}}</label>
                     <div>
-                        <input type="file" id="file" (change)="onAttachmentChange($event)">
+                        <input type="file" id="file" (change)="onFileChange($event,'attachmentFile')">
                     </div>
                 </div>
                 <button class="btn btn-primary" (click)="uploadSubjectAttachment()"

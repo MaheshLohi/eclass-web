@@ -331,3 +331,30 @@ a.table-link:active {
 .ctmimg-wdt {
     height: 185px;
 }
+.f-25px {
+    font-size: 25px;
+}
+.color-theme-gradient {
+    background: -webkit-linear-gradient(#4a77b7, #c74ea7);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+.btn-outline-theme-primary {
+    color: #4a77b7;
+    border-color: #4a77b7;
+    background-color: #ffffff;
+}
+.btn-outline-theme-primary:hover {
+    color: #fff;
+    background: -webkit-linear-gradient(#4a77b7, #c74ea7);
+}
+.btn-outline-theme-secondary {
+    color: #c74ea7;
+    border-color: #c74ea7;
+    background-color: #ffffff;
+}
+.btn-outline-theme-secondary:hover {
+    color: #fff;
+    background: -webkit-linear-gradient(#c74ea7, #4a77b7);
+}

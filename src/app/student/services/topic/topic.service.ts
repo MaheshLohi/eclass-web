@@ -19,7 +19,7 @@ export class StudentTopicService {
 
 	getTopicsList(chapterId) {
 		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.STUDENT_TOPICS_LIST_URL +  chapterId)
+			this.httpService.getWithCustomHeader(this.constants.STUDENT_TOPICS_LIST_URL +  chapterId)
 			.subscribe((response) => {
 				if(response && response.data && response.data.length) {
 					let result = response.data[0];

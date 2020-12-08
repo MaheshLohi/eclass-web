@@ -92,13 +92,13 @@ export class StudentTopicComponent implements OnInit {
 		this.downloadService.download(this.chapterDetails.notes);
 	};
 
-	addTopicToWishlist() {
+	updateTopicToWishlist() {
 		this.loader.showLoader();
-		this.studentWishlistService.addTopicToWishlist(this.selectedTopic.id)
+		this.studentWishlistService.updateTopicToWishlist(this.selectedTopic)
 		.then(() => {
 			this.loader.hideLoader();
-			this.selectedTopic.isWishlisted = true;
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
+			this.selectedTopic.is_wishlist = !this.selectedTopic.is_wishlist;
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
 		}, () => {
 			this.loader.hideLoader();
 		});

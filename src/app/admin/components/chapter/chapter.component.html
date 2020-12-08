@@ -102,13 +102,13 @@
                                             <div class="form-group">
                                                 <label for="customFile">{{ 'NOTES' | translate}}</label>
                                                 <div>
-                                                    <input type="file" id="notes_file" formControlName="notes_file" (change)="onFileChange($event)">
+                                                    <input type="file" id="notes_file" formControlName="notes_file" (change)="onFileChange($event,'notesFile')">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
                                                 <div>
-                                                    <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onThumbnailFileChange($event)">
+                                                    <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onFileChange($event,'thumbnailFile')">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
@@ -147,9 +147,15 @@
                                             </div>
                                             <app-form-validator [data]="validateAddTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group">
-                                                <label for="customFile">{{ 'FILES' | translate}}</label>
+                                                <label for="customFile">Video 1</label>
                                                 <div>
-                                                    <input type="file" id="video_file" formControlName="video_file" (change)="onVideoFileChange($event)" multiple>
+                                                    <input type="file" id="video_file1" formControlName="video_file1" (change)="onFileChange($event,'videoFile1')">
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="customFile">Video 2</label>
+                                                <div>
+                                                    <input type="file" id="video_file2" formControlName="video_file2" (change)="onFileChange($event,'videoFile2')">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-primary" [disabled]="disableAddTopicFeatureForm()">

@@ -58,5 +58,6 @@ export class Constants {
     STUDENT_ADD_QUESTION_URL = this.STUDENT_URL + 'question';
     STUDENT_WISHLIST_LIST_URL = this.STUDENT_URL + 'wishlist';
     STUDENT_ADD_WISHLIST_URL = this.STUDENT_URL + 'add-to-wishlist';
+    STUDENT_TOGGLE_WISHLIST_URL = this.STUDENT_URL + 'toggle-wishlist';
     
 }

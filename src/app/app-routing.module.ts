@@ -24,11 +24,10 @@ import { StudentHelpComponent } from '@studentComponents/help/help.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
-	{ path: 'superAdmin/login', component: LoginComponent },
+	{ path: 'school/login', component: LoginComponent },
 	{ path: 'superAdmin/dashboard', component: SuperAdminDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'superAdmin/institutes', component: SuperAdminInstitutesComponent, canActivate: [AuthGuard]},
 	{ path: 'superAdmin/admins', component: SuperAdminAdminsComponent, canActivate: [AuthGuard]},
-	{ path: 'admin/login', component: LoginComponent },
 	{ path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/faculties', component: AdminFacultiesComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/students', component: AdminStudentsComponent, canActivate: [AuthGuard]},

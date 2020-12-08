@@ -24,11 +24,12 @@ export class AdminChapterComponent implements OnInit {
 	departmentAndSemisterDataStatus = 2;
 	filterForm : any;
 	addChapterForm : any;
-	selectedFile: File = null;
+	notesFile: File = null;
 	subjects : any = [];
 	subjectsDataStatus : number = 2;
 	addTopicForm : any;
-	videoFiles: File = null;
+	videoFile1: File = null;
+	videoFile2: File = null;
 	thumbnailFile : File = null;
 	  
 	constructor(public constants : Constants,
@@ -70,7 +71,10 @@ export class AdminChapterComponent implements OnInit {
 			'chapter_id' : new FormControl(null, [
 				Validators.required
 			]),
-			'video_file' : new FormControl("", [
+			'video_file1' : new FormControl("", [
+				Validators.required
+			]),
+			'video_file2' : new FormControl("", [
 				Validators.required
 			]),
 			'keywords' : new FormControl("", [
@@ -168,44 +172,34 @@ export class AdminChapterComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addChapterForm.reset();
-			this.selectedFile = null;
+			this.notesFile = null;
 			this.addTopicForm.reset();
-			this.videoFiles = null;
+			this.videoFile1 = null;
+			this.videoFile2 = null;
+			this.thumbnailFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addChapterForm.valid && this.filterForm.valid && this.selectedFile && this.thumbnailFile) ? false : true;
+		return (this.addChapterForm.valid && this.filterForm.valid && this.notesFile && this.thumbnailFile) ? false : true;
 	};
 
 	disableAddTopicFeatureForm() {
-		return (this.addTopicForm.valid && this.filterForm.valid && this.videoFiles) ? false : true;
+		return (this.addTopicForm.valid && this.filterForm.valid && this.videoFile1 && this.videoFile2) ? false : true;
 	}
 
-	onFileChange(event) {
-		this.selectedFile = null;
+	onFileChange(event, fileTarget) {
+		this[fileTarget] = null;
 		if (event.target.files.length > 0) {
-			this.selectedFile = event.target.files[0];
-		}
-	};
-
-	onThumbnailFileChange(event) {
-		this.thumbnailFile = null;
-		if (event.target.files.length > 0) {
-			this.thumbnailFile = event.target.files[0];
-		}
-	};
-
-	onVideoFileChange(event) {
-		this.videoFiles = null;
-		if (event.target.files.length > 0) {
-			this.videoFiles = event.target.files;
+			this[fileTarget] = event.target.files[0];
+			console.log(fileTarget);
+			console.log(this[fileTarget]);
 		}
 	};
 
 	addChapter() {
 		this.loader.showLoader();
-		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.selectedFile, this.thumbnailFile)
+		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.notesFile, this.thumbnailFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -218,7 +212,7 @@ export class AdminChapterComponent implements OnInit {
 
 	addTopic() {
 		this.loader.showLoader();
-		this.chapterService.addTopic(this.addTopicForm.value, this.videoFiles)
+		this.chapterService.addTopic(this.addTopicForm.value, this.videoFile1, this.videoFile2)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);

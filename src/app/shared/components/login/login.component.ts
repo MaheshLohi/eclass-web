@@ -13,7 +13,7 @@ import { LoginService } from '@sharedServices/login/login.service';
 export class LoginComponent implements OnInit {
 
 	loginForm : any;
-	loginType : number;
+	loginType : string;
 
 	constructor(private router: Router,
 	private loader: LoaderService,
@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
 	ngOnInit() {
 		this.loginType = this.getLoginType();
-		if(this.loginType === 2) {
+		if(this.loginType === 'student') {
 			this.loginForm.controls['email'].setValidators([Validators.required]);
 		}
 		else {
@@ -39,11 +39,9 @@ export class LoginComponent implements OnInit {
 
 	getLoginType() {
 		switch(this.router.url) {
-			case '/superAdmin/login' : return 1;
-			case '/' : return 2;
-			case '/admin/login' : return 3;
-			case '/faculty/login' : return 4;
-			default : return 2;
+			case '/school/login' : return 'school';
+			case '/' : return 'student';
+			default : return 'student';
 		}
 	}
 
@@ -57,7 +55,7 @@ export class LoginComponent implements OnInit {
 	  
 	doLogin() {
 		let data = this.loginForm.value;
-		if(this.loginType === 2) {
+		if(this.loginType === 'student') {
 			data['type'] = 2;
 		}
 		this.loader.showLoader();

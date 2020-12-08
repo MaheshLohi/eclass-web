@@ -32,11 +32,12 @@ export class StudentWishlistService {
 		});
 	};
 
-	addTopicToWishlist(topicId) {
+	updateTopicToWishlist(selectedTopic) {
 		const formData = new FormData();
-		formData.append('chapter_detail_id', topicId);
+		formData.append('chapter_detail_id', selectedTopic.id);
+		let url = (selectedTopic.is_wishlist === 1) ? this.constants.STUDENT_TOGGLE_WISHLIST_URL : this.constants.STUDENT_ADD_WISHLIST_URL;
 		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.STUDENT_ADD_WISHLIST_URL, formData)
+			this.httpService.postWithFormData(url, formData)
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {

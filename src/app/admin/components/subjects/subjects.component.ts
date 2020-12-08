@@ -26,7 +26,7 @@ export class AdminSubjectsComponent implements OnInit {
 	departmentAndSectionDataStatus = 2;
 	filterForm : any;
 	addSubjectsForm : any;
-	selectedFile: File = null;
+	subjectsFile: File = null;
 	attachmentFile : File = null;
 	selectedSubjectId : number;
 	fileType : number;
@@ -60,16 +60,12 @@ export class AdminSubjectsComponent implements OnInit {
 		});
 	};
 
-	get department_id() { 
-		return this.filterForm.get('department_id'); 
+	validateFilterFormValue(formName) {
+		return this.filterForm.get(formName); 
 	};
 
-	get inst_class_id() { 
-		return this.filterForm.get('inst_class_id'); 
-	};
-
-	get subjects_file() { 
-		return this.addSubjectsForm.get('subjects_file'); 
+	validateAddSubjectsFormValue(formName) {
+		return this.addSubjectsForm.get(formName); 
 	};
 
 	validateAssignFacultyFormValue(formName) {
@@ -152,31 +148,24 @@ export class AdminSubjectsComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addSubjectsForm.reset();
-			this.selectedFile = null;
+			this.subjectsFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addSubjectsForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
+		return (this.addSubjectsForm.valid && this.filterForm.valid && this.subjectsFile) ? false : true;
 	};
 
-	onFileChange(event) {
-		this.selectedFile = null;
+	onFileChange(event, fileTarget) {
+		this[fileTarget] = null;
 		if (event.target.files.length > 0) {
-			this.selectedFile = event.target.files[0];
-		}
-	};
-
-	onAttachmentChange(event) {
-		this.attachmentFile = null;
-		if (event.target.files.length > 0) {
-			this.attachmentFile = event.target.files[0];
+			this[fileTarget] = event.target.files[0];
 		}
 	};
 
 	addSubjects() {
 		this.loader.showLoader();
-		this.subjectsService.addSubjects(this.filterForm.value, this.selectedFile)
+		this.subjectsService.addSubjects(this.filterForm.value, this.subjectsFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);

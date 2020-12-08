@@ -51,12 +51,10 @@ export class AdminChapterService {
 		});
 	};
 
-	addTopic(topicFormData, videoFiles) {
+	addTopic(topicFormData, videoFile1, videoFile2) {
 		const formData = new FormData();
-		_.forEach(videoFiles, (video,index) => {
-			var i = index + 1;
-			formData.append('video'+i, video);
-		})
+		formData.append('video1', videoFile1);
+		formData.append('video2', videoFile2);
 		formData.append('topic', topicFormData.name);
 		formData.append('keywords', topicFormData.keywords);
 		formData.append('related_videos', topicFormData.related_videos);
