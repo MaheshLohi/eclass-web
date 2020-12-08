@@ -11,10 +11,9 @@ import { StudentExaminationService } from '@studentServices/examination/examinat
   	templateUrl: './examination.component.html',
   	styleUrls: ['./examination.component.scss']
 })
-export class StudentExaminationComponent {
+export class StudentExaminationComponent implements OnChanges {
 
 	@Input() subjectId: any;
-	@Input() subjectDetails: any;
 	examDataStatus : number = 2;
 	examsList : any = [];
 

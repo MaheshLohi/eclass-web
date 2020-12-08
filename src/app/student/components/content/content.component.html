@@ -31,7 +31,7 @@
                 <app-student-chapter *ngIf="subjectDetailsDataStatus === 1" [subjectId]="subjectId" [subjectDetails]="subjectDetails"></app-student-chapter>
             </div>
             <div *ngIf="contentType === 2">
-                <app-student-examination *ngIf="subjectDetailsDataStatus === 1" [subjectId]="subjectId" [subjectDetails]="subjectDetails"></app-student-examination>
+                <app-student-examination *ngIf="subjectDetailsDataStatus === 1" [subjectId]="subjectId"></app-student-examination>
             </div>
         </div>
     </div>
