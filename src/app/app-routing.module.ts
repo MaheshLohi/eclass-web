@@ -13,10 +13,10 @@ import { AdminStudentsComponent } from '@adminComponents/students/students.compo
 import { AdminDepartmentComponent } from '@adminComponents/department/department.component';
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
 import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
-import { StudentHomeComponent } from '@studentComponents/home/home.component';
+import { StudentSubjectComponent } from '@studentComponents/subject/subject.component';
 import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
-import { StudentExaminationComponent } from '@studentComponents/examination/examination.component';
+import { StudentContentComponent } from '@studentComponents/content/content.component';
 import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.component';
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
@@ -36,10 +36,10 @@ const routes: Routes = [
 	{ path: 'admin/subjects', component: AdminSubjectsComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/chapters', component: AdminChapterComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/examination', component: AdminExaminationComponent, canActivate: [AuthGuard]},
-	{ path: 'student/home', component: StudentHomeComponent, canActivate: [AuthGuard]},
-	{ path: 'student/chapters/:subjectId', component: StudentChapterComponent, canActivate: [AuthGuard]},
+	{ path: 'student/home', component: StudentSubjectComponent, canActivate: [AuthGuard]},
+	{ path: 'student/contents/:subjectId', component: StudentContentComponent, canActivate: [AuthGuard]},
 	{ path: 'student/topics/:chapterId', component: StudentTopicComponent, canActivate: [AuthGuard]},
-	{ path: 'student/examination', component: StudentExaminationComponent, canActivate: [AuthGuard]},
+	{ path: 'student/examination', component: StudentSubjectComponent, canActivate: [AuthGuard]},
 	{ path: 'student/wishlist', component: StudentWishlistComponent, canActivate: [AuthGuard]},
 	{ path: 'student/feedback', component: StudentFeedbackComponent, canActivate: [AuthGuard]},
 	{ path: 'student/help', component: StudentHelpComponent, canActivate: [AuthGuard]},

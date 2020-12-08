@@ -226,16 +226,18 @@ a.table-link:active {
     background-color: #333;
     color: #ffffff;
 }
-.card-nav-heading {
+.card-nav {
     color: #333 !important;
     background-color: transparent !important;
     border-color: inherit !important;
-    border-top: 0 !important;
-    border-bottom: 2px solid #ed2a26 !important;
-    border-left: 0 !important;
-    border-right: 0 !important;
+    border: 0 !important;
+    border-bottom: 2px solid #ffffff !important;
     display: inline-block;
     padding: 20px 5px 3px 5px;
+    cursor: pointer;
+}
+.card-nav.card-nav-heading {
+    border-bottom: 2px solid #ed2a26 !important;
 }
 .cursor-pointer {
     cursor: pointer;

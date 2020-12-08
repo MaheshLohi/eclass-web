@@ -1,9 +1,7 @@
-import { Component, OnChanges, SimpleChanges, Output, EventEmitter, Input } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
-import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 
@@ -12,29 +10,22 @@ import { StudentSubjectService } from '@studentServices/subject/subject.service'
   	templateUrl: './subject.component.html',
   	styleUrls: ['./subject.component.scss']
 })
-export class StudentSubjectComponent implements OnChanges {
+export class StudentSubjectComponent implements OnInit {
 
 	subjectsDataStatus : number = 2;
 	subjects : any = [];
-	@Input() public selectedSemister;
-	@Output() public subjectSelected = new EventEmitter();
+	selectedSemister : any = {};
 
 	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
 	private loader: LoaderService,
 	public router: Router,
 	private studentSubjectService : StudentSubjectService) { };
 
+	ngOnInit() { };
 
-	ngOnChanges(changes: SimpleChanges) {
-		for (let propName in changes) { 
-			let change = changes[propName];
-			this[propName] = change.currentValue;
-		}
-		if(this.selectedSemister.id) {
-			this.getSubjects();
-		}
+	onSemisterSelection(semister) {
+		this.selectedSemister = semister;
+		this.getSubjects();
 	};
 	 
 	resetSubjectsList() {
@@ -56,9 +47,9 @@ export class StudentSubjectComponent implements OnChanges {
 		});
 	};
 
-	selectSubject(subject) {
-		this.subjectSelected.emit(subject);
+	onSubjectSelection(subject) {
+		let data = {};
+		data['contentType'] = (this.router.url === "/student/home") ? 1 : 2;
+		this.router.navigate(['student/contents', subject.id],{ queryParams: data });
 	};
-
-
 }

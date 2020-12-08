@@ -1,30 +1,22 @@
-<div class="wrapper">
-    <app-student-navbar (semisterChanged)="onSemisterSelection($event)"></app-student-navbar>
-    <app-student-sidebar></app-student-sidebar>
-    <div class="content-wrapper">
-      	<section class="content">
-          	<div class="col-md-12 pt-2">
-				<app-student-subject *ngIf="!isSubjectSelected" [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
-                <div class="card mb-4" *ngFor="let exam of examsList">
-                    <div *ngFor="let year of exam | prepareObject">
-                        <div class="card-header">
-                            <h5 class="mb-2">{{ year.key }} examination papers</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="downloadFile(paper)">
-                                    <div class="info-box filter-boxes">
-                                        <div class="info-box-content">
-                                            <span class="info-box-text">{{ paper.name | verifyData}}</span>
-                                        </div>
-                                    </div>
-                                </div>
+
+<div class="col-md-12 pt-2">
+    <div class="card mb-4" *ngFor="let exam of examsList">
+        <div *ngFor="let year of exam | prepareObject">
+            <div class="card-header">
+                <h5 class="mb-2">{{ year.key }} examination papers</h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="downloadFile(paper)">
+                        <div class="info-box filter-boxes">
+                            <div class="info-box-content">
+                                <span class="info-box-text">{{ paper.name | verifyData}}</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-		</section>
+        </div>
     </div>
-    <app-footer></app-footer>
 </div>
+		

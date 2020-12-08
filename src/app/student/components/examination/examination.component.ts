@@ -1,9 +1,7 @@
-import { Component } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
+import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
-import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { StudentExaminationService } from '@studentServices/examination/examination.service';
@@ -15,27 +13,22 @@ import { StudentExaminationService } from '@studentServices/examination/examinat
 })
 export class StudentExaminationComponent {
 
-	selectedSemister : any = {};
-	selectedSubject : any = {};
-	isSubjectSelected : boolean = false;
+	@Input() subjectId: any;
+	@Input() subjectDetails: any;
 	examDataStatus : number = 2;
 	examsList : any = [];
 
     constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
 	private loader: LoaderService,
 	public router: Router,
 	private downloadService : DownloadService,
 	private studentExaminationService : StudentExaminationService) { };
 
-	onSemisterSelection(semister) {
-		this.selectedSemister = semister;
-	};
-
-	onSubjectSelection(subject) {
-		this.isSubjectSelected = true;
-		this.selectedSubject = subject;
+	ngOnChanges(changes: SimpleChanges) {
+		for (let propName in changes) { 
+			let change = changes[propName];
+			this[propName] = change.currentValue;
+		}
 		this.getExamsList();
 	};
 
@@ -47,7 +40,7 @@ export class StudentExaminationComponent {
 
 	getExamsList() {
 		this.resetExamsList();
-		this.studentExaminationService.getExamsList(this.selectedSubject)
+		this.studentExaminationService.getExamsList(this.subjectId)
 		.then((response:any) => {
 			this.loader.hideLoader();
 			this.examDataStatus = 1;
@@ -61,5 +54,4 @@ export class StudentExaminationComponent {
 	downloadFile(paper) {
 		this.downloadService.download(paper.paper);
 	};
-
 }

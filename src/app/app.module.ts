@@ -39,7 +39,6 @@ import { AdminDepartmentComponent } from '@adminComponents/department/department
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
 import { VerifyDataPipe } from './shared/pipes/verifyData/verify-data.pipe';
 import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
-import { StudentHomeComponent } from '@studentComponents/home/home.component';
 import { StudentSidebarComponent } from '@studentComponents/sidebar/sidebar.component';
 import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
@@ -52,6 +51,7 @@ import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.c
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 import { StudentFaqComponent } from '@studentComponents/faq/faq.component';
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
+import { StudentContentComponent } from './student/components/content/content.component';
 
 @NgModule({
 	declarations: [
@@ -75,8 +75,6 @@ import { StudentHelpComponent } from '@studentComponents/help/help.component';
 		AdminSubjectsComponent,
 		VerifyDataPipe,
 		AdminChapterComponent,
-		StudentHomeComponent,
-		StudentSidebarComponent,
 		StudentChapterComponent,
 		StudentTopicComponent,
 		StudentSubjectComponent,
@@ -88,7 +86,9 @@ import { StudentHelpComponent } from '@studentComponents/help/help.component';
 		StudentFeedbackComponent,
 		StudentNavbarComponent,
 		StudentFaqComponent,
-		StudentHelpComponent
+		StudentHelpComponent,
+		StudentSidebarComponent,
+		StudentContentComponent
 	],
 	imports: [
 		BrowserModule,
