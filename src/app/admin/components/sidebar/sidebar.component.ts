@@ -22,23 +22,13 @@ export class AdminSidebarComponent implements OnInit {
 		this.userDetails = this.storageService.getData("User_Information");
 		this.sidemenus = [{
 			name : "DASHBOARD",
-			icon : "fas fa-tachometer-alt",
+			icon : "fa fa-home",
 			link : '/'+ this.userType +'/dashboard'
 		},
 		{
 			name : "DEPARTMENTS",
 			icon : "fas fa-university",
 			link : '/'+ this.userType +"/departments"
-		},
-		{
-			name : "STUDENTS",
-			icon : "fas fa-graduation-cap",
-			link : '/'+ this.userType +"/students"
-		},
-		{
-			name : "FACULTIES",
-			icon : "fas fa-chalkboard-teacher",
-			link : '/'+ this.userType +"/faculties"
 		},
 		{
 			name : "SUBJECTS",
@@ -54,6 +44,16 @@ export class AdminSidebarComponent implements OnInit {
 			name : "EXAMINATION",
 			icon : "fas fa-clipboard",
 			link : '/'+ this.userType +"/examination"
+		},
+		{
+			name : "STUDENTS",
+			icon : "fas fa-graduation-cap",
+			link : '/'+ this.userType +"/students"
+		},
+		{
+			name : "FACULTIES",
+			icon : "fas fa-chalkboard-teacher",
+			link : '/'+ this.userType +"/faculties"
 		}];
   	};
 }

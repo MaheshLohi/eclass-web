@@ -27,7 +27,7 @@ export class Constants {
     ADD_INSTITUTE_URL = this.BASE_URL + this.ADMIN_URL + 'add-institute';
     ADMINS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'inst-admin';
     ADD_ADMIN_URL = this.BASE_URL + this.ADMIN_URL + 'add-inst-admin';
-    DEPARTMENTS_AND_SECTIONS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'get-department-classes';
+    DEPARTMENTS_AND_SECTIONS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'get-department-classes/';
     FACULTIES_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faculties/';
     ADD_FACULTIES_URL = this.BASE_URL + this.ADMIN_URL + 'add-faculties';
     FACULTY_DELETE_URL = this.BASE_URL + this.ADMIN_URL + 'faculty/';

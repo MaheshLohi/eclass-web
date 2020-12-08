@@ -50,6 +50,13 @@ export class AdminDashboardComponent implements OnInit {
 			value : this.dashboardData.depts_count
 		},
 		{
+			name : "SUBJECTS",
+			link : '/admin/subjects',
+			className : 'bg-success',
+			icon : 'fas fa-book-open',
+			value : this.dashboardData.subjects_count
+		},
+		{
 			name : "STUDENTS",
 			link : '/admin/students',
 			className : 'bg-info',
@@ -62,13 +69,6 @@ export class AdminDashboardComponent implements OnInit {
 			className : 'bg-warning',
 			icon : 'fas fa-chalkboard-teacher',
 			value : this.dashboardData.faculties_count
-		},
-		{
-			name : "SUBJECTS",
-			link : '/admin/subjects',
-			className : 'bg-success',
-			icon : 'fas fa-book-open',
-			value : this.dashboardData.subjects_count
 		}]
 	} 
 

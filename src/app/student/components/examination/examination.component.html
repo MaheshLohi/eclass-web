@@ -2,10 +2,9 @@
     <app-student-navbar (semisterChanged)="onSemisterSelection($event)"></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
-      	<app-breadcrumb [title]="'EXAMINATION'"></app-breadcrumb>
       	<section class="content">
-          	<div class="col-md-12">
-				<app-student-subject [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
+          	<div class="col-md-12 pt-2">
+				<app-student-subject *ngIf="!isSubjectSelected" [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
                 <div class="card mb-4" *ngFor="let exam of examsList">
                     <div *ngFor="let year of exam | prepareObject">
                         <div class="card-header">

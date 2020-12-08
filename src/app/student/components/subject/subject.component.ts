@@ -6,7 +6,6 @@ import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Component({
   	selector: 'app-student-subject',
@@ -33,7 +32,7 @@ export class StudentSubjectComponent implements OnChanges {
 			let change = changes[propName];
 			this[propName] = change.currentValue;
 		}
-		if(this.selectedSemister) {
+		if(this.selectedSemister.id) {
 			this.getSubjects();
 		}
 	};

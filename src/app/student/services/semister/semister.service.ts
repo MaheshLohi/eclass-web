@@ -11,6 +11,8 @@ import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpEr
 })
 export class StudentSemisterService {
 
+	userDetails : any = {};
+
 	constructor(private httpService: HttpClientService,
 	public loggerService: LoggerService,
 	private constants: Constants,
@@ -18,8 +20,9 @@ export class StudentSemisterService {
 	private httpErrorHandler : HttpErrorHandlerService) { }
 
 	getSemistersList() {
+		this.userDetails = this.storageService.getData("User_Information");
 		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL)
+			this.httpService.get(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL + this.userDetails.inst_id)
 			.subscribe((response) => {
 				if(response && response.data) {
 					let result = response.data;

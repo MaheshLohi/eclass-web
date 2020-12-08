@@ -2,9 +2,8 @@
     <app-student-navbar (semisterChanged)="onSemisterSelection($event)"></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
-      	<app-breadcrumb [title]="'HOME'"></app-breadcrumb>
       	<section class="content">
-          	<div class="col-md-12">
+          	<div class="col-md-12 pt-4">
 				<app-student-subject [selectedSemister]="selectedSemister" (subjectSelected)="onSubjectSelection($event)"></app-student-subject>
           	</div>
 		</section>
