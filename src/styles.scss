@@ -1,3 +1,5 @@
+$color-primary : #7d4acb;
+$color-secondary : #5b15c4;
 .basic-form-page {
     height: 100vh;
     .basic-form-container {
@@ -146,7 +148,7 @@ a.table-link:active {
     cursor: pointer;
 }
 .filter-boxes:hover {
-    background-color: red;
+    background-color: $color-primary;
     color: #ffffff;
 }
 .topics-list {
@@ -161,7 +163,7 @@ a.table-link:active {
     .active-topic {
         font-weight: bold;
         .fas {
-            color: #0068d0 !important;
+            color: $color-primary !important;
         }
     }
     .callout {
@@ -189,6 +191,8 @@ a.table-link:active {
     text-align: left;
     display: block;
     padding-top: 10px;
+    min-height: 40px;
+    line-height: 40px;
 }
 .card-header-title {
     padding: 10px 0px;
@@ -231,14 +235,14 @@ a.table-link:active {
     font-size: 18px;
 }
 .card-nav.card-nav-heading {
-    border-bottom: 2px solid #ed2a26 !important;
+    border-bottom: 2px solid $color-primary !important;
     font-weight: 600;
 }
 .cursor-pointer {
     cursor: pointer;
 }
 .card-md {
-    min-height: 250px;
+    min-height: 275px;
 }
 .selector-medium {
     min-width: 200px;
@@ -340,21 +344,17 @@ a.table-link:active {
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-.btn-outline-theme-primary {
-    color: #4a77b7;
-    border-color: #4a77b7;
-    background-color: #ffffff;
-}
-.btn-outline-theme-primary:hover {
+.btn-theme-primary {
+    background-color: $color-primary;
     color: #fff;
-    background: -webkit-linear-gradient(#4a77b7, #c74ea7);
+    border-color: $color-primary;
+    box-shadow: none;
 }
-.btn-outline-theme-secondary {
-    color: #c74ea7;
-    border-color: #c74ea7;
-    background-color: #ffffff;
-}
-.btn-outline-theme-secondary:hover {
+.btn-theme-primary:hover {
+    background-color: $color-secondary;
+    border-color: $color-secondary;
     color: #fff;
-    background: -webkit-linear-gradient(#c74ea7, #4a77b7);
+}
+.theme-color {
+    color: $color-primary;
 }

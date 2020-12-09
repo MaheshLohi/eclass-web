@@ -20,10 +20,10 @@
                                         </select>
                                     </form>
                                     <div class="col-7 card-tools text-right">
-                                        <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                             <i class="fa fa-plus"></i> {{ 'ADD_FACULTIES' | translate}}
                                         </button>
-                                        <button type="button" class="btn btn-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
+                                        <button type="button" class="btn btn-theme-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
                                             <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
                                         </button>
                                     </div>
@@ -55,7 +55,7 @@
                                                     {{ faculty.phone_number | verifyData}}
                                                 </td>
                                                 <td class="td-small">
-                                                    <button type="button" class="btn btn-outline-primary btn-sm btn-sm-circle">
+                                                    <button type="button" class="btn btn-theme-primary btn-sm btn-sm-circle">
                                                         <i class="fa fa-pencil-alt"></i>
                                                     </button>
                                                 </td>
@@ -84,7 +84,7 @@
                                                 <input type="file" id="faculties_file" formControlName="faculties_file" (change)="onFileChange($event)">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">

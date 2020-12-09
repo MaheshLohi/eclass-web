@@ -13,11 +13,12 @@ import { AdminStudentsComponent } from '@adminComponents/students/students.compo
 import { AdminDepartmentComponent } from '@adminComponents/department/department.component';
 import { AdminSubjectsComponent } from '@adminComponents/subjects/subjects.component';
 import { AdminChapterComponent } from '@adminComponents/chapter/chapter.component';
+import { AdminFaqComponent } from '@adminComponents/faq/faq.component';
+import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
+import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { StudentSubjectComponent } from '@studentComponents/subject/subject.component';
-import { StudentChapterComponent } from '@studentComponents/chapter/chapter.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
 import { StudentContentComponent } from '@studentComponents/content/content.component';
-import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
 import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.component';
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
@@ -35,6 +36,8 @@ const routes: Routes = [
 	{ path: 'admin/subjects', component: AdminSubjectsComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/chapters', component: AdminChapterComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/examination', component: AdminExaminationComponent, canActivate: [AuthGuard]},
+	{ path: 'admin/faqs', component: AdminFaqComponent, canActivate: [AuthGuard]},
+	{ path: 'admin/topics/:chapterId', component: AdminTopicComponent, canActivate: [AuthGuard]},
 	{ path: 'student/home', component: StudentSubjectComponent, canActivate: [AuthGuard]},
 	{ path: 'student/contents/:subjectId', component: StudentContentComponent, canActivate: [AuthGuard]},
 	{ path: 'student/topics/:chapterId', component: StudentTopicComponent, canActivate: [AuthGuard]},

@@ -40,7 +40,7 @@
                                         </div>
                                     </form>
                                     <div class="col-3 card-tools text-right">
-                                        <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
                                         [disabled]="!this.filterForm.valid">
                                             <i class="fa fa-plus"></i> {{ 'ADD_EXAMINATION' | translate}}
                                         </button>
@@ -98,7 +98,7 @@
                                             <input type="file" id="paper" formControlName="paper" (change)="onFileChange($event)">
                                         </div>
                                     </div>
-                                    <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                    <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                         <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                     </button>
                                     <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">

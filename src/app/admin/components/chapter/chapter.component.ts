@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -36,6 +37,7 @@ export class AdminChapterComponent implements OnInit {
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
+	public router: Router,
 	private chapterService : AdminChapterService,
 	private departmentService : AdminDepartmentService,
 	private subjectsService : AdminSubjectsService) {
@@ -222,4 +224,8 @@ export class AdminChapterComponent implements OnInit {
 			this.loader.hideLoader();
 		});
 	};
+
+	navigateToTopics(chapter) {
+		this.router.navigate(['admin/topics', chapter.id]);
+	}
 }

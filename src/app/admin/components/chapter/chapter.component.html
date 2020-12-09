@@ -40,7 +40,7 @@
                                         </div>
                                     </form>
                                     <div class="col-3 card-tools text-right">
-                                        <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
                                         [disabled]="!this.filterForm.valid">
                                             <i class="fa fa-plus"></i> {{ 'ADD_CHAPTER' | translate}}
                                         </button>
@@ -55,6 +55,7 @@
                                                 <th>#</th>
                                                 <th>{{ 'CHAPTER_TITLE' | translate}}</th>
                                                 <th>{{ 'DESCRIPTION' | translate}}</th>
+                                                <!-- <th>{{ 'TOPICS' | translate}}</th> -->
                                             </tr>
                                             <tr *ngFor="let chapter of chapters;let i = index">
                                                 <td>
@@ -66,6 +67,15 @@
                                                 <td>
                                                     {{ chapter.description | verifyData }}
                                                 </td>
+                                                <!-- <td *ngIf="chapter.chapter_details.data.length">
+                                                    <button class="btn btn-theme-primary btn-sm"
+                                                    (click)="navigateToTopics(chapter)">
+                                                        View Topics
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="!chapter.chapter_details.data.length">
+                                                    NA
+                                                </td> -->
                                             </tr>
                                         </tbody>
                                     </table>
@@ -111,7 +121,7 @@
                                                     <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onFileChange($event,'thumbnailFile')">
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                            <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                                 <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                             </button>
                                             <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
@@ -158,7 +168,7 @@
                                                     <input type="file" id="video_file2" formControlName="video_file2" (change)="onFileChange($event,'videoFile2')">
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary" [disabled]="disableAddTopicFeatureForm()">
+                                            <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddTopicFeatureForm()">
                                                 <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                             </button>
                                             <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">

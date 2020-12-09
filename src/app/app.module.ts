@@ -52,6 +52,8 @@ import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.c
 import { StudentFaqComponent } from '@studentComponents/faq/faq.component';
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
 import { StudentContentComponent } from './student/components/content/content.component';
+import { AdminFaqComponent } from '@adminComponents/faq/faq.component';
+import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
 
 @NgModule({
 	declarations: [
@@ -88,7 +90,9 @@ import { StudentContentComponent } from './student/components/content/content.co
 		StudentFaqComponent,
 		StudentHelpComponent,
 		StudentSidebarComponent,
-		StudentContentComponent
+		StudentContentComponent,
+		AdminFaqComponent,
+		AdminTopicComponent
 	],
 	imports: [
 		BrowserModule,

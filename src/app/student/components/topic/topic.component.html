@@ -28,14 +28,14 @@
                                 <div class="pt-2">
                                     <div class="topic-title mb-2"><b>{{ selectedTopic.name }}</b>
                                         <div class="cursor-pointer d-inline-block float-right" *ngIf="!selectedTopic.is_wishlist">
-                                            <button class="btn btn-outline-theme-primary" (click)="updateTopicToWishlist()">
-                                                <i class="far fa-heart"></i>
+                                            <button class="btn btn-theme-primary" (click)="updateTopicToWishlist()">
+                                                <i class="fa fa-plus"></i>
                                                 Add To Wishlist
                                             </button>
                                         </div>
                                         <div class="cursor-pointer d-inline-block float-right" *ngIf="selectedTopic.is_wishlist">
-                                            <button class="btn btn-outline-theme-secondary" (click)="updateTopicToWishlist()">
-                                                <i class="fa fa-heart"></i>
+                                            <button class="btn btn-theme-primary" (click)="updateTopicToWishlist()">
+                                                <i class="fa fa-check"></i>
                                                 Wishlisted
                                             </button>
                                         </div>
@@ -71,7 +71,7 @@
                                                 <b>{{ 'NAME' | translate }}</b> : {{ chapterDetails.name }} <br/>
                                                 <b>{{ 'DESCRIPTION' | translate }}</b> : {{ chapterDetails.description }} <br/>
                                                 <b>{{ 'FACULTY' | translate }}</b> : {{ chapterDetails.faculty }}<br/>
-                                                <button class="btn btn-primary mt-2" (click)="downloadFile()">
+                                                <button class="btn btn-theme-primary mt-2" (click)="downloadFile()">
                                                     <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_NOTES' | translate}}
                                                 </button>
                                             </div>

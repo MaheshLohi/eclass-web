@@ -31,10 +31,10 @@
                                         </div>
                                     </form>
                                     <div class="col-4 card-tools text-right">
-                                        <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                             <i class="fa fa-plus"></i> {{ 'ADD_DEPARTMENTS_AND_SUBJECTS' | translate}}
                                         </button>
-                                        <button type="button" class="btn btn-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
+                                        <button type="button" class="btn btn-theme-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
                                             <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
                                         </button>
                                     </div>
@@ -66,37 +66,37 @@
                                                     {{ subject.faculty }}
                                                 </td>
                                                 <td *ngIf="!subject.faculty">
-                                                    <button class="btn btn-outline-primary btn-sm" data-toggle="modal" [attr.data-target]="'#assign-faculty'"
+                                                    <button class="btn btn-theme-primary btn-sm" data-toggle="modal" [attr.data-target]="'#assign-faculty'"
                                                     (click)="initialiseAssignModal(subject)">
                                                         <i class="fas fa-user-plus"></i> Assign
                                                     </button>
                                                 </td>
                                                 <td *ngIf="subject.syllabus">
-                                                    <button class="btn btn-outline-primary btn-sm" (click)="downloadAttachment(subject.syllabus)">
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadAttachment(subject.syllabus)">
                                                         <i class="fa fa-download"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
                                                     (click)="initialiseModal(0,subject)">
                                                         <i class="fas fa-pen"></i>
                                                     </button>
                                                 </td>
                                                 <td *ngIf="!subject.syllabus">
-                                                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    <button type="button" class="btn btn-theme-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
                                                     (click)="initialiseModal(0,subject)">
                                                         <i class="pr-1 fa fa-upload"></i> Upload
                                                     </button>
                                                 </td>
                                                 <td *ngIf="subject.bg_image">
-                                                    <button class="btn btn-outline-primary btn-sm" (click)="downloadAttachment(subject.bg_image)">
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadAttachment(subject.bg_image)">
                                                         <i class="fa fa-download"></i>
                                                     </button>
-                                                    <button type="button" class="btn btn-outline-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
                                                     (click)="initialiseModal(1,subject)">
                                                         <i class="fas fa-pen"></i>
                                                     </button>
                                                 </td>
                                                 <td *ngIf="!subject.bg_image">
-                                                    <button type="button" class="btn btn-outline-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    <button type="button" class="btn btn-theme-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
                                                     (click)="initialiseModal(1,subject)">
                                                         <i class="pr-1 fa fa-upload"></i> Upload
                                                     </button>
@@ -121,7 +121,7 @@
                                                 <input type="file" id="subjects_file" formControlName="subjects_file" (change)="onFileChange($event,'subjectsFile')">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
@@ -156,7 +156,7 @@
                         <input type="file" id="file" (change)="onFileChange($event,'attachmentFile')">
                     </div>
                 </div>
-                <button class="btn btn-primary" (click)="uploadSubjectAttachment()"
+                <button class="btn btn-theme-primary" (click)="uploadSubjectAttachment()"
                 [disabled]="!attachmentFile">
                     <i class="pr-1 fa fa-upload"></i> Upload
                 </button>
@@ -188,7 +188,7 @@
                         </select>
                     </div>
                     <app-form-validator [data]="validateAssignFacultyFormValue('faculty_id')"></app-form-validator>
-                    <button type="submit" class="btn btn-primary" [disabled]="!assignFacultyForm.valid">
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!assignFacultyForm.valid">
                         <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                     </button>
                     <button class="btn btn-danger ml-2" data-dismiss="modal">

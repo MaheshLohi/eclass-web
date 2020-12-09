@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
+import { DownloadService } from '@sharedServices/download/download.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class StudentSubjectComponent implements OnInit {
 	constructor(public constants : Constants,
 	private loader: LoaderService,
 	public router: Router,
+	private downloadService : DownloadService,
 	private studentSubjectService : StudentSubjectService) { };
 
 	ngOnInit() { };
@@ -55,5 +57,10 @@ export class StudentSubjectComponent implements OnInit {
 
 	changeImageSource(event) {
 		event.target.src = "assets/images/default_thumb.jpg";
+	};
+
+	downloadFile(path, event) {
+		event.stopPropagation();
+		this.downloadService.download(path);
 	};
 }

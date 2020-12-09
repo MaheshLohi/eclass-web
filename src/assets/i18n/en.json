@@ -125,5 +125,6 @@
     "SYLLABUS" : "Syllabus",
     "NOTES" : "Notes",
     "ASSIGN_FACULTY" : "Assign Faculty",
-    "LOGIN" : "Log In"
+    "LOGIN" : "Log In",
+    "SUBMIT" : "Submit"
 }

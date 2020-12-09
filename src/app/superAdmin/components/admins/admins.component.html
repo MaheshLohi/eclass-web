@@ -11,7 +11,7 @@
                             <div class="card-header">
                                 <h3 class="card-title custom-title">{{ 'ADMINS' | translate}}</h3>
                                 <div class="col-7 card-tools text-right">
-                                    <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                    <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                         <i class="fa fa-plus"></i> {{ 'ADD_FACULTIES' | translate}}
                                     </button>
                                 </div>
@@ -89,7 +89,7 @@
                                             </div>
                                         </div>
                                         <app-form-validator [data]="inst_id"></app-form-validator>
-                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">

@@ -4,7 +4,7 @@
         <textarea class="form-control" id="question" formControlName="question" placeholder="{{ 'ENTER_QUESTION' | translate}}" required></textarea>
     </div>
     <app-form-validator [data]="validateAddFormValue('question')" [validateNameMinLength]=true></app-form-validator>
-    <button type="submit" class="btn btn-primary mb-3" [disabled]="disableAddFeatureForm()">
+    <button type="submit" class="btn btn-theme-primary mb-3" [disabled]="disableAddFeatureForm()">
         <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
     </button>
 </form>

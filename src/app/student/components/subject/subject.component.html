@@ -14,6 +14,10 @@
                                 </div>
                                 <div class="card-header-portion">
                                     {{subject.code}}
+                                    <button class="btn btn-theme-primary float-right btn-sm"
+                                    (click)="downloadFile(subject.syllabus, $event)" *ngIf="subject.syllabus">
+                                        <i class="pr-1 fa fa-download"></i> Syllabus
+                                    </button>
                                 </div>
                                 <div class="card-header-title">
                                     {{subject.name}}

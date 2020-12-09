@@ -31,10 +31,10 @@
                                         </div>
                                     </form>
                                     <div class="col-4 card-tools text-right">
-                                        <button type="button" class="btn btn-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                             <i class="fa fa-plus"></i> {{ 'ADD_STUDENTS' | translate}}
                                         </button>
-                                        <button type="button" class="btn btn-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
+                                        <button type="button" class="btn btn-theme-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
                                             <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
                                         </button>
                                     </div>
@@ -83,7 +83,7 @@
                                                 <input type="file" id="students_file" formControlName="students_file" (change)="onFileChange($event)">
                                             </div>
                                         </div>
-                                        <button type="submit" class="btn btn-primary" [disabled]="disableAddFeatureForm()">
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">

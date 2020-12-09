@@ -55,8 +55,9 @@ export class StudentChapterComponent implements OnChanges {
 		this.router.navigate(['student/topics', chapter.id]);
 	};
 
-	downloadFile(chapter) {
-		this.downloadService.download(chapter.notes);
+	downloadFile(path, event) {
+		event.stopPropagation();
+		this.downloadService.download(path);
 	};
 	
 	changeImageSource(event) {
