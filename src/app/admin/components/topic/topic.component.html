@@ -1,1 +1,55 @@
-<p>topic works!</p>
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper">
+        <app-breadcrumb [title]="'TOPICS'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body row">
+                                <div class="col-lg-6">
+                                    <video src="{{videoUrl}}" width="99%" height="400px" controls class="video-player" autoplay>
+                                    </video>
+                                    <div class="pt-2">
+                                        <div class="topic-title mb-2">
+                                            <b>{{ selectedTopic.name }}</b>
+                                        </div>
+                                        {{ 'RELATED_VIDEOS' | translate }} : {{ selectedTopic.related_videos[0] | verifyData }} <br/>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 topics-list" *ngIf="topicsDataStatus === 1">
+                                    <table class="table table-striped mb-0">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{ 'TOPIC' | translate}}</th>
+                                            </tr>
+                                            <tr *ngFor="let topic of topics;let i = index">
+                                                <td>
+                                                    <b>{{ i + 1 }}.{{ topic.name | verifyData }}</b><br/>
+                                                    {{'KEYWORDS' | translate }} : {{ topic.keywords | verifyData }}<br/>
+                                                    {{'RELATED_VIDEOS' | translate }} : {{ topic.related_videos }}<br/>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm" (click)="selectTopic(topic)">
+                                                        <i class="pr-1 fa fa-play-circle"></i> {{ 'PLAY' | translate}}
+                                                    </button>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm ml-1">
+                                                        <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate}}
+                                                    </button>
+                                                    <button class="btn btn-danger mt-2 btn-sm ml-1">
+                                                        <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate}}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
