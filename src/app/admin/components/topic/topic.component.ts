@@ -86,4 +86,10 @@ export class AdminTopicComponent implements OnInit {
 		this.downloadService.download(this.chapterDetails.notes);
 	};
 
+	navigateToFaqs(topic) {
+		let data = {};
+		data['topicId'] = topic.id;
+		this.router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
+	};
+
 }

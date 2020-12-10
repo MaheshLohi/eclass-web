@@ -126,5 +126,10 @@
     "NOTES" : "Notes",
     "ASSIGN_FACULTY" : "Assign Faculty",
     "LOGIN" : "Log In",
-    "SUBMIT" : "Submit"
+    "SUBMIT" : "Submit",
+    "FREQUENTLY_ASKED_QUESTIONS" : "Frequently Asked Questions",
+    "ENTER_ANSWER" : "Enter Answer",
+    "ANSWER" : "Answer",
+    "ADD_FAQ" : "Add FAQ",
+    "UPDATE_FAQ" : "Update Faq" 
 }

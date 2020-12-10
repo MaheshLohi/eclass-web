@@ -8,7 +8,7 @@
                 <div class="row"> 
                     <div class="col-12">
                         <div class="card card-primary card-outline">
-                            <div class="card-body row">
+                            <div class="card-body row" *ngIf="topicsDataStatus === 1">
                                 <div class="col-lg-6">
                                     <video src="{{videoUrl}}" width="99%" height="400px" controls class="video-player" autoplay>
                                     </video>
@@ -38,6 +38,9 @@
                                                     </button>
                                                     <button class="btn btn-danger mt-2 btn-sm ml-1">
                                                         <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate}}
+                                                    </button>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm ml-1" (click)="navigateToFaqs(topic)">
+                                                        <i class="pr-1 fa fa-eye"></i> {{ 'FAQS' | translate}}
                                                     </button>
                                                 </td>
                                             </tr>

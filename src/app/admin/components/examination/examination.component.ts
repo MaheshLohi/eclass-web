@@ -66,6 +66,10 @@ export class AdminExaminationComponent implements OnInit {
 		return this.addDataForm.get(formName); 
 	};
 
+	resetFormValue(formName, key) {
+		this[formName].get(key).patchValue(null);
+	};
+
 	ngOnInit() {
 		this.getDepartmentsAndSectionsList();
 	};
@@ -102,6 +106,7 @@ export class AdminExaminationComponent implements OnInit {
 		this.subjectsDataStatus = 2;
 		this.subjects = [];
 		this.loader.showLoader();
+		this.resetFormValue('filterForm','subject_id');
 	};
 
 	getSubjects(data) {

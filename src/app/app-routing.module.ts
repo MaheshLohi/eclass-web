@@ -36,7 +36,7 @@ const routes: Routes = [
 	{ path: 'admin/subjects', component: AdminSubjectsComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/chapters', component: AdminChapterComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/examination', component: AdminExaminationComponent, canActivate: [AuthGuard]},
-	{ path: 'admin/faqs', component: AdminFaqComponent, canActivate: [AuthGuard]},
+	{ path: 'admin/faqs/:chapterId', component: AdminFaqComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/topics/:chapterId', component: AdminTopicComponent, canActivate: [AuthGuard]},
 	{ path: 'student/home', component: StudentSubjectComponent, canActivate: [AuthGuard]},
 	{ path: 'student/contents/:subjectId', component: StudentContentComponent, canActivate: [AuthGuard]},

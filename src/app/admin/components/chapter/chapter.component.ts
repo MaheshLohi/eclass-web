@@ -131,11 +131,17 @@ export class AdminChapterComponent implements OnInit {
 			this.getSubjects(data)
 		}
 	};
+
+	resetFormValue(formName, key) {
+		this[formName].get(key).patchValue(null);
+	};
 	
 	resetSubjects() {
 		this.subjectsDataStatus = 2;
 		this.subjects = [];
 		this.loader.showLoader();
+		this.resetFormValue('filterForm','subject_id');
+		this.resetFormValue('addTopicForm','chapter_id');
 	};
 
 	getSubjects(data) {
@@ -155,6 +161,7 @@ export class AdminChapterComponent implements OnInit {
 		this.chaptersDataStatus = 2;
 		this.chapters = [];
 		this.loader.showLoader();
+		this.resetFormValue('addTopicForm','chapter_id');
 	};
 
 	getChapters() {

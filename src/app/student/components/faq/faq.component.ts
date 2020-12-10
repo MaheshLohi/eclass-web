@@ -1,10 +1,7 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
-import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentFaqService } from '@studentServices/faq/faq.service';
 
@@ -20,8 +17,6 @@ export class StudentFaqComponent implements OnChanges {
 	faqs : any = [];
 
 	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
 	private loader: LoaderService,
 	public router: Router,
 	private studentFaqService : StudentFaqService) { };

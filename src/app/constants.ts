@@ -49,6 +49,10 @@ export class Constants {
     ADD_SUBJECT_SYLLABUS_URL = this.BASE_URL + this.ADMIN_URL + 'subject-syllabus';
     FAQS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faqs/';
     ADMIN_TOPICS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'chapter/';
+    ADMIN_FAQS_LIST_URL = this.BASE_URL + this.ADMIN_URL + 'faqs/';
+    ADD_FAQ_URL = this.BASE_URL + this.ADMIN_URL + 'faqs';
+    UPDATE_FAQ_URL = this.BASE_URL + this.ADMIN_URL + 'update-faqs';
+    DELETE_FAQ_URL = this.BASE_URL + this.ADMIN_URL + 'faq/';
 
     //students API
     STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';
