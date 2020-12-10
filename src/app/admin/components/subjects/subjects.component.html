@@ -1,7 +1,7 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="content-wrapper" *ngIf="departmentAndSectionDataStatus === 1">
+    <div class="content-wrapper">
         <app-breadcrumb [title]="'SUBJECTS'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
@@ -13,7 +13,7 @@
                                     <form class="col-8 row" role="form" [formGroup]="filterForm">
                                         <div class="col-6">
                                             <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
-                                            (change)="getSubjectsData()">
+                                            (change)="getSubjectsData()" *ngIf="departmentAndSectionDataStatus">
                                                 <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
@@ -22,7 +22,7 @@
                                         </div>
                                         <div class="col-6">
                                             <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
-                                            (change)="getSubjectsData()">
+                                            (change)="getSubjectsData()" *ngIf="departmentAndSectionDataStatus">
                                                 <option [value]=null selected disabled>{{ 'SELECT_SEMISTER' | translate}}</option>
                                                 <option *ngFor="let semister of semisters" [ngValue]="semister.id">
                                                     {{ 'SEMISTER' | translate }} {{semister.name}}
@@ -109,6 +109,14 @@
                                     <app-list-error-handler 
                                     [status]=subjectsDataStatus 
                                     [title]="'SUBJECTS'">
+                                    </app-list-error-handler>
+                                </div>
+                            </div>
+                            <div class="card-body" *ngIf="(departmentAndSectionDataStatus === 0 || departmentAndSectionDataStatus === 3) && !showAddFeature">
+                                <div class="col-lg-12">
+                                    <app-list-error-handler 
+                                    [status]=departmentAndSectionDataStatus 
+                                    [title]="'DEPARTMENTS'">
                                     </app-list-error-handler>
                                 </div>
                             </div>

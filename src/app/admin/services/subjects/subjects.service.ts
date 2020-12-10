@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Constants } from '@app/constants';
 import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
 import { LoggerService } from '@sharedServices/logger/logger.service';
+import { StorageService } from '@sharedServices/storage/storage.service';
 import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
 
 @Injectable({
@@ -10,9 +11,12 @@ import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpEr
 })
 export class AdminSubjectsService {
 
+	userDetails : any = {};
+
 	constructor(private httpService: HttpClientService,
 	public loggerService: LoggerService,
 	private constants: Constants,
+	private storageService : StorageService,
 	private httpErrorHandler : HttpErrorHandlerService) { }
 
 	getSubjects(selectedDepartmentId, selectedSectionId) {
@@ -32,11 +36,11 @@ export class AdminSubjectsService {
 		});
 	};
 	  
-	addSubjects(filterData, selectedFile) {
+	addSubjects(selectedFile) {
+		this.userDetails = this.storageService.getData("User_Information");
 		const formData = new FormData();
 		formData.append('subjects', selectedFile);
-		formData.append('department_id', filterData.department_id);
-		formData.append('inst_class_id', filterData.inst_class_id);
+		formData.append('inst_id', this.userDetails.inst_id);
 		return new Promise((resolve, reject) => {
 			this.httpService.postWithFormData(this.constants.ADD_SUBJECTS_URL, formData)
 			.subscribe((response) => {

@@ -153,7 +153,7 @@ export class AdminSubjectsComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addSubjectsForm.valid && this.filterForm.valid && this.subjectsFile) ? false : true;
+		return (this.addSubjectsForm.valid && this.subjectsFile) ? false : true;
 	};
 
 	onFileChange(event, fileTarget) {
@@ -165,11 +165,16 @@ export class AdminSubjectsComponent implements OnInit {
 
 	addSubjects() {
 		this.loader.showLoader();
-		this.subjectsService.addSubjects(this.filterForm.value, this.subjectsFile)
+		this.subjectsService.addSubjects(this.subjectsFile)
 		.then(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
-			this.getSubjects(this.filterForm.value);
+			if(this.departmentAndSectionDataStatus === 1) {
+				this.getSubjectsData();
+			}
+			else {
+				this.getDepartmentsAndSectionsList();
+			}
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("SUBJECTS")} ));
 		}, () => {
 			this.loader.hideLoader();
