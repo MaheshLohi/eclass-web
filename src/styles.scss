@@ -221,23 +221,6 @@ a.table-link:active {
     background-color: #333;
     color: #ffffff;
 }
-.card-nav {
-    color: #333 !important;
-    background-color: transparent !important;
-    border-color: inherit !important;
-    border: 0 !important;
-    border-bottom: 2px solid #ffffff !important;
-    display: inline-block;
-    padding: 20px 5px 3px 5px;
-    cursor: pointer;
-    font-weight: 300;
-    margin: 0px 6px;
-    font-size: 18px;
-}
-.card-nav.card-nav-heading {
-    border-bottom: 2px solid $color-primary !important;
-    font-weight: 600;
-}
 .cursor-pointer {
     cursor: pointer;
 }
@@ -246,6 +229,12 @@ a.table-link:active {
 }
 .selector-medium {
     min-width: 200px;
+}
+.content-type-heading {
+    font-size: 20px;
+    font-weight: 600;
+    color: #555555;
+    line-height: 38px;
 }
 @media only screen and (max-width: 812px) {
     .basic-form-page {
@@ -357,4 +346,8 @@ a.table-link:active {
 }
 .theme-color {
     color: $color-primary;
+}
+.sbt-wdt {
+    height: 205px;
+    position: relative;
 }

@@ -58,4 +58,8 @@ export class StudentWishlistComponent implements OnInit {
 		event.target.src = "assets/images/default_thumb.jpg";
 	};
 
+	preventEvent(event) {
+		event.stopPropagation();
+	};
+
 }

@@ -103,5 +103,4 @@ export class StudentTopicComponent implements OnInit {
 			this.loader.hideLoader();
 		});
 	};
-
 }

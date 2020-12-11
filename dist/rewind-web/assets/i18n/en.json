@@ -131,5 +131,8 @@
     "ENTER_ANSWER" : "Enter Answer",
     "ANSWER" : "Answer",
     "ADD_FAQ" : "Add FAQ",
-    "UPDATE_FAQ" : "Update Faq" 
+    "UPDATE_FAQ" : "Update Faq",
+    "SELECT_TOPIC" : "Select Topic",
+    "VIEW_EXAMINATIONS" : "View Examinations",
+    "VIEW_CHAPTERS" : "View Chapters"
 }

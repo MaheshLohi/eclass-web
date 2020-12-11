@@ -16,7 +16,10 @@
                                         <div class="topic-title mb-2">
                                             <b>{{ selectedTopic.name }}</b>
                                         </div>
-                                        {{ 'RELATED_VIDEOS' | translate }} : {{ selectedTopic.related_videos[0] | verifyData }} <br/>
+                                        {{ 'RELATED_VIDEOS' | translate }} :
+                                        <a href={{selectedTopic.related_videos[0]}} target="_blank">
+                                            {{ selectedTopic.related_videos[0] | verifyData }}
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 topics-list" *ngIf="topicsDataStatus === 1">
@@ -29,7 +32,10 @@
                                                 <td>
                                                     <b>{{ i + 1 }}.{{ topic.name | verifyData }}</b><br/>
                                                     {{'KEYWORDS' | translate }} : {{ topic.keywords | verifyData }}<br/>
-                                                    {{'RELATED_VIDEOS' | translate }} : {{ topic.related_videos }}<br/>
+                                                    {{'RELATED_VIDEOS' | translate }} : 
+                                                    <a href={{topic.related_videos}} target="_blank">
+                                                        {{ topic.related_videos | verifyData }}
+                                                    </a><br/>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm" (click)="selectTopic(topic)">
                                                         <i class="pr-1 fa fa-play-circle"></i> {{ 'PLAY' | translate}}
                                                     </button>
