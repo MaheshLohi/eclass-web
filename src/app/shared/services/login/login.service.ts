@@ -37,11 +37,16 @@ export class LoginService {
 		return new Promise((resolve, reject) => {
 			this.httpService.get(this.constants.USER_DETAILS_URL)
 			.subscribe((response: any) => {
-				this.storageService.setData('User_Information', response);
-				resolve(response);
+				if(response && response.data) {
+					this.storageService.setData('User_Information', response.data);
+					resolve(response.data);
+				}
+				else {
+					reject();
+				}
 			}, (error) => {
 				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
-				reject(error);
+				reject();
 			});
 		});
 	}
