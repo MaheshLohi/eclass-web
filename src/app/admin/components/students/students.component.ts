@@ -133,9 +133,10 @@ export class AdminStudentsComponent implements OnInit {
 	addStudents() {
 		this.loader.showLoader();
 		this.studentService.addStudents(this.filterForm.value, this.selectedFile)
-		.then(() => {
+		.then((response:any) => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
+			this.downloadService.downloadAsCsv(response.data,this.constants.STUDENT_CSV_CONTENTS,'students_list.csv');
 			this.getStudents(this.filterForm.value);
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("STUDENTS")} ));
 		}, () => {

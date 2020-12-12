@@ -12,6 +12,8 @@ export class Constants {
     DISPLAY_HTTP_ERROR_TOASTER = true;
     HTTP_SERVER_ERROR = 500;
     UNAUTHORISED_ERROR = 503;
+    STUDENT_CSV_CONTENTS = ["USN","Password"];
+    FACULTY_CSV_CONTENTS = ["Name","Password"];
 
     SUPER_ADMIN = "superAdmin";
     ADMIN = "admin";

@@ -120,8 +120,9 @@ export class AdminFacultiesComponent implements OnInit {
 	addFaculties() {
 		this.loader.showLoader();
 		this.facultyService.addFaculties(this.filterForm.value, this.selectedFile)
-		.then(() => {
+		.then((response:any) => {
 			this.loader.hideLoader();
+			this.downloadService.downloadAsCsv(response.data,this.constants.FACULTY_CSV_CONTENTS,'faculties_list.csv');
 			this.showAddFeatureView(false);
 			this.getFaculties();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("FACULTIES")} ));
