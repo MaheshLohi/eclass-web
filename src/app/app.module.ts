@@ -51,9 +51,10 @@ import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.c
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 import { StudentFaqComponent } from '@studentComponents/faq/faq.component';
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
-import { StudentContentComponent } from './student/components/content/content.component';
+import { StudentContentComponent } from '@studentComponents/content/content.component';
 import { AdminFaqComponent } from '@adminComponents/faq/faq.component';
 import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
+import { StudentSearchComponent } from '@studentComponents/search/search.component';
 
 @NgModule({
 	declarations: [
@@ -92,7 +93,8 @@ import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
 		StudentSidebarComponent,
 		StudentContentComponent,
 		AdminFaqComponent,
-		AdminTopicComponent
+		AdminTopicComponent,
+		StudentSearchComponent
 	],
 	imports: [
 		BrowserModule,

@@ -22,6 +22,7 @@ import { StudentContentComponent } from '@studentComponents/content/content.comp
 import { StudentWishlistComponent } from '@studentComponents/wishlist/wishlist.component';
 import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.component';
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
+import { StudentSearchComponent } from '@studentComponents/search/search.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
 	{ path: 'student/wishlist', component: StudentWishlistComponent, canActivate: [AuthGuard]},
 	{ path: 'student/feedback', component: StudentFeedbackComponent, canActivate: [AuthGuard]},
 	{ path: 'student/help', component: StudentHelpComponent, canActivate: [AuthGuard]},
+	{ path: 'student/search', component: StudentSearchComponent, canActivate: [AuthGuard]},
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

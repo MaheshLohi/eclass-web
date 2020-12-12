@@ -302,7 +302,7 @@ a.table-link:active {
     }
 }
 .custom-search-navbar {
-    width: 300px;
+    width: 500px;
     .border-secondary {
         border: 1px solid #ced4da !important;
         color: #ced4da !important;
@@ -350,4 +350,8 @@ a.table-link:active {
 .sbt-wdt {
     height: 205px;
     position: relative;
+}
+.custom-search-input {
+    height: 50px;
+    border-radius: 30px;
 }

@@ -1,0 +1,33 @@
+<div class="wrapper">
+    <app-student-navbar></app-student-navbar>
+    <app-student-sidebar></app-student-sidebar>
+    <div class="content-wrapper">
+        <div class="content col-lg-12 p-4">
+            <form name="searchForm" class="col-lg-8 col-12 m-auto" (submit)="getSearchResults()">
+                <input type="search" [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}" class="form-control custom-search-input" placeholder="Type your keywords here">
+            </form>
+        </div>
+        <section class="content col-lg-12 row p-4" *ngIf="searchResultsDataStatus === 1">
+            <div class="col-lg-3 col-12 mt-1" *ngFor="let result of searchResults">
+                <div class="card card-widget mb-3 card-md cursor-pointer" (click)="navigateToTopics(result.chapter_details.data[0])">
+                    <div class="card-body p-2">
+                        <div class="img-container">
+                            <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + result.chapter_details.data[0].thumbnail' 
+                            (error)="changeImageSource($event)">
+                        </div>
+                        <div class="card-header-portion">
+                            {{result.chapter_details.data[0].name}}
+                        </div>
+                        <div (click)="preventEvent($event)">
+                            {{'RELATED_VIDEOS' | translate}} : 
+                            <a href={{result.chapter_details.data[0].related_videos}} target="_blank">
+                                {{result.chapter_details.data[0].related_videos | verifyData}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>

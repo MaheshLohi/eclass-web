@@ -23,7 +23,9 @@ export class StudentNavbarComponent implements OnInit {
 	semistersDataStatus : number = 2;
 	selectSemisterId : number;
 	showSemisterDropdown : Boolean = false;
+	showSearhBar : Boolean = true;
 	@Output() public semisterChanged = new EventEmitter();
+	searchString : string;
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -37,11 +39,20 @@ export class StudentNavbarComponent implements OnInit {
 	ngOnInit() {
 		this.userDetails = this.storageService.getData("User_Information");
 		this.loginType = this.userDetails.type;
+		this.searchString = '';
 		if(this.semistersDataStatus != 1) {
 			this.getSemistersList();
 		}
 		this.toggleSemistersListSelector();
+		this.toggleSearchBar();
 	};
+
+	toggleSearchBar() {
+		this.showSearhBar = true;
+		if (this.router.url.split('?')[0] === "/student/search") {
+			this.showSearhBar = false;
+		}
+	}
 
 	toggleSemistersListSelector() {
 		this.showSemisterDropdown = false;
@@ -94,5 +105,17 @@ export class StudentNavbarComponent implements OnInit {
 
 	logout() {
 		this.sessionHandler.handleLogout();
+	};
+
+	navigateToSearch() {
+		if(this.searchString) {
+			let data = {};
+			data['searchString'] = this.searchString;
+			this.router.navigate(['student/search'],{ queryParams: data });
+			
+		}
+		else {
+			this.router.navigate(['student/search']);
+		}
 	};
 }
