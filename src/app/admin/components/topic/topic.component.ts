@@ -4,7 +4,6 @@ import * as _ from "lodash";
 
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
-import { DownloadService } from '@sharedServices/download/download.service';
 import { AdminTopicService } from '@adminServices/topic/topic.service';
 
 @Component({
@@ -26,7 +25,6 @@ export class AdminTopicComponent implements OnInit {
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	public router: Router,
-	private downloadService : DownloadService,
 	private adminTopicService : AdminTopicService) {
 		this.route.params.subscribe((params: Params) => {
 			this.chapterId = params['chapterId'];
@@ -80,10 +78,6 @@ export class AdminTopicComponent implements OnInit {
 		let data = {};
 		data['topicId'] = this.selectedTopic.id;
 		this.router.navigate(['admin/topics', this.chapterId],{ queryParams: data });
-	};
-
-	downloadFile() {
-		this.downloadService.download(this.chapterDetails.notes);
 	};
 
 	navigateToFaqs(topic) {

@@ -41,7 +41,7 @@ export class AdminSubjectsComponent implements OnInit {
 	private subjectsService : AdminSubjectsService,
 	private departmentService : AdminDepartmentService,
 	private facultyService : AdminFacultiesService,
-	private downloadService : DownloadService) {
+	public downloadService : DownloadService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
 				Validators.required
@@ -192,14 +192,6 @@ export class AdminSubjectsComponent implements OnInit {
 		}, () => {
 			this.loader.hideLoader();
 		});
-	}
-
-	downloadFile() {
-		this.downloadService.download('public/subjects.csv');
-	};
-
-	downloadAttachment(filePath) {
-		this.downloadService.download(filePath);
 	}
 
 	initialiseModal(fileType,subject) {

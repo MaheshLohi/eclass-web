@@ -32,7 +32,7 @@ export class AdminStudentsComponent implements OnInit {
 	private loader: LoaderService,
 	private studentService : AdminStudentsService,
 	private departmentService : AdminDepartmentService,
-	private downloadService : DownloadService) {
+	public downloadService : DownloadService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
 				Validators.required
@@ -142,9 +142,4 @@ export class AdminStudentsComponent implements OnInit {
 			this.loader.hideLoader();
 		});
 	};
-
-	downloadFile() {
-		this.downloadService.download('public/student.csv');
-	};
-
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import * as _ from "lodash";
 
 import { Constants } from '@app/constants';
-import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
@@ -28,8 +26,6 @@ export class StudentNavbarComponent implements OnInit {
 	searchString : string;
 
 	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
 	private loader: LoaderService,
 	public router: Router,
 	private studentSemisterService : StudentSemisterService,

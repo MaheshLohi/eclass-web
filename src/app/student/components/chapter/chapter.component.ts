@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { StudentChapterService } from '@studentServices/chapter/chapter.service';
 
 @Component({
@@ -21,7 +22,8 @@ export class StudentChapterComponent implements OnChanges {
   	constructor(public constants : Constants,
 	private loader: LoaderService,
 	public router: Router,
-	private downloadService : DownloadService,
+	public downloadService : DownloadService,
+	public miscellaneousService : MiscellaneousService,
 	private studentChapterService : StudentChapterService) {}
 	  
 	ngOnChanges(changes: SimpleChanges) {
@@ -54,13 +56,4 @@ export class StudentChapterComponent implements OnChanges {
 	navigateToTopics(chapter) {
 		this.router.navigate(['student/topics', chapter.id]);
 	};
-
-	downloadFile(path, event) {
-		event.stopPropagation();
-		this.downloadService.download(path);
-	};
-	
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_thumb.jpg";
-	}
 }

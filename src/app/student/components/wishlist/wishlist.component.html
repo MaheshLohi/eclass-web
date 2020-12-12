@@ -4,11 +4,11 @@
     <div class="content-wrapper">
         <section class="content col-12 row p-4">
             <div class="col-lg-3 col-12 mt-1" *ngFor="let wishlist of wishlists">
-                <div class="card card-widget mb-3 card-md cursor-pointer" (click)="navigateToTopics(wishlist.chapter_details.data[0])">
+                <div class="card card-widget mb-3 card-md cursor-pointer shadow" (click)="navigateToTopics(wishlist.chapter_details.data[0])">
                     <div class="card-body p-2">
                         <div class="img-container">
                             <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + wishlist.chapter_details.data[0].thumbnail' 
-                            (error)="changeImageSource($event)">
+                            (error)="miscellaneousService.changeImageSource($event)">
                         </div>
                         <div class="card-header-portion">
                             {{wishlist.chapter_details.data[0].name}}

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { StudentSubjectService } from '@studentServices/subject/subject.service'
   	templateUrl: './subject.component.html',
   	styleUrls: ['./subject.component.scss']
 })
-export class StudentSubjectComponent implements OnInit {
+export class StudentSubjectComponent {
 
 	subjectsDataStatus : number = 2;
 	subjects : any = [];
@@ -20,10 +21,9 @@ export class StudentSubjectComponent implements OnInit {
 	constructor(public constants : Constants,
 	private loader: LoaderService,
 	public router: Router,
-	private downloadService : DownloadService,
+	public downloadService : DownloadService,
+	public miscellaneousService : MiscellaneousService,
 	private studentSubjectService : StudentSubjectService) { };
-
-	ngOnInit() { };
 
 	onSemisterSelection(semister) {
 		this.selectedSemister = semister;
@@ -55,12 +55,4 @@ export class StudentSubjectComponent implements OnInit {
 		this.router.navigate(['student/contents', subject.id],{ queryParams: data });
 	};
 
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_thumb.jpg";
-	};
-
-	downloadFile(path, event) {
-		event.stopPropagation();
-		this.downloadService.download(path);
-	};
 }

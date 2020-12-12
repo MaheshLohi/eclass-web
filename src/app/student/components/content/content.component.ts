@@ -4,6 +4,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 
 @Component({
@@ -22,7 +23,8 @@ export class StudentContentComponent implements OnInit {
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	public router: Router,
-	private downloadService : DownloadService,
+	public downloadService : DownloadService,
+	public miscellaneousService : MiscellaneousService,
 	private studentSubjectService : StudentSubjectService) {
     	this.route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
@@ -56,18 +58,10 @@ export class StudentContentComponent implements OnInit {
 		});
 	};
 
-	downloadSyllabus(subjectDetails) {
-		this.downloadService.download(subjectDetails.syllabus);
-	};
-
 	updateNavigation(contentType) {
 		this.contentType = contentType;
 		let data = {};
 		data['contentType'] = contentType;
 		this.router.navigate(['student/contents', this.subjectId],{ queryParams: data });
-	};
-
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_thumb.jpg";
 	};
 }

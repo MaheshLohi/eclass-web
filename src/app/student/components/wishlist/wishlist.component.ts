@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StudentWishlistService } from '@studentServices/wishlist/wishlist.service';
 
 @Component({
@@ -18,6 +19,7 @@ export class StudentWishlistComponent implements OnInit {
 	constructor(public constants : Constants,
 	private loader: LoaderService,
 	public router: Router,
+	public miscellaneousService : MiscellaneousService,
 	private studentWishlistService : StudentWishlistService) {	}
 
 	ngOnInit() {
@@ -47,10 +49,6 @@ export class StudentWishlistComponent implements OnInit {
 		let data = {};
 		data['topicId'] = topic.id;
 		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
-	};
-
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_thumb.jpg";
 	};
 
 	preventEvent(event) {

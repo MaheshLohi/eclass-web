@@ -9,7 +9,8 @@ export class DownloadService {
 
   	constructor(private constants: Constants) { }
 
-	download(file) {
+	download(file, event?:any) {
+		if(event) { event.stopPropagation(); }
 		var aTag = document.createElement("a");
 		aTag.setAttribute('href', this.constants.DOMAIN_URL + file);
 		aTag.setAttribute('download', '');

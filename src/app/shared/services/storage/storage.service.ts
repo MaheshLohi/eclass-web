@@ -12,15 +12,15 @@ export class StorageService {
 
 	setData(key, value) {
 		if (this.constants.ENABLE_ENCRYPTION) {
-			sessionStorage.setItem(key, CryptoJS.AES.encrypt(JSON.stringify(value), this.constants.ENCRYPTION_KEY));
+			localStorage.setItem(key, CryptoJS.AES.encrypt(JSON.stringify(value), this.constants.ENCRYPTION_KEY));
 		} else {
-			sessionStorage.setItem(key, JSON.stringify(value));
+			localStorage.setItem(key, JSON.stringify(value));
 		}
 	};
 
 	getData(key) {
-		if(sessionStorage.getItem(key)) {
-			let value = sessionStorage.getItem(key);
+		if(localStorage.getItem(key)) {
+			let value = localStorage.getItem(key);
 			if (this.constants.ENABLE_ENCRYPTION) {
 				let bytes = CryptoJS.AES.decrypt(value, this.constants.ENCRYPTION_KEY);
 				return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
@@ -35,12 +35,12 @@ export class StorageService {
 	};
 
 	deleteData(key) {
-		if(sessionStorage.getItem(key)) {
-			sessionStorage.removeItem(key);
+		if(localStorage.getItem(key)) {
+			localStorage.removeItem(key);
 		}
 	};
 
 	clear() {
-		sessionStorage.clear();
+		localStorage.clear();
 	};
 }

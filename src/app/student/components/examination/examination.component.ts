@@ -20,7 +20,7 @@ export class StudentExaminationComponent implements OnChanges {
     constructor(public constants : Constants,
 	private loader: LoaderService,
 	public router: Router,
-	private downloadService : DownloadService,
+	public downloadService : DownloadService,
 	private studentExaminationService : StudentExaminationService) { };
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -48,9 +48,5 @@ export class StudentExaminationComponent implements OnChanges {
 			this.loader.hideLoader();
 			this.examDataStatus = 0;
 		});
-	};
-
-	downloadFile(paper) {
-		this.downloadService.download(paper.paper);
 	};
 }

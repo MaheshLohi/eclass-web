@@ -5,9 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
+import { DownloadService } from '@sharedServices/download/download.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
 import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
-import { DownloadService } from '@sharedServices/download/download.service';
 import { AdminExaminationService } from '@adminServices/examination/examination.service';
 
 @Component({
@@ -34,7 +34,7 @@ export class AdminExaminationComponent implements OnInit {
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
-	private downloadService : DownloadService,
+	public downloadService : DownloadService,
 	private departmentService : AdminDepartmentService,
 	private adminExaminationService : AdminExaminationService,
 	private subjectsService : AdminSubjectsService) { 
@@ -173,9 +173,5 @@ export class AdminExaminationComponent implements OnInit {
 		}, () => {
 			this.loader.hideLoader();
 		});
-	};
-
-	downloadFile(paper) {
-		this.downloadService.download(paper.paper);
 	};
 }

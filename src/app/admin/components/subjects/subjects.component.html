@@ -34,7 +34,7 @@
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                             <i class="fa fa-plus"></i> {{ 'ADD_DEPARTMENTS_AND_SUBJECTS' | translate}}
                                         </button>
-                                        <button type="button" class="btn btn-theme-primary" (click)="downloadFile()" *ngIf="showAddFeature === true">
+                                        <button type="button" class="btn btn-theme-primary" (click)="downloadService.download('public/subjects.csv')" *ngIf="showAddFeature === true">
                                             <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
                                         </button>
                                     </div>
@@ -72,7 +72,7 @@
                                                     </button>
                                                 </td>
                                                 <td *ngIf="subject.syllabus">
-                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadAttachment(subject.syllabus)">
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadService.download(subject.syllabus)">
                                                         <i class="fa fa-download"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
@@ -87,7 +87,7 @@
                                                     </button>
                                                 </td>
                                                 <td *ngIf="subject.bg_image">
-                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadAttachment(subject.bg_image)">
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadService.download(subject.bg_image)">
                                                         <i class="fa fa-download"></i>
                                                     </button>
                                                     <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"

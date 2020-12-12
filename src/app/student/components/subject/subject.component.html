@@ -6,16 +6,16 @@
           	<div class="col-md-12 pt-4">
 				<section class="row" *ngIf="subjectsDataStatus === 1">
                     <div class="col-lg-3 col-12 mt-1" *ngFor="let subject of subjects">
-                        <div class="card card-widget mb-3 card-md cursor-pointer" (click)="onSubjectSelection(subject)">
+                        <div class="card card-widget mb-3 card-md cursor-pointer shadow" (click)="onSubjectSelection(subject)">
                             <div class="card-body p-2">
                                 <div class="img-container">
                                     <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + subject.bg_image' 
-                                    (error)="changeImageSource($event)">
+                                    (error)="miscellaneousService.changeImageSource($event)">
                                 </div>
                                 <div class="card-header-portion">
                                     {{subject.code}}
                                     <button class="btn btn-theme-primary float-right btn-sm"
-                                    (click)="downloadFile(subject.syllabus, $event)" *ngIf="subject.syllabus">
+                                    (click)="downloadService.download(subject.syllabus, $event)" *ngIf="subject.syllabus">
                                         <i class="pr-1 fa fa-download"></i> Syllabus
                                     </button>
                                 </div>

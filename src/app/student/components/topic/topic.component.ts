@@ -31,7 +31,7 @@ export class StudentTopicComponent implements OnInit {
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	public router: Router,
-	private downloadService : DownloadService,
+	public downloadService : DownloadService,
 	private studentTopicService : StudentTopicService,
 	private studentWishlistService : StudentWishlistService) {
 		this.route.params.subscribe((params: Params) => {
@@ -86,10 +86,6 @@ export class StudentTopicComponent implements OnInit {
 		let data = {};
 		data['topicId'] = this.selectedTopic.id;
 		this.router.navigate(['student/topics', this.chapterId],{ queryParams: data });
-	};
-
-	downloadFile() {
-		this.downloadService.download(this.chapterDetails.notes);
 	};
 
 	updateTopicToWishlist() {

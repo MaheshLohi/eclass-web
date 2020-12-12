@@ -31,7 +31,7 @@ export class AdminFacultiesComponent implements OnInit {
 	private loader: LoaderService,
 	private facultyService : AdminFacultiesService,
 	private departmentService : AdminDepartmentService,
-	private downloadService : DownloadService) {
+	public downloadService : DownloadService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [
 				Validators.required
@@ -128,10 +128,6 @@ export class AdminFacultiesComponent implements OnInit {
 		}, () => {
 			this.loader.hideLoader();
 		});
-	};
-
-	downloadFile() {
-		this.downloadService.download('public/faculties.csv');
 	};
 
 	deleteFaculty(faculty) {

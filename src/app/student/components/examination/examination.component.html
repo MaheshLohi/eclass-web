@@ -7,7 +7,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="downloadFile(paper)">
+                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="downloadService.download(paper.paper)">
                         <div class="info-box filter-boxes">
                             <div class="info-box-content">
                                 <span class="info-box-text">{{ paper.name | verifyData}}</span>
