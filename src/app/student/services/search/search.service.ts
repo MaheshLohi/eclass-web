@@ -15,9 +15,9 @@ export class StudentSearchService {
 	private constants: Constants,
 	private httpErrorHandler : HttpErrorHandlerService) { }
 
-	getSearchResultsList(data) {
+	getSearchResultsList(searchString) {
 		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.STUDENT_SEARCH_LIST_URL, data)
+			this.httpService.get(this.constants.STUDENT_SEARCH_LIST_URL + searchString)
 			.subscribe((response) => {
 				if(response && response.data && response.data.length) {
 					resolve(response.data);

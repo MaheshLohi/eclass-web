@@ -33,6 +33,7 @@ export class AdminSubjectsComponent implements OnInit {
 	assignFacultyForm : any;
 	faculties : any = [];
 	facultiesDataStatus : number = 2;
+	assignFacultyType : number;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -199,8 +200,10 @@ export class AdminSubjectsComponent implements OnInit {
 		this.selectedSubjectId = subject.id;
 	}
 
-	initialiseAssignModal(subject) {
+	initialiseAssignModal(subject,type) {
+		this.assignFacultyType = type;
 		this.selectedSubjectId = subject.id;
+		this.assignFacultyForm.get('faculty_id').patchValue(this.assignFacultyType ? subject.faculty_id : null);
 	}
 
 	assignFaculties() {

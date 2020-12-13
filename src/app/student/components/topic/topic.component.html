@@ -12,10 +12,10 @@
                                 </video>
                             </div>
                             <div class="col-lg-4 pl-0">
-                                <div class="topics-list bg-light">
+                                <div class="topics-list">
                                     <table class="table table-bordered table-head-fixed text-nowrap m-0">
                                         <tbody>
-                                            <tr><td><b>{{ 'COURSE_CONTENT' | translate }}</b></td></tr>
+                                            <tr class="bg-light"><td><b>{{ 'COURSE_CONTENT' | translate }}</b></td></tr>
                                             <tr class="bg-white" *ngFor="let topic of topics" (click)="selectTopic(topic)"
                                             [ngClass]="{'active-topic': topic.id === selectedTopic.id}">
                                                 <td><span class="topic-heading">{{topic.name}}</span><i class="fas fa-play-circle pr-1 text-muted float-right"></i></td>
