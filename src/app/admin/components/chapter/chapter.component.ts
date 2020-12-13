@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
+declare var $: any; 
+
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -32,6 +34,7 @@ export class AdminChapterComponent implements OnInit {
 	videoFile1: File = null;
 	videoFile2: File = null;
 	thumbnailFile : File = null;
+	editChapterForm : FormGroup;
 	  
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -86,6 +89,19 @@ export class AdminChapterComponent implements OnInit {
 				Validators.required
 			])
 		});
+		this.editChapterForm = new FormGroup({
+			'chapter_id' : new FormControl("", [
+				Validators.required
+			]),
+			'name' : new FormControl("", [
+				Validators.required
+			]),
+			'description' : new FormControl("", [
+				Validators.required
+			]),
+			'notes_file' : new FormControl("", []),
+			'thumbnail_file' : new FormControl("", [])
+		});
 	};
 
 	validateFilterFormValue(formName) {
@@ -98,6 +114,10 @@ export class AdminChapterComponent implements OnInit {
 
 	validateAddTopicFormValue(formName) {
 		return this.addTopicForm.get(formName); 
+	};
+
+	validateUpdateChapterFormValue(formName) {
+		return this.editChapterForm.get(formName); 
 	};
 
 	ngOnInit() {
@@ -232,5 +252,33 @@ export class AdminChapterComponent implements OnInit {
 
 	navigateToTopics(chapter) {
 		this.router.navigate(['admin/topics', chapter.id]);
-	}
+	};
+
+	addTopics(chapter) {
+		this.showAddFeatureView(true);
+		this.addTopicForm.get('chapter_id').patchValue(chapter.id);
+		$('#topic-tab').click();
+	};
+
+	editChapter(chapter) {
+		this.notesFile = null;
+		this.thumbnailFile = null;
+		this.editChapterForm.reset();
+		this["editChapterForm"].get('name').patchValue(chapter.name);
+		this["editChapterForm"].get('chapter_id').patchValue(chapter.id);
+		this["editChapterForm"].get('description').patchValue(chapter.description);
+	};
+	
+	updateChapter() {
+		this.loader.showLoader();
+		this.chapterService.updateChapter(this.editChapterForm.value, this.notesFile, this.thumbnailFile)
+		.then(() => {
+			this.loader.hideLoader();
+			$('#update-chapter').modal('hide');
+			this.getChapters();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("CHAPTER")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
 }

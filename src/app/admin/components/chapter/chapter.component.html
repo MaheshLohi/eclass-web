@@ -56,6 +56,7 @@
                                                 <th>{{ 'CHAPTER_TITLE' | translate}}</th>
                                                 <th>{{ 'DESCRIPTION' | translate}}</th>
                                                 <th>{{ 'TOPICS' | translate}}</th>
+                                                <th></th>
                                             </tr>
                                             <tr *ngFor="let chapter of chapters;let i = index">
                                                 <td>
@@ -72,9 +73,23 @@
                                                     (click)="navigateToTopics(chapter)">
                                                         <i class="pr-1 fa fa-eye"></i> View Topics
                                                     </button>
+                                                    <button class="btn btn-theme-primary btn-sm ml-1"
+                                                    (click)="addTopics(chapter)">
+                                                        <i class="fa fa-plus"></i>
+                                                    </button>
                                                 </td>
                                                 <td *ngIf="!chapter.chapter_details.data.length">
-                                                    NA
+                                                    <button class="btn btn-theme-primary btn-sm"
+                                                    (click)="addTopics(chapter)">
+                                                        <i class="pr-1 fa fa-plus"></i> Add Topics
+                                                    </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-theme-primary btn-sm"
+                                                    (click)="editChapter(chapter)" data-toggle="modal" [attr.data-target]="'#update-chapter'">
+                                                        <i class="pr-1 fa fa-pen"></i> 
+                                                        {{ 'EDIT' | translate}}
+                                                    </button>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -87,13 +102,13 @@
                                     </app-list-error-handler>
                                 </div>
                             </div>
-                            <div class="card-body" *ngIf="showAddFeature === true">
-                                <ul class="nav nav-tabs" role="tablist">
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <ul class="nav nav-tabs" role="tablist" id="tab">
                                     <li class="nav-item">
                                         <a class="nav-link active" data-toggle="pill" href="#add-chapter" role="tab" aria-controls="add-chapter" aria-selected="true">Chapter</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" data-toggle="pill" href="#add-topic" role="tab" aria-controls="add-topic" aria-selected="true">Topic</a>
+                                        <a class="nav-link" id="topic-tab" data-toggle="pill" href="#add-topic" role="tab" aria-controls="add-topic" aria-selected="true">Topic</a>
                                     </li>
                                 </ul>
                                 <div class="tab-content pt-3">
@@ -185,4 +200,48 @@
         </section>
     </div>
     <app-footer></app-footer>
+</div>
+<div class="modal fade" id="update-chapter">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'UPDATE_CHAPTER' | translate}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="updateChapter()" [formGroup]="editChapterForm">
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'CHAPTER_NAME' | translate}} *</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                    </div>
+                    <app-form-validator [data]="validateUpdateChapterFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="description">{{ 'DESCRIPTION' | translate}} *</label>
+                        <input type="text" class="form-control" id="description" formControlName="description" placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
+                    </div>
+                    <app-form-validator [data]="validateUpdateChapterFormValue('description')"></app-form-validator>
+                    <div class="form-group">
+                        <label for="customFile">{{ 'NOTES' | translate}}</label>
+                        <div>
+                            <input type="file" id="notes_file" formControlName="notes_file" (change)="onFileChange($event,'notesFile')">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
+                        <div>
+                            <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onFileChange($event,'thumbnailFile')">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!editChapterForm.valid">
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate}}
+                    </button>
+                    <button class="btn btn-danger ml-2" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

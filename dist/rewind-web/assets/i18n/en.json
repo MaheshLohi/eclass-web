@@ -72,7 +72,7 @@
     "SUBJECTS" : "Subjects",
     "DEPARTMENT" : "Department",
     "CHAPTERS" : "Chapters",
-    "CHAPTER" : "Chapters",
+    "CHAPTER" : "Chapter",
     "HOME" : "Home",
     "TOPICS" : "Topics",
     "USN_NUMBER" : "USN Number",
@@ -137,5 +137,8 @@
     "VIEW_CHAPTERS" : "View Chapters",
     "SEARCH" : "Search",
     "UPDATE" : "Update",
-    "UPDATE_TOPIC" : "Update Topic"
+    "UPDATE_TOPIC" : "Update Topic",
+    "TOPIC" : "Topic",
+    "UPDATE_CHAPTER" : "Update Chapter",
+    "BACK" : "Back"
 }

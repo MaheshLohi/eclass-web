@@ -69,4 +69,22 @@ export class AdminChapterService {
 			});
 		});
 	}
+
+	updateChapter(updateFormValue, notesFile?:any, thumbnailFile?:any) {
+		const formData = new FormData();
+		if(notesFile) { formData.append('notes', notesFile); }
+		if(thumbnailFile) { formData.append('thumbnail', thumbnailFile); }
+		formData.append('name', updateFormValue.name);
+		formData.append('description', updateFormValue.description);
+		formData.append('chapter_id', updateFormValue.chapter_id);
+		return new Promise((resolve, reject) => {
+			this.httpService.postWithFormData(this.constants.UPDATE_CHAPTERS_URL, formData)
+			.subscribe((response) => {
+				resolve(response);
+			}, (error) => {
+				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
+				reject(error);
+			});
+		});
+	};
 }
