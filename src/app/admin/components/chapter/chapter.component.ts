@@ -21,8 +21,8 @@ export class AdminChapterComponent implements OnInit {
 	chaptersDataStatus : number = 2;
 	showAddFeature : boolean = false;
 	departments : any = [];
-	semisters : any = [];
-	departmentAndSemisterDataStatus = 2;
+	semesters : any = [];
+	departmentAndSemesterDataStatus = 2;
 	filterForm : any;
 	addChapterForm : any;
 	notesFile: File = null;
@@ -105,9 +105,9 @@ export class AdminChapterComponent implements OnInit {
 	}
 
 	resetDepartmentsAndSections() {
-		this.departmentAndSemisterDataStatus = 2;
+		this.departmentAndSemesterDataStatus = 2;
 		this.departments = [];
-		this.semisters = [];
+		this.semesters = [];
 		this.loader.showLoader();
 	};
 
@@ -116,12 +116,12 @@ export class AdminChapterComponent implements OnInit {
 		this.departmentService.getDepartmentsAndSections()
 		.then((response:any) => {
 			this.loader.hideLoader();
-			this.departmentAndSemisterDataStatus = 1;
+			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
-			this.semisters = response.inst_class;
+			this.semesters = response.inst_class;
 		}, () => {
 			this.loader.hideLoader();
-			this.departmentAndSemisterDataStatus = 0;
+			this.departmentAndSemesterDataStatus = 0;
 		});
 	};
 

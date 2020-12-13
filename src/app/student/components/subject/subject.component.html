@@ -1,12 +1,12 @@
 <div class="wrapper">
-    <app-student-navbar (semisterChanged)="onSemisterSelection($event)"></app-student-navbar>
+    <app-student-navbar (semesterChanged)="onSemesterSelection($event)"></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
       	<section class="content">
           	<div class="col-md-12 pt-4">
 				<section class="row" *ngIf="subjectsDataStatus === 1">
                     <div class="col-lg-3 col-12 mt-1" *ngFor="let subject of subjects">
-                        <div class="card card-widget mb-3 card-md cursor-pointer shadow" (click)="onSubjectSelection(subject)">
+                        <div class="card card-widget mb-3 custom-card" (click)="onSubjectSelection(subject)">
                             <div class="card-body p-2">
                                 <div class="img-container">
                                     <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + subject.bg_image' 

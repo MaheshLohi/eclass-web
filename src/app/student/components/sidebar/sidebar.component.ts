@@ -40,6 +40,10 @@ export class StudentSidebarComponent implements OnInit {
 			name : "HELP",
 			icon : "fa fa-question-circle",
 			link : '/'+ this.userType +'/help'
+		},{
+			name : "SEARCH",
+			icon : "fa fa-search",
+			link : '/'+ this.userType +'/search'
 		}];
   	};
 }

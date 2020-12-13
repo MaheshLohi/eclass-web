@@ -6,7 +6,7 @@ import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
-import { StudentSemisterService } from '@studentServices/semister/semister.service';
+import { StudentSemesterService } from '@studentServices/semester/semester.service';
 
 @Component({
 	selector: 'app-student-navbar',
@@ -17,18 +17,18 @@ export class StudentNavbarComponent implements OnInit {
 
 	userDetails : any = {};
 	loginType : number;
-	semisters : any = [];
-	semistersDataStatus : number = 2;
-	selectSemisterId : number;
-	showSemisterDropdown : Boolean = false;
+	semesters : any = [];
+	semestersDataStatus : number = 2;
+	selectSemesterId : number;
+	showSemesterDropdown : Boolean = false;
 	showSearhBar : Boolean = true;
-	@Output() public semisterChanged = new EventEmitter();
+	@Output() public semesterChanged = new EventEmitter();
 	searchString : string;
 
 	constructor(public constants : Constants,
 	private loader: LoaderService,
 	public router: Router,
-	private studentSemisterService : StudentSemisterService,
+	private studentSemesterService : StudentSemesterService,
 	private sessionHandler : SessionHandlerService,
 	private storageService: StorageService) { }
 
@@ -36,10 +36,10 @@ export class StudentNavbarComponent implements OnInit {
 		this.userDetails = this.storageService.getData("User_Information");
 		this.loginType = this.userDetails.type;
 		this.searchString = '';
-		if(this.semistersDataStatus != 1) {
-			this.getSemistersList();
+		if(this.semestersDataStatus != 1) {
+			this.getSemestersList();
 		}
-		this.toggleSemistersListSelector();
+		this.toggleSemestersListSelector();
 		this.toggleSearchBar();
 	};
 
@@ -50,53 +50,53 @@ export class StudentNavbarComponent implements OnInit {
 		}
 	}
 
-	toggleSemistersListSelector() {
-		this.showSemisterDropdown = false;
+	toggleSemestersListSelector() {
+		this.showSemesterDropdown = false;
 		if (this.router.url === "/student/home" || this.router.url === "/student/examination") {
-			this.showSemisterDropdown = true;
+			this.showSemesterDropdown = true;
 		}
 	};
 
-	resetSemistersList() {
-		this.semistersDataStatus = 2;
-		this.semisters = [];
+	resetSemestersList() {
+		this.semestersDataStatus = 2;
+		this.semesters = [];
 		this.loader.showLoader();
 	};
 
-	getSemistersList() {
-		this.resetSemistersList();
-		this.studentSemisterService.getSemistersList()
+	getSemestersList() {
+		this.resetSemestersList();
+		this.studentSemesterService.getSemestersList()
 		.then((response:any) => {
 			this.loader.hideLoader();
-			this.semistersDataStatus = 1;
-			this.semisters = response.inst_class;
-			this.renderSemistersList();
+			this.semestersDataStatus = 1;
+			this.semesters = response.inst_class;
+			this.renderSemestersList();
 		}, () => {
 			this.loader.hideLoader();
-			this.semistersDataStatus = 0;
+			this.semestersDataStatus = 0;
 		});
 	};
 
-	renderSemistersList() {
-		if(this.storageService.getData("selected_semister")) {
-			let semister= this.storageService.getData("selected_semister");
-			this.selectSemisterId = semister.id;
+	renderSemestersList() {
+		if(this.storageService.getData("selected_semester")) {
+			let semester= this.storageService.getData("selected_semester");
+			this.selectSemesterId = semester.id;
 		}
 		else {
-			this.selectSemisterId = this.userDetails.inst_class_id;
+			this.selectSemesterId = this.userDetails.inst_class_id;
 		}
 		this.emitSelectionEvent();
 	};
 
-	onSemisterSelection(semisterId) {
-		this.selectSemisterId = parseInt(semisterId);
+	onSemesterSelection(semesterId) {
+		this.selectSemesterId = parseInt(semesterId);
 		this.emitSelectionEvent();
 	};
 
 	emitSelectionEvent() {
-		let index = _.findIndex(this.semisters, { id: this.selectSemisterId});
-		this.storageService.setData("selected_semister",this.semisters[index]);
-		this.semisterChanged.emit(this.semisters[index]);
+		let index = _.findIndex(this.semesters, { id: this.selectSemesterId});
+		this.storageService.setData("selected_semester",this.semesters[index]);
+		this.semesterChanged.emit(this.semesters[index]);
 	};
 
 	logout() {

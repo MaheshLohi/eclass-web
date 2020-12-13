@@ -15,10 +15,10 @@
 	</ul>
     <ul class="navbar-nav ml-auto">
 		<li class="nav-item">
-			<form class="form-inline ml-3" *ngIf="showSemisterDropdown && semistersDataStatus === 1">
+			<form class="form-inline ml-3" *ngIf="showSemesterDropdown && semestersDataStatus === 1">
 				<div class="form-group">
-					<select class="custom-select selector-medium" [(ngModel)] ="selectSemisterId" [ngModelOptions]="{standalone: true}" (change)="onSemisterSelection(selectSemisterId)">
-						<option *ngFor="let semister of semisters" [value]="semister.id">{{ 'SEMISTER' | translate}} {{semister.name}}</option>
+					<select class="custom-select selector-medium" [(ngModel)] ="selectSemesterId" [ngModelOptions]="{standalone: true}" (change)="onSemesterSelection(selectSemesterId)">
+						<option *ngFor="let semester of semesters" [value]="semester.id">{{ 'SEMESTER' | translate}} {{semester.name}}</option>
 					</select>
 				</div>
 			</form>

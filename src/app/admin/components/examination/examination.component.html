@@ -1,7 +1,7 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="content-wrapper" *ngIf="departmentAndSemisterDataStatus === 1">
+    <div class="content-wrapper" *ngIf="departmentAndSemesterDataStatus === 1">
         <app-breadcrumb [title]="'EXAMINATION'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
@@ -23,9 +23,9 @@
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
                                             (change)="getSubjectsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SEMISTER' | translate}}</option>
-                                                <option *ngFor="let semister of semisters" [ngValue]="semister.id">
-                                                    {{ 'SEMISTER' | translate }} {{semister.name}}
+                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate}}</option>
+                                                <option *ngFor="let semester of semesters" [ngValue]="semester.id">
+                                                    {{ 'SEMESTER' | translate }} {{semester.name}}
                                                 </option>
                                             </select>
                                         </div>

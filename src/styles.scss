@@ -225,9 +225,6 @@ a.table-link:active {
 .cursor-pointer {
     cursor: pointer;
 }
-.card-md {
-    min-height: 275px;
-}
 .selector-medium {
     min-width: 200px;
 }
@@ -355,4 +352,12 @@ a.table-link:active {
 .custom-search-input {
     height: 50px;
     border-radius: 30px;
+}
+.custom-card {
+    cursor: pointer;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    min-height: 275px;
+}
+.custom-card:hover {
+    transform: scale(1.01);
 }

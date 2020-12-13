@@ -16,7 +16,7 @@ export class StudentSubjectComponent {
 
 	subjectsDataStatus : number = 2;
 	subjects : any = [];
-	selectedSemister : any = {};
+	selectedSemester : any = {};
 
 	constructor(public constants : Constants,
 	private loader: LoaderService,
@@ -25,8 +25,8 @@ export class StudentSubjectComponent {
 	public miscellaneousService : MiscellaneousService,
 	private studentSubjectService : StudentSubjectService) { };
 
-	onSemisterSelection(semister) {
-		this.selectedSemister = semister;
+	onSemesterSelection(semester) {
+		this.selectedSemester = semester;
 		this.getSubjects();
 	};
 	 
@@ -38,7 +38,7 @@ export class StudentSubjectComponent {
 
 	getSubjects() {
 		this.resetSubjectsList();
-		this.studentSubjectService.getSubjectsList(this.selectedSemister)
+		this.studentSubjectService.getSubjectsList(this.selectedSemester)
 		.then((response:any) => {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;

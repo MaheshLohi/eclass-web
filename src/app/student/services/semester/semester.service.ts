@@ -9,7 +9,7 @@ import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpEr
 @Injectable({
     providedIn: 'root'
 })
-export class StudentSemisterService {
+export class StudentSemesterService {
 
 	userDetails : any = {};
 
@@ -19,7 +19,7 @@ export class StudentSemisterService {
 	private storageService : StorageService,
 	private httpErrorHandler : HttpErrorHandlerService) { }
 
-	getSemistersList() {
+	getSemestersList() {
 		this.userDetails = this.storageService.getData("User_Information");
 		return new Promise((resolve, reject) => {
 			this.httpService.get(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL + this.userDetails.inst_id)
