@@ -201,8 +201,6 @@ export class AdminChapterComponent implements OnInit {
 		this[fileTarget] = null;
 		if (event.target.files.length > 0) {
 			this[fileTarget] = event.target.files[0];
-			console.log(fileTarget);
-			console.log(this[fileTarget]);
 		}
 	};
 

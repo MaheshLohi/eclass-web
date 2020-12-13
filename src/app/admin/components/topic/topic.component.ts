@@ -1,8 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import * as _ from "lodash";
+declare var $: any;
 
 import { Constants } from '@app/constants';
+import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminTopicService } from '@adminServices/topic/topic.service';
 
@@ -20,8 +24,13 @@ export class AdminTopicComponent implements OnInit {
 	videoUrl : any = null;
 	chapterDetails : any = {};
 	queryParams : any = {};
+	editTopicForm : FormGroup;
+	videoFile1: File = null;
+	videoFile2: File = null;
 
 	constructor(public constants : Constants,
+	private translate: TranslateService,
+	private toaster: ToasterService,
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	public router: Router,
@@ -33,10 +42,22 @@ export class AdminTopicComponent implements OnInit {
 		.subscribe((queryParams: Params) => {
 			this.queryParams = queryParams;
 		})
+		this.editTopicForm = new FormGroup({
+			'name' : new FormControl("", [Validators.required]),
+			'chapter_details_id' : new FormControl("", [Validators.required]),
+			'video_file1' : new FormControl("", []),
+			'video_file2' : new FormControl("", []),
+			'keywords' : new FormControl("", [Validators.required]),
+			'related_videos' : new FormControl("", [Validators.required])
+		});
 	};
 
 	ngOnInit() {
 		this.getTopicsList();
+	};
+
+	validateUpdateTopicFormValue(formName) {
+		return this.editTopicForm.get(formName); 
 	};
 
 	resetTopicsList() {
@@ -85,5 +106,34 @@ export class AdminTopicComponent implements OnInit {
 		data['topicId'] = topic.id;
 		this.router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
 	};
+
+	editTopic(topic) {
+		this.editTopicForm.reset();
+		this["editTopicForm"].get('name').patchValue(topic.name);
+		this["editTopicForm"].get('chapter_details_id').patchValue(topic.id);
+		this["editTopicForm"].get('keywords').patchValue(topic.keywords);
+		this["editTopicForm"].get('related_videos').patchValue(topic.related_videos);
+	};
+
+	onFileChange(event, fileTarget) {
+		this[fileTarget] = null;
+		if (event.target.files.length > 0) {
+			this[fileTarget] = event.target.files[0];
+		}
+	};
+
+	updateTopic() {
+		this.loader.showLoader();
+		this.adminTopicService.updateTopic(this.editTopicForm.value, this.videoFile1, this.videoFile2)
+		.then(() => {
+			this.loader.hideLoader();
+			$('#update-topic').modal('hide');
+			this.getTopicsList();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("TOPIC")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
+
 
 }
