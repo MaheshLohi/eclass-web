@@ -55,6 +55,7 @@ import { StudentContentComponent } from '@studentComponents/content/content.comp
 import { AdminFaqComponent } from '@adminComponents/faq/faq.component';
 import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
 import { StudentSearchComponent } from '@studentComponents/search/search.component';
+import { StudentProfileComponent } from '@studentComponents/profile/profile.component';
 
 @NgModule({
 	declarations: [
@@ -94,7 +95,8 @@ import { StudentSearchComponent } from '@studentComponents/search/search.compone
 		StudentContentComponent,
 		AdminFaqComponent,
 		AdminTopicComponent,
-		StudentSearchComponent
+		StudentSearchComponent,
+		StudentProfileComponent
 	],
 	imports: [
 		BrowserModule,
