@@ -66,7 +66,7 @@ export class StudentWishlistComponent implements OnInit {
 		data['id'] =  selectedTopic.chapter_detail_id;
 		data['is_wishlist'] = 1;
 		this.studentWishlistService.updateTopicWishlist(data)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getWishlistDetails();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
