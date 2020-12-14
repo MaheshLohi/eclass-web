@@ -1,1 +1,85 @@
-<p>profile works!</p>
+<div class="wrapper">
+    <app-student-navbar></app-student-navbar>
+    <app-student-sidebar></app-student-sidebar>
+    <div class="content-wrapper">
+        <section class="content col-lg-12 row p-4" *ngIf="profileDetailsStatus === 1">
+            <div class="card col-lg-6 card-primary card-outline">
+                <div class="card-body box-profile">
+                    <div class="text-center">
+                        <img class="profile-user-img img-fluid img-circle" [src]='this.constants.DOMAIN_URL + profileDetails.profile_pic' alt="User profile picture"
+                        (error)="changeImageSource($event)">
+                    </div>
+                    <h3 class="profile-username text-center">{{profileDetails.name}}</h3>
+                    <p class="text-muted text-center">{{profileDetails.usn}}</p>
+                    <ul class="list-group list-group-unbordered mb-3">
+                        <li class="list-group-item">
+                            <b>{{'PHONE_NUMBER' | translate}}</b> <a class="float-right">{{profileDetails.phone_number}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{'EMAIL_ADDRESS' | translate}}</b> <a class="float-right">{{profileDetails.email}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{'INSTITUTE_NAME' | translate}}</b> <a class="float-right">{{profileDetails.inst_name}}</a>
+                        </li>
+                        <li class="list-group-item">
+                            <b>{{'DEPARTMENT' | translate}}</b> <a class="float-right">{{profileDetails.department_name}}</a>
+                        </li>
+                    </ul>
+                    <button type="submit" class="btn btn-theme-primary float-right" (click)="initiateEditModal()"
+                    data-toggle="modal" [attr.data-target]="'#update-profile'">
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate}}
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
+
+<div class="modal fade" id="update-profile">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'UPDATE_PROFILE' | translate}}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="updateProfile()" [formGroup]="editProfileForm">
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'NAME' | translate}} *</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                    </div>
+                    <app-form-validator [data]="validateProfileEditFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
+                        <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateProfileEditFormValue('email')" [validateEmail]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
+                        <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
+                    </div>
+                    <app-form-validator [data]="validateProfileEditFormValue('phone_number')"></app-form-validator>
+                    <div class="form-group">
+                        <label for="password">{{ 'PASSWORD' | translate }}</label>
+                        <input type="password" class="form-control" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}">
+                    </div>
+                    <div class="form-group">
+                        <label for="customFile">{{ 'PROFILE_PICTURE' | translate}}</label>
+                        <div>
+                            <input type="file" id="profile_pic" formControlName="profile_pic" (change)="onFileChange($event,'profile_pic')">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!editProfileForm.valid">
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate}}
+                    </button>
+                    <button class="btn btn-danger ml-2" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

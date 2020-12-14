@@ -3,6 +3,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 import { StudentSearchService } from '@app/student/services/search/search.service';
 
 import { Constants } from '@app/constants';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 
 @Component({
@@ -20,6 +21,7 @@ export class StudentSearchComponent implements OnInit {
 	private route: ActivatedRoute,
 	public router: Router,
 	private loader: LoaderService,
+	public miscellaneousService : MiscellaneousService,
 	private studentSearchService : StudentSearchService) { 
 		this.route.queryParams
 		.subscribe((queryParams: Params) => {
@@ -70,10 +72,6 @@ export class StudentSearchComponent implements OnInit {
 		let data = {};
 		data['topicId'] = topic.id;
 		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
-	};
-
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_thumb.jpg";
 	};
 
 	preventEvent(event) {

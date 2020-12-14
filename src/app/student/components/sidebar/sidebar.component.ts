@@ -44,6 +44,10 @@ export class StudentSidebarComponent implements OnInit {
 			name : "SEARCH",
 			icon : "fa fa-search",
 			link : '/'+ this.userType +'/search'
+		},{
+			name : "PROFILE",
+			icon : "fa fa-user",
+			link : '/'+ this.userType +'/profile'
 		}];
   	};
 }

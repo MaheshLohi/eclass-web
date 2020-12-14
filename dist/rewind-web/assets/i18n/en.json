@@ -140,5 +140,8 @@
     "UPDATE_TOPIC" : "Update Topic",
     "TOPIC" : "Topic",
     "UPDATE_CHAPTER" : "Update Chapter",
-    "BACK" : "Back"
+    "BACK" : "Back",
+    "UPDATE_PROFILE" : "Update Profile",
+    "PROFILE" : "Profile",
+    "PROFILE_PICTURE" : "Profile Picture"
 }
