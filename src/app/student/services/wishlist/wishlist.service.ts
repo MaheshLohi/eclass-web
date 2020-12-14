@@ -32,7 +32,7 @@ export class StudentWishlistService {
 		});
 	};
 
-	updateTopicToWishlist(selectedTopic) {
+	updateTopicWishlist(selectedTopic) {
 		const formData = new FormData();
 		formData.append('chapter_detail_id', selectedTopic.id);
 		let url = (selectedTopic.is_wishlist === 1) ? this.constants.STUDENT_TOGGLE_WISHLIST_URL : this.constants.STUDENT_ADD_WISHLIST_URL;

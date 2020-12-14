@@ -112,4 +112,8 @@ export class SuperAdminInstitutesComponent implements OnInit {
 			this.loader.hideLoader();
 		});
 	};
+
+	changeImageSource(event) {
+		event.target.src = "assets/images/default_usericon.png";
+	};
 }

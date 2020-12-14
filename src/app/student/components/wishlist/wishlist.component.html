@@ -10,7 +10,7 @@
                             <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + wishlist.chapter_details.data[0].thumbnail' 
                             (error)="miscellaneousService.changeImageSource($event)">
                         </div>
-                        <div class="card-header-portion">
+                        <div>
                             {{wishlist.chapter_details.data[0].name}}
                         </div>
                         <div (click)="preventEvent($event)">
@@ -18,6 +18,12 @@
                             <a href={{wishlist.chapter_details.data[0].related_videos}} target="_blank">
                                 {{wishlist.chapter_details.data[0].related_videos | verifyData}}
                             </a>
+                        </div>
+                        <div class="cursor-pointer mt-2">
+                            <button class="btn btn-theme-primary btn-sm" (click)="updateTopicWishlist(wishlist, $event)">
+                                <i class="fa fa-check"></i>
+                                Wishlisted
+                            </button>
                         </div>
                     </div>
                 </div>

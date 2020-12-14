@@ -24,6 +24,7 @@
                                                 <th>#</th>
                                                 <th>{{ 'NAME' | translate}}</th>
                                                 <th>{{ 'EMAIL_ADDRESS' | translate}}</th>
+                                                <th>{{ 'INSTITUTE_NAME' | translate}}</th>
                                                 <th>{{ 'STATUS' | translate}}</th>
                                             </tr>
                                             <tr *ngFor="let admin of admins;let i = index">
@@ -35,6 +36,9 @@
                                                 </td>
                                                 <td>
                                                     {{ admin.email | verifyData }}
+                                                </td>
+                                                <td>
+                                                    {{ admin.inst_name | verifyData }}
                                                 </td>
                                                 <td>
                                                     <span *ngIf="admin.status === constants.STATUS_ACTIVE">

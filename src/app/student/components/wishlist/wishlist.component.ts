@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
+import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StudentWishlistService } from '@studentServices/wishlist/wishlist.service';
@@ -17,6 +19,8 @@ export class StudentWishlistComponent implements OnInit {
 	wishlists : any = [];
 
 	constructor(public constants : Constants,
+	private translate: TranslateService,
+	private toaster: ToasterService,
 	private loader: LoaderService,
 	public router: Router,
 	public miscellaneousService : MiscellaneousService,
@@ -53,6 +57,22 @@ export class StudentWishlistComponent implements OnInit {
 
 	preventEvent(event) {
 		event.stopPropagation();
+	};
+
+	updateTopicWishlist(selectedTopic, event) {
+		this.preventEvent(event)
+		this.loader.showLoader();
+		let data = {};
+		data['id'] =  selectedTopic.chapter_detail_id;
+		data['is_wishlist'] = 1;
+		this.studentWishlistService.updateTopicWishlist(data)
+		.then(() => {
+			this.loader.hideLoader();
+			this.getWishlistDetails();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
 	};
 
 }

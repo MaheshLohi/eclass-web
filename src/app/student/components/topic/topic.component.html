@@ -28,13 +28,13 @@
                                 <div class="pt-2">
                                     <div class="topic-title mb-2"><b>{{ selectedTopic.name }}</b>
                                         <div class="cursor-pointer d-inline-block float-right" *ngIf="!selectedTopic.is_wishlist">
-                                            <button class="btn btn-theme-primary" (click)="updateTopicToWishlist()">
+                                            <button class="btn btn-theme-primary" (click)="updateTopicWishlist()">
                                                 <i class="fa fa-plus"></i>
                                                 Add To Wishlist
                                             </button>
                                         </div>
                                         <div class="cursor-pointer d-inline-block float-right" *ngIf="selectedTopic.is_wishlist">
-                                            <button class="btn btn-theme-primary" (click)="updateTopicToWishlist()">
+                                            <button class="btn btn-theme-primary" (click)="updateTopicWishlist()">
                                                 <i class="fa fa-check"></i>
                                                 Wishlisted
                                             </button>

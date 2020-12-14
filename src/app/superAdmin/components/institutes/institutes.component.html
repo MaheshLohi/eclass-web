@@ -32,6 +32,8 @@
                                                     {{ i + 1 }}
                                                 </td>
                                                 <td>
+                                                    <img [src]="institute.logo" class="img-circle img-size-32 mr-2"
+                                                    (error)="changeImageSource($event)">
                                                     {{ institute.name | verifyData }}
                                                 </td>
                                                 <td>

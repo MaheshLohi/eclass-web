@@ -88,9 +88,9 @@ export class StudentTopicComponent implements OnInit {
 		this.router.navigate(['student/topics', this.chapterId],{ queryParams: data });
 	};
 
-	updateTopicToWishlist() {
+	updateTopicWishlist() {
 		this.loader.showLoader();
-		this.studentWishlistService.updateTopicToWishlist(this.selectedTopic)
+		this.studentWishlistService.updateTopicWishlist(this.selectedTopic)
 		.then(() => {
 			this.loader.hideLoader();
 			this.selectedTopic.is_wishlist = !this.selectedTopic.is_wishlist;
