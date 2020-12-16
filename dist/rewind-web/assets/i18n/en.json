@@ -1,11 +1,11 @@
 {
     "APP_NAME" : "Rewind",
 
-    "WELCOME_TITLE" : "Welcome to",
+    "WELCOME_TITLE" : "Welcome Back",
     "SIGNIN_TITLE" : "Sign in to start your session",
     "FORGOT_PASSWORD_LINK" : "I forgot my password",
 
-    "SIGNIN" : "Sign In",
+    "SIGNIN" : "Log in",
     "SUCCESS" : "Success",
     "ERROR" : "Error",
     "WARNING" : "Warning",

@@ -1,50 +1,5 @@
 $color-primary : #7d4acb;
 $color-secondary : #5b15c4;
-.basic-form-page {
-    height: 100vh;
-    .basic-form-container {
-        margin: 0 auto;
-        background: transparent;
-        width: 900px;
-        padding: 25px 50px;
-        min-height: 600px;
-        top: 50%;
-        -ms-transform: translateY(-50%);
-        transform: translateY(-50%);
-    }
-    .basic-form-box {
-        width:45%;
-        padding: 20px;
-        display: inline-block;
-        background: white;
-        box-shadow: 9px 20px 16.83px 1.17px rgba(0, 0, 0, 0.15);
-        border-radius: 6px;
-        min-height: 375px;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%,-50%);
-        transform: translate(-50%,-50%);
-        position: absolute;
-        .app-logo {
-            height: 150px;
-        }
-    }
-    .basic-form-box-message {
-        font-size: 20px;
-    }
-}
-.basic-form-page:before {
-    content: "";
-    background: url(assets/images/login.svg) no-repeat center;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    position: absolute;
-    pointer-events: none;
-    background-size: cover;
-    opacity: 0.04;
-}
 .form-error-container {
     min-height: 10px;
     .form-input-error {
@@ -360,4 +315,35 @@ a.table-link:active {
 }
 .custom-card:hover {
     transform: scale(1.01);
+}
+.align-center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    position: absolute;
+}
+.basic-form {
+    position: relative;
+    height: 100vh;
+    background-color: #7a97ff;
+    .app-logo {
+        height: 50px;
+    }
+    .app-title {
+        vertical-align: sub;
+    }
+    .bg-theme-light {
+        background-color: #e9eefa;
+    }
+    .basic-form-image {
+        background-image: url('assets/images/form_image.png');
+        background-size: 250px 250px;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+        background-position: bottom left;
+        min-height: 300px;
+    }
+    .login-form {
+        border-radius: 7px 0px 0px 7px;
+    }
 }
