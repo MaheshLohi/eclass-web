@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 
 import { Constants } from '@app/constants';
 import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
-import { StorageService } from '@app/shared/services/storage/storage.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -14,14 +13,7 @@ export class StudentProfileService {
 
 	constructor(private constants: Constants,
 	private miscellaneous : MiscellaneousService,
-	private storageService : StorageService,
 	private http: HttpClient) { }
-	  
-	getProfileDetails() {
-		this.userDetails = this.storageService.getData("User_Information");
-		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
-		return this.http.get<any>(this.constants.STUDENT_PROFILE_LIST_URL + this.userDetails.id, httpOptions);
-	};
 
 	updateProfile(profileFormValue, profile_pic) {
 		const formData = new FormData();

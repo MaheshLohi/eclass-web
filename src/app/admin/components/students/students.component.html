@@ -47,12 +47,16 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>{{ 'NAME' | translate}}</th>
+                                                <th>{{ 'USN_NUMBER' | translate}}</th>
                                                 <th>{{ 'EMAIL_ADDRESS' | translate}}</th>
                                                 <th>{{ 'PHONE_NUMBER' | translate}}</th>
                                             </tr>
                                             <tr *ngFor="let student of students;let i = index">
                                                 <td>
                                                     {{ i + 1 }}
+                                                </td>
+                                                <td>
+                                                    {{ student.usn | verifyData }}
                                                 </td>
                                                 <td>
                                                     {{ student.name | verifyData }}

@@ -6,6 +6,7 @@ declare var $: any;
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
+import { LoginService } from '@sharedServices/login/login.service';
 import { StudentProfileService } from '@app/student/services/profile/profile.service';
 
 
@@ -22,6 +23,7 @@ export class StudentProfileComponent implements OnInit {
 	profile_pic : File;
 
 	constructor(public constants : Constants,
+	private loginService: LoginService,
 	private studentProfileService : StudentProfileService,
 	private loader: LoaderService,
 	private translate: TranslateService,
@@ -58,11 +60,11 @@ export class StudentProfileComponent implements OnInit {
 	  
 	getProfileDetails() {
 		this.resetProfileDetails();
-		this.studentProfileService.getProfileDetails()
-		.subscribe((response) => {
+		this.loginService.getUserDetails()
+		.then((response:any) => {
 			this.loader.hideLoader();
 			this.profileDetailsStatus = 1;
-			this.profileDetails = response.data;
+			this.profileDetails = response;
 		}, () => {
 			this.loader.hideLoader();
 			this.profileDetailsStatus = 0;
@@ -88,9 +90,9 @@ export class StudentProfileComponent implements OnInit {
 		this.loader.showLoader();
 		this.studentProfileService.updateProfile(this.editProfileForm.value, this.profile_pic)
 		.subscribe(() => {
-			this.loader.hideLoader();
 			$('#update-profile').modal('hide');
 			this.getProfileDetails();
+			this.loader.hideLoader();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("PROFILE")} ));
 		}, () => {
 			this.loader.hideLoader();

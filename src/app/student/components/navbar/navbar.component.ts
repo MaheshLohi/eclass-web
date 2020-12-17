@@ -114,4 +114,12 @@ export class StudentNavbarComponent implements OnInit {
 			this.router.navigate(['student/search']);
 		}
 	};
+
+	navigteToProfile() {
+		this.router.navigate(['student/profile']);
+	};
+
+	changeImageSource(event) {
+		event.target.src = "assets/images/default_usericon.png";
+	};
 }

@@ -13,7 +13,7 @@
 			</div>
 		</li>
 	</ul>
-    <ul class="navbar-nav ml-auto">
+	<ul class="navbar-nav ml-auto">
 		<li class="nav-item">
 			<form class="form-inline ml-3" *ngIf="showSemesterDropdown && semestersDataStatus === 1">
 				<div class="form-group">
@@ -23,6 +23,27 @@
 				</div>
 			</form>
 		</li>
-		<a href="#" class="nav-link" (click)="logout()">Logout</a>
+		<li class="nav-item dropdown user-menu cursor-pointer">
+			<a class="nav-link dropdown-toggle" data-toggle="dropdown">
+			  <img [src]='this.constants.DOMAIN_URL + userDetails.profile_pic' class="user-image img-circle elevation-2" alt="User Image"
+			  (error)="changeImageSource($event)">
+			  <span class="d-none d-md-inline">{{userDetails.name | verifyData}}</span>
+			</a>
+			<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+			  	<li class="user-header">
+					<img [src]='this.constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
+					(error)="changeImageSource($event)">
+					<p>
+						{{userDetails.name | verifyData}}
+						<small>{{userDetails.email}}</small>
+					</p>
+			  	</li>
+			  	<li class="user-footer">
+					<a class="btn btn-default btn-flat" (click)="navigteToProfile()">Profile</a>
+					<a class="btn btn-default btn-flat float-right" (click)="logout()">Logout</a>
+			  	</li>
+			</ul>
+		</li>
     </ul>
+
 </nav>
