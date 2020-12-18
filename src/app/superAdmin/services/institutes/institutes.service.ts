@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 import { Constants } from '@app/constants';
 import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
 import { LoggerService } from '@sharedServices/logger/logger.service';
 import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
  	providedIn: 'root'
@@ -13,6 +15,8 @@ export class SuperAdminInstitutesService {
   	constructor(private httpService: HttpClientService,
     public loggerService: LoggerService,
 	private constants: Constants,
+	private miscellaneous : MiscellaneousService,
+	private http: HttpClient,
 	private httpErrorHandler : HttpErrorHandlerService) { }
 
 	getInstitutes() {
@@ -48,5 +52,12 @@ export class SuperAdminInstitutesService {
 			});
 		});
 	};
+
+	updateStatus(institute) {
+		const formData = new FormData();
+		formData.append('id', institute.id);
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.post<any>(this.constants.INSTITUTE_STATUS_UPDATE_URL, formData, httpOptions);
+	}
   
 }

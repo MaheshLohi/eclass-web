@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any; 
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -18,7 +19,8 @@ export class SuperAdminAdminsComponent implements OnInit {
 	institutes : any = [];
 	instituteDataStatus : number = 2;
 	showAddFeature : boolean = false;
-	addAdminForm : any;
+	addAdminForm : FormGroup;
+	editForm : FormGroup;
 	admins : any = [];
 	adminDataStatus : number = 2;
 
@@ -45,22 +47,26 @@ export class SuperAdminAdminsComponent implements OnInit {
 				Validators.required
 			])
 		});
+		this.editForm = new FormGroup({
+			'id' : new FormControl("", []),
+			'name' : new FormControl("", [
+				Validators.minLength(3)
+			]),
+			'email' : new FormControl("", [
+				Validators.email
+			]),
+			'password' : new FormControl("", [
+				Validators.minLength(6)
+			])
+		});
 	}
 
-	get name() { 
-		return this.addAdminForm.get('name'); 
+	validateAddAdminFormValue(formName) {
+		return this.addAdminForm.get(formName); 
 	};
 
-	get email() { 
-		return this.addAdminForm.get('email'); 
-	};
-	
-	get password() { 
-		return this.addAdminForm.get('password'); 
-	};
-
-	get inst_id() { 
-		return this.addAdminForm.get('inst_id'); 
+	validateEditFormValue(formName) {
+		return this.editForm.get(formName); 
 	};
 
 	ngOnInit() {
@@ -126,6 +132,37 @@ export class SuperAdminAdminsComponent implements OnInit {
 			this.showAddFeatureView(false);
 			this.getAdmins();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("ADMIN")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
+
+	initiateEditModal(admin) {
+		this.editForm.reset();
+		this["editForm"].get('name').patchValue(admin.name);
+		this["editForm"].get('email').patchValue(admin.email);
+		this["editForm"].get('id').patchValue(admin.id);
+	};
+
+	updateAdmin() {
+		this.loader.showLoader();
+		this.adminService.updateAdmin(this.editForm.value)
+		.subscribe(() => {
+			$('#update-admin').modal('hide');
+			this.getAdmins();
+			this.loader.hideLoader();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("ADMIN")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
+
+	updateStatus(admin) {
+		this.loader.showLoader();
+		this.adminService.updateStatus(admin)
+		.subscribe(() => {
+			this.loader.hideLoader();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("ADMIN_STATUS")} ));
 		}, () => {
 			this.loader.hideLoader();
 		});

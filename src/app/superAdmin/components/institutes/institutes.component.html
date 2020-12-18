@@ -43,12 +43,13 @@
                                                     {{ institute.address | verifyData }}
                                                 </td>
                                                 <td>
-                                                    <span *ngIf="institute.status === constants.STATUS_ACTIVE">
-                                                        {{ 'ACTIVE' | translate }}
-                                                    </span>
-                                                    <span *ngIf="institute.status === constants.STATUS_INACTIVE">
-                                                        {{ 'INACTIVE' | translate }}
-                                                    </span>
+                                                    <span class="badge bg-danger mr-1">{{ 'INACTIVE' | translate }}</span>
+                                                    <div class="custom-control custom-switch d-inline-block">
+                                                        <input type="checkbox" class="custom-control-input" [(ngModel)]="institute.status" id="{{institute.name}}" (change)="updateStatus(institute)">
+                                                        <label class="custom-control-label" for="{{institute.name}}">
+                                                            <span class="badge bg-success">{{ 'ACTIVE' | translate }}</span>
+                                                        </label>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>

@@ -45,8 +45,8 @@
     "ENTER_NAME" : "Enter name",
     "ENTER_DESCRIPTION" : "Enter description",
     "COUNT" : "Count",
-    "ACTIVE" : "Active",
-    "INACTIVE" : "Inactive",
+    "ACTIVE" : "ACTIVE",
+    "INACTIVE" : "INACTIVE",
     "STATUS" : "Status",
     "ADDRESS" : "Address",
     "ENTER_ADDRESS" : "Enter Address",
@@ -144,5 +144,8 @@
     "UPDATE_PROFILE" : "Update Profile",
     "PROFILE" : "Profile",
     "PROFILE_PICTURE" : "Profile Picture",
-    "REPLAY" : "Replay"
+    "REPLAY" : "Replay",
+    "UPDATE_ADMIN" : "Update Admin",
+    "ADMIN_STATUS" : "Admin Status",
+    "INSTITUTE_STATUS" : "Institute Status"
 }

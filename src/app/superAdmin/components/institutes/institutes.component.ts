@@ -116,4 +116,15 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	changeImageSource(event) {
 		event.target.src = "assets/images/default_usericon.png";
 	};
+
+	updateStatus(institute) {
+		this.loader.showLoader();
+		this.instituteService.updateStatus(institute)
+		.subscribe(() => {
+			this.loader.hideLoader();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("INSTITUTE_STATUS")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	};
 }
