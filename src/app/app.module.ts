@@ -56,6 +56,10 @@ import { AdminFaqComponent } from '@adminComponents/faq/faq.component';
 import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
 import { StudentSearchComponent } from '@studentComponents/search/search.component';
 import { StudentProfileComponent } from '@studentComponents/profile/profile.component';
+import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboard.component';
+import { FacultySidebarComponent } from '@facultyComponents/sidebar/sidebar.component';
+import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
+import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
 
 @NgModule({
 	declarations: [
@@ -96,7 +100,11 @@ import { StudentProfileComponent } from '@studentComponents/profile/profile.comp
 		AdminFaqComponent,
 		AdminTopicComponent,
 		StudentSearchComponent,
-		StudentProfileComponent
+		StudentProfileComponent,
+		FacultyDashboardComponent,
+		FacultySidebarComponent,
+		FacultySubjectsComponent,
+		FacultyQuestionsComponent
 	],
 	imports: [
 		BrowserModule,

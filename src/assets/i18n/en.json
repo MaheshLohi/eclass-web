@@ -143,5 +143,6 @@
     "BACK" : "Back",
     "UPDATE_PROFILE" : "Update Profile",
     "PROFILE" : "Profile",
-    "PROFILE_PICTURE" : "Profile Picture"
+    "PROFILE_PICTURE" : "Profile Picture",
+    "REPLAY" : "Replay"
 }

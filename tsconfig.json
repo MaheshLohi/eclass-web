@@ -17,10 +17,12 @@
       "@superAdminComponents/*" : ["src/app/superAdmin/components/*"],
       "@adminComponents/*" : ["src/app/admin/components/*"],
       "@studentComponents/*" : ["src/app/student/components/*"],
+      "@facultyComponents/*" : ["src/app/faculty/components/*"],
       "@sharedServices/*" : ["src/app/shared/services/*"],
       "@superAdminServices/*" : ["src/app/superAdmin/services/*"],
       "@adminServices/*" : ["src/app/admin/services/*"],
       "@studentServices/*" : ["src/app/student/services/*"],
+      "@facultyServices/*" : ["src/app/faculty/services/*"],
     },
     "typeRoots": [
       "node_modules/@types"

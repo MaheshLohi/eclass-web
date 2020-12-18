@@ -18,6 +18,7 @@ export class Constants {
     SUPER_ADMIN = "superAdmin";
     ADMIN = "admin";
     STUDENT = "student";
+    FACULTY = "faculty";
 
     ADMIN_URL = this.BASE_URL + "admin/";
     STUDENT_URL = this.BASE_URL + "student/";
@@ -71,4 +72,9 @@ export class Constants {
     STUDENT_TOGGLE_WISHLIST_URL = this.STUDENT_URL + 'toggle-wishlist';
     STUDENT_SEARCH_LIST_URL = this.STUDENT_URL + 'search/';
     STUDENT_PROFILE_UPDATE_URL = this.STUDENT_URL + 'update-profile';  
+
+
+    FACULTY_SUBJECTS_LIST_URL = this.ADMIN_URL + 'faculty-subjects';
+    FACULTY_QUESTIONS_LIST_URL = this.ADMIN_URL + 'subject-questions/';
+    FACULTY_SUBMIT_REPLAY_URL = this.ADMIN_URL + 'answer';
 }

@@ -33,4 +33,12 @@ export class MiscellaneousService {
 			params : params
 		}
 	};
+
+	changeStudentProfileSource(event) {
+		event.target.src = "assets/images/default_usericon.png";
+	};
+
+	changeFacultyProfileSource(event) {
+		event.target.src = "assets/images/default_usericon.png";
+	}
 }

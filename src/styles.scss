@@ -300,6 +300,10 @@ a.table-link:active {
 .theme-color {
     color: $color-primary;
 }
+.bg-theme {
+    background-color: $color-primary !important;
+    color: #ffffff;
+}
 .sbt-wdt {
     height: 205px;
     position: relative;
@@ -345,5 +349,11 @@ a.table-link:active {
     }
     .login-form {
         border-radius: 7px 0px 0px 7px;
+    }
+}
+.faculty-questions-list {
+    .direct-chat-messages {
+        min-height: 100px;
+        height: auto;
     }
 }
