@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { Constants } from '@app/constants';
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
 
 @Component({
@@ -13,7 +15,9 @@ export class NavbarComponent implements OnInit {
 	userDetails : any = {};
 	loginType : number;
 
-	constructor(private sessionHandler : SessionHandlerService,
+	constructor(public constants : Constants,
+	private sessionHandler : SessionHandlerService,
+	public miscellaneousService : MiscellaneousService,
 	private storageService: StorageService) { }
 
 	ngOnInit() {

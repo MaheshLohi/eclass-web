@@ -38,7 +38,7 @@ export class MiscellaneousService {
 		event.target.src = "assets/images/default_usericon.png";
 	};
 
-	changeFacultyProfileSource(event) {
+	changeAdminProfileSource(event) {
 		event.target.src = "assets/images/default_usericon.png";
 	}
 }

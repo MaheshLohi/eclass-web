@@ -7,7 +7,7 @@
                 <div *ngFor="let question of questionsList; let i = index">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h3 class="card-title">{{'QUESTION' | translate}} {{i+1}}</h3>
+                            <h3 class="card-title text-bold">{{'QUESTION' | translate}} {{i+1}}</h3>
                         </div>
                         <div class="card-body">
                             <div class="direct-chat-messages">
@@ -28,7 +28,7 @@
                                         <span class="direct-chat-name float-right">You</span>
                                     </div>
                                     <img class="direct-chat-img" src="assets/images/default_usericon.png"
-                                    (error)="miscellaneousService.changeFacultyProfileSource($event)">
+                                    (error)="miscellaneousService.changeAdminProfileSource($event)">
                                     <div class="direct-chat-text">
                                         {{question.answer}}
                                     </div>
