@@ -28,6 +28,7 @@
                 </div>
             </div>
         </section>
+        <app-student-list-error [errorId]=5 *ngIf="searchResultsDataStatus === 0"></app-student-list-error>
     </div>
     <app-footer></app-footer>
 </div>

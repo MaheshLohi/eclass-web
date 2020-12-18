@@ -2,7 +2,7 @@
     <app-student-navbar></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
-        <section class="content col-12 row p-4">
+        <section class="content col-12 row p-4" *ngIf="wishlistDataStatus === 1">
             <div class="col-lg-3 col-12 mt-1" *ngFor="let wishlist of wishlists">
                 <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(wishlist.chapter_details.data[0])">
                     <div class="card-body p-2">
@@ -29,6 +29,7 @@
                 </div>
             </div>
         </section>
+        <app-student-list-error [errorId]=3 *ngIf="wishlistDataStatus === 0"></app-student-list-error>
     </div>
     <app-footer></app-footer>
 </div>

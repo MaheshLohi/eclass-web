@@ -1,5 +1,5 @@
 
-<div class="col-md-12 pt-2">
+<div class="col-md-12 pt-2" *ngIf="examDataStatus === 1">
     <div class="card mb-4" *ngFor="let exam of examsList">
         <div *ngFor="let year of exam | prepareObject">
             <div class="card-header">
@@ -19,4 +19,5 @@
         </div>
     </div>
 </div>
+<app-student-list-error [errorId]=2 *ngIf="examDataStatus === 0"></app-student-list-error>
 		

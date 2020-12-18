@@ -60,6 +60,7 @@ import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboar
 import { FacultySidebarComponent } from '@facultyComponents/sidebar/sidebar.component';
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
+import { StudentListErrorComponent } from '@studentComponents/list-error/list-error.component';
 
 @NgModule({
 	declarations: [
@@ -104,7 +105,8 @@ import { FacultyQuestionsComponent } from '@facultyComponents/questions/question
 		FacultyDashboardComponent,
 		FacultySidebarComponent,
 		FacultySubjectsComponent,
-		FacultyQuestionsComponent
+		FacultyQuestionsComponent,
+		StudentListErrorComponent
 	],
 	imports: [
 		BrowserModule,
