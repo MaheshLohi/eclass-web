@@ -18,7 +18,7 @@ export class StudentQuestionsComponent implements OnChanges {
 	@Input() topicId: any;
 	questionsDataStatus : number = 2;
 	questions : any = [];
-	addDataForm : any;
+	addDataForm : FormGroup;
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -27,9 +27,7 @@ export class StudentQuestionsComponent implements OnChanges {
 	public router: Router,
 	private studentQuestionsService : StudentQuestionsService) { 
 		this.addDataForm = new FormGroup({
-			'question' : new FormControl("", [
-				Validators.required
-			])
+			'question' : new FormControl("", [])
 		});
 	};
 	

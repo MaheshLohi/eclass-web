@@ -21,9 +21,9 @@ export class AdminFacultiesComponent implements OnInit {
 	showAddFeature : boolean = false;
 	departments : any = [];
 	filterDataStatus = 2;
-	filterForm : any;
-	addFacultiesForm : any;
-	selectedFile: File = null;
+	filterForm : FormGroup;
+	addFacultiesForm : FormGroup;
+	selectedFile: File;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,

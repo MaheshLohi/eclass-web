@@ -45,60 +45,28 @@ export class AdminChapterComponent implements OnInit {
 	private departmentService : AdminDepartmentService,
 	private subjectsService : AdminSubjectsService) {
 		this.filterForm = new FormGroup({
-			'department_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'inst_class_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'subject_id' : new FormControl(null, [
-				Validators.required
-			])
+			'department_id' : new FormControl(null, []),
+			'inst_class_id' : new FormControl(null, []),
+			'subject_id' : new FormControl(null, [])
 		});
 		this.addChapterForm = new FormGroup({
-			'name' : new FormControl("", [
-				Validators.required
-			]),
-			'description' : new FormControl("", [
-				Validators.required
-			]),
-			'notes_file' : new FormControl("", [
-				Validators.required
-			]),
-			'thumbnail_file' : new FormControl("", [
-				Validators.required
-			])
+			'name' : new FormControl("", []),
+			'description' : new FormControl("", []),
+			'notes_file' : new FormControl("", []),
+			'thumbnail_file' : new FormControl("", [])
 		});
 		this.addTopicForm = new FormGroup({
-			'name' : new FormControl("", [
-				Validators.required
-			]),
-			'chapter_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'video_file1' : new FormControl("", [
-				Validators.required
-			]),
-			'video_file2' : new FormControl("", [
-				Validators.required
-			]),
-			'keywords' : new FormControl("", [
-				Validators.required
-			]),
-			'related_videos' : new FormControl("", [
-				Validators.required
-			])
+			'name' : new FormControl("", []),
+			'chapter_id' : new FormControl(null, []),
+			'video_file1' : new FormControl("", []),
+			'video_file2' : new FormControl("", []),
+			'keywords' : new FormControl("", []),
+			'related_videos' : new FormControl("", [])
 		});
 		this.editChapterForm = new FormGroup({
-			'chapter_id' : new FormControl("", [
-				Validators.required
-			]),
-			'name' : new FormControl("", [
-				Validators.required
-			]),
-			'description' : new FormControl("", [
-				Validators.required
-			]),
+			'chapter_id' : new FormControl("", []),
+			'name' : new FormControl("", []),
+			'description' : new FormControl("", []),
 			'notes_file' : new FormControl("", []),
 			'thumbnail_file' : new FormControl("", [])
 		});

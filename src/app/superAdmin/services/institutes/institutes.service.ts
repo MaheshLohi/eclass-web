@@ -42,15 +42,8 @@ export class SuperAdminInstitutesService {
 		formData.append('name', instituteData.name);
 		formData.append('phone_number', instituteData.phone);
 		formData.append('address', instituteData.address);
-		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.ADD_INSTITUTE_URL, formData)
-			.subscribe((response) => {
-				resolve(response);
-			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
-				reject(error);
-			});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.post<any>(this.constants.ADD_INSTITUTE_URL, formData, httpOptions);
 	};
 
 	updateStatus(institute) {

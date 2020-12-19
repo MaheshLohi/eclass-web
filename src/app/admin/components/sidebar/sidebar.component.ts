@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { Constants } from 'src/app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 
 @Component({
 	selector: 'app-admin-sidebar',
@@ -14,8 +15,9 @@ export class AdminSidebarComponent implements OnInit {
 	sidemenus : any = [];
 	userDetails : any = {};
 
-	constructor(private constants: Constants,
-	private storageService: StorageService) {};
+	constructor(public constants: Constants,
+	private storageService: StorageService,
+	public miscellaneousService : MiscellaneousService) {};
 
  	ngOnInit() {
 		this.userType = this.constants.ADMIN;

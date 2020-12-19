@@ -42,15 +42,8 @@ export class SuperAdminAdminsService {
 		formData.append('email', adminData.email);
 		formData.append('password', adminData.password);
 		formData.append('inst_id', adminData.inst_id);
-		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.ADD_ADMIN_URL, formData)
-			.subscribe((response) => {
-				resolve(response);
-			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
-				reject(error);
-			});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.post<any>(this.constants.ADD_ADMIN_URL, formData, httpOptions);
 	};
 	  
 	updateAdmin(editFormValue) {

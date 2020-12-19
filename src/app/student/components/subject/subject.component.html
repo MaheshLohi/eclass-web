@@ -10,7 +10,7 @@
                             <div class="card-body p-2">
                                 <div class="img-container">
                                     <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + subject.bg_image' 
-                                    (error)="miscellaneousService.changeImageSource($event)">
+                                    (error)="miscellaneousService.setDefaultThumbnailImage($event)">
                                 </div>
                                 <div class="card-header-portion">
                                     {{subject.code}}

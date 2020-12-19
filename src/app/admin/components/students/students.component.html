@@ -84,7 +84,7 @@
                                         <div class="form-group">
                                             <label for="customFile">{{ 'FILE' | translate}}</label>
                                             <div>
-                                                <input type="file" id="students_file" formControlName="students_file" (change)="onFileChange($event)">
+                                                <input type="file" id="students_file" formControlName="students_file" (change)="onFileChange($event)" required>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">

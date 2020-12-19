@@ -97,7 +97,7 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	addInstitute() {
 		this.loader.showLoader();
 		this.instituteService.addInstitute(this.addDataForm.value, this.logo)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getInstitutes();

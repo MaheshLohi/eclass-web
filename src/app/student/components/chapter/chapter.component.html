@@ -5,7 +5,7 @@
             <div class="card-body p-2" (click)="navigateToTopics(chapter)">
                 <div class="img-container ctmimg-wdt">
                     <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + chapter.thumbnail' 
-                    (error)="miscellaneousService.changeImageSource($event)">
+                    (error)="miscellaneousService.setDefaultThumbnailImage($event)">
                 </div>
                 <div class="card-header-portion">
                     {{subjectDetails.code | verifyData}}

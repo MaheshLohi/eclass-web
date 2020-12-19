@@ -8,6 +8,7 @@ import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { LoginService } from '@sharedServices/login/login.service';
 import { StudentProfileService } from '@app/student/services/profile/profile.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 
 @Component({
@@ -27,18 +28,12 @@ export class StudentProfileComponent implements OnInit {
 	private studentProfileService : StudentProfileService,
 	private loader: LoaderService,
 	private translate: TranslateService,
+	public miscellaneousService : MiscellaneousService,
 	private toaster: ToasterService) { 
 		this.editProfileForm = new FormGroup({
-			'name' : new FormControl("", [
-				Validators.minLength(3),
-				Validators.required
-			]),
-			'phone_number' : new FormControl("", [
-				Validators.required
-			]),
-			'email' : new FormControl("", [
-				Validators.required
-			]),
+			'name' : new FormControl("", [Validators.minLength(3)]),
+			'phone_number' : new FormControl("", []),
+			'email' : new FormControl("", []),
 			'profile_pic' : new FormControl("", []),
 			'password' : new FormControl("", [])
 		});
@@ -97,10 +92,6 @@ export class StudentProfileComponent implements OnInit {
 		}, () => {
 			this.loader.hideLoader();
 		});
-	};
-
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_usericon.png";
 	};
 
 }

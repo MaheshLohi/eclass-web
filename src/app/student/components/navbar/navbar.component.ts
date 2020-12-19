@@ -6,6 +6,7 @@ import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StudentSemesterService } from '@studentServices/semester/semester.service';
 
 @Component({
@@ -30,6 +31,7 @@ export class StudentNavbarComponent implements OnInit {
 	public router: Router,
 	private studentSemesterService : StudentSemesterService,
 	private sessionHandler : SessionHandlerService,
+	public miscellaneousService : MiscellaneousService,
 	private storageService: StorageService) { }
 
 	ngOnInit() {
@@ -117,9 +119,5 @@ export class StudentNavbarComponent implements OnInit {
 
 	navigteToProfile() {
 		this.router.navigate(['student/profile']);
-	};
-
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_usericon.png";
 	};
 }

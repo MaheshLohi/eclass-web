@@ -33,8 +33,8 @@
                                                     {{ i + 1 }}
                                                 </td>
                                                 <td>
-                                                    <img [src]="institute.logo" class="img-circle img-size-32 mr-2"
-                                                    (error)="miscellaneousService.setDefaultSchoolLogo($event)">
+                                                    <img [src]="this.constants.DOMAIN_URL + institute.logo" class="img-circle img-size-32 mr-2"
+                                                    (error)="miscellaneousService.setDefaultInstituteLogo($event)">
                                                     {{ institute.name | verifyData }}
                                                 </td>
                                                 <td>

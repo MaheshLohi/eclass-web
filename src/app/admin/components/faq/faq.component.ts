@@ -46,20 +46,12 @@ export class AdminFaqComponent implements OnInit {
 			this.queryParams = queryParams;
 		});
 		this.addDataForm = new FormGroup({
-			'question' : new FormControl('', [
-				Validators.required
-			]),
-			'answer' : new FormControl('', [
-				Validators.required
-			])
+			'question' : new FormControl('', []),
+			'answer' : new FormControl('', [])
 		});
 		this.editDataForm = new FormGroup({
-			'question' : new FormControl('', [
-				Validators.required
-			]),
-			'answer' : new FormControl('', [
-				Validators.required
-			])
+			'question' : new FormControl('', []),
+			'answer' : new FormControl('', [])
 		});
 	};
 

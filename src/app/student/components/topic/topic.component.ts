@@ -17,11 +17,11 @@ import { StudentWishlistService } from '@studentServices/wishlist/wishlist.servi
 })
 export class StudentTopicComponent implements OnInit {
 
-	chapterId : any = '';
+	chapterId : number;
 	topicsDataStatus : number = 2;
 	topics : any = [];
 	selectedTopic : any = {};
-	videoUrl : any = null;
+	videoUrl : string;
 	chapterDetails : any = {};
 	queryParams : any = {};
 

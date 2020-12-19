@@ -8,7 +8,7 @@
                     <div class="card-body p-2">
                         <div class="img-container">
                             <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + wishlist.chapter_details.data[0].thumbnail' 
-                            (error)="miscellaneousService.changeImageSource($event)">
+                            (error)="miscellaneousService.setDefaultThumbnailImage($event)">
                         </div>
                         <div>
                             {{wishlist.chapter_details.data[0].name}}

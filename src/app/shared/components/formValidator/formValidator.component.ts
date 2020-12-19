@@ -5,7 +5,7 @@ import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
   	templateUrl: './formValidator.component.html',
   	styleUrls: ['./formValidator.component.scss']
 })
-export class FormValidatorComponent implements OnChanges{
+export class FormValidatorComponent implements OnChanges {
 
 	@Input() data: any;
 	@Input() validateRequired? : boolean = true;

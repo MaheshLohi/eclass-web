@@ -48,7 +48,6 @@ export class FacultyQuestionsComponent implements OnInit {
 		this.resetQuestionsList();
 		this.facultyQuestionsService.getQuestionsList(this.subjectId)
 		.subscribe((response : any) => {
-			console.log(JSON.stringify(response.data))
 			if(response && response.data && response.data.length) {
 				this.questionsListStatus = 1;
 				this.questionsList = response.data;

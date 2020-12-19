@@ -7,11 +7,7 @@ import { StorageService } from '@sharedServices/storage/storage.service';
 })
 export class MiscellaneousService {
 
-	constructor(private storageService: StorageService) { }
-	  
-	changeImageSource(event) {
-		event.target.src = "assets/images/default_thumb.jpg";
-	};
+	constructor(private storageService: StorageService) { };
 
 	getHttpOptionsWithContentType(params?:any) {
 		let headerData = { 'Content-Type': 'application/json' }
@@ -34,15 +30,19 @@ export class MiscellaneousService {
 		}
 	};
 
-	changeStudentProfileSource(event) {
+	setDefaultStudentLogo(event) {
 		event.target.src = "assets/images/default_usericon.png";
 	};
 
-	changeAdminProfileSource(event) {
+	setDefaultAdminLogo(event) {
 		event.target.src = "assets/images/default_usericon.png";
-	}
+	};
 
-	setDefaultSchoolLogo(event) {
+	setDefaultInstituteLogo(event) {
 		event.target.src = "assets/images/default_usericon.png";
-	}
+	};
+
+	setDefaultThumbnailImage(event) {
+		event.target.src = "assets/images/default_thumb.jpg";
+	};
 }

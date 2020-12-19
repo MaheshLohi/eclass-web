@@ -12,7 +12,7 @@ import { LoginService } from '@sharedServices/login/login.service';
 })
 export class LoginComponent implements OnInit {
 
-	loginForm : any;
+	loginForm : FormGroup;
 	loginType : string;
 
 	constructor(private router: Router,
@@ -20,20 +20,19 @@ export class LoginComponent implements OnInit {
 	private loginService: LoginService) { 
 		this.loginForm = new FormGroup({
 			'email' : new FormControl("", []),
-			'password' : new FormControl("", [
-				Validators.minLength(6),
-				Validators.required
-			])
+			'password' : new FormControl("", [Validators.minLength(6)])
 		});
+	};
+
+	validateLoginForm(formName) {
+		return this.loginForm.get(formName); 
 	};
 
 	ngOnInit() {
 		this.loginType = this.getLoginType();
-		if(this.loginType === 'student') {
-			this.loginForm.controls['email'].setValidators([Validators.required]);
-		}
-		else {
-			this.loginForm.controls['email'].setValidators([Validators.required, Validators.email]);
+		this.loginForm.controls['email'].setValidators([]);
+		if(this.loginType !== 'student') {
+			this.loginForm.controls['email'].setValidators([Validators.email]);
 		}
 	};
 
@@ -43,21 +42,11 @@ export class LoginComponent implements OnInit {
 			case '/' : return 'student';
 			default : return 'student';
 		}
-	}
-
-	get email() { 
-		return this.loginForm.get('email'); 
-	};
-
-	get password() { 
-		return this.loginForm.get('password'); 
 	};
 	  
 	doLogin() {
 		let data = this.loginForm.value;
-		if(this.loginType === 'student') {
-			data['type'] = 2;
-		}
+		if(this.loginType === 'student') { data['type'] = 2;}
 		this.loader.showLoader();
 		this.loginService.doLogin(this.loginForm.value)
 		.then(() => {
@@ -79,20 +68,15 @@ export class LoginComponent implements OnInit {
 
 	navigateToDashboard(typeOfUser) {
 		switch(typeOfUser) {
-			case 1:
-				this.router.navigate(['/superAdmin/dashboard']);
-				  break;
-			case 2:
-				this.router.navigate(['/student/home']);
+			case 1:	this.router.navigate(['/superAdmin/dashboard']);
 				break;
-			case 3:
-				this.router.navigate(['/admin/dashboard']);
-				  break;
-			case 4:
-				this.router.navigate(['/faculty/dashboard']);
-				  break;
-			default:
-				this.router.navigate(['/superAdmin/dashboard']);
+			case 2:	this.router.navigate(['/student/home']);
+				break;
+			case 3:	this.router.navigate(['/admin/dashboard']);
+				break;
+			case 4:	this.router.navigate(['/faculty/dashboard']);
+				break;
+			default:this.router.navigate(['/superAdmin/dashboard']);
 		}
 	};
 }

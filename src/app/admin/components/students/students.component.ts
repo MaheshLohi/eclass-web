@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
@@ -22,9 +22,9 @@ export class AdminStudentsComponent implements OnInit {
 	departments : any = [];
 	semesters : any = [];
 	departmentAndSemesterDataStatus = 2;
-	filterForm : any;
-	addStudentsForm : any;
-	selectedFile: File = null;
+	filterForm : FormGroup;
+	addStudentsForm : FormGroup;
+	selectedFile: File;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -34,17 +34,11 @@ export class AdminStudentsComponent implements OnInit {
 	private departmentService : AdminDepartmentService,
 	public downloadService : DownloadService) {
 		this.filterForm = new FormGroup({
-			'department_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'inst_class_id' : new FormControl(null, [
-				Validators.required
-			])
+			'department_id' : new FormControl(null, []),
+			'inst_class_id' : new FormControl(null, [])
 		});
 		this.addStudentsForm = new FormGroup({
-			'students_file' : new FormControl("", [
-				Validators.required
-			])
+			'students_file' : new FormControl("", [])
 		});
 	};
 

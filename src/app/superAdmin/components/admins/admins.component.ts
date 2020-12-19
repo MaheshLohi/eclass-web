@@ -31,33 +31,16 @@ export class SuperAdminAdminsComponent implements OnInit {
 	private instituteService : SuperAdminInstitutesService,
 	private adminService : SuperAdminAdminsService) { 
 		this.addAdminForm = new FormGroup({
-			'name' : new FormControl("", [
-				Validators.minLength(3),
-				Validators.required
-			]),
-			'email' : new FormControl("", [
-				Validators.email,
-				Validators.required
-			]),
-			'password' : new FormControl("", [
-				Validators.minLength(6),
-				Validators.required
-			]),
-			'inst_id' : new FormControl("", [
-				Validators.required
-			])
+			'name' : new FormControl("", [Validators.minLength(3)]),
+			'email' : new FormControl("", [Validators.email]),
+			'password' : new FormControl("", [Validators.minLength(6)]),
+			'inst_id' : new FormControl("", [])
 		});
 		this.editForm = new FormGroup({
 			'id' : new FormControl("", []),
-			'name' : new FormControl("", [
-				Validators.minLength(3)
-			]),
-			'email' : new FormControl("", [
-				Validators.email
-			]),
-			'password' : new FormControl("", [
-				Validators.minLength(6)
-			])
+			'name' : new FormControl("", [Validators.minLength(3)]),
+			'email' : new FormControl("", [Validators.email]),
+			'password' : new FormControl("", [Validators.minLength(6)])
 		});
 	}
 
@@ -127,7 +110,7 @@ export class SuperAdminAdminsComponent implements OnInit {
 	addAdmin() {
 		this.loader.showLoader();
 		this.adminService.addAdmin(this.addAdminForm.value)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getAdmins();

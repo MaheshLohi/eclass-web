@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
-import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
 
@@ -17,8 +15,6 @@ export class AdminDepartmentComponent implements OnInit {
 	departmentDataStatus : number = 2;
   
 	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
 	private loader: LoaderService,
 	private departmentService : AdminDepartmentService) { };
 
