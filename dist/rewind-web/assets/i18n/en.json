@@ -147,5 +147,6 @@
     "REPLAY" : "Replay",
     "UPDATE_ADMIN" : "Update Admin",
     "ADMIN_STATUS" : "Admin Status",
-    "INSTITUTE_STATUS" : "Institute Status"
+    "INSTITUTE_STATUS" : "Institute Status",
+    "UPDATE_INSTITUTE" : "Update Institute"
 }

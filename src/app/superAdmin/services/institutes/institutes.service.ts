@@ -58,6 +58,17 @@ export class SuperAdminInstitutesService {
 		formData.append('id', institute.id);
 		const httpOptions = this.miscellaneous.getHttpOptions();
 		return this.http.post<any>(this.constants.INSTITUTE_STATUS_UPDATE_URL, formData, httpOptions);
+	};
+
+	updateInstitute(editFormValue, logo) {
+		const formData = new FormData();
+		formData.append('id', editFormValue.id);
+		formData.append('name', editFormValue.name);
+		formData.append('phone_number', editFormValue.phone_number);
+		formData.append('address', editFormValue.address);
+		if(logo) { formData.append('logo', logo);}
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.post<any>(this.constants.INSTITUTE_UPDATE_URL, formData, httpOptions);
 	}
   
 }

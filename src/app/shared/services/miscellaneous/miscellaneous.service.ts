@@ -41,4 +41,8 @@ export class MiscellaneousService {
 	changeAdminProfileSource(event) {
 		event.target.src = "assets/images/default_usericon.png";
 	}
+
+	setDefaultSchoolLogo(event) {
+		event.target.src = "assets/images/default_usericon.png";
+	}
 }
