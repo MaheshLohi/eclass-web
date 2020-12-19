@@ -4,7 +4,6 @@ import { Constants } from '@app/constants';
 import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
 import { LoggerService } from '@sharedServices/logger/logger.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
-import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
 
 @Injectable({
  	providedIn: 'root'
@@ -16,8 +15,7 @@ export class AdminSubjectsService {
 	constructor(private httpService: HttpClientService,
 	public loggerService: LoggerService,
 	private constants: Constants,
-	private storageService : StorageService,
-	private httpErrorHandler : HttpErrorHandlerService) { }
+	private storageService : StorageService) { }
 
 	getSubjects(selectedDepartmentId, selectedSectionId) {
 		this.userDetails = this.storageService.getData("User_Information");
@@ -31,7 +29,6 @@ export class AdminSubjectsService {
 				  	reject();
 			  	}
 		  	}, (error) => {
-			  	this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 			  	reject(error);
 		  	});
 		});
@@ -47,7 +44,6 @@ export class AdminSubjectsService {
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});
@@ -67,7 +63,6 @@ export class AdminSubjectsService {
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});
@@ -82,7 +77,6 @@ export class AdminSubjectsService {
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});

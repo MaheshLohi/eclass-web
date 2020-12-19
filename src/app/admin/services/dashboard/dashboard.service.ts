@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
-import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
     providedIn: 'root'
@@ -13,22 +14,27 @@ export class AdminDashboardService {
 
   	userDetails : any = {};
 
- 	constructor(private httpService: HttpClientService,
-  	public loggerService: LoggerService,
-	private constants: Constants,
+	constructor(private constants: Constants,
+	private http: HttpClient,
 	private storageService : StorageService,
-	private httpErrorHandler : HttpErrorHandlerService) { }
+	private miscellaneous : MiscellaneousService) { }
 
-	getDashboardData() {
+	getDashboardData() : Observable<any> {
 		this.userDetails = this.storageService.getData("User_Information");
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.ADMIN_DASHBOARD_LIST_URL + this.userDetails.inst_id)
-		  	.subscribe((response) => {
-				resolve(response);
-		  	}, (error) => {
-			  	this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
-			  	reject(error);
-		  	});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.get<any>(this.constants.ADMIN_DASHBOARD_LIST_URL + this.userDetails.inst_id, httpOptions)
+		.pipe(
+			map(response => { 
+				if (response) {
+				  	return response; 
+				} else {
+					throw throwError(0);
+				}
+			}),
+			catchError((error : HttpErrorResponse)=> {
+				this.miscellaneous.handle(error);
+				throw throwError(3);
+			})
+		)
 	};
 }

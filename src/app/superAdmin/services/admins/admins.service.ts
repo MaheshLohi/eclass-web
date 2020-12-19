@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { Constants } from '@app/constants';
 import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
 import { LoggerService } from '@sharedServices/logger/logger.service';
-import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
 import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
@@ -16,8 +15,7 @@ export class SuperAdminAdminsService {
 	public loggerService: LoggerService,
 	private constants: Constants,
 	private miscellaneous : MiscellaneousService,
-	private http: HttpClient,
-	private httpErrorHandler : HttpErrorHandlerService) {}
+	private http: HttpClient) {}
 
 	getAdmins() {
 		return new Promise((resolve, reject) => {
@@ -30,7 +28,6 @@ export class SuperAdminAdminsService {
 				  	reject()
 			  	}
 		  	}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 		  	});
 		});

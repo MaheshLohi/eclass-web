@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
 		if(this.loginType === 'student') { data['type'] = 2;}
 		this.loader.showLoader();
 		this.loginService.doLogin(this.loginForm.value)
-		.then(() => {
+		.subscribe(() => {
 			this.getUserDetails();
 		}, () => {
 			this.loader.hideLoader();
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
 
 	getUserDetails() {
 		this.loginService.getUserDetails()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.navigateToDashboard(response.type)
 		}, () => {

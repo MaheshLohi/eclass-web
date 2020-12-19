@@ -12,7 +12,7 @@ export class AdminDashboardComponent implements OnInit {
 
 	dashboardReportCards : any = [];
 	dashboardDataStatus : number = 2;
-	dashboardData :any = {};
+	dashboardData : any = {};
 	
   	constructor(private loader: LoaderService,
 	private dashboardService : AdminDashboardService) { }
@@ -30,14 +30,14 @@ export class AdminDashboardComponent implements OnInit {
 	getDashboardData() {
 		this.resetDashboardData();
 		this.dashboardService.getDashboardData()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.dashboardDataStatus = 1;
 			this.dashboardData = response;
 			this.prepareDashboardReportCards();
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.dashboardDataStatus = 0;
+			this.dashboardDataStatus = errorCode;
 		});
 	};
 	  

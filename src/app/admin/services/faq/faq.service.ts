@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Constants } from '@app/constants';
 import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
 import { LoggerService } from '@sharedServices/logger/logger.service';
-import { HttpErrorHandlerService } from '@sharedServices/httpErrorHandler/httpErrorHandler.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -12,8 +11,7 @@ export class AdminFaqService {
 
 	constructor(private httpService: HttpClientService,
 	public loggerService: LoggerService,
-	private constants: Constants,
-	private httpErrorHandler : HttpErrorHandlerService) { }
+	private constants: Constants) { }
 
 	getFaqsList(topicId) {
 		return new Promise((resolve, reject) => {
@@ -26,7 +24,6 @@ export class AdminFaqService {
 					reject();
 				}
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});
@@ -42,7 +39,6 @@ export class AdminFaqService {
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});
@@ -58,7 +54,6 @@ export class AdminFaqService {
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});
@@ -70,7 +65,6 @@ export class AdminFaqService {
 			.subscribe((response) => {
 				resolve(response);
 			}, (error) => {
-				this.httpErrorHandler.handle(error, this.constants.DISPLAY_HTTP_ERROR_TOASTER);
 				reject(error);
 			});
 		});

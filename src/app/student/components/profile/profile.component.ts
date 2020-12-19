@@ -56,13 +56,13 @@ export class StudentProfileComponent implements OnInit {
 	getProfileDetails() {
 		this.resetProfileDetails();
 		this.loginService.getUserDetails()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.profileDetailsStatus = 1;
 			this.profileDetails = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.profileDetailsStatus = 0;
+			this.profileDetailsStatus = errorCode;
 		});
 	};
 
