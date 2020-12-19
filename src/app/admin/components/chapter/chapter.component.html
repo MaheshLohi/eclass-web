@@ -160,17 +160,17 @@
                                                     </option>
                                                 </select>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('chapter_id')" [validateNameMinLength]=true></app-form-validator>
+                                            <app-form-validator [data]="validateAddTopicFormValue('chapter_id')"></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'KEYWORDS' | translate}} *</label>
                                                 <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('keywords')" [validateNameMinLength]=true></app-form-validator>
+                                            <app-form-validator [data]="validateAddTopicFormValue('keywords')"></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'RELATED_VIDEOS' | translate}} *</label>
                                                 <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
+                                            <app-form-validator [data]="validateAddTopicFormValue('related_videos')"></app-form-validator>
                                             <div class="form-group">
                                                 <label for="customFile">Video 1</label>
                                                 <div>

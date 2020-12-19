@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 declare var $: any; 
 
-
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
@@ -19,22 +18,22 @@ import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
 })
 export class AdminChapterComponent implements OnInit {
 
-	chapters : any = [];
-	chaptersDataStatus : number = 2;
-	showAddFeature : boolean = false;
 	departments : any = [];
 	semesters : any = [];
-	departmentAndSemesterDataStatus = 2;
-	filterForm : any;
-	addChapterForm : any;
-	notesFile: File = null;
+	chapters : any = [];
 	subjects : any = [];
+	departmentAndSemesterDataStatus : number = 2;
+	chaptersDataStatus : number = 2;
 	subjectsDataStatus : number = 2;
-	addTopicForm : any;
-	videoFile1: File = null;
-	videoFile2: File = null;
-	thumbnailFile : File = null;
+	showAddFeature : boolean = false;
+	filterForm : FormGroup;
+	addChapterForm : FormGroup;
+	addTopicForm : FormGroup;
 	editChapterForm : FormGroup;
+	notesFile: File;
+	videoFile1: File;
+	videoFile2: File;
+	thumbnailFile : File;
 	  
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -50,13 +49,13 @@ export class AdminChapterComponent implements OnInit {
 			'subject_id' : new FormControl(null, [])
 		});
 		this.addChapterForm = new FormGroup({
-			'name' : new FormControl("", []),
+			'name' : new FormControl("", [Validators.minLength(3)]),
 			'description' : new FormControl("", []),
 			'notes_file' : new FormControl("", []),
 			'thumbnail_file' : new FormControl("", [])
 		});
 		this.addTopicForm = new FormGroup({
-			'name' : new FormControl("", []),
+			'name' : new FormControl("", [Validators.minLength(3)]),
 			'chapter_id' : new FormControl(null, []),
 			'video_file1' : new FormControl("", []),
 			'video_file2' : new FormControl("", []),
@@ -65,7 +64,7 @@ export class AdminChapterComponent implements OnInit {
 		});
 		this.editChapterForm = new FormGroup({
 			'chapter_id' : new FormControl("", []),
-			'name' : new FormControl("", []),
+			'name' : new FormControl("", [Validators.minLength(3)]),
 			'description' : new FormControl("", []),
 			'notes_file' : new FormControl("", []),
 			'thumbnail_file' : new FormControl("", [])

@@ -17,16 +17,16 @@ import { AdminTopicService } from '@adminServices/topic/topic.service';
 })
 export class AdminTopicComponent implements OnInit {
 
-	chapterId : any = '';
+	chapterId : number;
 	topicsDataStatus : number = 2;
 	topics : any = [];
 	selectedTopic : any = {};
-	videoUrl : any = null;
+	videoUrl : string;
 	chapterDetails : any = {};
 	queryParams : any = {};
 	editTopicForm : FormGroup;
-	videoFile1: File = null;
-	videoFile2: File = null;
+	videoFile1: File;
+	videoFile2: File;
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,

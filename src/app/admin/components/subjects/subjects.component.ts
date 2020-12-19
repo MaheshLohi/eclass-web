@@ -18,51 +18,41 @@ import { AdminFacultiesService } from '@adminServices/faculties/faculties.servic
 })
 export class AdminSubjectsComponent implements OnInit {
 
-	subjects : any = [];
-	subjectsDataStatus : number = 2;
-	showAddFeature : boolean = false;
 	departments : any = [];
 	semesters : any = [];
+	subjects : any = [];
+	faculties : any = [];
 	departmentAndSectionDataStatus = 2;
-	filterForm : any;
-	addSubjectsForm : any;
-	subjectsFile: File = null;
-	attachmentFile : File = null;
+	subjectsDataStatus : number = 2;
+	facultiesDataStatus : number = 2;
+	showAddFeature : boolean = false;
+	filterForm : FormGroup;
+	addSubjectsForm : FormGroup;
+	assignFacultyForm : FormGroup;
+	subjectsFile: File;
+	attachmentFile : File;
 	selectedSubjectId : number;
 	fileType : number;
-	assignFacultyForm : any;
-	faculties : any = [];
-	facultiesDataStatus : number = 2;
 	assignFacultyType : number;
   
 	constructor(public constants : Constants,
+	public downloadService : DownloadService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
 	private subjectsService : AdminSubjectsService,
 	private departmentService : AdminDepartmentService,
-	private facultyService : AdminFacultiesService,
-	public downloadService : DownloadService) {
+	private facultyService : AdminFacultiesService) {
 		this.filterForm = new FormGroup({
-			'department_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'inst_class_id' : new FormControl(null, [
-				Validators.required
-			])
+			'department_id' : new FormControl(null, []),
+			'inst_class_id' : new FormControl(null, [])
 		});
 		this.addSubjectsForm = new FormGroup({
-			'subjects_file' : new FormControl("", [])
+			'subjectsFile' : new FormControl("", [])
 		});
 		this.assignFacultyForm = new FormGroup({
-			'faculty_id' : new FormControl(null, [
-				Validators.required
-			])
+			'faculty_id' : new FormControl(null, [])
 		});
-	};
-
-	validateFilterFormValue(formName) {
-		return this.filterForm.get(formName); 
 	};
 
 	validateAddSubjectsFormValue(formName) {

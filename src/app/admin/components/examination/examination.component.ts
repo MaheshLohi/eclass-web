@@ -3,9 +3,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
+import { DownloadService } from '@sharedServices/download/download.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
-import { DownloadService } from '@sharedServices/download/download.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
 import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
 import { AdminExaminationService } from '@adminServices/examination/examination.service';
@@ -19,46 +19,34 @@ export class AdminExaminationComponent implements OnInit {
 
 	departments : any = [];
 	semesters : any = [];
-	departmentAndSemesterDataStatus = 2;
 	subjects : any = [];
-	subjectsDataStatus : number = 2;
-	showAddFeature : boolean = false;
-	filterForm : any;
-	addDataForm : any;
-	selectedFile: File = null;
-	examDataStatus : number = 2;
 	examsList : any = [];
+	departmentAndSemesterDataStatus : number = 2;
+	subjectsDataStatus : number = 2;
+	examDataStatus : number = 2;
+	showAddFeature : boolean = false;
+	filterForm : FormGroup;
+	addDataForm : FormGroup;
+	selectedFile: File;
 	years = [2020,2019,2018,2017,2016,2015];
 
 	constructor(public constants : Constants,
+	public downloadService : DownloadService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
-	public downloadService : DownloadService,
 	private departmentService : AdminDepartmentService,
 	private adminExaminationService : AdminExaminationService,
 	private subjectsService : AdminSubjectsService) { 
 		this.filterForm = new FormGroup({
-			'department_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'inst_class_id' : new FormControl(null, [
-				Validators.required
-			]),
-			'subject_id' : new FormControl(null, [
-				Validators.required
-			])
+			'department_id' : new FormControl(null, []),
+			'inst_class_id' : new FormControl(null, []),
+			'subject_id' : new FormControl(null, [])
 		});
 		this.addDataForm = new FormGroup({
-			'name' : new FormControl("", [
-				Validators.required
-			]),
-			'year' : new FormControl("", [
-				Validators.required
-			]),
-			'paper' : new FormControl("", [
-				Validators.required
-			])
+			'name' : new FormControl("", [Validators.minLength(3)]),
+			'year' : new FormControl("", []),
+			'paper' : new FormControl("", [])
 		});
 	}
 

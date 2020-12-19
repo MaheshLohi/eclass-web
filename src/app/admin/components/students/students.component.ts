@@ -23,8 +23,8 @@ export class AdminStudentsComponent implements OnInit {
 	semesters : any = [];
 	departmentAndSemesterDataStatus = 2;
 	filterForm : FormGroup;
-	addStudentsForm : FormGroup;
-	selectedFile: File;
+	addDataForm : FormGroup;
+	studentsFile: File;
   
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -37,21 +37,13 @@ export class AdminStudentsComponent implements OnInit {
 			'department_id' : new FormControl(null, []),
 			'inst_class_id' : new FormControl(null, [])
 		});
-		this.addStudentsForm = new FormGroup({
-			'students_file' : new FormControl("", [])
+		this.addDataForm = new FormGroup({
+			'studentsFile' : new FormControl("", [])
 		});
 	};
 
-	get department_id() { 
-		return this.filterForm.get('department_id'); 
-	};
-
-	get inst_class_id() { 
-		return this.filterForm.get('inst_class_id'); 
-	};
-
-	get students_file() { 
-		return this.addStudentsForm.get('students_file'); 
+	validateAddFormValue(formName) {
+		return this.addDataForm.get(formName); 
 	};
 
 	ngOnInit() {
@@ -108,25 +100,25 @@ export class AdminStudentsComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addStudentsForm.reset();
-			this.selectedFile = null;
+			this.addDataForm.reset();
+			this.studentsFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addStudentsForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
+		return (this.addDataForm.valid && this.filterForm.valid && this.studentsFile) ? false : true;
 	};
 
-	onFileChange(event) {
-		this.selectedFile = null;
+	onFileChange(event, fileTarget) {
+		this[fileTarget] = null;
 		if (event.target.files.length > 0) {
-			this.selectedFile = event.target.files[0];
+			this[fileTarget] = event.target.files[0];
 		}
 	};
 
 	addStudents() {
 		this.loader.showLoader();
-		this.studentService.addStudents(this.filterForm.value, this.selectedFile)
+		this.studentService.addStudents(this.filterForm.value, this.studentsFile)
 		.then((response:any) => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);

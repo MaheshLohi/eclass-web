@@ -17,40 +17,32 @@ import { DownloadService } from '@sharedServices/download/download.service';
 export class AdminFacultiesComponent implements OnInit {
 
 	faculties : any = [];
-	facultiesDataStatus : number = 2;
-	showAddFeature : boolean = false;
 	departments : any = [];
-	filterDataStatus = 2;
+	facultiesDataStatus : number = 2;
+	filterDataStatus : number = 2;
+	showAddFeature : boolean = false;
 	filterForm : FormGroup;
-	addFacultiesForm : FormGroup;
-	selectedFile: File;
+	addDataForm : FormGroup;
+	facultiesFile: File;
   
 	constructor(public constants : Constants,
+	public downloadService : DownloadService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
 	private facultyService : AdminFacultiesService,
-	private departmentService : AdminDepartmentService,
-	public downloadService : DownloadService) {
+	private departmentService : AdminDepartmentService) {
 		this.filterForm = new FormGroup({
-			'department_id' : new FormControl(null, [
-				Validators.required
-			])
+			'department_id' : new FormControl(null, [])
 		});
-		this.addFacultiesForm = new FormGroup({
-			'faculties_file' : new FormControl("", [
-				Validators.required
-			])
+		this.addDataForm = new FormGroup({
+			'facultiesFile' : new FormControl("", [])
 		});
 	};
 
-	get department_id() { 
-		return this.filterForm.get('department_id'); 
+	validateAddFormValue(formName) {
+		return this.addDataForm.get(formName); 
 	};
-
-	get faculties_file() { 
-		return this.addFacultiesForm.get('faculties_file'); 
-	}; 
 
 	ngOnInit() {
 		this.getDepartmentsList();
@@ -98,8 +90,8 @@ export class AdminFacultiesComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addFacultiesForm.reset();
-			this.selectedFile = null;
+			this.addDataForm.reset();
+			this.facultiesFile = null;
 		}
 		else {
 			this.getFaculties();
@@ -107,19 +99,19 @@ export class AdminFacultiesComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addFacultiesForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
+		return (this.addDataForm.valid && this.filterForm.valid && this.facultiesFile) ? false : true;
 	};
 
-	onFileChange(event) {
-		this.selectedFile = null;
+	onFileChange(event, fileTarget) {
+		this[fileTarget] = null;
 		if (event.target.files.length > 0) {
-			this.selectedFile = event.target.files[0];
+			this[fileTarget] = event.target.files[0];
 		}
 	};
 
 	addFaculties() {
 		this.loader.showLoader();
-		this.facultyService.addFaculties(this.filterForm.value, this.selectedFile)
+		this.facultyService.addFaculties(this.filterForm.value, this.facultiesFile)
 		.then((response:any) => {
 			this.loader.hideLoader();
 			this.downloadService.downloadAsCsv(response.data,this.constants.FACULTY_CSV_CONTENTS,'faculties_list.csv');
