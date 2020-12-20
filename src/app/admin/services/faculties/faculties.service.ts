@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
  	providedIn: 'root'
@@ -16,13 +15,11 @@ export class AdminFacultiesService {
 
 	constructor(private constants: Constants,
 	private http: HttpClient,
-	private storageService : StorageService,
-	private miscellaneous : MiscellaneousService) { }
+	private storageService : StorageService) { }
 
 	getFaculties(filterData) : Observable<any> {
 		this.userDetails = this.storageService.getData("User_Information");
-		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
-		return this.http.get<any>(this.constants.FACULTIES_LIST_URL + this.userDetails.inst_id + '/' + filterData.department_id, httpOptions)
+		return this.http.get<any>(this.constants.FACULTIES_LIST_URL + this.userDetails.inst_id + '/' + filterData.department_id)
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
@@ -30,10 +27,6 @@ export class AdminFacultiesService {
 				} else {
 					throw throwError(0);
 				}
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
 			})
 		)
 	};
@@ -44,30 +37,10 @@ export class AdminFacultiesService {
 		formData.append('faculties', faculties);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_id', this.userDetails.inst_id);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.ADD_FACULTIES_URL, formData, httpOptions)
-		.pipe(
-			map(response => { 
-				return response;
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
-			})
-		)
+		return this.http.post<any>(this.constants.ADD_FACULTIES_URL, formData);
 	};
 
 	deleteFaculty(facultyData): Observable<any> {
-		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
-		return this.http.delete<any>(this.constants.FACULTY_DELETE_URL + facultyData.id, httpOptions)
-		.pipe(
-			map(response => { 
-				return response;
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
-			})
-		)
+		return this.http.delete<any>(this.constants.FACULTY_DELETE_URL + facultyData.id);
 	};
 }

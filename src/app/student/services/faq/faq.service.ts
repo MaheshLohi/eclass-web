@@ -1,31 +1,28 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
 
 @Injectable({
   	providedIn: 'root'
 })
 export class StudentFaqService {
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants) { }
+	constructor(private constants: Constants,
+	private http: HttpClient) { }
 
-	getFaqsList(topicId) {
-		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.FAQS_LIST_URL + topicId)
-			.subscribe((response) => {
-				if(response && response.data && response.data.length) {
-					resolve(response.data);
+	getFaqsList(topicId): Observable<any> {
+		return this.http.get<any>(this.constants.FAQS_LIST_URL + topicId)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+				  	return response; 
+				} else {
+					throw throwError(0);
 				}
-				else {
-					reject();
-				}
-			}, (error) => {
-				reject(error);
-			});
-		});
+			})
+		)
 	};
 }

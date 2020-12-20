@@ -1,49 +1,41 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
 })
 export class SuperAdminAdminsService {
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants,
-	private miscellaneous : MiscellaneousService,
-	private http: HttpClient) {}
+	constructor(private constants: Constants,
+	private http: HttpClient) { }
 
-	getAdmins() {
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.ADMINS_LIST_URL)
-		  	.subscribe((response) => {
-			  	if(response && response.data && response.data.length) {
-				  	resolve(response.data);
-			  	}
-			  	else {
-				  	reject()
-			  	}
-		  	}, (error) => {
-				reject(error);
-		  	});
-		});
+	getAdmins(): Observable<any> {
+		return this.http.get<any>(this.constants.ADMINS_LIST_URL)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+				  	return response.data; 
+				} else {
+					throw throwError(0);
+				}
+			})
+		)
   	};
   
-  	addAdmin(adminData) {
+  	addAdmin(adminData): Observable<any> {
 		const formData = new FormData();
 		formData.append('name', adminData.name);
 		formData.append('email', adminData.email);
 		formData.append('password', adminData.password);
 		formData.append('inst_id', adminData.inst_id);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.ADD_ADMIN_URL, formData, httpOptions);
+		return this.http.post<any>(this.constants.ADD_ADMIN_URL, formData);
 	};
 	  
-	updateAdmin(editFormValue) {
+	updateAdmin(editFormValue): Observable<any> {
 		const formData = new FormData();
 		formData.append('id', editFormValue.id);
 		formData.append('name', editFormValue.name);
@@ -51,14 +43,12 @@ export class SuperAdminAdminsService {
 		if(editFormValue.password) {
 			formData.append('password', editFormValue.password);
 		}
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.ADMIN_UPDATE_URL, formData, httpOptions);
+		return this.http.post<any>(this.constants.ADMIN_UPDATE_URL, formData);
 	};
 
-	updateStatus(admin) {
+	updateStatus(admin): Observable<any> {
 		const formData = new FormData();
 		formData.append('id', admin.id);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.ADMIN_STATUS_UPDATE_URL, formData, httpOptions);
+		return this.http.post<any>(this.constants.ADMIN_STATUS_UPDATE_URL, formData);
 	};
 }

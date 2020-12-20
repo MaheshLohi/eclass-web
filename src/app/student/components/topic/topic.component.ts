@@ -57,7 +57,7 @@ export class StudentTopicComponent implements OnInit {
 	getTopicsList() {
 		this.resetTopicsList();
 		this.studentTopicService.getTopicsList(this.chapterId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.chapterDetails = response;

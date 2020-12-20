@@ -68,7 +68,7 @@ export class StudentNavbarComponent implements OnInit {
 	getSemestersList() {
 		this.resetSemestersList();
 		this.studentSemesterService.getSemestersList()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.semestersDataStatus = 1;
 			this.semesters = response.inst_class;

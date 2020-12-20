@@ -43,7 +43,7 @@ export class StudentChapterComponent implements OnChanges {
 	getChaptersList() {
 		this.resetChaptersList();
 		this.studentChapterService.getChaptersList(this.subjectId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.chaptersDataStatus = 1;
 			this.chapters = response;

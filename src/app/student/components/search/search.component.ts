@@ -46,7 +46,7 @@ export class StudentSearchComponent implements OnInit {
 		this.changeRouteParams();
 		if(this.searchString) {
 			this.studentSearchService.getSearchResultsList(this.searchString)
-			.then((response:any) => {
+			.subscribe((response:any) => {
 				this.loader.hideLoader();
 				this.searchResultsDataStatus = 1;
 				this.searchResults = response;

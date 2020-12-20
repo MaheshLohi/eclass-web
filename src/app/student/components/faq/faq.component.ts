@@ -38,7 +38,7 @@ export class StudentFaqComponent implements OnChanges {
 	getFaqsList() {
 		this.resetQuestionsList();
 		this.studentFaqService.getFaqsList(this.topicId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.faqsDataStatus = 1;
 			this.faqs = response.reverse();

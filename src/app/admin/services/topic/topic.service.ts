@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -12,12 +11,10 @@ import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscell
 export class AdminTopicService {
 
 	constructor(private constants: Constants,
-	private http: HttpClient,
-	private miscellaneous : MiscellaneousService) { }
+	private http: HttpClient) { }
 
 	getTopicsList(chapterId) : Observable<any> {
-		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
-		return this.http.get<any>(this.constants.ADMIN_TOPICS_LIST_URL + chapterId, httpOptions)
+		return this.http.get<any>(this.constants.ADMIN_TOPICS_LIST_URL + chapterId)
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
@@ -31,10 +28,6 @@ export class AdminTopicService {
 				} else {
 					throw throwError(0);
 				}
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
 			})
 		)
 	}
@@ -47,16 +40,6 @@ export class AdminTopicService {
 		formData.append('keywords', topicFormData.keywords);
 		formData.append('related_videos', topicFormData.related_videos);
 		formData.append('chapter_details_id', topicFormData.chapter_details_id);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.UPDATE_TOPIC_URL, formData, httpOptions)
-		.pipe(
-			map(response => { 
-				return response;
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
-			})
-		)
+		return this.http.post<any>(this.constants.UPDATE_TOPIC_URL, formData);
 	}
 }

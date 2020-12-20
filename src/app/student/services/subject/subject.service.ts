@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
 
 @Injectable({
@@ -12,41 +13,36 @@ export class StudentSubjectService {
 
 	userDetails : any = {};
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants,
+	constructor(private constants: Constants,
+	private http: HttpClient,
 	private storageService : StorageService) { }
 
-	getSubjectsList(semesterDetails) {
+	getSubjectsList(semesterDetails): Observable<any> {
 		this.userDetails = this.storageService.getData("User_Information");
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.STUDENT_SUBJECTS_LIST_URL +  this.userDetails.inst_id + '/' + semesterDetails.id)
-		  	.subscribe((response) => {
-			  	if(response && response.data && response.data.length && response.data[0].subjects && response.data[0].subjects.data) {
-				  	resolve(response.data);
-			  	}
-			  	else {
-				  	reject();
-			  	}
-		  	}, (error) => {
-			  	reject(error);
-		  	});
-		});
+		return this.http.get<any>(this.constants.STUDENT_SUBJECTS_LIST_URL + this.userDetails.inst_id + '/' + semesterDetails.id)
+		.pipe(
+			map(response => { 
+				if(response && response.data && response.data.length && response.data[0].subjects && response.data[0].subjects.data) {
+					return response.data; 
+				  	
+				} else {
+					throw throwError(0);
+				}
+			})
+		)
 	};
 
 	getSubjectDetails(subjectId) {
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.ADMIN_SUBJECTS_DETAILS_URL + subjectId)
-		  	.subscribe((response) => {
-			  	if(response && response.data) {
-				  	resolve(response.data);
-			  	}
-			  	else {
-				  	reject();
-			  	}
-		  	}, (error) => {
-			  	reject(error);
-		  	});
-		});
+		return this.http.get<any>(this.constants.ADMIN_SUBJECTS_DETAILS_URL + subjectId)
+		.pipe(
+			map(response => { 
+				if(response && response.data) {
+					return response.data; 
+				  	
+				} else {
+					throw throwError(0);
+				}
+			})
+		)
 	};
 }

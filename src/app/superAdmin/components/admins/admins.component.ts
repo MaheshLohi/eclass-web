@@ -65,7 +65,7 @@ export class SuperAdminAdminsComponent implements OnInit {
 	getAdmins() {
 		this.resetAdmins();
 		this.adminService.getAdmins()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.adminDataStatus = 1;
 			this.admins = response;
@@ -84,7 +84,7 @@ export class SuperAdminAdminsComponent implements OnInit {
 	getInstitutes() {
 		this.resetInstitutes();
 		this.instituteService.getInstitutes()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.instituteDataStatus = 1;
 			this.institutes = response;

@@ -1,45 +1,35 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
 
 @Injectable({
   	providedIn: 'root'
 })
 export class StudentQuestionsService {
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants) { }
+	constructor(private constants: Constants,
+	private http: HttpClient) { }
 
 	getQuestionsList(topicId) {
-		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.STUDENT_QUESTIONS_LIST_URL + topicId)
-			.subscribe((response) => {
-				if(response && response.data && response.data.length) {
-					resolve(response.data);
+		return this.http.get<any>(this.constants.STUDENT_QUESTIONS_LIST_URL + topicId)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+				  	return response; 
+				} else {
+					throw throwError(0);
 				}
-				else {
-					reject();
-				}
-			}, (error) => {
-				reject(error);
-			});
-		});
+			})
+		)
 	};
 
 	addQuestion(addForm,topicId) {
 		const formData = new FormData();
 		formData.append('chapter_detail_id', topicId);
 		formData.append('question', addForm.question);
-		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.STUDENT_ADD_QUESTION_URL, formData)
-			.subscribe((response) => {
-				resolve(response);
-			}, (error) => {
-				reject(error);
-			});
-		});
+		return this.http.post<any>(this.constants.STUDENT_ADD_QUESTION_URL, formData)
 	};
 }

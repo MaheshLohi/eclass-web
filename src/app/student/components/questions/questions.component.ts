@@ -52,7 +52,7 @@ export class StudentQuestionsComponent implements OnChanges {
 	getQuestionsList() {
 		this.resetQuestionsList();
 		this.studentQuestionsService.getQuestionsList(this.topicId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.questionsDataStatus = 1;
 			this.questions = response.reverse();
@@ -69,7 +69,7 @@ export class StudentQuestionsComponent implements OnChanges {
 	addQuestion() {
 		this.loader.showLoader();
 		this.studentQuestionsService.addQuestion(this.addDataForm.value,this.topicId)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getQuestionsList();
 			this.addDataForm.reset();

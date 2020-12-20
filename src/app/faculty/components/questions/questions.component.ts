@@ -48,16 +48,11 @@ export class FacultyQuestionsComponent implements OnInit {
 		this.resetQuestionsList();
 		this.facultyQuestionsService.getQuestionsList(this.subjectId)
 		.subscribe((response : any) => {
-			if(response && response.data && response.data.length) {
-				this.questionsListStatus = 1;
-				this.questionsList = response.data;
-			}
-			else {
-				this.questionsListStatus = 0;
-			}
 			this.loader.hideLoader();
-		},()=> {
-			this.questionsListStatus = 0;
+			this.questionsListStatus = 1;
+			this.questionsList = response;
+		},(errorStatus)=> {
+			this.questionsListStatus = errorStatus;
 			this.loader.hideLoader();
 		})
 	};

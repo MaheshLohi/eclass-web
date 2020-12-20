@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 import * as _ from "lodash";
 
 import { Constants } from '@app/constants';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -13,12 +12,10 @@ import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscell
 export class AdminChapterService {
 
 	constructor(private constants: Constants,
-	private http: HttpClient,
-	private miscellaneous : MiscellaneousService) { }
+	private http: HttpClient) { }
 
 	getChapters(data) : Observable<any> {
-		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
-		return this.http.get<any>(this.constants.CHAPTERS_LIST_URL +  data.subject_id + '/chapters', httpOptions)
+		return this.http.get<any>(this.constants.CHAPTERS_LIST_URL +  data.subject_id + '/chapters')
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
@@ -26,10 +23,6 @@ export class AdminChapterService {
 				} else {
 					throw throwError(0);
 				}
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
 			})
 		)
 	};
@@ -41,17 +34,7 @@ export class AdminChapterService {
 		formData.append('name', addFormValue.name);
 		formData.append('subject_id', filterData.subject_id);
 		formData.append('description', addFormValue.description);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.ADD_CHAPTERS_URL, formData, httpOptions)
-		.pipe(
-			map(response => { 
-				return response;
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
-			})
-		)
+		return this.http.post<any>(this.constants.ADD_CHAPTERS_URL, formData);
 	};
 
 	addTopic(topicFormData, videoFile1, videoFile2) {
@@ -62,17 +45,7 @@ export class AdminChapterService {
 		formData.append('keywords', topicFormData.keywords);
 		formData.append('related_videos', topicFormData.related_videos);
 		formData.append('chapter_id', topicFormData.chapter_id);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.ADD_TOPIC_URL, formData, httpOptions)
-		.pipe(
-			map(response => { 
-				return response;
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
-			})
-		)
+		return this.http.post<any>(this.constants.ADD_TOPIC_URL, formData);
 	}
 
 	updateChapter(updateFormValue, notesFile?:any, thumbnailFile?:any) {
@@ -82,16 +55,6 @@ export class AdminChapterService {
 		formData.append('name', updateFormValue.name);
 		formData.append('description', updateFormValue.description);
 		formData.append('chapter_id', updateFormValue.chapter_id);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.UPDATE_CHAPTERS_URL, formData, httpOptions)
-		.pipe(
-			map(response => { 
-				return response;
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
-			})
-		)
+		return this.http.post<any>(this.constants.UPDATE_CHAPTERS_URL, formData);
 	};
 }

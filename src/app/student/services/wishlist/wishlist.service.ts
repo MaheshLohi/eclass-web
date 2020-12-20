@@ -1,43 +1,35 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
 })
 export class StudentWishlistService {
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants,
-	private miscellaneous : MiscellaneousService,
+	constructor(private constants: Constants,
 	private http: HttpClient) { }
 
-	getWishlistDetails() {
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.STUDENT_WISHLIST_LIST_URL)
-		  	.subscribe((response) => {
-			  	if(response && response.data && response.data.length) {
-				  	resolve(response.data);
-			  	}
-			  	else {
-				  	reject();
-			  	}
-		  	}, (error) => {
-			  	reject(error);
-		  	});
-		});
+	getWishlistDetails():  Observable<any> {
+		return this.http.get<any>(this.constants.STUDENT_WISHLIST_LIST_URL)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+				  	return response; 
+				} else {
+					throw throwError(0);
+				}
+			})
+		)
 	};
 
-	updateTopicWishlist(selectedTopic) {
+	updateTopicWishlist(selectedTopic):  Observable<any> {
 		const formData = new FormData();
 		formData.append('chapter_detail_id', selectedTopic.id);
 		let url = (selectedTopic.is_wishlist === 1) ? this.constants.STUDENT_TOGGLE_WISHLIST_URL : this.constants.STUDENT_ADD_WISHLIST_URL;
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(url, formData, httpOptions);
+		return this.http.post<any>(url, formData);
 	};
 }

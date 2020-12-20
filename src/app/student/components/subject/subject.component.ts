@@ -39,7 +39,7 @@ export class StudentSubjectComponent {
 	getSubjects() {
 		this.resetSubjectsList();
 		this.studentSubjectService.getSubjectsList(this.selectedSemester)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response[0].subjects.data;

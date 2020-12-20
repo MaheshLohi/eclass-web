@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClient } from '@angular/common/http';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -10,12 +11,19 @@ import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscell
 export class FacultySubjectsService {
 
   	constructor(private constants: Constants,
-	private miscellaneous : MiscellaneousService,
 	private http: HttpClient) { }
 
-	getSubjectsList() {
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.get(this.constants.FACULTY_SUBJECTS_LIST_URL, httpOptions);
+	getSubjectsList() : Observable<any> {
+		return this.http.get<any>(this.constants.FACULTY_SUBJECTS_LIST_URL)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+					return response.data;
+				} else {
+					throw throwError(0);
+				}
+			})
+		)
 	};
 
 }

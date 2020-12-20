@@ -39,7 +39,7 @@ export class StudentWishlistComponent implements OnInit {
 	getWishlistDetails() {
 		this.resetWishlistDetails();
 		this.studentWishlistService.getWishlistDetails()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.wishlistDataStatus = 1;
 			this.wishlists = response;

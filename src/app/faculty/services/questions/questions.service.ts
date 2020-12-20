@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClient } from '@angular/common/http';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -10,20 +11,26 @@ import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscell
 export class FacultyQuestionsService {
 
 	constructor(private constants: Constants,
-	private miscellaneous : MiscellaneousService,
 	private http: HttpClient) { }
 
-	getQuestionsList(subjectId) {
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.get(this.constants.FACULTY_QUESTIONS_LIST_URL + subjectId, httpOptions);
+	getQuestionsList(subjectId) : Observable<any> {
+		return this.http.get<any>(this.constants.FACULTY_QUESTIONS_LIST_URL + subjectId)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+					return response.data;
+				} else {
+					throw throwError(0);
+				}
+			})
+		)
 	};
 
 	submitReplay(question) {
 		const formData = new FormData();
 		formData.append('id', question.id);
 		formData.append('answer', question.replay);
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.FACULTY_SUBMIT_REPLAY_URL, formData, httpOptions);
+		return this.http.post<any>(this.constants.FACULTY_SUBMIT_REPLAY_URL, formData);
 	};
 
 }

@@ -19,8 +19,7 @@ export class LoginService {
 	private miscellaneous : MiscellaneousService) { };
 
 	doLogin(loginData) : Observable<any> {
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.post<any>(this.constants.LOGIN_URL, loginData, httpOptions)
+		return this.http.post<any>(this.constants.LOGIN_URL, loginData)
 		.pipe(
 			map(response => { 
 				if (response && response.token) {
@@ -29,17 +28,12 @@ export class LoginService {
 				} else {
 					throw throwError(0);
 				}
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
 			})
 		)
 	};
 
 	getUserDetails() : Observable<any> {
-		const httpOptions = this.miscellaneous.getHttpOptions();
-		return this.http.get<any>(this.constants.USER_DETAILS_URL, httpOptions)
+		return this.http.get<any>(this.constants.USER_DETAILS_URL)
 		.pipe(
 			map(response => { 
 				if (response && response.data) {
@@ -48,10 +42,6 @@ export class LoginService {
 				} else {
 					throw throwError(0);
 				}
-			}),
-			catchError((error : HttpErrorResponse)=> {
-				this.miscellaneous.handle(error);
-				throw throwError(3);
 			})
 		)
 	};

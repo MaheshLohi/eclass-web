@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NgxSpinnerService } from "ngx-spinner";
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { ToastrModule } from 'ngx-toastr';
@@ -17,6 +17,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 import { AppRoutingModule } from '@app/app-routing.module';
 import { AppComponent } from '@app/app.component';
 import { Constants } from '@app/constants';
+import { HttpConfigInterceptor } from '@sharedServices/http-interceptor/http-interceptor.service';
 
 //Component declaration
 import { LoginComponent } from '@sharedComponents/login/login.component';
@@ -128,7 +129,8 @@ import { StudentListErrorComponent } from '@studentComponents/list-error/list-er
 	],
 	providers: [
 		NgxSpinnerService,
-		Constants
+		Constants,
+		{ provide: HTTP_INTERCEPTORS, useClass: HttpConfigInterceptor, multi: true }
 	],
 	schemas: [CUSTOM_ELEMENTS_SCHEMA],
 	bootstrap: [AppComponent]

@@ -48,7 +48,7 @@ export class StudentContentComponent implements OnInit {
 	getSubjectDetails() {
 		this.resetSubjectDetailsList();
 		this.studentSubjectService.getSubjectDetails(this.subjectId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.subjectDetailsDataStatus = 1;
 			this.subjectDetails = response;

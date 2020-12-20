@@ -38,14 +38,9 @@ export class FacultySubjectsComponent implements OnInit {
 		this.resetSubjectsList();
 		this.facultySubjectsService.getSubjectsList()
 		.subscribe((response : any) => {
-			if(response && response.data && response.data.length) {
-				this.subjectsListStatus = 1;
-				this.subjectsList = response.data;
-			}
-			else {
-				this.subjectsListStatus = 0;
-			}
 			this.loader.hideLoader();
+			this.subjectsListStatus = 1;
+			this.subjectsList = response;
 		},()=> {
 			this.subjectsListStatus = 0;
 			this.loader.hideLoader();

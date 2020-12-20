@@ -40,7 +40,7 @@ export class StudentExaminationComponent implements OnChanges {
 	getExamsList() {
 		this.resetExamsList();
 		this.studentExaminationService.getExamsList(this.subjectId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
