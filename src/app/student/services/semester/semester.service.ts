@@ -25,7 +25,7 @@ export class StudentSemesterService {
 				if (response && response.data) {
 					let result = response.data;
 					if(result.departments && result.inst_class && result.departments.length && result.inst_class.length) {
-						return response.data; 
+						return result; 
 					}
 					else {
 						throw throwError(0);

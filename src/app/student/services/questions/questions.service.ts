@@ -18,7 +18,7 @@ export class StudentQuestionsService {
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
-				  	return response; 
+				  	return response.data; 
 				} else {
 					throw throwError(0);
 				}

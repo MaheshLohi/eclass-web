@@ -60,6 +60,7 @@ export class LoginComponent implements OnInit {
 		this.loginService.getUserDetails()
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
+			console.log(response.type)
 			this.navigateToDashboard(response.type)
 		}, () => {
 			this.loader.hideLoader();
