@@ -40,9 +40,7 @@ export class SuperAdminAdminsService {
 		formData.append('id', editFormValue.id);
 		formData.append('name', editFormValue.name);
 		formData.append('email', editFormValue.email);
-		if(editFormValue.password) {
-			formData.append('password', editFormValue.password);
-		}
+		if(editFormValue.password) { formData.append('password', editFormValue.password); }
 		return this.http.post<any>(this.constants.ADMIN_UPDATE_URL, formData);
 	};
 

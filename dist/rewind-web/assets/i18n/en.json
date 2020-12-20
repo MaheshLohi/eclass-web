@@ -2,7 +2,6 @@
     "APP_NAME" : "Rewind",
 
     "WELCOME_TITLE" : "Welcome Back",
-    "SIGNIN_TITLE" : "Sign in to start your session",
     "FORGOT_PASSWORD_LINK" : "I forgot my password",
 
     "SIGNIN" : "Log in",
@@ -149,5 +148,6 @@
     "UPDATE_ADMIN" : "Update Admin",
     "ADMIN_STATUS" : "Admin Status",
     "INSTITUTE_STATUS" : "Institute Status",
-    "UPDATE_INSTITUTE" : "Update Institute"
+    "UPDATE_INSTITUTE" : "Update Institute",
+    "MORE_INFO" : "More Info"
 }

@@ -13,7 +13,7 @@ export class SuperAdminInstitutesService {
 	constructor(private constants: Constants,
 	private http: HttpClient) { }
 
-	getInstitutes() {
+	getInstitutes(): Observable<any> {
 		return this.http.get<any>(this.constants.INSTITUTES_LIST_URL)
 		.pipe(
 			map(response => { 
@@ -26,22 +26,22 @@ export class SuperAdminInstitutesService {
 		)
 	};
 	
-	addInstitute(instituteData,selectedFile) {
+	addInstitute(instituteData,logo): Observable<any> {
 		const formData = new FormData();
-		formData.append('logo', selectedFile);
+		formData.append('logo', logo);
 		formData.append('name', instituteData.name);
 		formData.append('phone_number', instituteData.phone);
 		formData.append('address', instituteData.address);
 		return this.http.post<any>(this.constants.ADD_INSTITUTE_URL, formData);
 	};
 
-	updateStatus(institute) {
+	updateStatus(institute): Observable<any> {
 		const formData = new FormData();
 		formData.append('id', institute.id);
 		return this.http.post<any>(this.constants.INSTITUTE_STATUS_UPDATE_URL, formData);
 	};
 
-	updateInstitute(editFormValue, logo) {
+	updateInstitute(editFormValue, logo): Observable<any> {
 		const formData = new FormData();
 		formData.append('id', editFormValue.id);
 		formData.append('name', editFormValue.name);

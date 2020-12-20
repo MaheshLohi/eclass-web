@@ -3,7 +3,7 @@
     <app-admin-sidebar></app-admin-sidebar>
     <div class="content-wrapper">
       	<app-breadcrumb [title]="'DASHBOARD'"></app-breadcrumb>
-		<section class="content">
+		<section class="content" *ngIf="dashboardDataStatus === 1">
 			<div class="container-fluid">
 				<div class="row">
 					<div class="col-lg-3 col-6" *ngFor="let reportCard of dashboardReportCards">
@@ -15,7 +15,7 @@
 							<div class="icon">
 								<i class="{{ reportCard.icon }}"></i>
 							</div>
-							<a routerLink="{{ reportCard.link }}" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+							<a routerLink="{{ reportCard.link }}" class="small-box-footer">{{ 'MORE_INFO' | translate}} <i class="fas fa-arrow-circle-right"></i></a>
 						</div>
 					</div> 
 				</div>

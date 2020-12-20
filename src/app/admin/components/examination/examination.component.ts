@@ -123,7 +123,6 @@ export class AdminExaminationComponent implements OnInit {
 			this.loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
-			console.log(JSON.stringify(this.examsList))
 		}, () => {
 			this.loader.hideLoader();
 			this.examDataStatus = 0;

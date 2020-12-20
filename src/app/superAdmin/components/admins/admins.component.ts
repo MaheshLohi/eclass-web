@@ -17,12 +17,12 @@ import { SuperAdminAdminsService } from '@app/superAdmin/services/admins/admins.
 export class SuperAdminAdminsComponent implements OnInit {
 
 	institutes : any = [];
+	admins : any = [];
 	instituteDataStatus : number = 2;
+	adminDataStatus : number = 2;
 	showAddFeature : boolean = false;
 	addAdminForm : FormGroup;
 	editForm : FormGroup;
-	admins : any = [];
-	adminDataStatus : number = 2;
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,

@@ -1,11 +1,10 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
-import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 
 
 @Injectable({
@@ -15,8 +14,7 @@ export class LoginService {
 
 	constructor(private http: HttpClient,
 	private constants: Constants,
-	private storageService: StorageService,
-	private miscellaneous : MiscellaneousService) { };
+	private storageService: StorageService) { };
 
 	doLogin(loginData) : Observable<any> {
 		return this.http.post<any>(this.constants.LOGIN_URL, loginData)

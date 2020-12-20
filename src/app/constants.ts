@@ -1,14 +1,13 @@
 export class Constants {
     DOMAIN_URL = 'http://159.89.167.37/'
     BASE_URL = this.DOMAIN_URL + 'api/';
+
     LANGUAGE_ARRAY = ['en','ka'];
     DEFAULT_LANGUAGE = this.LANGUAGE_ARRAY[0];
+
     ENABLE_ENCRYPTION = true;
     ENCRYPTION_KEY = "Rewind";
-    SUPER_ADMIN_USER_TYPE = 0;
-    ADMIN_USER_TYPE = 1;
-    STATUS_ACTIVE = 1;
-    STATUS_INACTIVE = 0;
+
     STUDENT_CSV_CONTENTS = ["USN","Password"];
     FACULTY_CSV_CONTENTS = ["Name","Password"];
 
@@ -17,13 +16,13 @@ export class Constants {
     STUDENT = "student";
     FACULTY = "faculty";
 
-    ADMIN_URL = this.BASE_URL + "admin/";
-    STUDENT_URL = this.BASE_URL + "student/";
-
     LOGIN_URL = this.BASE_URL + 'login';
     USER_DETAILS_URL = this.BASE_URL + 'student/user';
     LOGOUT_URL = this.BASE_URL + 'logout';
     INSTITUTES_LIST_URL = this.BASE_URL + 'all-institutes';
+
+    ADMIN_URL = this.BASE_URL + "admin/";
+    STUDENT_URL = this.BASE_URL + "student/";
     
     ADD_INSTITUTE_URL = this.ADMIN_URL + 'add-institute';
     ADMINS_LIST_URL = this.ADMIN_URL + 'inst-admin';
