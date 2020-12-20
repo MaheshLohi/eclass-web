@@ -2,9 +2,9 @@ import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
-import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
+import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentChapterService } from '@studentServices/chapter/chapter.service';
 
 @Component({
@@ -16,14 +16,14 @@ export class StudentChapterComponent implements OnChanges {
 
 	@Input() subjectId: any;
 	@Input() subjectDetails: any;
-	chaptersDataStatus : number = 2;
 	chapters : any = [];
+	chaptersDataStatus : number = 2;
 
-  	constructor(public constants : Constants,
-	private loader: LoaderService,
-	public router: Router,
+	constructor(public constants : Constants,
 	public downloadService : DownloadService,
 	public miscellaneousService : MiscellaneousService,
+	private loader: LoaderService,
+	private router: Router,
 	private studentChapterService : StudentChapterService) {}
 	  
 	ngOnChanges(changes: SimpleChanges) {
@@ -47,9 +47,9 @@ export class StudentChapterComponent implements OnChanges {
 			this.loader.hideLoader();
 			this.chaptersDataStatus = 1;
 			this.chapters = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.chaptersDataStatus = 0;
+			this.chaptersDataStatus = errorCode;
 		});
 	};
 

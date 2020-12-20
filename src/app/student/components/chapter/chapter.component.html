@@ -11,7 +11,7 @@
                     {{subjectDetails.code | verifyData}}
                     <button class="btn btn-theme-primary float-right btn-sm"
                     (click)="downloadService.download(chapter.notes, $event)" *ngIf="chapter.notes">
-                        <i class="pr-1 fa fa-download"></i> Notes
+                        <i class="pr-1 fa fa-download"></i> {{ 'NOTES' | translate }}
                     </button>
                 </div>
                 <div class="card-header-title">
@@ -21,4 +21,5 @@
         </div>
     </div>
 </section>
-<app-student-list-error [errorId]=1 *ngIf="chaptersDataStatus === 0"></app-student-list-error>
+<app-student-list-error [errorId]=1 [errorCode]="chaptersDataStatus" *ngIf="chaptersDataStatus === 0 || chaptersDataStatus === 3">
+</app-student-list-error>

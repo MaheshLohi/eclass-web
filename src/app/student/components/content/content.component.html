@@ -36,12 +36,14 @@
                 </div>
             </div>
             <div *ngIf="contentType === 1">
-                <app-student-chapter *ngIf="subjectDetailsDataStatus === 1" [subjectId]="subjectId" [subjectDetails]="subjectDetails"></app-student-chapter>
+                <app-student-chapter [subjectId]="subjectId" [subjectDetails]="subjectDetails"></app-student-chapter>
             </div>
             <div *ngIf="contentType === 2">
-                <app-student-examination *ngIf="subjectDetailsDataStatus === 1" [subjectId]="subjectId"></app-student-examination>
+                <app-student-examination [subjectId]="subjectId"></app-student-examination>
             </div>
         </div>
+        <app-student-list-error [errorId]=6 [errorCode]="subjectDetailsDataStatus" *ngIf="subjectDetailsDataStatus === 0 || subjectDetailsDataStatus === 3">
+        </app-student-list-error>
     </div>
     <app-footer></app-footer>
 </div>

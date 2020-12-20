@@ -3,9 +3,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StudentWishlistService } from '@studentServices/wishlist/wishlist.service';
 
 @Component({
@@ -19,11 +19,11 @@ export class StudentWishlistComponent implements OnInit {
 	wishlists : any = [];
 
 	constructor(public constants : Constants,
+	public miscellaneousService : MiscellaneousService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
-	public router: Router,
-	public miscellaneousService : MiscellaneousService,
+	private router: Router,
 	private studentWishlistService : StudentWishlistService) {	}
 
 	ngOnInit() {
@@ -43,9 +43,9 @@ export class StudentWishlistComponent implements OnInit {
 			this.loader.hideLoader();
 			this.wishlistDataStatus = 1;
 			this.wishlists = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.wishlistDataStatus = 0;
+			this.wishlistDataStatus = errorCode;
 		});
 	};
 

@@ -1,5 +1,4 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
@@ -13,14 +12,13 @@ import { StudentExaminationService } from '@studentServices/examination/examinat
 })
 export class StudentExaminationComponent implements OnChanges {
 
-	@Input() subjectId: any;
+	@Input() subjectId: number;
 	examDataStatus : number = 2;
 	examsList : any = [];
 
-    constructor(public constants : Constants,
-	private loader: LoaderService,
-	public router: Router,
+	constructor(public constants : Constants,
 	public downloadService : DownloadService,
+	private loader: LoaderService,
 	private studentExaminationService : StudentExaminationService) { };
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -44,9 +42,9 @@ export class StudentExaminationComponent implements OnChanges {
 			this.loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.examDataStatus = 0;
+			this.examDataStatus = errorCode;
 		});
 	};
 }

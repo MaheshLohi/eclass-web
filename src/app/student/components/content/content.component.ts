@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 
 import { Constants } from '@app/constants';
-import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
+import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 
 @Component({
@@ -14,17 +14,17 @@ import { StudentSubjectService } from '@studentServices/subject/subject.service'
 })
 export class StudentContentComponent implements OnInit {
 
-	subjectId : any = '';
+	subjectId : number;
 	subjectDetailsDataStatus : number = 2;
 	subjectDetails : any = {};
 	contentType : number;
 
-  	constructor(public constants : Constants,
-	private loader: LoaderService,
-	private route: ActivatedRoute,
-	public router: Router,
+	constructor(public constants : Constants,
 	public downloadService : DownloadService,
 	public miscellaneousService : MiscellaneousService,
+	private loader: LoaderService,
+	private route: ActivatedRoute,
+	private router: Router,
 	private studentSubjectService : StudentSubjectService) {
     	this.route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
@@ -52,9 +52,9 @@ export class StudentContentComponent implements OnInit {
 			this.loader.hideLoader();
 			this.subjectDetailsDataStatus = 1;
 			this.subjectDetails = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.subjectDetailsDataStatus = 0;
+			this.subjectDetailsDataStatus = errorCode;
 		});
 	};
 

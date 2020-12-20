@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
-import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
+import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 
 @Component({
@@ -19,10 +19,10 @@ export class StudentSubjectComponent {
 	selectedSemester : any = {};
 
 	constructor(public constants : Constants,
-	private loader: LoaderService,
-	public router: Router,
 	public downloadService : DownloadService,
 	public miscellaneousService : MiscellaneousService,
+	private loader: LoaderService,
+	private router: Router,
 	private studentSubjectService : StudentSubjectService) { };
 
 	onSemesterSelection(semester) {
@@ -43,9 +43,9 @@ export class StudentSubjectComponent {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response[0].subjects.data;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.subjectsDataStatus = 0;
+			this.subjectsDataStatus = errorCode;
 		});
 	};
 

@@ -26,7 +26,8 @@
                         </div>
                     </div>
                 </section>
-                <app-student-list-error [errorId]=0 *ngIf="subjectsDataStatus === 0"></app-student-list-error>
+                <app-student-list-error [errorId]=0 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
+                </app-student-list-error>
           	</div>
         </section>
     </div>

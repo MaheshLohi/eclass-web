@@ -4,9 +4,9 @@ import { TranslateService } from '@ngx-translate/core';
 import * as _ from "lodash";
 
 import { Constants } from '@app/constants';
+import { DownloadService } from '@sharedServices/download/download.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
-import { DownloadService } from '@sharedServices/download/download.service';
 import { StudentTopicService } from '@studentServices/topic/topic.service';
 import { StudentWishlistService } from '@studentServices/wishlist/wishlist.service';
 
@@ -26,12 +26,12 @@ export class StudentTopicComponent implements OnInit {
 	queryParams : any = {};
 
 	constructor(public constants : Constants,
+	public downloadService : DownloadService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
 	private route: ActivatedRoute,
-	public router: Router,
-	public downloadService : DownloadService,
+	private router: Router,
 	private studentTopicService : StudentTopicService,
 	private studentWishlistService : StudentWishlistService) {
 		this.route.params.subscribe((params: Params) => {
@@ -69,9 +69,9 @@ export class StudentTopicComponent implements OnInit {
 			else {
 				this.selectTopic(this.topics[0]);
 			}
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.topicsDataStatus = 0;
+			this.topicsDataStatus = errorCode;
 		});
 	};
 

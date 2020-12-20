@@ -19,5 +19,6 @@
         </div>
     </div>
 </div>
-<app-student-list-error [errorId]=2 *ngIf="examDataStatus === 0"></app-student-list-error>
+<app-student-list-error [errorId]=2 [errorCode]="examDataStatus" *ngIf="examDataStatus === 0 || examDataStatus === 3">
+</app-student-list-error>
 		

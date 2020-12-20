@@ -7,6 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class StudentListErrorComponent {
 
-	@Input() errorId: any;
+	@Input() errorId: number;
+	@Input() errorCode: number;
 	
 }

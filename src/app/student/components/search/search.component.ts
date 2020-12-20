@@ -18,10 +18,10 @@ export class StudentSearchComponent implements OnInit {
 	searchResults : any = [];
 
 	constructor(public constants : Constants,
-	private route: ActivatedRoute,
-	public router: Router,
-	private loader: LoaderService,
 	public miscellaneousService : MiscellaneousService,
+	private route: ActivatedRoute,
+	private router: Router,
+	private loader: LoaderService,
 	private studentSearchService : StudentSearchService) { 
 		this.route.queryParams
 		.subscribe((queryParams: Params) => {
@@ -50,9 +50,9 @@ export class StudentSearchComponent implements OnInit {
 				this.loader.hideLoader();
 				this.searchResultsDataStatus = 1;
 				this.searchResults = response;
-			}, () => {
+			}, (errorCode) => {
 				this.loader.hideLoader();
-				this.searchResultsDataStatus = 0;
+				this.searchResultsDataStatus = errorCode;
 			});
 		}
 	};

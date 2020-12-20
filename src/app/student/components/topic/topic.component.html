@@ -92,7 +92,8 @@
                         </div>
                     </div>
                 </div>
-                <app-student-list-error [errorId]=4 *ngIf="topicsDataStatus === 0"></app-student-list-error>
+                <app-student-list-error [errorId]=4 [errorCode]="topicsDataStatus" *ngIf="topicsDataStatus === 0 || topicsDataStatus === 3">
+                </app-student-list-error>
             </div>
         </section>
     </div>
