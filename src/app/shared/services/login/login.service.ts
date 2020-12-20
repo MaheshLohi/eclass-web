@@ -23,9 +23,8 @@ export class LoginService {
 				if (response && response.token) {
 					this.storageService.setData('Authorization', response);
 				  	return response; 
-				} else {
-					throw throwError(0);
 				}
+				throw 0;
 			})
 		)
 	};
@@ -37,9 +36,8 @@ export class LoginService {
 				if (response && response.data) {
 					this.storageService.setData('User_Information', response.data);
 				  	return response.data; 
-				} else {
-					throw throwError(0);
 				}
+				throw 0;
 			})
 		)
 	};

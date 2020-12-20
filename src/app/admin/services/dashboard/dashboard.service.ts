@@ -24,9 +24,8 @@ export class AdminDashboardService {
 			map(response => { 
 				if (response) {
 				  	return response; 
-				} else {
-					throw throwError(0);
 				}
+				throw 0;
 			})
 		)
 	};

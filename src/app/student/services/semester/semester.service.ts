@@ -27,13 +27,9 @@ export class StudentSemesterService {
 					if(result.departments && result.inst_class && result.departments.length && result.inst_class.length) {
 						return result; 
 					}
-					else {
-						throw throwError(0);
-					}
-				  	
-				} else {
-					throw throwError(0);
+					throw 0;
 				}
+				throw 0;
 			})
 		)
 	};

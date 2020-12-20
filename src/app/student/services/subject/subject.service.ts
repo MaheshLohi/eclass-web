@@ -24,10 +24,8 @@ export class StudentSubjectService {
 			map(response => { 
 				if(response && response.data && response.data.length && response.data[0].subjects && response.data[0].subjects.data) {
 					return response.data; 
-				  	
-				} else {
-					throw throwError(0);
-				}
+				} 
+				throw 0;
 			})
 		)
 	};
@@ -37,11 +35,9 @@ export class StudentSubjectService {
 		.pipe(
 			map(response => { 
 				if(response && response.data) {
-					return response.data; 
-				  	
-				} else {
-					throw throwError(0);
+					return response.data; 	
 				}
+				throw 0;
 			})
 		)
 	};

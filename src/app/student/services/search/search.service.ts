@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-
 import { Constants } from '@app/constants';
 
 @Injectable({
@@ -20,9 +19,8 @@ export class StudentSearchService {
 			map(response => { 
 				if (response && response.data && response.data.length) {
 				  	return response.data; 
-				} else {
-					throw throwError(0);
 				}
+				throw 0;
 			})
 		)
 	};

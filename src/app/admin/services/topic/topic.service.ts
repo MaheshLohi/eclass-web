@@ -22,12 +22,9 @@ export class AdminTopicService {
 					if(result.chapter_details && result.chapter_details.data && result.chapter_details.data.length) {
 						return result;
 					}
-					else {
-						throw throwError(0);
-					}
-				} else {
-					throw throwError(0);
-				}
+					throw 0;
+				} 
+				throw 0;
 			})
 		)
 	}

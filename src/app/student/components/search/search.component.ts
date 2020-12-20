@@ -42,9 +42,9 @@ export class StudentSearchComponent implements OnInit {
 	};
 
 	getSearchResults() {
-		this.resetSearchResultsList();
-		this.changeRouteParams();
 		if(this.searchString) {
+			this.resetSearchResultsList();
+			this.changeRouteParams();
 			this.studentSearchService.getSearchResultsList(this.searchString)
 			.subscribe((response:any) => {
 				this.loader.hideLoader();
