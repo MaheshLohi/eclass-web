@@ -72,7 +72,7 @@ export class AdminExaminationComponent implements OnInit {
 	getDepartmentsAndSectionsList() {
 		this.resetDepartmentsAndSections();
 		this.departmentService.getDepartmentsAndSections()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
@@ -100,7 +100,7 @@ export class AdminExaminationComponent implements OnInit {
 	getSubjects(data) {
 		this.resetSubjects();
 		this.subjectsService.getSubjects(data.department_id, data.inst_class_id)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
@@ -119,7 +119,7 @@ export class AdminExaminationComponent implements OnInit {
 	getExamsList() {
 		this.resetExamsList();
 		this.adminExaminationService.getExamsList(this.filterForm.value)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
@@ -153,7 +153,7 @@ export class AdminExaminationComponent implements OnInit {
 	addExam() {
 		this.loader.showLoader();
 		this.adminExaminationService.addExamination(this.filterForm.value, this.addDataForm.value, this.selectedFile)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getExamsList();

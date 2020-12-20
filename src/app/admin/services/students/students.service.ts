@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
 
 @Injectable({
@@ -12,42 +14,47 @@ export class AdminStudentsService {
 
 	userDetails : any = {};
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants,
+	constructor(private constants: Constants,
+	private http: HttpClient,
+	private miscellaneous : MiscellaneousService,
 	private storageService : StorageService) { }
 
-	getStudents(selectedDepartmentId, selectedSectionId) {
+	getStudents(selectedDepartmentId, selectedSectionId) : Observable<any> {
 		this.userDetails = this.storageService.getData("User_Information");
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.STUDENTS_LIST_URL + this.userDetails.inst_id + '/' + selectedDepartmentId + '/' + selectedSectionId)
-		  	.subscribe((response) => {
-			  	if(response && response.data && response.data.length) {
-				  	resolve(response.data);
-			  	}
-			  	else {
-				  	reject();
-			  	}
-		  	}, (error) => {
-			  	reject(error);
-		  	});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
+		return this.http.get<any>(this.constants.STUDENTS_LIST_URL + this.userDetails.inst_id + '/' + selectedDepartmentId + '/' + selectedSectionId, httpOptions)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+				  	return response; 
+				} else {
+					throw throwError(0);
+				}
+			}),
+			catchError((error : HttpErrorResponse)=> {
+				this.miscellaneous.handle(error);
+				throw throwError(3);
+			})
+		)
 	};
 	  
-	addStudents(filterData, selectedFile) {
+	addStudents(filterData, selectedFile) : Observable<any> {
 		this.userDetails = this.storageService.getData("User_Information");
 		const formData = new FormData();
 		formData.append('students', selectedFile);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_class_id', filterData.inst_class_id);
 		formData.append('inst_id', this.userDetails.inst_id);
-		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.ADD_STUDENTS_URL, formData)
-			.subscribe((response) => {
-				resolve(response);
-			}, (error) => {
-				reject(error);
-			});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.post<any>(this.constants.ADD_STUDENTS_URL, formData, httpOptions)
+		.pipe(
+			map(response => { 
+				return response;
+			}),
+			catchError((error : HttpErrorResponse)=> {
+				this.miscellaneous.handle(error);
+				throw throwError(3);
+			})
+		)
 	};
 }

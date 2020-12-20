@@ -31,7 +31,7 @@ export class AdminDepartmentComponent implements OnInit {
 	getDepartments() {
 		this.resetDepartmentsAndSections();
 		this.departmentService.getDepartmentsAndSections()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.departmentDataStatus = 1;
 			this.departments = response.departments;

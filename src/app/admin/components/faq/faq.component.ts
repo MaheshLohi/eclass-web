@@ -76,7 +76,7 @@ export class AdminFaqComponent implements OnInit {
 	getTopicsList() {
 		this.resetTopicsList();
 		this.adminTopicService.getTopicsList(this.chapterId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.topics = response.chapter_details.data;
@@ -102,7 +102,7 @@ export class AdminFaqComponent implements OnInit {
 	getFaqsList() {
 		this.resetFaqsList();
 		this.adminFaqService.getFaqsList(this.topicId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.faqsDataStatus = 1;
 			this.faqs = response.reverse();
@@ -136,7 +136,7 @@ export class AdminFaqComponent implements OnInit {
 	addFaq() {
 		this.loader.showLoader();
 		this.adminFaqService.addFaq(this.addDataForm.value, this.topicId)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getFaqsList();
@@ -156,7 +156,7 @@ export class AdminFaqComponent implements OnInit {
 	updateFaq() {
 		this.loader.showLoader();
 		this.adminFaqService.updateFaq(this.editDataForm.value, this.selectedFaq.id)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getFaqsList();
 			$('#editData').modal('hide');
@@ -169,7 +169,7 @@ export class AdminFaqComponent implements OnInit {
 	deleteFaq(faq) {
 		this.loader.showLoader();
 		this.adminFaqService.deleteFaq(faq.id)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getFaqsList();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("FAQ")} ));

@@ -60,7 +60,7 @@ export class AdminStudentsComponent implements OnInit {
 	getDepartmentsAndSectionsList() {
 		this.resetDepartmentsAndSections();
 		this.departmentService.getDepartmentsAndSections()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
@@ -87,7 +87,7 @@ export class AdminStudentsComponent implements OnInit {
 	getStudents(data) {
 		this.resetStudents();
 		this.studentService.getStudents(data.department_id, data.inst_class_id)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.studentsDataStatus = 1;
 			this.students = response;
@@ -119,7 +119,7 @@ export class AdminStudentsComponent implements OnInit {
 	addStudents() {
 		this.loader.showLoader();
 		this.studentService.addStudents(this.filterForm.value, this.studentsFile)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.downloadService.downloadAsCsv(response.data,this.constants.STUDENT_CSV_CONTENTS,'students_list.csv');

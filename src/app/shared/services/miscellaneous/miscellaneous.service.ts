@@ -19,9 +19,11 @@ export class MiscellaneousService {
 	getHttpOptionsWithContentType(params?:any) {
 		let headerData = { 'Content-Type': 'application/json' }
 		let Authorization = this.storageService.getData("Authorization");
+		let userDetails = this.storageService.getData("User_Information");
 		if(Authorization && Authorization.token) {
 			headerData['Authorization'] = "Bearer " + Authorization.token;
 		}
+		if(userDetails) { headerData['user-id'] = userDetails.id.toString();}
 		return {
 			headers : new HttpHeaders(headerData),
 			params : params

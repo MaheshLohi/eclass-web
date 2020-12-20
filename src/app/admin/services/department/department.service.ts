@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
-import { HttpClientService } from '@sharedServices/httpClient/httpClient.service';
-import { LoggerService } from '@sharedServices/logger/logger.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Injectable({
   	providedIn: 'root'
@@ -12,60 +14,65 @@ export class AdminDepartmentService {
 
 	userDetails : any = {};
 
-	constructor(private httpService: HttpClientService,
-	public loggerService: LoggerService,
-	private constants: Constants,
-	private storageService : StorageService) { }
+	constructor(private constants: Constants,
+	private http: HttpClient,
+	private storageService : StorageService,
+	private miscellaneous : MiscellaneousService) { }
 
 	getDepartments() {
-		return new Promise((resolve, reject) => {
-		  	this.httpService.get(this.constants.DEPARTMENTS_LIST_URL)
-		  	.subscribe((response) => {
-			  	if(response && response.data && response.data.length) {
-				  	resolve(response.data);
-			  	}
-			  	else {
-				  	reject();
-			  	}
-		  	}, (error) => {
-			  	reject(error);
-		  	});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
+		return this.http.get<any>(this.constants.DEPARTMENTS_LIST_URL, httpOptions)
+		.pipe(
+			map(response => { 
+				if (response && response.data && response.data.length) {
+				  	return response; 
+				} else {
+					throw throwError(0);
+				}
+			}),
+			catchError((error : HttpErrorResponse)=> {
+				this.miscellaneous.handle(error);
+				throw throwError(3);
+			})
+		)
 	};
 	  
 	getDepartmentsAndSections() {
 		this.userDetails = this.storageService.getData("User_Information");
-		return new Promise((resolve, reject) => {
-			this.httpService.get(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL + this.userDetails.inst_id)
-			.subscribe((response) => {
-				if(response && response.data) {
-					let result = response.data;
+		const httpOptions = this.miscellaneous.getHttpOptionsWithContentType();
+		return this.http.get<any>(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL + this.userDetails.inst_id, httpOptions)
+		.pipe(
+			map(response => { 
+				if(response && response.data) { 
+					let result = response.data
 					if(result.departments && result.inst_class && result.departments.length && result.inst_class.length) {
-						resolve(response.data);
-					}
-					else {
-						reject();
+						return response.data;
 					}
 				}
 				else {
-					reject();
+					throw throwError(0);
 				}
-			}, (error) => {
-				reject(error);
-			});
-	  	});
+			}),
+			catchError((error : HttpErrorResponse)=> {
+				this.miscellaneous.handle(error);
+				throw throwError(3);
+			})
+		)
 	};
 
 	addDepartment(selectedFile) {
 		const formData = new FormData();
 		formData.append('departments', selectedFile);
-		return new Promise((resolve, reject) => {
-			this.httpService.postWithFormData(this.constants.ADD_DEPARTMENT_URL, formData)
-			.subscribe((response) => {
-				resolve(response);
-			}, (error) => {
-				reject(error);
-			});
-		});
+		const httpOptions = this.miscellaneous.getHttpOptions();
+		return this.http.post<any>(this.constants.ADD_DEPARTMENT_URL, formData, httpOptions)
+		.pipe(
+			map(response => { 
+				return response;
+			}),
+			catchError((error : HttpErrorResponse)=> {
+				this.miscellaneous.handle(error);
+				throw throwError(3);
+			})
+		)
 	};
 }

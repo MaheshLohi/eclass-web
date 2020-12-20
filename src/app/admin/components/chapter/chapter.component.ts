@@ -101,7 +101,7 @@ export class AdminChapterComponent implements OnInit {
 	getDepartmentsAndSectionsList() {
 		this.resetDepartmentsAndSections();
 		this.departmentService.getDepartmentsAndSections()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
@@ -134,7 +134,7 @@ export class AdminChapterComponent implements OnInit {
 	getSubjects(data) {
 		this.resetSubjects();
 		this.subjectsService.getSubjects(data.department_id, data.inst_class_id)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
@@ -154,7 +154,7 @@ export class AdminChapterComponent implements OnInit {
 	getChapters() {
 		this.resetChapters();
 		this.chapterService.getChapters(this.filterForm.value)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.chaptersDataStatus = 1;
 			this.chapters = response;
@@ -194,7 +194,7 @@ export class AdminChapterComponent implements OnInit {
 	addChapter() {
 		this.loader.showLoader();
 		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.notesFile, this.thumbnailFile)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getChapters();
@@ -207,7 +207,7 @@ export class AdminChapterComponent implements OnInit {
 	addTopic() {
 		this.loader.showLoader();
 		this.chapterService.addTopic(this.addTopicForm.value, this.videoFile1, this.videoFile2)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getChapters();
@@ -239,7 +239,7 @@ export class AdminChapterComponent implements OnInit {
 	updateChapter() {
 		this.loader.showLoader();
 		this.chapterService.updateChapter(this.editChapterForm.value, this.notesFile, this.thumbnailFile)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			$('#update-chapter').modal('hide');
 			this.getChapters();

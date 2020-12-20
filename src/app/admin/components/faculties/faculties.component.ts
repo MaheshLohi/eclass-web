@@ -57,7 +57,7 @@ export class AdminFacultiesComponent implements OnInit {
 	getDepartmentsList() {
 		this.resetDepartmentsDetails();
 		this.departmentService.getDepartmentsAndSections()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.filterDataStatus = 1;
 			this.departments = response.departments;
@@ -77,7 +77,7 @@ export class AdminFacultiesComponent implements OnInit {
 		this.resetFaculties();
 		let data = this.filterForm.value;
 		this.facultyService.getFaculties(data)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.facultiesDataStatus = 1;
 			this.faculties = response;
@@ -112,7 +112,7 @@ export class AdminFacultiesComponent implements OnInit {
 	addFaculties() {
 		this.loader.showLoader();
 		this.facultyService.addFaculties(this.filterForm.value, this.facultiesFile)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.downloadService.downloadAsCsv(response.data,this.constants.FACULTY_CSV_CONTENTS,'faculties_list.csv');
 			this.showAddFeatureView(false);
@@ -126,7 +126,7 @@ export class AdminFacultiesComponent implements OnInit {
 	deleteFaculty(faculty) {
 		this.loader.showLoader();
 		this.facultyService.deleteFaculty(faculty)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getFaculties();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("FACULTY")} ));

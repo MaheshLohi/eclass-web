@@ -77,7 +77,7 @@ export class AdminSubjectsComponent implements OnInit {
 		this.resetFaculties();
 		let data = this.filterForm.value;
 		this.facultyService.getFaculties(data)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.facultiesDataStatus = 1;
 			this.faculties = response;
@@ -97,7 +97,7 @@ export class AdminSubjectsComponent implements OnInit {
 	getDepartmentsAndSectionsList() {
 		this.resetDepartmentsAndSections();
 		this.departmentService.getDepartmentsAndSections()
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.departmentAndSectionDataStatus = 1;
 			this.departments = response.departments;
@@ -125,7 +125,7 @@ export class AdminSubjectsComponent implements OnInit {
 	getSubjects(data) {
 		this.resetSubjects();
 		this.subjectsService.getSubjects(data.department_id, data.inst_class_id)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
@@ -157,7 +157,7 @@ export class AdminSubjectsComponent implements OnInit {
 	addSubjects() {
 		this.loader.showLoader();
 		this.subjectsService.addSubjects(this.subjectsFile)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
 			if(this.departmentAndSectionDataStatus === 1) {
@@ -175,7 +175,7 @@ export class AdminSubjectsComponent implements OnInit {
 	uploadSubjectAttachment() {
 		this.loader.showLoader();
 		this.subjectsService.uploadSubjectAttachment(this.selectedSubjectId, this.attachmentFile, this.fileType)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getSubjects(this.filterForm.value);
 			$('#upload-files').modal('hide');
@@ -199,7 +199,7 @@ export class AdminSubjectsComponent implements OnInit {
 	assignFaculties() {
 		this.loader.showLoader();
 		this.subjectsService.assignFaculties(this.assignFacultyForm.value, this.selectedSubjectId)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getSubjects(this.filterForm.value);
 			$('#assign-faculty').modal('hide');

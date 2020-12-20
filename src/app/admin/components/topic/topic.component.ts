@@ -70,7 +70,7 @@ export class AdminTopicComponent implements OnInit {
 	getTopicsList() {
 		this.resetTopicsList();
 		this.adminTopicService.getTopicsList(this.chapterId)
-		.then((response:any) => {
+		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.chapterDetails = response;
@@ -125,7 +125,7 @@ export class AdminTopicComponent implements OnInit {
 	updateTopic() {
 		this.loader.showLoader();
 		this.adminTopicService.updateTopic(this.editTopicForm.value, this.videoFile1, this.videoFile2)
-		.then(() => {
+		.subscribe(() => {
 			this.loader.hideLoader();
 			$('#update-topic').modal('hide');
 			this.getTopicsList();
