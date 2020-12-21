@@ -150,5 +150,7 @@
     "ADMIN_STATUS" : "Admin Status",
     "INSTITUTE_STATUS" : "Institute Status",
     "UPDATE_INSTITUTE" : "Update Institute",
-    "MORE_INFO" : "More Info"
+    "MORE_INFO" : "More Info",
+    "PLEASE_ADD_FACULTIES_TO_CONTINUE" : "Please add faculties to continue",
+    "PLEASE_ADD_CHAPTERS_TO_CONTINUE" : "Please add chapters to continue"
 }

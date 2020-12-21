@@ -87,7 +87,7 @@
                                         <app-form-validator [data]="validateAddAdminFormValue('password')" [validatePasswordLength]=true></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label>{{ 'INSTITUTE_NAME' | translate}} *</label>
-                                            <select class="custom-select" id="inst_id" formControlName="inst_id" *ngIf="instituteDataStatus === 1" required>
+                                            <select class="custom-select" id="inst_id" formControlName="inst_id" [hidden]="instituteDataStatus != 1" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_INSTITUTE' | translate}}</option>
                                                 <option *ngFor="let institute of institutes" [ngValue]="institute.id">
                                                     {{institute.name}}

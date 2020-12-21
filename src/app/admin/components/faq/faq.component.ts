@@ -82,9 +82,9 @@ export class AdminFaqComponent implements OnInit {
 			this.topics = response.chapter_details.data;
 			this.topicId = parseInt(this.queryParams.topicId);
 			this.onTopicChange();
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.topicsDataStatus = 0;
+			this.topicsDataStatus = errorCode;
 		});
 	};
 
@@ -106,9 +106,9 @@ export class AdminFaqComponent implements OnInit {
 			this.loader.hideLoader();
 			this.faqsDataStatus = 1;
 			this.faqs = response.reverse();
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.faqsDataStatus = 0;
+			this.faqsDataStatus = errorCode;
 		});
 	};
 

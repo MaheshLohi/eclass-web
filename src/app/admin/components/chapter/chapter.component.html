@@ -95,13 +95,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-lg-12" *ngIf="chaptersDataStatus === 0 || chaptersDataStatus === 3">
-                                    <app-list-error-handler 
-                                    [status]=chaptersDataStatus 
-                                    [title]="'CHAPTERS'">
-                                    </app-list-error-handler>
-                                </div>
+                                <app-admin-list-error [errorId]=7 [errorCode]="chaptersDataStatus" *ngIf="chaptersDataStatus === 0 || chaptersDataStatus === 3">
+                                </app-admin-list-error>
                             </div>
+                            <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
+                            </app-admin-list-error>
                             <div class="card-body" [hidden]="showAddFeature === false">
                                 <ul class="nav nav-tabs" role="tablist" id="tab">
                                     <li class="nav-item">
@@ -136,13 +134,13 @@
                                                     <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onFileChange($event,'thumbnailFile')" required>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
-                                            </button>
-                                            <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                            </button>
                                         </form>
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                        </button>
                                     </div>
                                     <div class="col-lg-6 tab-pane fade" id="add-topic" role="tabpanel">
                                         <form role="form" (ngSubmit)="addTopic()" [formGroup]="addTopicForm">
@@ -153,12 +151,18 @@
                                             <app-form-validator [data]="validateAddTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'SELECT_CHAPTER' | translate}} *</label>
-                                                <select class="custom-select form-control select2" id="chapter_id" formControlName="chapter_id" required>
+                                                <select class="custom-select form-control select2" id="chapter_id" formControlName="chapter_id" required [hidden]="chaptersDataStatus != 1">
                                                     <option [value]=null selected disabled>{{ 'SELECT_CHAPTER' | translate}}</option>
                                                     <option *ngFor="let chapter of chapters" [ngValue]="chapter.id">
                                                         {{chapter.name}}
                                                     </option>
                                                 </select>
+                                                <div class="error-message" *ngIf="chaptersDataStatus === 0">
+                                                    {{ 'PLEASE_ADD_CHAPTERS_TO_CONTINUE' | translate }}<br/>
+                                                </div>
+                                                <div class="error-message" *ngIf="chaptersDataStatus === 3">
+                                                    {{ 'STANDARD_ERROR' | translate}}
+                                                </div>
                                             </div>
                                             <app-form-validator [data]="validateAddTopicFormValue('chapter_id')"></app-form-validator>
                                             <div class="form-group mb-0">
@@ -186,9 +190,6 @@
                                             <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddTopicFeatureForm()">
                                                 <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
                                             </button>
-                                            <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                            </button>
                                         </form>
                                     </div>
                                 </div>
@@ -198,6 +199,10 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div class="content-wrapper" *ngIf="departmentAndSemesterDataStatus === 0 || departmentAndSemesterDataStatus === 3">
+        <app-admin-list-error [errorId]=1 [errorCode]="departmentAndSemesterDataStatus">
+        </app-admin-list-error>
     </div>
     <app-footer></app-footer>
 </div>

@@ -81,9 +81,9 @@ export class AdminSubjectsComponent implements OnInit {
 			this.loader.hideLoader();
 			this.facultiesDataStatus = 1;
 			this.faculties = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.facultiesDataStatus = 0;
+			this.facultiesDataStatus = errorCode;
 		});
 	};
 
@@ -102,9 +102,9 @@ export class AdminSubjectsComponent implements OnInit {
 			this.departmentAndSectionDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = 0;
+			this.departmentAndSectionDataStatus = errorCode;
 		});
 	};
 
@@ -129,9 +129,9 @@ export class AdminSubjectsComponent implements OnInit {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.subjectsDataStatus = 0;
+			this.subjectsDataStatus = errorCode;
 		});
 	};
 

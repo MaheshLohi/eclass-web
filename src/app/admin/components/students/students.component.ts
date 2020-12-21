@@ -65,9 +65,9 @@ export class AdminStudentsComponent implements OnInit {
 			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = 0;
+			this.departmentAndSemesterDataStatus = errorCode;
 		});
 	};
 
@@ -91,9 +91,9 @@ export class AdminStudentsComponent implements OnInit {
 			this.loader.hideLoader();
 			this.studentsDataStatus = 1;
 			this.students = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.studentsDataStatus = 0;
+			this.studentsDataStatus = errorCode;
 		});
 	};
 

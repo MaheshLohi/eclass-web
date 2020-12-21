@@ -35,9 +35,9 @@ export class AdminDepartmentComponent implements OnInit {
 			this.loader.hideLoader();
 			this.departmentDataStatus = 1;
 			this.departments = response.departments;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentDataStatus = 0;
+			this.departmentDataStatus = errorCode;
 		});
 	};
 }

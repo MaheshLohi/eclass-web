@@ -1,14 +1,14 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="content-wrapper">
+    <div class="content-wrapper" *ngIf="topicsDataStatus === 1">
         <app-breadcrumb [title]="'TOPICS'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
                 <div class="row"> 
                     <div class="col-12">
                         <div class="card card-primary card-outline">
-                            <div class="card-body row" *ngIf="topicsDataStatus === 1">
+                            <div class="card-body row">
                                 <div class="col-lg-6">
                                     <video src="{{videoUrl}}" width="99%" height="400px" controls class="video-player" autoplay>
                                     </video>
@@ -22,7 +22,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 topics-list p-0" *ngIf="topicsDataStatus === 1">
+                                <div class="col-lg-6 topics-list p-0">
                                     <table class="table table-striped mb-0">
                                         <tbody>
                                             <tr>
@@ -60,6 +60,10 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div class="content-wrapper" *ngIf="topicsDataStatus === 0 || topicsDataStatus === 3">
+        <app-admin-list-error [errorId]=6 [errorCode]="topicsDataStatus">
+        </app-admin-list-error>
     </div>
     <app-footer></app-footer>
 </div>

@@ -61,9 +61,9 @@ export class AdminFacultiesComponent implements OnInit {
 			this.loader.hideLoader();
 			this.filterDataStatus = 1;
 			this.departments = response.departments;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.filterDataStatus = 0;
+			this.filterDataStatus = errorCode;
 		});
 	};
 
@@ -81,9 +81,9 @@ export class AdminFacultiesComponent implements OnInit {
 			this.loader.hideLoader();
 			this.facultiesDataStatus = 1;
 			this.faculties = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.facultiesDataStatus = 0;
+			this.facultiesDataStatus = errorCode;
 		});
 	};
 

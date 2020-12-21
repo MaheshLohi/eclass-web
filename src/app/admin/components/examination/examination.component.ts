@@ -77,13 +77,14 @@ export class AdminExaminationComponent implements OnInit {
 			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = 0;
+			this.departmentAndSemesterDataStatus = errorCode;
 		});
 	};
 
 	getSubjectsData() {
+		this.resetExamsList();
 		let data = this.filterForm.value;
 		if(data.department_id && data.inst_class_id) {
 			this.getSubjects(data)
@@ -104,28 +105,28 @@ export class AdminExaminationComponent implements OnInit {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.subjectsDataStatus = 0;
+			this.subjectsDataStatus = errorCode;
 		});
 	};
 
 	resetExamsList() {
 		this.examDataStatus = 2;
 		this.examsList = [];
-		this.loader.showLoader();
 	};
 
 	getExamsList() {
 		this.resetExamsList();
+		this.loader.showLoader();
 		this.adminExaminationService.getExamsList(this.filterForm.value)
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.examDataStatus = 0;
+			this.examDataStatus = errorCode;
 		});
 	};
 

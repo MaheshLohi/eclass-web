@@ -109,21 +109,11 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-lg-12" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
-                                    <app-list-error-handler 
-                                    [status]=subjectsDataStatus 
-                                    [title]="'SUBJECTS'">
-                                    </app-list-error-handler>
-                                </div>
+                                <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
+                                </app-admin-list-error>
                             </div>
-                            <div class="card-body" *ngIf="(departmentAndSectionDataStatus === 0 || departmentAndSectionDataStatus === 3) && !showAddFeature">
-                                <div class="col-lg-12">
-                                    <app-list-error-handler 
-                                    [status]=departmentAndSectionDataStatus 
-                                    [title]="'DEPARTMENTS'">
-                                    </app-list-error-handler>
-                                </div>
-                            </div>
+                            <app-admin-list-error [errorId]=5 [errorCode]="departmentAndSectionDataStatus" *ngIf="departmentAndSectionDataStatus === 0 || departmentAndSectionDataStatus === 3" [hidden]="showAddFeature === true">
+                            </app-admin-list-error>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addSubjects()" [formGroup]="addSubjectsForm">
@@ -192,12 +182,18 @@
                 <form role="form" (ngSubmit)="assignFaculties()" [formGroup]="assignFacultyForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'SELECT_FACULTY' | translate}} *</label>
-                        <select class="custom-select form-control select2" id="faculty_id" formControlName="faculty_id" required>
+                        <select class="custom-select form-control select2" id="faculty_id" formControlName="faculty_id" [hidden]="facultiesDataStatus != 1" required>
                             <option [value]=null selected disabled>{{ 'SELECT_FACULTY' | translate}}</option>
                             <option *ngFor="let faculty of faculties" [ngValue]="faculty.id">
                                 {{faculty.name}}
                             </option>
                         </select>
+                        <div class="error-message" *ngIf="facultiesDataStatus === 0">
+                            {{ 'PLEASE_ADD_FACULTIES_TO_CONTINUE' | translate }}<br/>
+                        </div>
+                        <div class="error-message" *ngIf="facultiesDataStatus === 3">
+                            {{ 'STANDARD_ERROR' | translate}}
+                        </div>
                     </div>
                     <app-form-validator [data]="validateAssignFacultyFormValue('faculty_id')"></app-form-validator>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!assignFacultyForm.valid">

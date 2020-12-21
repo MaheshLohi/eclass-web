@@ -82,9 +82,9 @@ export class AdminTopicComponent implements OnInit {
 			else {
 				this.selectTopic(this.topics[0]);
 			}
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.topicsDataStatus = 0;
+			this.topicsDataStatus = errorCode;
 		});
 	};
 

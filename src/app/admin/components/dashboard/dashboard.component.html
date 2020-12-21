@@ -21,6 +21,8 @@
 				</div>
 			</div>
 		</section>
+		<app-admin-list-error [errorId]=0 [errorCode]="dashboardDataStatus" *ngIf="dashboardDataStatus === 0 || dashboardDataStatus === 3">
+		</app-admin-list-error>
     </div>
     <app-footer></app-footer>
 </div>

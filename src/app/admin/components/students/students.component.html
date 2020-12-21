@@ -56,10 +56,10 @@
                                                     {{ i + 1 }}
                                                 </td>
                                                 <td>
-                                                    {{ student.usn | verifyData }}
+                                                    {{ student.name | verifyData }}
                                                 </td>
                                                 <td>
-                                                    {{ student.name | verifyData }}
+                                                    {{ student.usn | verifyData }}
                                                 </td>
                                                 <td>
                                                     {{ student.email | verifyData }}
@@ -71,12 +71,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-lg-12" *ngIf="studentsDataStatus === 0 || studentsDataStatus === 3">
-                                    <app-list-error-handler 
-                                    [status]=studentsDataStatus 
-                                    [title]="'STUDENTS'">
-                                    </app-list-error-handler>
-                                </div>
+                                <app-admin-list-error [errorId]=2 [errorCode]="studentsDataStatus" *ngIf="studentsDataStatus === 0 || studentsDataStatus === 3">
+                                </app-admin-list-error>
                             </div>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">
@@ -102,6 +98,10 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div class="content-wrapper" *ngIf="departmentAndSemesterDataStatus === 0 || departmentAndSemesterDataStatus === 3">
+        <app-admin-list-error [errorId]=1 [errorCode]="departmentAndSemesterDataStatus">
+        </app-admin-list-error>
     </div>
     <app-footer></app-footer>
 </div>

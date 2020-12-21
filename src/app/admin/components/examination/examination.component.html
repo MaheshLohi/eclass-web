@@ -68,13 +68,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-lg-12" *ngIf="examDataStatus === 0 || examDataStatus === 3">
-                                    <app-list-error-handler 
-                                    [status]=examDataStatus 
-                                    [title]="'EXAMINATION'">
-                                    </app-list-error-handler>
-                                </div>
+                                <app-admin-list-error [errorId]=8 [errorCode]="examDataStatus" *ngIf="examDataStatus === 0 || examDataStatus === 3">
+                                </app-admin-list-error>
                             </div>
+                            <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
+                            </app-admin-list-error>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
                                     <div class="form-group mb-0">
@@ -111,6 +109,10 @@
                 </div>
             </div>
         </section>
+    </div>
+    <div class="content-wrapper" *ngIf="departmentAndSemesterDataStatus === 0 || departmentAndSemesterDataStatus === 3">
+        <app-admin-list-error [errorId]=1 [errorCode]="departmentAndSemesterDataStatus">
+        </app-admin-list-error>
     </div>
     <app-footer></app-footer>
 </div>

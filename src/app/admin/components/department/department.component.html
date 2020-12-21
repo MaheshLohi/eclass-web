@@ -1,7 +1,7 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="content-wrapper">
+    <div class="content-wrapper" *ngIf="departmentDataStatus === 1">
         <app-breadcrumb [title]="'DEPARTMENTS'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
@@ -14,7 +14,7 @@
                                 </h3>
                             </div>
                             <div class="card-body">
-                                <div class="col-lg-12" *ngIf="departmentDataStatus === 1">
+                                <div class="col-lg-12">
                                     <table class="table table-striped">
                                         <tbody>
                                             <tr>
@@ -32,18 +32,17 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-lg-12" *ngIf="departmentDataStatus === 0 || departmentDataStatus === 3">
-                                    <app-list-error-handler 
-                                    [status]=departmentDataStatus 
-                                    [title]="'DEPARTMENTS'">
-                                    </app-list-error-handler>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
+    </div>
+    <div class="content-wrapper" *ngIf="departmentDataStatus === 0 || departmentDataStatus === 3">
+        <app-admin-list-error [errorId]=1 [errorCode]="departmentDataStatus">
+        </app-admin-list-error>
     </div>
     <app-footer></app-footer>
 </div>

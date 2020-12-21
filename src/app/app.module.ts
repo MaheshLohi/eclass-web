@@ -27,7 +27,6 @@ import { NavbarComponent } from '@sharedComponents/navbar/navbar.component';
 import { StudentNavbarComponent } from '@studentComponents/navbar/navbar.component';
 import { SuperAdminSidebarComponent } from '@superAdminComponents/sidebar/sidebar.component';
 import { AdminSidebarComponent } from '@adminComponents/sidebar/sidebar.component';
-import { ListErrorHandlerComponent } from '@sharedComponents/listErrorHandler/listErrorHandler.component';
 import { PageNotFoundComponent } from '@sharedComponents/pageNotFound/pageNotFound.component';
 import { FormValidatorComponent } from '@sharedComponents/formValidator/formValidator.component';
 import { SuperAdminDashboardComponent } from '@superAdminComponents/dashboard/dashboard.component';
@@ -64,6 +63,7 @@ import { FacultyQuestionsComponent } from '@facultyComponents/questions/question
 import { StudentListErrorComponent } from '@studentComponents/list-error/list-error.component';
 import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-error.component';
 import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/list-error.component';
+import { AdminListErrorComponent } from '@adminComponents/list-error/list-error.component';
 
 @NgModule({
 	declarations: [
@@ -76,7 +76,6 @@ import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/l
 		SuperAdminSidebarComponent,
 		AdminSidebarComponent,
 		SuperAdminInstitutesComponent,
-		ListErrorHandlerComponent,
 		PageNotFoundComponent,
 		FormValidatorComponent,
 		AdminDashboardComponent,
@@ -111,7 +110,8 @@ import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/l
 		FacultyQuestionsComponent,
 		StudentListErrorComponent,
 		FacultyListErrorComponent,
-		SuperAdminListErrorComponent
+		SuperAdminListErrorComponent,
+		AdminListErrorComponent
 	],
 	imports: [
 		BrowserModule,

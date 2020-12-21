@@ -106,13 +106,14 @@ export class AdminChapterComponent implements OnInit {
 			this.departmentAndSemesterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = 0;
+			this.departmentAndSemesterDataStatus = errorCode;
 		});
 	};
 
 	getSubjectsData() {
+		this.resetChapters();
 		let data = this.filterForm.value;
 		if(data.department_id && data.inst_class_id) {
 			this.getSubjects(data)
@@ -138,29 +139,29 @@ export class AdminChapterComponent implements OnInit {
 			this.loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.subjectsDataStatus = 0;
+			this.subjectsDataStatus = errorCode;
 		});
 	};
 
 	resetChapters() {
 		this.chaptersDataStatus = 2;
 		this.chapters = [];
-		this.loader.showLoader();
 		this.resetFormValue('addTopicForm','chapter_id');
 	};
 
 	getChapters() {
 		this.resetChapters();
+		this.loader.showLoader();
 		this.chapterService.getChapters(this.filterForm.value)
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.chaptersDataStatus = 1;
 			this.chapters = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.chaptersDataStatus = 0;
+			this.chaptersDataStatus = errorCode;
 		});
 	};
 
