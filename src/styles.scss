@@ -377,3 +377,8 @@ a.table-link:active {
     padding: 15px 0px;
     color: #565151;
 }
+@media only screen and (max-width: 768px) {
+    .basic-form-image {
+        display: none;
+    }
+}
