@@ -19,8 +19,8 @@
                                 <input [type]="showPassword ? 'text' : 'password'" class="form-control" class="form-control br-basic-form" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}" required>
                                 <div class="input-group-append" (click)="togglePassword()">
                                     <div class="input-group-text br-basic-form bg-white cursor-ponter" type="button">
-                                        <i *ngIf="showPassword" class="fa fa-eye"></i>
-                                        <i *ngIf="!showPassword" class="fa fa-eye-slash"></i>
+                                        <i *ngIf="showPassword" class="fa fa-eye-slash"></i>
+                                        <i *ngIf="!showPassword" class="fa fa-eye"></i>
                                     </div>
                                 </div>
                             </div>
