@@ -1,0 +1,17 @@
+<section class="content">
+    <div class="text-center no-data-container">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+            <span class="swal2-x-mark">
+                <span class="swal2-x-mark-line-left"></span>
+                <span class="swal2-x-mark-line-right"></span>
+            </span>
+        </div>
+        <div class="message" *ngIf="errorCode === 0"> 
+           <span *ngIf="errorId === 0">No subjects assigned to you from your school.</span> 
+           <span *ngIf="errorId === 1">No questions found for this subject.</span>
+        </div>
+        <div class="message" *ngIf="errorCode === 3"> 
+            <span>Something went wrong.<br/> Please contact your school.</span> 
+        </div>
+    </div>
+</section>

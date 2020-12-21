@@ -26,13 +26,13 @@ export class FacultySubjectsComponent implements OnInit {
 
   	ngOnInit() {
 		this.getFacultySubjects();
-	}
+	};
 
 	resetSubjectsList() {
 		this.subjectsListStatus = 2;
 		this.subjectsList = [];
 		this.loader.showLoader();
-	}
+	};
 	  
 	getFacultySubjects() {
 		this.resetSubjectsList();
@@ -41,14 +41,14 @@ export class FacultySubjectsComponent implements OnInit {
 			this.loader.hideLoader();
 			this.subjectsListStatus = 1;
 			this.subjectsList = response;
-		},()=> {
-			this.subjectsListStatus = 0;
+		},(errorStatus)=> {
+			this.subjectsListStatus = errorStatus;
 			this.loader.hideLoader();
 		})
-	}
+	};
 
 	onSubjectSelection(subject) {
 		this.router.navigate(['faculty/questions', subject.id]);
-	}
+	};
 
 }

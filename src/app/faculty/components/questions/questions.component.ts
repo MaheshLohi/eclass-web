@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute, Router, Params } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -20,23 +20,22 @@ export class FacultyQuestionsComponent implements OnInit {
 	questionsList : any = [];
 	questionsListStatus : number = 2;
 
-  	constructor(public constants : Constants,
+	constructor(public constants : Constants,
+	public miscellaneousService : MiscellaneousService,
 	private loader: LoaderService,
 	private route: ActivatedRoute,
-	public router: Router,
 	private toaster: ToasterService,
 	private translate: TranslateService,
 	public downloadService : DownloadService,
-	public miscellaneousService : MiscellaneousService,
 	private facultyQuestionsService : FacultyQuestionsService) { 
 		this.route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
 		});
-	}
+	};
 
 	ngOnInit() {
 		this.getQuestionsList();
-	}
+	};
 
 	resetQuestionsList() {
 		this.questionsListStatus = 2;

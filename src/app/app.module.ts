@@ -62,6 +62,7 @@ import { FacultySidebarComponent } from '@facultyComponents/sidebar/sidebar.comp
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
 import { StudentListErrorComponent } from '@studentComponents/list-error/list-error.component';
+import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-error.component';
 
 @NgModule({
 	declarations: [
@@ -107,7 +108,8 @@ import { StudentListErrorComponent } from '@studentComponents/list-error/list-er
 		FacultySidebarComponent,
 		FacultySubjectsComponent,
 		FacultyQuestionsComponent,
-		StudentListErrorComponent
+		StudentListErrorComponent,
+		FacultyListErrorComponent
 	],
 	imports: [
 		BrowserModule,

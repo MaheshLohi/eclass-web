@@ -3,7 +3,7 @@
     <app-faculty-sidebar></app-faculty-sidebar>
     <div class="content-wrapper">
         <div class="col-md-12 pt-4">
-            <section class="faculty-questions-list">
+            <section class="faculty-questions-list" *ngIf="questionsListStatus === 1">
                 <div *ngFor="let question of questionsList; let i = index">
                     <div class="card mb-2">
                         <div class="card-header">
@@ -48,6 +48,8 @@
                     </div>
                 </div>
             </section>
+            <app-faculty-list-error [errorId]=1 [errorCode]="questionsListStatus" *ngIf="questionsListStatus === 0 || questionsListStatus === 3">
+            </app-faculty-list-error>
         </div>
     </div>
     <app-footer></app-footer>
