@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FacultyListErrorComponent } from './list-error.component';
+import { SuperAdminListErrorComponent } from './list-error.component';
 
-describe('FacultyListErrorComponent', () => {
-  let component: FacultyListErrorComponent;
-  let fixture: ComponentFixture<FacultyListErrorComponent>;
+describe('SuperAdminListErrorComponent', () => {
+  let component: SuperAdminListErrorComponent;
+  let fixture: ComponentFixture<SuperAdminListErrorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FacultyListErrorComponent ]
+      declarations: [ SuperAdminListErrorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FacultyListErrorComponent);
+    fixture = TestBed.createComponent(SuperAdminListErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

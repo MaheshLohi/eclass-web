@@ -14,7 +14,7 @@ export class SessionHandlerService {
 
 	constructor(private router: Router,
 	private alert : AlertService,
-	public translate : TranslateService,
+	private translate : TranslateService,
 	private storageService : StorageService,
 	private constants: Constants,
 	private http: HttpClient) { }

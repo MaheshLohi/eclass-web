@@ -19,9 +19,9 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	institutes : any = [];
 	instituteDataStatus : number = 2;
 	showAddFeature : boolean = false;
-	logo: File;
 	addDataForm : FormGroup;
 	editDataForm : FormGroup;
+	logo: File;
 
 	constructor(public constants : Constants,
 	private translate: TranslateService,

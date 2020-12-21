@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListErrorComponent } from './list-error.component';
+import { StudentListErrorComponent } from './list-error.component';
 
-describe('ListErrorComponent', () => {
-  let component: ListErrorComponent;
-  let fixture: ComponentFixture<ListErrorComponent>;
+describe('StudentListErrorComponent', () => {
+  let component: StudentListErrorComponent;
+  let fixture: ComponentFixture<StudentListErrorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListErrorComponent ]
+      declarations: [ StudentListErrorComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListErrorComponent);
+    fixture = TestBed.createComponent(StudentListErrorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

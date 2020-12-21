@@ -63,12 +63,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <div class="col-lg-12" *ngIf="instituteDataStatus === 0 || instituteDataStatus === 3">
-                                    <app-list-error-handler 
-                                    [status]=instituteDataStatus 
-                                    [title]="'INSTITUTES'">
-                                    </app-list-error-handler>
-                                </div>
+                                <app-sAdmin-list-error [errorId]=0 [errorCode]="instituteDataStatus" *ngIf="instituteDataStatus === 0 || instituteDataStatus === 3">
+                                </app-sAdmin-list-error>
                             </div>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">

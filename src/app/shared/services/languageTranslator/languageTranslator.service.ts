@@ -8,7 +8,7 @@ import { Constants } from 'src/app/constants';
 })
 export class LanguageTranslatorService {
 
-	constructor(public translate : TranslateService,
+	constructor(private translate : TranslateService,
 	private constants : Constants) { };
 
 	initiateLanguage() {

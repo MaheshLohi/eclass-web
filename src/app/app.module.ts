@@ -63,6 +63,7 @@ import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.c
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
 import { StudentListErrorComponent } from '@studentComponents/list-error/list-error.component';
 import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-error.component';
+import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/list-error.component';
 
 @NgModule({
 	declarations: [
@@ -109,7 +110,8 @@ import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-er
 		FacultySubjectsComponent,
 		FacultyQuestionsComponent,
 		StudentListErrorComponent,
-		FacultyListErrorComponent
+		FacultyListErrorComponent,
+		SuperAdminListErrorComponent
 	],
 	imports: [
 		BrowserModule,
