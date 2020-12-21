@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
@@ -11,7 +11,7 @@ import { Constants } from '@app/constants';
 export class SuperAdminAdminsService {
 
 	constructor(private constants: Constants,
-	private http: HttpClient) { }
+	private http: HttpClient) { };
 
 	getAdmins(): Observable<any> {
 		return this.http.get<any>(this.constants.ADMINS_LIST_URL)

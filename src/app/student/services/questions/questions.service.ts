@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
@@ -13,7 +13,7 @@ export class StudentQuestionsService {
 	constructor(private constants: Constants,
 	private http: HttpClient) { }
 
-	getQuestionsList(topicId) {
+	getQuestionsList(topicId): Observable<any> {
 		return this.http.get<any>(this.constants.STUDENT_QUESTIONS_LIST_URL + topicId)
 		.pipe(
 			map(response => { 
@@ -25,7 +25,7 @@ export class StudentQuestionsService {
 		)
 	};
 
-	addQuestion(addForm,topicId) {
+	addQuestion(addForm,topicId): Observable<any> {
 		const formData = new FormData();
 		formData.append('chapter_detail_id', topicId);
 		formData.append('question', addForm.question);

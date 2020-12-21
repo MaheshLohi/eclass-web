@@ -69,9 +69,9 @@ export class SuperAdminInstitutesComponent implements OnInit {
 			this.loader.hideLoader();
 			this.instituteDataStatus = 1;
 			this.institutes = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.instituteDataStatus = 0;
+			this.instituteDataStatus = errorCode;
 		});
 	};
 

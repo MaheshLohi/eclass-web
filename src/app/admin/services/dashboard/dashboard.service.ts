@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
@@ -17,7 +17,7 @@ export class AdminDashboardService {
 	private http: HttpClient,
 	private storageService : StorageService) { }
 
-	getDashboardData() : Observable<any> {
+	getDashboardData(): Observable<any> {
 		this.userDetails = this.storageService.getData("userDetails");
 		return this.http.get<any>(this.constants.ADMIN_DASHBOARD_LIST_URL + this.userDetails.inst_id)
 		.pipe(

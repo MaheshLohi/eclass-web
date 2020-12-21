@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Constants } from '@app/constants';
@@ -11,7 +11,7 @@ import { Constants } from '@app/constants';
 export class SuperAdminInstitutesService {
 
 	constructor(private constants: Constants,
-	private http: HttpClient) { }
+	private http: HttpClient) { };
 
 	getInstitutes(): Observable<any> {
 		return this.http.get<any>(this.constants.INSTITUTES_LIST_URL)
@@ -48,6 +48,6 @@ export class SuperAdminInstitutesService {
 		formData.append('address', editFormValue.address);
 		if(logo) { formData.append('logo', logo);}
 		return this.http.post<any>(this.constants.INSTITUTE_UPDATE_URL, formData);
-	}
+	};
   
 }

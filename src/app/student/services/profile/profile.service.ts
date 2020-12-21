@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Observable } from 'rxjs';
 import { Constants } from '@app/constants';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class StudentProfileService {
 	constructor(private constants: Constants,
 	private http: HttpClient) { }
 
-	updateProfile(profileFormValue, profile_pic) {
+	updateProfile(profileFormValue, profile_pic): Observable<any> {
 		const formData = new FormData();
 		if(profile_pic) { formData.append('profile_pic', profile_pic); }
 		if(profileFormValue.password) { formData.append('password', profileFormValue.password); }

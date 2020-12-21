@@ -69,9 +69,9 @@ export class SuperAdminAdminsComponent implements OnInit {
 			this.loader.hideLoader();
 			this.adminDataStatus = 1;
 			this.admins = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.adminDataStatus = 0;
+			this.adminDataStatus = errorCode;
 		});
 	};
 
@@ -88,9 +88,9 @@ export class SuperAdminAdminsComponent implements OnInit {
 			this.loader.hideLoader();
 			this.instituteDataStatus = 1;
 			this.institutes = response;
-		}, () => {
+		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.instituteDataStatus = 0;
+			this.instituteDataStatus = errorCode;
 		});
 	};
 
