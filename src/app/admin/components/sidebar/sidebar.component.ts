@@ -21,7 +21,7 @@ export class AdminSidebarComponent implements OnInit {
 
  	ngOnInit() {
 		this.userType = this.constants.ADMIN;
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		this.sidemenus = [{
 			name : "DASHBOARD",
 			icon : "fa fa-home",

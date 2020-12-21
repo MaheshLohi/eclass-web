@@ -18,7 +18,7 @@ export class StudentSemesterService {
 	private storageService : StorageService) { }
 
 	getSemestersList(): Observable<any> {
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		return this.http.get<any>(this.constants.DEPARTMENTS_AND_SECTIONS_LIST_URL + this.userDetails.inst_id)
 		.pipe(
 			map(response => { 

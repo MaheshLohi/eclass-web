@@ -18,7 +18,7 @@ export class AdminDashboardService {
 	private storageService : StorageService) { }
 
 	getDashboardData() : Observable<any> {
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		return this.http.get<any>(this.constants.ADMIN_DASHBOARD_LIST_URL + this.userDetails.inst_id)
 		.pipe(
 			map(response => { 

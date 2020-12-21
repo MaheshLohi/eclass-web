@@ -24,7 +24,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 	
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 		let Authorization = this.storageService.getData("Authorization");
-		let userDetails = this.storageService.getData("User_Information");
+		let userDetails = this.storageService.getData("userDetails");
       	if (Authorization) {
           	request = request.clone({ headers: request.headers.set('Authorization',  "Bearer " + Authorization.token) });
 		}

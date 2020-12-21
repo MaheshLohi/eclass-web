@@ -29,7 +29,7 @@ export class SessionHandlerService {
 	};
 
 	navigateToLogin() {
-		let userDetails = this.storageService.getData("User_Information");
+		let userDetails = this.storageService.getData("userDetails");
 		this.storageService.clear();
 		if(userDetails.type === 2) {
 			this.router.navigate(['/']);

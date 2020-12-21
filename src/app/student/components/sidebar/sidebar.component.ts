@@ -19,7 +19,7 @@ export class StudentSidebarComponent implements OnInit {
 
  	ngOnInit() {
 		this.userType = this.constants.STUDENT;
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		this.sidemenus = [{
 			name : "HOME",
 			icon : "fa fa-home",

@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
 	private storageService: StorageService) { }
 
 	ngOnInit() {
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		this.loginType = this.userDetails.type;
 	}
 

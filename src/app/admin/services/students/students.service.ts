@@ -18,7 +18,7 @@ export class AdminStudentsService {
 	private storageService : StorageService) { }
 
 	getStudents(selectedDepartmentId, selectedSectionId) : Observable<any> {
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		return this.http.get<any>(this.constants.STUDENTS_LIST_URL + this.userDetails.inst_id + '/' + selectedDepartmentId + '/' + selectedSectionId)
 		.pipe(
 			map(response => { 
@@ -31,7 +31,7 @@ export class AdminStudentsService {
 	};
 	  
 	addStudents(filterData, selectedFile) : Observable<any> {
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		const formData = new FormData();
 		formData.append('students', selectedFile);
 		formData.append('department_id', filterData.department_id);

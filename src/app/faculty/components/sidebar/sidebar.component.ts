@@ -19,7 +19,7 @@ export class FacultySidebarComponent implements OnInit {
 
 	ngOnInit() {
 		this.userType = this.constants.FACULTY;
-		this.userDetails = this.storageService.getData("User_Information");
+		this.userDetails = this.storageService.getData("userDetails");
 		this.sidemenus = [{
 			name : "DASHBOARD",
 			icon : "fa fa-home",

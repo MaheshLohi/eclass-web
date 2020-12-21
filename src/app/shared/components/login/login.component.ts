@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
 	loginForm : FormGroup;
 	loginType : string;
+	showPassword : boolean = false;
 
 	constructor(private router: Router,
 	private loader: LoaderService,
@@ -42,6 +43,10 @@ export class LoginComponent implements OnInit {
 			case '/' : return 'student';
 			default : return 'student';
 		}
+	};
+
+	togglePassword() {
+		this.showPassword = !this.showPassword;
 	};
 	  
 	doLogin() {

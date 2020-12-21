@@ -34,7 +34,7 @@ export class LoginService {
 		.pipe(
 			map(response => { 
 				if (response && response.data) {
-					this.storageService.setData('User_Information', response.data);
+					this.storageService.setData('userDetails', response.data);
 				  	return response.data; 
 				}
 				throw 0;
