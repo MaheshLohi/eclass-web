@@ -27,6 +27,7 @@ import { StudentFeedbackComponent } from '@studentComponents/feedback/feedback.c
 import { StudentHelpComponent } from '@studentComponents/help/help.component';
 import { StudentSearchComponent } from '@studentComponents/search/search.component';
 import { StudentProfileComponent } from '@studentComponents/profile/profile.component';
+import { StudentCreateProfileComponent } from '@app/student/components/profile/create-profile/create-profile.component';
 
 import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboard.component';
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
@@ -59,6 +60,7 @@ const routes: Routes = [
 	{ path: 'student/help', component: StudentHelpComponent, canActivate: [AuthGuard]},
 	{ path: 'student/search', component: StudentSearchComponent, canActivate: [AuthGuard]},
 	{ path: 'student/profile', component: StudentProfileComponent, canActivate: [AuthGuard]},
+	{ path: 'student/create-profile', component: StudentCreateProfileComponent, canActivate: [AuthGuard]},
 	
 	{ path: 'faculty/dashboard', component: FacultyDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'faculty/subjects', component: FacultySubjectsComponent, canActivate: [AuthGuard]},

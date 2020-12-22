@@ -64,6 +64,7 @@ import { StudentListErrorComponent } from '@studentComponents/list-error/list-er
 import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-error.component';
 import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/list-error.component';
 import { AdminListErrorComponent } from '@adminComponents/list-error/list-error.component';
+import { StudentCreateProfileComponent } from '@app/student/components/profile/create-profile/create-profile.component';
 
 @NgModule({
 	declarations: [
@@ -111,7 +112,8 @@ import { AdminListErrorComponent } from '@adminComponents/list-error/list-error.
 		StudentListErrorComponent,
 		FacultyListErrorComponent,
 		SuperAdminListErrorComponent,
-		AdminListErrorComponent
+		AdminListErrorComponent,
+		StudentCreateProfileComponent
 	],
 	imports: [
 		BrowserModule,

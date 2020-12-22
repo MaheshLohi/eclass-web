@@ -338,6 +338,9 @@ a.table-link:active {
     .app-logo {
         width: 250px;
     }
+    .create-profile-form .app-logo {
+        width: 150px;
+    }
     .app-title {
         vertical-align: sub;
     }
@@ -352,7 +355,8 @@ a.table-link:active {
         background-position: bottom left;
         min-height: 400px;
     }
-    .login-form {
+    .login-form,
+    .create-profile-form {
         border-radius: 7px 0px 0px 7px;
     }
 }
