@@ -96,13 +96,15 @@
                     <div class="form-group">
                         <label for="customFile">Video 1</label>
                         <div>
-                            <input type="file" id="video_file1" formControlName="video_file1" (change)="onFileChange($event,'videoFile1')">
+                            <input type="file" id="video_file1" formControlName="video_file1" (change)="onFileChange($event,'videoFile1')"
+                            accept="video/*">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="customFile">Video 2</label>
                         <div>
-                            <input type="file" id="video_file2" formControlName="video_file2" (change)="onFileChange($event,'videoFile2')">
+                            <input type="file" id="video_file2" formControlName="video_file2" (change)="onFileChange($event,'videoFile2')"
+                            accept="video/*">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editTopicForm.valid">

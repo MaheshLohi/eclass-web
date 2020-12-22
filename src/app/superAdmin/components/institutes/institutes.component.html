@@ -87,7 +87,8 @@
                                         <div class="form-group">
                                             <label for="customFile">{{ 'LOGO' | translate}}</label>
                                             <div>
-                                                <input type="file" id="logo" formControlName="logo" (change)="onFileChange($event,'logo')">
+                                                <input type="file" id="logo" formControlName="logo" (change)="onFileChange($event,'logo')"
+                                                accept="image/*">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
@@ -136,7 +137,8 @@
                     <div class="form-group">
                         <label for="customFile">{{ 'LOGO' | translate}}</label>
                         <div>
-                            <input type="file" id="logo" formControlName="logo" (change)="onFileChange($event,'logo')">
+                            <input type="file" id="logo" formControlName="logo" (change)="onFileChange($event,'logo')"
+                            accept="image/*">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editDataForm.valid">

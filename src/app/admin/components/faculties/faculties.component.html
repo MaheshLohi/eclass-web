@@ -77,7 +77,8 @@
                                         <div class="form-group">
                                             <label for="customFile">{{ 'File' | translate}}</label>
                                             <div>
-                                                <input type="file" id="facultiesFile" formControlName="facultiesFile" (change)="onFileChange($event,'facultiesFile')" required>
+                                                <input type="file" id="facultiesFile" formControlName="facultiesFile" (change)="onFileChange($event,'facultiesFile')" required
+                                                accept=".csv">
                                             </div>
                                         </div>
                                         <app-form-validator [data]="validateAddFormValue('facultiesFile')"></app-form-validator>

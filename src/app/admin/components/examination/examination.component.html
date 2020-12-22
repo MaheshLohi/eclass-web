@@ -93,7 +93,7 @@
                                     <div class="form-group">
                                         <label for="customFile">{{ 'FILE' | translate}}</label>
                                         <div>
-                                            <input type="file" id="paper" formControlName="paper" (change)="onFileChange($event)">
+                                            <input type="file" id="paper" formControlName="paper" (change)="onFileChange($event)" accept=".pdf">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
