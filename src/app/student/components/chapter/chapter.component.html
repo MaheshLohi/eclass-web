@@ -5,12 +5,12 @@
             <div class="card-body p-2" (click)="navigateToTopics(chapter)">
                 <div class="img-container ctmimg-wdt">
                     <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + chapter.thumbnail' 
-                    (error)="miscellaneousService.setDefaultThumbnailImage($event)">
+                    (error)="miscellaneous.setDefaultThumbnailImage($event)">
                 </div>
                 <div class="card-header-portion">
                     {{subjectDetails.code | verifyData}}
                     <button class="btn btn-theme-primary float-right btn-sm"
-                    (click)="downloadService.download(chapter.notes, $event)" *ngIf="chapter.notes">
+                    (click)="download.download(chapter.notes, $event)" *ngIf="chapter.notes">
                         <i class="pr-1 fa fa-download"></i> {{ 'NOTES' | translate }}
                     </button>
                 </div>

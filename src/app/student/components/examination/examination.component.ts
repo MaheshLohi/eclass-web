@@ -1,8 +1,8 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
 import { Constants } from '@app/constants';
-import { LoaderService } from '@sharedServices/loader/loader.service';
 import { DownloadService } from '@sharedServices/download/download.service';
+import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentExaminationService } from '@studentServices/examination/examination.service';
 
 @Component({
@@ -16,10 +16,10 @@ export class StudentExaminationComponent implements OnChanges {
 	examDataStatus : number = 2;
 	examsList : any = [];
 
-	constructor(public constants : Constants,
-	public downloadService : DownloadService,
+	constructor(public constants: Constants,
+	public download: DownloadService,
 	private loader: LoaderService,
-	private studentExaminationService : StudentExaminationService) { };
+	private studentExaminationService: StudentExaminationService) { };
 
 	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 

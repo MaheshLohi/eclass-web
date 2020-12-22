@@ -1,5 +1,4 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
-import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
@@ -12,13 +11,12 @@ import { StudentFaqService } from '@studentServices/faq/faq.service';
 })
 export class StudentFaqComponent implements OnChanges {
 
-	@Input() topicId: any;
+	@Input() topicId: number;
 	faqsDataStatus : number = 2;
 	faqs : any = [];
 
 	constructor(public constants : Constants,
 	private loader: LoaderService,
-	public router: Router,
 	private studentFaqService : StudentFaqService) { };
 
 	ngOnChanges(changes: SimpleChanges) {

@@ -23,24 +23,22 @@ export class StudentNavbarComponent implements OnInit {
 	selectSemesterId : number;
 	showSemesterDropdown : Boolean = false;
 	showSearhBar : Boolean = true;
-	@Output() public semesterChanged = new EventEmitter();
 	searchString : string;
+	@Output() public semesterChanged = new EventEmitter();
 
 	constructor(public constants : Constants,
+	public miscellaneous : MiscellaneousService,
 	private loader: LoaderService,
-	public router: Router,
+	private router: Router,
 	private studentSemesterService : StudentSemesterService,
 	private sessionHandler : SessionHandlerService,
-	public miscellaneousService : MiscellaneousService,
 	private storageService: StorageService) { }
 
 	ngOnInit() {
 		this.userDetails = this.storageService.getData("userDetails");
 		this.loginType = this.userDetails.type;
 		this.searchString = '';
-		if(this.semestersDataStatus != 1) {
-			this.getSemestersList();
-		}
+		if(this.semestersDataStatus != 1) { this.getSemestersList(); };
 		this.toggleSemestersListSelector();
 		this.toggleSearchBar();
 	};
@@ -110,7 +108,6 @@ export class StudentNavbarComponent implements OnInit {
 			let data = {};
 			data['searchString'] = this.searchString;
 			this.router.navigate(['student/search'],{ queryParams: data });
-			
 		}
 		else {
 			this.router.navigate(['student/search']);

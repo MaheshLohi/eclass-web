@@ -19,12 +19,12 @@ export class StudentChapterComponent implements OnChanges {
 	chapters : any = [];
 	chaptersDataStatus : number = 2;
 
-	constructor(public constants : Constants,
-	public downloadService : DownloadService,
-	public miscellaneousService : MiscellaneousService,
+	constructor(public constants: Constants,
+	public download: DownloadService,
+	public miscellaneous: MiscellaneousService,
 	private loader: LoaderService,
 	private router: Router,
-	private studentChapterService : StudentChapterService) {}
+	private chapterService: StudentChapterService) { };
 	  
 	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 
@@ -42,7 +42,7 @@ export class StudentChapterComponent implements OnChanges {
 
 	getChaptersList() {
 		this.resetChaptersList();
-		this.studentChapterService.getChaptersList(this.subjectId)
+		this.chapterService.getChaptersList(this.subjectId)
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
 			this.chaptersDataStatus = 1;

@@ -14,30 +14,30 @@ import { StudentSubjectService } from '@studentServices/subject/subject.service'
 })
 export class StudentContentComponent implements OnInit {
 
-	subjectId : number;
-	subjectDetailsDataStatus : number = 2;
-	subjectDetails : any = {};
-	contentType : number;
+	subjectId: number;
+	subjectDetailsDataStatus: number = 2;
+	subjectDetails: any = {};
+	contentType: number;
 
-	constructor(public constants : Constants,
-	public downloadService : DownloadService,
-	public miscellaneousService : MiscellaneousService,
+	constructor(public constants: Constants,
+	public download: DownloadService,
+	public miscellaneous: MiscellaneousService,
 	private loader: LoaderService,
 	private route: ActivatedRoute,
 	private router: Router,
-	private studentSubjectService : StudentSubjectService) {
+	private studentSubjectService: StudentSubjectService) {
     	this.route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
 		});
 		this.route.queryParams
 		.subscribe((queryParams: Params) => {
 			this.contentType = parseInt(queryParams.contentType);
-		})
-  	}
+		});
+  	};
 
   	ngOnInit() {
 		this.getSubjectDetails();
-	}
+	};
 	  
 	resetSubjectDetailsList() {
 		this.subjectDetailsDataStatus = 2;
