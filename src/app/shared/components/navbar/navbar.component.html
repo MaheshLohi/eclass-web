@@ -18,12 +18,12 @@
 					<img [src]='this.constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
 					(error)="miscellaneousService.setDefaultAdminLogo($event)">
 					<p>
-						{{userDetails.name | verifyData}}
+						<b>{{userDetails.name | verifyData}}</b>
 						<small>{{userDetails.email}}</small>
 					</p>
 			  	</li>
 			  	<li class="user-footer">
-					<a class="btn btn-default btn-flat float-right" (click)="logout()">Logout</a>
+					<a class="btn btn-theme-primary btn-flat float-right" (click)="logout()">Logout</a>
 			  	</li>
 			</ul>
 		</li>

@@ -22,17 +22,14 @@
                     </div>
                 </div>
                 <div class="bg-white text-center p-2">
-                    <span class="content-type-heading">
-                        {{(contentType === 1) ? ( 'CHAPTERS' | translate ) : ( 'EXAMINATION' | translate )}}
-                    </span>
-                    <button class="btn btn-theme-primary float-right mr-3"
-                    (click)="updateNavigation(1)" *ngIf="contentType === 2">
-                        <i class="pr-1 fa fa-eye"></i> {{ 'VIEW_CHAPTERS' | translate }}
-                    </button>
-                    <button class="btn btn-theme-primary float-right mr-3"
-                    (click)="updateNavigation(2)" *ngIf="contentType === 1">
-                        <i class="pr-1 fa fa-eye"></i> {{ 'VIEW_EXAMINATIONS' | translate }}
-                    </button>
+                    <div class="btn-group">
+                        <button type="button" class="btn" (click)="updateNavigation(1)" [ngClass]="{'btn-theme-primary' : contentType === 1,'btn-theme-outline-primary' : contentType === 2}">
+                            {{ 'CHAPTERS' | translate }}
+                        </button>
+                        <button type="button" class="btn" (click)="updateNavigation(2)" [ngClass]="{'btn-theme-primary' : contentType === 2,'btn-theme-outline-primary' : contentType === 1}">
+                            {{ 'EXAMINATIONS' | translate }}
+                        </button>
+                    </div>
                 </div>
             </div>
             <div *ngIf="contentType === 1">

@@ -2,8 +2,9 @@
     <app-student-navbar (semesterChanged)="onSemesterSelection($event)"></app-student-navbar>
     <app-student-sidebar></app-student-sidebar>
     <div class="content-wrapper">
+        <app-breadcrumb [title]="(featureType === 1)?'HOME':'EXAMINATION'"></app-breadcrumb>
       	<section class="content">
-          	<div class="col-md-12 pt-4">
+          	<div class="col-md-12">
 				<section class="row" *ngIf="subjectsDataStatus === 1">
                     <div class="col-lg-3 col-12 mt-1" *ngFor="let subject of subjects">
                         <div class="card card-widget mb-3 custom-card" (click)="onSubjectSelection(subject)">

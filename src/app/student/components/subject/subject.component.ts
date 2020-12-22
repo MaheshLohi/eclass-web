@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Constants } from '@app/constants';
@@ -12,11 +12,12 @@ import { StudentSubjectService } from '@studentServices/subject/subject.service'
   	templateUrl: './subject.component.html',
   	styleUrls: ['./subject.component.scss']
 })
-export class StudentSubjectComponent {
+export class StudentSubjectComponent implements OnInit{
 
 	subjectsDataStatus : number = 2;
 	subjects : any = [];
 	selectedSemester : any = {};
+	featureType : number;
 
 	constructor(public constants : Constants,
 	public downloadService : DownloadService,
@@ -24,6 +25,10 @@ export class StudentSubjectComponent {
 	private loader: LoaderService,
 	private router: Router,
 	private studentSubjectService : StudentSubjectService) { };
+
+	ngOnInit() {
+		this.featureType = (this.router.url === "/student/home") ? 1 : 2;
+	}
 
 	onSemesterSelection(semester) {
 		this.selectedSemester = semester;
@@ -51,7 +56,7 @@ export class StudentSubjectComponent {
 
 	onSubjectSelection(subject) {
 		let data = {};
-		data['contentType'] = (this.router.url === "/student/home") ? 1 : 2;
+		data['contentType'] = this.featureType;
 		this.router.navigate(['student/contents', subject.id],{ queryParams: data });
 	};
 

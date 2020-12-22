@@ -17,7 +17,7 @@
 		<li class="nav-item">
 			<form class="form-inline ml-3" *ngIf="showSemesterDropdown && semestersDataStatus === 1">
 				<div class="form-group">
-					<select class="custom-select selector-medium" [(ngModel)] ="selectSemesterId" [ngModelOptions]="{standalone: true}" (change)="onSemesterSelection(selectSemesterId)">
+					<select class="custom-select selector-medium sem-dropdown" [(ngModel)] ="selectSemesterId" [ngModelOptions]="{standalone: true}" (change)="onSemesterSelection(selectSemesterId)">
 						<option *ngFor="let semester of semesters" [value]="semester.id">{{ 'SEMESTER' | translate}} {{semester.name}}</option>
 					</select>
 				</div>
@@ -34,13 +34,13 @@
 					<img [src]='this.constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
 					(error)="miscellaneous.setDefaultStudentLogo($event)">
 					<p>
-						{{userDetails.name | verifyData}}
+						<b>{{userDetails.name | verifyData}}</b>
 						<small>{{userDetails.email}}</small>
 					</p>
 			  	</li>
 			  	<li class="user-footer">
-					<a class="btn btn-default btn-flat" (click)="navigteToProfile()">Profile</a>
-					<a class="btn btn-default btn-flat float-right" (click)="logout()">Logout</a>
+					<a class="btn btn-theme-primary btn-flat" (click)="navigteToProfile()">Profile</a>
+					<a class="btn btn-danger btn-flat float-right" (click)="logout()">Logout</a>
 			  	</li>
 			</ul>
 		</li>
