@@ -31,7 +31,7 @@ export class AdminExaminationComponent implements OnInit {
 	years = [2020,2019,2018,2017,2016,2015];
 
 	constructor(public constants : Constants,
-	public downloadService : DownloadService,
+	public download : DownloadService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
@@ -162,4 +162,16 @@ export class AdminExaminationComponent implements OnInit {
 			this.loader.hideLoader();
 		});
 	};
+
+	deletePaper(paper) {
+		this.loader.showLoader();
+		this.adminExaminationService.deleteExamPaper(paper)
+		.subscribe(() => {
+			this.loader.hideLoader();
+			this.getExamsList();
+			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("EXAMINATION")} ));
+		}, () => {
+			this.loader.hideLoader();
+		});
+	}
 }

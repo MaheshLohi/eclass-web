@@ -33,4 +33,8 @@ export class AdminExaminationService {
 		formData.append('paper', selectedFile);
 		return this.http.post<any>(this.constants.ADD_EXAMINATION_URL, formData);
 	};
+
+	deleteExamPaper(paper) {
+		return this.http.delete<any>(this.constants.EXAM_PAPER_DELETE_URL + paper.id);
+	}
 }

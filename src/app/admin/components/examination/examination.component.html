@@ -49,23 +49,41 @@
                             </div>
                             <div class="card-body" *ngIf="showAddFeature === false && examDataStatus != 2">
                                 <div class="col-lg-12" *ngIf="examDataStatus === 1">
-                                    <div class="card mb-4" *ngFor="let exam of examsList">
-                                        <div *ngFor="let year of exam | prepareObject">
-                                            <div class="card-header">
-                                                <h5 class="mb-2">{{ year.key }} examination papers</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="downloadService.download(paper.paper)">
-                                                        <div class="info-box filter-boxes">
-                                                            <div class="info-box-content">
-                                                                <span class="info-box-text">{{ paper.name | verifyData}}</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="row">
+                                        <table class="table table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <th>#</th>
+                                                    <th>{{ 'NAME' | translate}}</th>
+                                                    <th>{{ 'YEAR' | translate}}</th>
+                                                    <th></th>
+                                                </tr>
+                                                <ng-container *ngFor="let exam of examsList">
+                                                    <ng-container *ngFor="let year of exam | prepareObject" >
+                                                        <tr *ngFor="let paper of year.value;let i = index">
+                                                            <td>
+                                                                {{ i + 1 }}
+                                                            </td>
+                                                            <td>
+                                                                {{ paper.name | verifyData }}
+                                                            </td>
+                                                            <td>
+                                                                {{ paper.year }}
+                                                            </td>
+                                                            <td>
+                                                                <button class="btn btn-theme-primary btn-sm"
+                                                                (click)="download.download(paper.paper, $event)" *ngIf="paper.paper">
+                                                                    <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
+                                                                </button>
+                                                                <button type="button" class="ml-1 btn btn-danger btn-sm" (click)="deletePaper(paper)">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </button>
+                                                            </td>
+                                                        </tr>
+                                                    </ng-container>
+                                                </ng-container>
+                                            </tbody>
+                                        </table>
                                     </div>
                                 </div>
                                 <app-admin-list-error [errorId]=8 [errorCode]="examDataStatus" *ngIf="examDataStatus === 0 || examDataStatus === 3">
