@@ -21,7 +21,6 @@ export class StudentProfileComponent implements OnInit {
 	profileDetailsStatus : number = 2;
 	profileDetails : any = {};
 	editProfileForm : FormGroup;
-	profile_pic : File;
 
 	constructor(public constants : Constants,
 	private loginService: LoginService,
@@ -67,7 +66,6 @@ export class StudentProfileComponent implements OnInit {
 	};
 
 	initiateEditModal() {
-		this.profile_pic = null;
 		this.editProfileForm.reset();
 		this["editProfileForm"].get('name').patchValue(this.profileDetails.name);
 		this["editProfileForm"].get('phone_number').patchValue(this.profileDetails.phone_number);
@@ -75,15 +73,15 @@ export class StudentProfileComponent implements OnInit {
 	};
 
 	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+		this["editProfileForm"].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this["editProfileForm"].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	updateProfile() {
 		this.loader.showLoader();
-		this.studentProfileService.updateProfile(this.editProfileForm.value, this.profile_pic)
+		this.studentProfileService.updateProfile(this.editProfileForm.value)
 		.subscribe(() => {
 			$('#update-profile').modal('hide');
 			this.getProfileDetails();

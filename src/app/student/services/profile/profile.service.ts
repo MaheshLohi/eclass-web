@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
@@ -13,9 +14,9 @@ export class StudentProfileService {
 	constructor(private constants: Constants,
 	private http: HttpClient) { }
 
-	updateProfile(profileFormValue, profile_pic): Observable<any> {
+	updateProfile(profileFormValue): Observable<any> {
 		const formData = new FormData();
-		if(profile_pic) { formData.append('profile_pic', profile_pic); }
+		if(profileFormValue.profile_pic) { formData.append('profile_pic', profileFormValue.profile_pic); }
 		if(profileFormValue.password) { formData.append('password', profileFormValue.password); }
 		formData.append('name', profileFormValue.name);
 		formData.append('phone_number', profileFormValue.phone_number);

@@ -110,7 +110,7 @@ export class StudentCreateProfileComponent implements OnInit {
 
 	updateProfile() {
 		this.loader.showLoader();
-		this.studentProfileService.updateProfile(this.createProfile.value, this.profile_pic)
+		this.studentProfileService.updateProfile(this.createProfile.value)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.toaster.showSuccess(this.translate.instant("FEATURE_CREATED_SUCCESSFULLY",{ value : this.translate.instant("PROFILE")} ));
