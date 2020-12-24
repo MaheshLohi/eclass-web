@@ -26,20 +26,20 @@ export class AdminChapterService {
 		)
 	};
 	  
-	addChapter(filterData, addFormValue, selectedFile, thumbnailFile) : Observable<any> {
+	addChapter(filterData, addFormValue) : Observable<any> {
 		const formData = new FormData();
-		formData.append('notes', selectedFile);
-		formData.append('thumbnail', thumbnailFile);
+		formData.append('notes', addFormValue.notes);
+		formData.append('thumbnail', addFormValue.thumbnail);
 		formData.append('name', addFormValue.name);
 		formData.append('subject_id', filterData.subject_id);
 		formData.append('description', addFormValue.description);
 		return this.http.post<any>(this.constants.ADD_CHAPTERS_URL, formData);
 	};
 
-	addTopic(topicFormData, videoFile1, videoFile2) {
+	addTopic(topicFormData) {
 		const formData = new FormData();
-		formData.append('video1', videoFile1);
-		formData.append('video2', videoFile2);
+		formData.append('video1', topicFormData.video1);
+		formData.append('video2', topicFormData.video2);
 		formData.append('topic', topicFormData.name);
 		formData.append('keywords', topicFormData.keywords);
 		formData.append('related_videos', topicFormData.related_videos);
@@ -47,10 +47,10 @@ export class AdminChapterService {
 		return this.http.post<any>(this.constants.ADD_TOPIC_URL, formData);
 	}
 
-	updateChapter(updateFormValue, notesFile?:any, thumbnailFile?:any) {
+	updateChapter(updateFormValue) {
 		const formData = new FormData();
-		if(notesFile) { formData.append('notes', notesFile); }
-		if(thumbnailFile) { formData.append('thumbnail', thumbnailFile); }
+		if(updateFormValue.notes) { formData.append('notes', updateFormValue.notes); }
+		if(updateFormValue.thumbnail) { formData.append('thumbnail', updateFormValue.thumbnail); }
 		formData.append('name', updateFormValue.name);
 		formData.append('description', updateFormValue.description);
 		formData.append('chapter_id', updateFormValue.chapter_id);

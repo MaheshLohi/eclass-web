@@ -33,7 +33,7 @@ export class StudentProfileComponent implements OnInit {
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'phone_number' : new FormControl("", []),
 			'email' : new FormControl("", []),
-			'profile_pic' : new FormControl("", []),
+			'profile_pic' : new FormControl("", [Validators.required]),
 			'password' : new FormControl("", [])
 		});
 	}
@@ -66,7 +66,7 @@ export class StudentProfileComponent implements OnInit {
 	};
 
 	initiateEditModal() {
-		this.editProfileForm.reset();
+		$('#editProfileForm')[0].reset();
 		this["editProfileForm"].get('name').patchValue(this.profileDetails.name);
 		this["editProfileForm"].get('phone_number').patchValue(this.profileDetails.phone_number);
 		this["editProfileForm"].get('email').patchValue(this.profileDetails.email);

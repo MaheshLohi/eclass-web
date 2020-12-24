@@ -111,46 +111,46 @@
                                 </ul>
                                 <div class="tab-content pt-3">
                                     <div class="col-lg-6 tab-pane fade show active" id="add-chapter" role="tabpanel">
-                                        <form role="form" (ngSubmit)="addChapter()" [formGroup]="addChapterForm">
+                                        <form role="form" (ngSubmit)="addChapter()" [formGroup]="addChapterForm" id="addChapterForm">
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'CHAPTER_NAME' | translate}} *</label>
                                                 <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddChapterFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                                            <app-form-validator [data]="validateForm('name',1)" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="description">{{ 'DESCRIPTION' | translate}} *</label>
                                                 <input type="text" class="form-control" id="description" formControlName="description" placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddChapterFormValue('description')"></app-form-validator>
+                                            <app-form-validator [data]="validateForm('description',1)"></app-form-validator>
                                             <div class="form-group">
                                                 <label for="customFile">{{ 'NOTES' | translate}}</label>
                                                 <div>
-                                                    <input type="file" id="notes_file" formControlName="notes_file" (change)="onFileChange($event,'notesFile')" required
+                                                    <input type="file" (change)="onFileChange($event,'notes',1)" required
                                                     accept=".pdf">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
                                                 <div>
-                                                    <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onFileChange($event,'thumbnailFile')" required
+                                                    <input type="file" (change)="onFileChange($event,'thumbnail',1)" required
                                                     accept="image/*">
                                                 </div>
                                             </div>
+                                            <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                            </button>
+                                            <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
+                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                            </button>
                                         </form>
-                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
-                                        </button>
-                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
-                                        </button>
                                     </div>
                                     <div class="col-lg-6 tab-pane fade" id="add-topic" role="tabpanel">
-                                        <form role="form" (ngSubmit)="addTopic()" [formGroup]="addTopicForm">
+                                        <form role="form" (ngSubmit)="addTopic()" [formGroup]="addTopicForm" id="addTopicForm">
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'TOPIC_NAME' | translate}} *</label>
                                                 <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                                            <app-form-validator [data]="validateForm('name',2)" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'SELECT_CHAPTER' | translate}} *</label>
                                                 <select class="custom-select form-control select2" id="chapter_id" formControlName="chapter_id" required [hidden]="chaptersDataStatus != 1">
@@ -166,33 +166,36 @@
                                                     {{ 'STANDARD_ERROR' | translate}}
                                                 </div>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('chapter_id')"></app-form-validator>
+                                            <app-form-validator [data]="validateForm('chapter_id',2)"></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'KEYWORDS' | translate}} *</label>
                                                 <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('keywords')"></app-form-validator>
+                                            <app-form-validator [data]="validateForm('keywords',2)"></app-form-validator>
                                             <div class="form-group mb-0">
                                                 <label for="name">{{ 'RELATED_VIDEOS' | translate}} *</label>
                                                 <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate}}" required>
                                             </div>
-                                            <app-form-validator [data]="validateAddTopicFormValue('related_videos')"></app-form-validator>
+                                            <app-form-validator [data]="validateForm('related_videos',2)"></app-form-validator>
                                             <div class="form-group">
                                                 <label for="customFile">Video 1</label>
                                                 <div>
-                                                    <input type="file" id="video_file1" formControlName="video_file1" (change)="onFileChange($event,'videoFile1')" required
+                                                    <input type="file" (change)="onFileChange($event,'video1',2)" required
                                                     accept="video/*">
                                                 </div>
                                             </div>
                                             <div class="form-group">
                                                 <label for="customFile">Video 2</label>
                                                 <div>
-                                                    <input type="file" id="video_file2" formControlName="video_file2" (change)="onFileChange($event,'videoFile2')" required
+                                                    <input type="file" (change)="onFileChange($event,'video2',2)" required
                                                     accept="video/*">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddTopicFeatureForm()">
                                                 <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                            </button>
+                                            <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
+                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
                                             </button>
                                         </form>
                                     </div>
@@ -220,28 +223,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form role="form" (ngSubmit)="updateChapter()" [formGroup]="editChapterForm">
+                <form role="form" (ngSubmit)="updateChapter()" [formGroup]="editChapterForm" id="editChapterForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'CHAPTER_NAME' | translate}} *</label>
                         <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                     </div>
-                    <app-form-validator [data]="validateUpdateChapterFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                    <app-form-validator [data]="validateForm('name',3)" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="description">{{ 'DESCRIPTION' | translate}} *</label>
                         <input type="text" class="form-control" id="description" formControlName="description" placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
                     </div>
-                    <app-form-validator [data]="validateUpdateChapterFormValue('description')"></app-form-validator>
+                    <app-form-validator [data]="validateForm('description',3)"></app-form-validator>
                     <div class="form-group">
                         <label for="customFile">{{ 'NOTES' | translate}}</label>
                         <div>
-                            <input type="file" id="notes_file" formControlName="notes_file" (change)="onFileChange($event,'notesFile')"
+                            <input type="file" (change)="onFileChange($event,'notes',3)"
                             accept=".pdf">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
                         <div>
-                            <input type="file" id="thumbnail_file" formControlName="thumbnail_file" (change)="onFileChange($event,'thumbnailFile')"
+                            <input type="file" (change)="onFileChange($event,'thumbnail',3)"
                             accept="image/*">
                         </div>
                     </div>

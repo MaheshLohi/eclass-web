@@ -22,6 +22,7 @@ export class AdminChapterComponent implements OnInit {
 	semesters : any = [];
 	chapters : any = [];
 	subjects : any = [];
+	availableForms = ["filterForm","addChapterForm","addTopicForm","editChapterForm"];
 	filterDataStatus : number = 2;
 	chaptersDataStatus : number = 2;
 	subjectsDataStatus : number = 2;
@@ -30,10 +31,6 @@ export class AdminChapterComponent implements OnInit {
 	addChapterForm : FormGroup;
 	addTopicForm : FormGroup;
 	editChapterForm : FormGroup;
-	notesFile: File;
-	videoFile1: File;
-	videoFile2: File;
-	thumbnailFile : File;
 	  
 	constructor(public constants : Constants,
 	private translate: TranslateService,
@@ -51,14 +48,14 @@ export class AdminChapterComponent implements OnInit {
 		this.addChapterForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'description' : new FormControl("", []),
-			'notes_file' : new FormControl("", []),
-			'thumbnail_file' : new FormControl("", [])
+			'notes' : new FormControl("", [Validators.required]),
+			'thumbnail' : new FormControl("", [Validators.required])
 		});
 		this.addTopicForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'chapter_id' : new FormControl(null, []),
-			'video_file1' : new FormControl("", []),
-			'video_file2' : new FormControl("", []),
+			'video1' : new FormControl("", [Validators.required]),
+			'video2' : new FormControl("", [Validators.required]),
 			'keywords' : new FormControl("", []),
 			'related_videos' : new FormControl("", [])
 		});
@@ -66,25 +63,13 @@ export class AdminChapterComponent implements OnInit {
 			'chapter_id' : new FormControl("", []),
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'description' : new FormControl("", []),
-			'notes_file' : new FormControl("", []),
-			'thumbnail_file' : new FormControl("", [])
+			'notes' : new FormControl("", []),
+			'thumbnail' : new FormControl("", [])
 		});
 	};
 
-	validateFilterFormValue(formName) {
-		return this.filterForm.get(formName); 
-	};
-
-	validateAddChapterFormValue(formName) {
-		return this.addChapterForm.get(formName); 
-	};
-
-	validateAddTopicFormValue(formName) {
-		return this.addTopicForm.get(formName); 
-	};
-
-	validateUpdateChapterFormValue(formName) {
-		return this.editChapterForm.get(formName); 
+	validateForm(formName, formIndex) {
+		return this[this.availableForms[formIndex]].get(formName);
 	};
 
 	ngOnInit() {
@@ -120,7 +105,8 @@ export class AdminChapterComponent implements OnInit {
 		}
 	};
 
-	resetFormValue(formName, key) {
+	resetFormValue(formIndex, key) {
+		let formName = this.availableForms[formIndex];
 		this[formName].get(key).patchValue(null);
 	};
 	
@@ -128,8 +114,8 @@ export class AdminChapterComponent implements OnInit {
 		this.subjectsDataStatus = 2;
 		this.subjects = [];
 		this.loader.showLoader();
-		this.resetFormValue('filterForm','subject_id');
-		this.resetFormValue('addTopicForm','chapter_id');
+		this.resetFormValue(0,'subject_id');
+		this.resetFormValue(2,'chapter_id');
 	};
 
 	getSubjects(data) {
@@ -148,7 +134,7 @@ export class AdminChapterComponent implements OnInit {
 	resetChapters() {
 		this.chaptersDataStatus = 2;
 		this.chapters = [];
-		this.resetFormValue('addTopicForm','chapter_id');
+		this.resetFormValue(3,'chapter_id');
 	};
 
 	getChapters() {
@@ -168,33 +154,30 @@ export class AdminChapterComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addChapterForm.reset();
-			this.notesFile = null;
-			this.addTopicForm.reset();
-			this.videoFile1 = null;
-			this.videoFile2 = null;
-			this.thumbnailFile = null;
+			$('#'+this.availableForms[1])[0].reset();
+			$('#'+this.availableForms[2])[0].reset();
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addChapterForm.valid && this.filterForm.valid && this.notesFile && this.thumbnailFile) ? false : true;
+		return (this.addChapterForm.valid && this.filterForm.valid) ? false : true;
 	};
 
 	disableAddTopicFeatureForm() {
-		return (this.addTopicForm.valid && this.filterForm.valid && this.videoFile1 && this.videoFile2) ? false : true;
-	}
+		return (this.addTopicForm.valid && this.filterForm.valid) ? false : true;
+	};
 
-	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+	onFileChange(event, fileTarget, formIndex) {
+		let formName = this.availableForms[formIndex];
+		this[formName].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this[formName].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	addChapter() {
 		this.loader.showLoader();
-		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value, this.notesFile, this.thumbnailFile)
+		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -207,7 +190,7 @@ export class AdminChapterComponent implements OnInit {
 
 	addTopic() {
 		this.loader.showLoader();
-		this.chapterService.addTopic(this.addTopicForm.value, this.videoFile1, this.videoFile2)
+		this.chapterService.addTopic(this.addTopicForm.value)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -229,17 +212,15 @@ export class AdminChapterComponent implements OnInit {
 	};
 
 	editChapter(chapter) {
-		this.notesFile = null;
-		this.thumbnailFile = null;
-		this.editChapterForm.reset();
-		this["editChapterForm"].get('name').patchValue(chapter.name);
-		this["editChapterForm"].get('chapter_id').patchValue(chapter.id);
-		this["editChapterForm"].get('description').patchValue(chapter.description);
+		$('#'+this.availableForms[3])[0].reset();
+		this[this.availableForms[3]].patchValue({
+			'name' : chapter.name, 'chapter_id' : chapter.id, 'description' : chapter.description
+		})
 	};
 	
 	updateChapter() {
 		this.loader.showLoader();
-		this.chapterService.updateChapter(this.editChapterForm.value, this.notesFile, this.thumbnailFile)
+		this.chapterService.updateChapter(this.editChapterForm.value)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			$('#update-chapter').modal('hide');

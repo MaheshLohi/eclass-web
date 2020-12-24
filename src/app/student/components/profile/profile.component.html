@@ -46,7 +46,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form role="form" (ngSubmit)="updateProfile()" [formGroup]="editProfileForm">
+                <form role="form" (ngSubmit)="updateProfile()" [formGroup]="editProfileForm" id="editProfileForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'NAME' | translate}} *</label>
                         <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
