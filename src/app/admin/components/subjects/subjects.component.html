@@ -13,7 +13,7 @@
                                     <form class="col-8 row" role="form" [formGroup]="filterForm">
                                         <div class="col-6">
                                             <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
-                                            (change)="getSubjectsData()" *ngIf="departmentAndSectionDataStatus">
+                                            (change)="getSubjectsData()" *ngIf="filterDataStatus">
                                                 <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
@@ -22,7 +22,7 @@
                                         </div>
                                         <div class="col-6">
                                             <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
-                                            (change)="getSubjectsData()" *ngIf="departmentAndSectionDataStatus">
+                                            (change)="getSubjectsData()" *ngIf="filterDataStatus">
                                                 <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate}}</option>
                                                 <option *ngFor="let semester of semesters" [ngValue]="semester.id">
                                                     {{ 'SEMESTER' | translate }} {{semester.name}}
@@ -112,7 +112,7 @@
                                 <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
                                 </app-admin-list-error>
                             </div>
-                            <app-admin-list-error [errorId]=5 [errorCode]="departmentAndSectionDataStatus" *ngIf="departmentAndSectionDataStatus === 0 || departmentAndSectionDataStatus === 3" [hidden]="showAddFeature === true">
+                            <app-admin-list-error [errorId]=5 [errorCode]="filterDataStatus" *ngIf="filterDataStatus === 0 || filterDataStatus === 3" [hidden]="showAddFeature === true">
                             </app-admin-list-error>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">

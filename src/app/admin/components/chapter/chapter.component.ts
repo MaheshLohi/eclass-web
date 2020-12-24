@@ -22,7 +22,7 @@ export class AdminChapterComponent implements OnInit {
 	semesters : any = [];
 	chapters : any = [];
 	subjects : any = [];
-	departmentAndSemesterDataStatus : number = 2;
+	filterDataStatus : number = 2;
 	chaptersDataStatus : number = 2;
 	subjectsDataStatus : number = 2;
 	showAddFeature : boolean = false;
@@ -39,7 +39,7 @@ export class AdminChapterComponent implements OnInit {
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
-	public router: Router,
+	private router: Router,
 	private chapterService : AdminChapterService,
 	private departmentService : AdminDepartmentService,
 	private subjectsService : AdminSubjectsService) {
@@ -92,7 +92,7 @@ export class AdminChapterComponent implements OnInit {
 	}
 
 	resetDepartmentsAndSections() {
-		this.departmentAndSemesterDataStatus = 2;
+		this.filterDataStatus = 2;
 		this.departments = [];
 		this.semesters = [];
 		this.loader.showLoader();
@@ -103,12 +103,12 @@ export class AdminChapterComponent implements OnInit {
 		this.departmentService.getDepartmentsAndSections()
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = 1;
+			this.filterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
 		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = errorCode;
+			this.filterDataStatus = errorCode;
 		});
 	};
 

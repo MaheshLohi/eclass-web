@@ -21,7 +21,7 @@ export class AdminExaminationComponent implements OnInit {
 	semesters : any = [];
 	subjects : any = [];
 	examsList : any = [];
-	departmentAndSemesterDataStatus : number = 2;
+	filterDataStatus : number = 2;
 	subjectsDataStatus : number = 2;
 	examDataStatus : number = 2;
 	showAddFeature : boolean = false;
@@ -63,7 +63,7 @@ export class AdminExaminationComponent implements OnInit {
 	};
 
 	resetDepartmentsAndSections() {
-		this.departmentAndSemesterDataStatus = 2;
+		this.filterDataStatus = 2;
 		this.departments = [];
 		this.semesters = [];
 		this.loader.showLoader();
@@ -74,12 +74,12 @@ export class AdminExaminationComponent implements OnInit {
 		this.departmentService.getDepartmentsAndSections()
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = 1;
+			this.filterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
 		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSemesterDataStatus = errorCode;
+			this.filterDataStatus = errorCode;
 		});
 	};
 

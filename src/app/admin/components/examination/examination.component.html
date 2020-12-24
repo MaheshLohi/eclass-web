@@ -1,7 +1,7 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="content-wrapper" *ngIf="departmentAndSemesterDataStatus === 1">
+    <div class="content-wrapper" *ngIf="filterDataStatus === 1">
         <app-breadcrumb [title]="'EXAMINATION'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
@@ -128,8 +128,8 @@
             </div>
         </section>
     </div>
-    <div class="content-wrapper" *ngIf="departmentAndSemesterDataStatus === 0 || departmentAndSemesterDataStatus === 3">
-        <app-admin-list-error [errorId]=1 [errorCode]="departmentAndSemesterDataStatus">
+    <div class="content-wrapper" *ngIf="filterDataStatus === 0 || filterDataStatus === 3">
+        <app-admin-list-error [errorId]=1 [errorCode]="filterDataStatus">
         </app-admin-list-error>
     </div>
     <app-footer></app-footer>

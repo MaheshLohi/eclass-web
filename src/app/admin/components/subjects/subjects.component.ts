@@ -22,7 +22,7 @@ export class AdminSubjectsComponent implements OnInit {
 	semesters : any = [];
 	subjects : any = [];
 	faculties : any = [];
-	departmentAndSectionDataStatus = 2;
+	filterDataStatus = 2;
 	subjectsDataStatus : number = 2;
 	facultiesDataStatus : number = 2;
 	showAddFeature : boolean = false;
@@ -88,7 +88,7 @@ export class AdminSubjectsComponent implements OnInit {
 	};
 
 	resetDepartmentsAndSections() {
-		this.departmentAndSectionDataStatus = 2;
+		this.filterDataStatus = 2;
 		this.departments = [];
 		this.semesters = [];
 		this.loader.showLoader();
@@ -99,12 +99,12 @@ export class AdminSubjectsComponent implements OnInit {
 		this.departmentService.getDepartmentsAndSections()
 		.subscribe((response:any) => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = 1;
+			this.filterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
 		}, (errorCode) => {
 			this.loader.hideLoader();
-			this.departmentAndSectionDataStatus = errorCode;
+			this.filterDataStatus = errorCode;
 		});
 	};
 
@@ -160,7 +160,7 @@ export class AdminSubjectsComponent implements OnInit {
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
-			if(this.departmentAndSectionDataStatus === 1) {
+			if(this.filterDataStatus === 1) {
 				this.getSubjectsData();
 			}
 			else {
