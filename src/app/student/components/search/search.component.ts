@@ -38,13 +38,13 @@ export class StudentSearchComponent implements OnInit {
 	resetSearchResultsList() {
 		this.searchResultsDataStatus = 2;
 		this.searchResults = [];
-		this.loader.showLoader();
 	};
 
 	getSearchResults() {
+		this.resetSearchResultsList();
+		this.changeRouteParams();
 		if(this.searchString) {
-			this.resetSearchResultsList();
-			this.changeRouteParams();
+			this.loader.showLoader();
 			this.studentSearchService.getSearchResultsList(this.searchString)
 			.subscribe((response:any) => {
 				this.loader.hideLoader();
