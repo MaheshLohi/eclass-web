@@ -56,6 +56,7 @@
                                                 <th>{{ 'CHAPTER_TITLE' | translate}}</th>
                                                 <th>{{ 'DESCRIPTION' | translate}}</th>
                                                 <th>{{ 'TOPICS' | translate}}</th>
+                                                <th>{{ 'NOTES' | translate}}</th>
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let chapter of chapters;let i = index">
@@ -63,6 +64,8 @@
                                                     {{ i + 1 }}
                                                 </td>
                                                 <td>
+                                                    <img [src]="this.constants.DOMAIN_URL + chapter.thumbnail" class="img-circle img-size-32 mr-2"
+                                                    (error)="miscellaneous.setDefaultThumbnailImage($event)">
                                                     {{ chapter.name | verifyData }}
                                                 </td>
                                                 <td>
@@ -83,6 +86,13 @@
                                                     (click)="addTopics(chapter)">
                                                         <i class="pr-1 fa fa-plus"></i> Add Topics
                                                     </button>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="download.download(chapter.notes)"
+                                                    *ngIf="chapter.notes">
+                                                        <i class="fa fa-download pr-1"></i> {{ 'NOTES' | translate}}
+                                                    </button>
+                                                    <span *ngIf="!chapter.notes">{{ 'NA' | translate}}</span>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-theme-primary btn-sm"

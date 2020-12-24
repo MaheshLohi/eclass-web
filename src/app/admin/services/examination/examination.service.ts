@@ -25,12 +25,12 @@ export class AdminExaminationService {
 		)
 	};
 	  
-	addExamination(filterData, addFormValue, selectedFile) : Observable<any> {
+	addExamination(filterData, addFormValue) : Observable<any> {
 		const formData = new FormData();
 		formData.append('name', addFormValue.name);
 		formData.append('subject_id', filterData.subject_id);
 		formData.append('year', addFormValue.year);
-		formData.append('paper', selectedFile);
+		formData.append('paper', addFormValue.paper);
 		return this.http.post<any>(this.constants.ADD_EXAMINATION_URL, formData);
 	};
 

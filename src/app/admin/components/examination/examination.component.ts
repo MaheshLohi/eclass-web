@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any; 
 
 import { Constants } from '@app/constants';
 import { DownloadService } from '@sharedServices/download/download.service';
@@ -27,7 +28,6 @@ export class AdminExaminationComponent implements OnInit {
 	showAddFeature : boolean = false;
 	filterForm : FormGroup;
 	addDataForm : FormGroup;
-	selectedFile: File;
 	years = [2020,2019,2018,2017,2016,2015];
 
 	constructor(public constants : Constants,
@@ -46,7 +46,7 @@ export class AdminExaminationComponent implements OnInit {
 		this.addDataForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'year' : new FormControl("", []),
-			'paper' : new FormControl("", [])
+			'paper' : new FormControl("", [Validators.required])
 		});
 	}
 
@@ -135,24 +135,23 @@ export class AdminExaminationComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addDataForm.reset();
-			this.selectedFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addDataForm.valid && this.filterForm.valid && this.selectedFile) ? false : true;
+		return (this.addDataForm.valid && this.filterForm.valid) ? false : true;
 	};
 
-	onFileChange(event) {
-		this.selectedFile = null;
+	onFileChange(event, fileTarget) {
+		this["addDataForm"].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this.selectedFile = event.target.files[0];
+			this["addDataForm"].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	addExam() {
 		this.loader.showLoader();
-		this.adminExaminationService.addExamination(this.filterForm.value, this.addDataForm.value, this.selectedFile)
+		this.adminExaminationService.addExamination(this.filterForm.value, this.addDataForm.value)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -173,5 +172,5 @@ export class AdminExaminationComponent implements OnInit {
 		}, () => {
 			this.loader.hideLoader();
 		});
-	}
+	};
 }

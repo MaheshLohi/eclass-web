@@ -89,7 +89,8 @@
                                 <app-admin-list-error [errorId]=8 [errorCode]="examDataStatus" *ngIf="examDataStatus === 0 || examDataStatus === 3">
                                 </app-admin-list-error>
                             </div>
-                            <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
+                            <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3" 
+                            [hidden]="showAddFeature === true">
                             </app-admin-list-error>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
@@ -111,7 +112,7 @@
                                     <div class="form-group">
                                         <label for="customFile">{{ 'FILE' | translate}}</label>
                                         <div>
-                                            <input type="file" id="paper" formControlName="paper" (change)="onFileChange($event)" accept=".pdf">
+                                            <input type="file" (change)="onFileChange($event,'paper')" accept=".pdf">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">

@@ -5,6 +5,8 @@ import { Router } from '@angular/router';
 declare var $: any; 
 
 import { Constants } from '@app/constants';
+import { DownloadService } from '@app/shared/services/download/download.service';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
@@ -33,6 +35,8 @@ export class AdminChapterComponent implements OnInit {
 	editChapterForm : FormGroup;
 	  
 	constructor(public constants : Constants,
+	public download : DownloadService,
+	public miscellaneous : MiscellaneousService,
 	private translate: TranslateService,
 	private toaster: ToasterService,
 	private loader: LoaderService,
