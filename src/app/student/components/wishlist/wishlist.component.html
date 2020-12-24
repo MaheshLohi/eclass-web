@@ -10,14 +10,8 @@
                             <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + wishlist.chapter_details.data[0].thumbnail' 
                             (error)="miscellaneousService.setDefaultThumbnailImage($event)">
                         </div>
-                        <div>
+                        <div class="card-header-title">
                             {{wishlist.chapter_details.data[0].name}}
-                        </div>
-                        <div (click)="preventEvent($event)">
-                            {{'RELATED_VIDEOS' | translate}} : 
-                            <a href={{wishlist.chapter_details.data[0].related_videos}} target="_blank">
-                                {{wishlist.chapter_details.data[0].related_videos | verifyData}}
-                            </a>
                         </div>
                         <div class="cursor-pointer mt-2">
                             <button class="btn btn-theme-primary btn-sm" (click)="updateTopicWishlist(wishlist, $event)">

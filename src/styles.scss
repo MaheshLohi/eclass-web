@@ -150,17 +150,19 @@ a.table-link:active {
     display: block;
     padding-top: 10px;
     min-height: 40px;
-    line-height: 40px;
+    line-height: 32px;
 }
 .card-header-title {
-    padding: 10px 0px;
+    margin: 5px 0px;
     display: block;
     font-size: 16px;
     font-weight: 600;
     font-family: 'Roboto', sans-serif;
-    color: #333;
+    color: #464646;
     text-align: left;
     line-height: 24px;
+    height: 48px;
+    overflow: hidden;
 }
 .heading-cd-imgtmb {
     padding: 10px 10px;
@@ -319,7 +321,6 @@ a.table-link:active {
 .custom-card {
     cursor: pointer;
     box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
-    min-height: 275px;
 }
 .custom-card:hover {
     transform: scale(1.02);
@@ -405,9 +406,4 @@ a.table-link:active {
     background-color: #e9eefa;
     border: 1px solid #000000;
     color: #000000;
-}
-section.recent-videos {
-    .custom-card {
-        min-height: 225px;
-    }
 }
