@@ -406,3 +406,8 @@ a.table-link:active {
     border: 1px solid #000000;
     color: #000000;
 }
+section.recent-videos {
+    .custom-card {
+        min-height: 225px;
+    }
+}

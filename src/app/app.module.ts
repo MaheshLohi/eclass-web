@@ -65,6 +65,7 @@ import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-er
 import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/list-error.component';
 import { AdminListErrorComponent } from '@adminComponents/list-error/list-error.component';
 import { StudentCreateProfileComponent } from '@app/student/components/profile/create-profile/create-profile.component';
+import { StudentRecentVideosComponent } from '@studentComponents/recent-videos/recent-videos.component';
 
 @NgModule({
 	declarations: [
@@ -113,7 +114,8 @@ import { StudentCreateProfileComponent } from '@app/student/components/profile/c
 		FacultyListErrorComponent,
 		SuperAdminListErrorComponent,
 		AdminListErrorComponent,
-		StudentCreateProfileComponent
+		StudentCreateProfileComponent,
+		StudentRecentVideosComponent
 	],
 	imports: [
 		BrowserModule,
