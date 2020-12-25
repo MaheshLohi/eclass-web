@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any; 
 
-import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { LoginService } from '@sharedServices/login/login.service';
@@ -16,26 +16,24 @@ import { StudentSemesterService } from '@studentServices/semester/semester.servi
 })
 export class StudentCreateProfileComponent implements OnInit {
 
-	profileDetailsStatus : number = 2;
 	profileDetails : any = {};
-	createProfile : any;
-	profile_pic : File;
 	semesters : any = [];
+	profileDetailsStatus : number = 2;
 	semestersDataStatus : number = 2;
 	showPassword : boolean = false;
+	createProfileForm : FormGroup;
 
-	constructor(public constants : Constants,
-	private loginService: LoginService,
-	private studentProfileService : StudentProfileService,
-	private loader: LoaderService,
-	private translate: TranslateService,
-	private studentSemesterService : StudentSemesterService,
-	private toaster: ToasterService) { 
-		this.createProfile = new FormGroup({
+	constructor(private _login: LoginService,
+	private _profile : StudentProfileService,
+	private _loader: LoaderService,
+	private _translate: TranslateService,
+	private _semester : StudentSemesterService,
+	private _toaster: ToasterService) { 
+		this.createProfileForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'phone_number' : new FormControl("", []),
 			'email' : new FormControl("", []),
-			'profile_pic' : new FormControl("", []),
+			'profile_pic' : new FormControl("", [Validators.required]),
 			'password' : new FormControl("", []),
 			'otp' : new FormControl("", []),
 			'semesterId' : new FormControl(null, [])
@@ -48,7 +46,7 @@ export class StudentCreateProfileComponent implements OnInit {
 	};
 
 	validateCreateProfileForm(formName) {
-		return this.createProfile.get(formName); 
+		return this.createProfileForm.get(formName); 
 	};
 
 	togglePassword() {
@@ -58,18 +56,18 @@ export class StudentCreateProfileComponent implements OnInit {
 	resetProfileDetails() {
 		this.profileDetailsStatus = 2;
 		this.profileDetails = {};
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 	  
 	getProfileDetails() {
 		this.resetProfileDetails();
-		this.loginService.getUserDetails()
+		this._login.getUserDetails()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.profileDetailsStatus = 1;
 			this.profileDetails = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.profileDetailsStatus = errorCode;
 		});
 	};
@@ -77,28 +75,29 @@ export class StudentCreateProfileComponent implements OnInit {
 	resetSemestersList() {
 		this.semestersDataStatus = 2;
 		this.semesters = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getSemestersList() {
 		this.resetSemestersList();
-		this.studentSemesterService.getSemestersList()
+		this._semester.getSemestersList()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.semestersDataStatus = 1;
 			this.semesters = response.inst_class;
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.semestersDataStatus = 0;
 		});
 	};
 
 	initiateEditModal() {
-		this.profile_pic = null;
-		this.createProfile.reset();
-		this["createProfile"].get('name').patchValue(this.profileDetails.name);
-		this["createProfile"].get('phone_number').patchValue(this.profileDetails.phone_number);
-		this["createProfile"].get('email').patchValue(this.profileDetails.email);
+		$('#createProfileForm')[0].reset();
+		this["createProfileForm"].patchValue({
+			name : this.profileDetails.name,
+			phone_number : this.profileDetails.phone_number,
+			email : this.profileDetails.email
+		})
 	};
 
 	onFileChange(event, fileTarget) {
@@ -109,13 +108,13 @@ export class StudentCreateProfileComponent implements OnInit {
 	};
 
 	updateProfile() {
-		this.loader.showLoader();
-		this.studentProfileService.updateProfile(this.createProfile.value)
+		this._loader.showLoader();
+		this._profile.updateProfile(this.createProfileForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_CREATED_SUCCESSFULLY",{ value : this.translate.instant("PROFILE")} ));
+			this._loader.hideLoader();
+			this._toaster.showSuccess(this._translate.instant("FEATURE_CREATED_SUCCESSFULLY",{ value : this._translate.instant("PROFILE")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 }

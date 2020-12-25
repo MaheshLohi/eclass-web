@@ -218,7 +218,7 @@ export class AdminChapterComponent implements OnInit {
 	editChapter(chapter) {
 		$('#'+this.availableForms[3])[0].reset();
 		this[this.availableForms[3]].patchValue({
-			'name' : chapter.name, 'chapter_id' : chapter.id, 'description' : chapter.description
+			name : chapter.name, chapter_id : chapter.id, description : chapter.description
 		})
 	};
 	

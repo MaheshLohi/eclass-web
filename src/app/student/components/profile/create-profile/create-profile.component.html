@@ -5,7 +5,7 @@
                 <p class="text-center mb-2 col-lg-12">
                     <img class="app-logo" src="assets/images/form_logo.png">
                 </p>
-                <form (ngSubmit)="createProfile()" [formGroup]="createProfile" class="mt-1 row col-lg-12">
+                <form (ngSubmit)="updateProfile()" [formGroup]="createProfileForm" class="mt-1 row col-lg-12" id="createProfileForm">
                     <div class="col-lg-6 p-4 bg-white create-profile-form">
                         <div class="form-group mb-0">
                             <label for="name">{{ 'NAME' | translate}} *</label>
@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label for="customFile">{{ 'PROFILE_PICTURE' | translate}}</label>
                             <div>
-                                <input type="file" id="profile_pic" formControlName="profile_pic" (change)="onFileChange($event,'profile_pic')"
+                                <input type="file" (change)="onFileChange($event,'profile_pic')"
                                 accept="image/*">
                             </div>
                         </div>
@@ -68,7 +68,7 @@
                         <app-form-validator [data]="validateCreateProfileForm('otp')"></app-form-validator>
                     </div>
                     <div class="col-lg-4 m-auto pb-3">
-                        <button type="submit" [disabled]="!createProfile.valid" class="btn btn-primary btn-block br-basic-form">{{ 'CREATE' | translate }}</button>
+                        <button type="submit" [disabled]="!createProfileForm.valid" class="btn btn-primary btn-block br-basic-form">{{ 'CREATE' | translate }}</button>
                     </div>
                 </form>
             </div>

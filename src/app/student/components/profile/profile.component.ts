@@ -67,9 +67,11 @@ export class StudentProfileComponent implements OnInit {
 
 	initiateEditModal() {
 		$('#editProfileForm')[0].reset();
-		this["editProfileForm"].get('name').patchValue(this.profileDetails.name);
-		this["editProfileForm"].get('phone_number').patchValue(this.profileDetails.phone_number);
-		this["editProfileForm"].get('email').patchValue(this.profileDetails.email);
+		this["editProfileForm"].patchValue({
+			name : this.profileDetails.name,
+			phone_number : this.profileDetails.phone_number,
+			email : this.profileDetails.email
+		})
 	};
 
 	onFileChange(event, fileTarget) {
