@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any;
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -23,20 +24,19 @@ export class AdminFacultiesComponent implements OnInit {
 	showAddFeature : boolean = false;
 	filterForm : FormGroup;
 	addDataForm : FormGroup;
-	facultiesFile: File;
   
-	constructor(public constants : Constants,
-	public downloadService : DownloadService,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private facultyService : AdminFacultiesService,
-	private departmentService : AdminDepartmentService) {
+	constructor(public _constants : Constants,
+	public _download : DownloadService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _faculty : AdminFacultiesService,
+	private _department : AdminDepartmentService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, [])
 		});
 		this.addDataForm = new FormGroup({
-			'facultiesFile' : new FormControl("", [])
+			'faculties' : new FormControl("", [Validators.required])
 		});
 	};
 
@@ -51,18 +51,18 @@ export class AdminFacultiesComponent implements OnInit {
 	resetDepartmentsDetails() {
 		this.filterDataStatus = 2;
 		this.departments = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getDepartmentsList() {
 		this.resetDepartmentsDetails();
-		this.departmentService.getDepartmentsAndSections()
+		this._department.getDepartmentsAndSections()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = 1;
 			this.departments = response.departments;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = errorCode;
 		});
 	};
@@ -70,19 +70,19 @@ export class AdminFacultiesComponent implements OnInit {
 	resetFaculties() {
 		this.facultiesDataStatus = 2;
 		this.faculties = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getFaculties() {
 		this.resetFaculties();
 		let data = this.filterForm.value;
-		this.facultyService.getFaculties(data)
+		this._faculty.getFaculties(data)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.facultiesDataStatus = 1;
 			this.faculties = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.facultiesDataStatus = errorCode;
 		});
 	};
@@ -90,8 +90,7 @@ export class AdminFacultiesComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addDataForm.reset();
-			this.facultiesFile = null;
+			$('#addDataForm')[0].reset();
 		}
 		else {
 			this.getFaculties();
@@ -99,39 +98,39 @@ export class AdminFacultiesComponent implements OnInit {
 	};
 
 	disableAddFeatureForm() {
-		return (this.addDataForm.valid && this.filterForm.valid && this.facultiesFile) ? false : true;
+		return (this.addDataForm.valid && this.filterForm.valid) ? false : true;
 	};
 
 	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+		this["addDataForm"].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this["addDataForm"].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	addFaculties() {
-		this.loader.showLoader();
-		this.facultyService.addFaculties(this.filterForm.value, this.facultiesFile)
+		this._loader.showLoader();
+		this._faculty.addFaculties(this.filterForm.value)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
-			this.downloadService.downloadAsCsv(response.data,this.constants.FACULTY_CSV_CONTENTS,'faculties_list.csv');
+			this._loader.hideLoader();
+			this._download.downloadAsCsv(response.data,this._constants.FACULTY_CSV_CONTENTS,'faculties_list.csv');
 			this.showAddFeatureView(false);
 			this.getFaculties();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("FACULTIES")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("FACULTIES")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	deleteFaculty(faculty) {
-		this.loader.showLoader();
-		this.facultyService.deleteFaculty(faculty)
+		this._loader.showLoader();
+		this._faculty.deleteFaculty(faculty)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.getFaculties();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("FACULTY")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this._translate.instant("FACULTY")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
-	}
+	};
 }

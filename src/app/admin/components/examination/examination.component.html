@@ -72,7 +72,7 @@
                                                             </td>
                                                             <td>
                                                                 <button class="btn btn-theme-primary btn-sm"
-                                                                (click)="download.download(paper.paper, $event)" *ngIf="paper.paper">
+                                                                (click)="_download.download(paper.paper, $event)" *ngIf="paper.paper">
                                                                     <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD' | translate }}
                                                                 </button>
                                                                 <button type="button" class="ml-1 btn btn-danger btn-sm" (click)="deletePaper(paper)">

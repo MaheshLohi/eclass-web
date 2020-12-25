@@ -34,16 +34,16 @@ export class AdminChapterComponent implements OnInit {
 	addTopicForm : FormGroup;
 	editChapterForm : FormGroup;
 	  
-	constructor(public constants : Constants,
-	public download : DownloadService,
-	public miscellaneous : MiscellaneousService,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private router: Router,
-	private chapterService : AdminChapterService,
-	private departmentService : AdminDepartmentService,
-	private subjectsService : AdminSubjectsService) {
+	constructor(public _constants : Constants,
+	public _download : DownloadService,
+	public _miscellaneous : MiscellaneousService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _router: Router,
+	private _chapter : AdminChapterService,
+	private _department : AdminDepartmentService,
+	private _subjects : AdminSubjectsService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, []),
 			'inst_class_id' : new FormControl(null, []),
@@ -77,26 +77,26 @@ export class AdminChapterComponent implements OnInit {
 	};
 
 	ngOnInit() {
-		this.getDepartmentsAndSectionsList();
-	}
+		this.getFiltersList();
+	};
 
-	resetDepartmentsAndSections() {
+	resetFiltersList() {
 		this.filterDataStatus = 2;
 		this.departments = [];
 		this.semesters = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
-	getDepartmentsAndSectionsList() {
-		this.resetDepartmentsAndSections();
-		this.departmentService.getDepartmentsAndSections()
+	getFiltersList() {
+		this.resetFiltersList();
+		this._department.getDepartmentsAndSections()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = errorCode;
 		});
 	};
@@ -117,20 +117,20 @@ export class AdminChapterComponent implements OnInit {
 	resetSubjects() {
 		this.subjectsDataStatus = 2;
 		this.subjects = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 		this.resetFormValue(0,'subject_id');
 		this.resetFormValue(2,'chapter_id');
 	};
 
 	getSubjects(data) {
 		this.resetSubjects();
-		this.subjectsService.getSubjects(data.department_id, data.inst_class_id)
+		this._subjects.getSubjects(data.department_id, data.inst_class_id)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectsDataStatus = errorCode;
 		});
 	};
@@ -143,14 +143,14 @@ export class AdminChapterComponent implements OnInit {
 
 	getChapters() {
 		this.resetChapters();
-		this.loader.showLoader();
-		this.chapterService.getChapters(this.filterForm.value)
+		this._loader.showLoader();
+		this._chapter.getChapters(this.filterForm.value)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.chaptersDataStatus = 1;
 			this.chapters = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.chaptersDataStatus = errorCode;
 		});
 	};
@@ -180,33 +180,33 @@ export class AdminChapterComponent implements OnInit {
 	};
 
 	addChapter() {
-		this.loader.showLoader();
-		this.chapterService.addChapter(this.filterForm.value, this.addChapterForm.value)
+		this._loader.showLoader();
+		this._chapter.addChapter(this.filterForm.value, this.addChapterForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getChapters();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("CHAPTERS")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("CHAPTERS")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	addTopic() {
-		this.loader.showLoader();
-		this.chapterService.addTopic(this.addTopicForm.value)
+		this._loader.showLoader();
+		this._chapter.addTopic(this.addTopicForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getChapters();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("TOPIC")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("TOPIC")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	navigateToTopics(chapter) {
-		this.router.navigate(['admin/topics', chapter.id]);
+		this._router.navigate(['admin/topics', chapter.id]);
 	};
 
 	addTopics(chapter) {
@@ -223,15 +223,15 @@ export class AdminChapterComponent implements OnInit {
 	};
 	
 	updateChapter() {
-		this.loader.showLoader();
-		this.chapterService.updateChapter(this.editChapterForm.value)
+		this._loader.showLoader();
+		this._chapter.updateChapter(this.editChapterForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			$('#update-chapter').modal('hide');
 			this.getChapters();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("CHAPTER")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("CHAPTER")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 }

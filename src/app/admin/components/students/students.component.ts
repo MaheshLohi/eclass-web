@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+declare var $: any; 
 
 import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
@@ -24,21 +25,20 @@ export class AdminStudentsComponent implements OnInit {
 	filterDataStatus = 2;
 	filterForm : FormGroup;
 	addDataForm : FormGroup;
-	studentsFile: File;
   
-	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private studentService : AdminStudentsService,
-	private departmentService : AdminDepartmentService,
-	public downloadService : DownloadService) {
+	constructor(public _constants : Constants,
+	public _download : DownloadService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _students : AdminStudentsService,
+	private _department : AdminDepartmentService) {
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, []),
 			'inst_class_id' : new FormControl(null, [])
 		});
 		this.addDataForm = new FormGroup({
-			'studentsFile' : new FormControl("", [])
+			'students' : new FormControl("", [])
 		});
 	};
 
@@ -54,19 +54,19 @@ export class AdminStudentsComponent implements OnInit {
 		this.filterDataStatus = 2;
 		this.departments = [];
 		this.semesters = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getDepartmentsAndSectionsList() {
 		this.resetDepartmentsAndSections();
-		this.departmentService.getDepartmentsAndSections()
+		this._department.getDepartmentsAndSections()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = errorCode;
 		});
 	};
@@ -81,18 +81,18 @@ export class AdminStudentsComponent implements OnInit {
 	resetStudents() {
 		this.studentsDataStatus = 2;
 		this.students = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getStudents(data) {
 		this.resetStudents();
-		this.studentService.getStudents(data.department_id, data.inst_class_id)
+		this._students.getStudents(data.department_id, data.inst_class_id)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.studentsDataStatus = 1;
 			this.students = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.studentsDataStatus = errorCode;
 		});
 	};
@@ -100,33 +100,32 @@ export class AdminStudentsComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addDataForm.reset();
-			this.studentsFile = null;
+			$('#addDataForm')[0].reset();
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addDataForm.valid && this.filterForm.valid && this.studentsFile) ? false : true;
+		return (this.addDataForm.valid && this.filterForm.valid) ? false : true;
 	};
 
 	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+		this["addDataForm"].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this["addDataForm"].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	addStudents() {
-		this.loader.showLoader();
-		this.studentService.addStudents(this.filterForm.value, this.studentsFile)
+		this._loader.showLoader();
+		this._students.addStudents(this.filterForm.value)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
-			this.downloadService.downloadAsCsv(response.data,this.constants.STUDENT_CSV_CONTENTS,'students_list.csv');
+			this._download.downloadAsCsv(response.data,this._constants.STUDENT_CSV_CONTENTS,'students_list.csv');
 			this.getStudents(this.filterForm.value);
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("STUDENTS")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("STUDENTS")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 }

@@ -15,13 +15,13 @@ export class AdminSidebarComponent implements OnInit {
 	sidemenus : any = [];
 	userDetails : any = {};
 
-	constructor(public constants: Constants,
-	private storageService: StorageService,
-	public miscellaneousService : MiscellaneousService) {};
+	constructor(public _constants: Constants,
+	private _storage: StorageService,
+	public _miscellaneous : MiscellaneousService) {};
 
  	ngOnInit() {
-		this.userType = this.constants.ADMIN;
-		this.userDetails = this.storageService.getData("userDetails");
+		this.userType = this._constants.ADMIN;
+		this.userDetails = this._storage.getData("userDetails");
 		this.sidemenus = [{
 			name : "DASHBOARD",
 			icon : "fa fa-home",

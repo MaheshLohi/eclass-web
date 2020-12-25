@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 declare var $: any; 
 
-import { Constants } from '@app/constants';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
@@ -30,14 +29,13 @@ export class AdminExaminationComponent implements OnInit {
 	addDataForm : FormGroup;
 	years = [2020,2019,2018,2017,2016,2015];
 
-	constructor(public constants : Constants,
-	public download : DownloadService,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private departmentService : AdminDepartmentService,
-	private adminExaminationService : AdminExaminationService,
-	private subjectsService : AdminSubjectsService) { 
+	constructor(public _download : DownloadService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _department : AdminDepartmentService,
+	private _examination : AdminExaminationService,
+	private _subjects : AdminSubjectsService) { 
 		this.filterForm = new FormGroup({
 			'department_id' : new FormControl(null, []),
 			'inst_class_id' : new FormControl(null, []),
@@ -66,19 +64,19 @@ export class AdminExaminationComponent implements OnInit {
 		this.filterDataStatus = 2;
 		this.departments = [];
 		this.semesters = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getDepartmentsAndSectionsList() {
 		this.resetDepartmentsAndSections();
-		this.departmentService.getDepartmentsAndSections()
+		this._department.getDepartmentsAndSections()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = 1;
 			this.departments = response.departments;
 			this.semesters = response.inst_class;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.filterDataStatus = errorCode;
 		});
 	};
@@ -87,26 +85,26 @@ export class AdminExaminationComponent implements OnInit {
 		this.resetExamsList();
 		let data = this.filterForm.value;
 		if(data.department_id && data.inst_class_id) {
-			this.getSubjects(data)
+			this.getSubjects(data);
 		}
 	};
 	
 	resetSubjects() {
 		this.subjectsDataStatus = 2;
 		this.subjects = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 		this.resetFormValue('filterForm','subject_id');
 	};
 
 	getSubjects(data) {
 		this.resetSubjects();
-		this.subjectsService.getSubjects(data.department_id, data.inst_class_id)
+		this._subjects.getSubjects(data.department_id, data.inst_class_id)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectsDataStatus = errorCode;
 		});
 	};
@@ -118,14 +116,14 @@ export class AdminExaminationComponent implements OnInit {
 
 	getExamsList() {
 		this.resetExamsList();
-		this.loader.showLoader();
-		this.adminExaminationService.getExamsList(this.filterForm.value)
+		this._loader.showLoader();
+		this._examination.getExamsList(this.filterForm.value)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.examDataStatus = errorCode;
 		});
 	};
@@ -134,7 +132,7 @@ export class AdminExaminationComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addDataForm.reset();
+			$('#addDataForm')[0].reset();
 		}
 	};
 
@@ -150,27 +148,27 @@ export class AdminExaminationComponent implements OnInit {
 	};
 
 	addExam() {
-		this.loader.showLoader();
-		this.adminExaminationService.addExamination(this.filterForm.value, this.addDataForm.value)
+		this._loader.showLoader();
+		this._examination.addExamination(this.filterForm.value, this.addDataForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getExamsList();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("EXAMINATION")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("EXAMINATION")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	deletePaper(paper) {
-		this.loader.showLoader();
-		this.adminExaminationService.deleteExamPaper(paper)
+		this._loader.showLoader();
+		this._examination.deleteExamPaper(paper)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.getExamsList();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("EXAMINATION")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this._translate.instant("EXAMINATION")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 }

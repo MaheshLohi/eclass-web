@@ -64,8 +64,8 @@
                                                     {{ i + 1 }}
                                                 </td>
                                                 <td>
-                                                    <img [src]="this.constants.DOMAIN_URL + chapter.thumbnail" class="img-circle img-size-32 mr-2"
-                                                    (error)="miscellaneous.setDefaultThumbnailImage($event)">
+                                                    <img [src]="_constants.DOMAIN_URL + chapter.thumbnail" class="img-circle img-size-32 mr-2"
+                                                    (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                                                     {{ chapter.name | verifyData }}
                                                 </td>
                                                 <td>
@@ -88,7 +88,7 @@
                                                     </button>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-theme-primary btn-sm" (click)="download.download(chapter.notes)"
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="_download.download(chapter.notes)"
                                                     *ngIf="chapter.notes">
                                                         <i class="fa fa-download pr-1"></i> {{ 'NOTES' | translate}}
                                                     </button>

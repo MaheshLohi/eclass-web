@@ -34,7 +34,7 @@
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                             <i class="fa fa-plus"></i> {{ 'ADD_STUDENTS' | translate}}
                                         </button>
-                                        <button type="button" class="btn btn-theme-primary" (click)="downloadService.download('public/storage/student.csv')" *ngIf="showAddFeature === true">
+                                        <button type="button" class="btn btn-theme-primary" (click)="_download.download('public/storage/student.csv')" *ngIf="showAddFeature === true">
                                             <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
                                         </button>
                                     </div>
@@ -76,11 +76,11 @@
                             </div>
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <div class="col-lg-12">
-                                    <form role="form" (ngSubmit)="addStudents()" [formGroup]="addDataForm">
+                                    <form role="form" (ngSubmit)="addStudents()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group">
                                             <label for="customFile">{{ 'FILE' | translate}}</label>
                                             <div>
-                                                <input type="file" id="studentsFile" formControlName="studentsFile" (change)="onFileChange($event,'studentsFile')" required
+                                                <input type="file" id="studentsFile" formControlName="studentsFile" (change)="onFileChange($event,'students')" required
                                                 accept=".csv">
                                             </div>
                                         </div>

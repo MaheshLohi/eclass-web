@@ -5,7 +5,6 @@ import { TranslateService } from '@ngx-translate/core';
 import * as _ from "lodash";
 declare var $: any; 
 
-import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { AdminTopicService } from '@adminServices/topic/topic.service';
@@ -30,18 +29,17 @@ export class AdminFaqComponent implements OnInit {
 	selectedFaq : any = {};
 	editDataForm : FormGroup;
 
-	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private loader: LoaderService,
-	private route: ActivatedRoute,
-	public router: Router,
-	private toaster: ToasterService,
-	private adminFaqService : AdminFaqService,
-	private adminTopicService : AdminTopicService) {
-		this.route.params.subscribe((params: Params) => {
+	constructor(private _translate: TranslateService,
+	private _loader: LoaderService,
+	private _route: ActivatedRoute,
+	private _router: Router,
+	private _toaster: ToasterService,
+	private _faq : AdminFaqService,
+	private _topic : AdminTopicService) {
+		this._route.params.subscribe((params: Params) => {
 			this.chapterId = params['chapterId'];
 		});
-		this.route.queryParams
+		this._route.queryParams
 		.subscribe((queryParams: Params) => {
 			this.queryParams = queryParams;
 		});
@@ -70,20 +68,20 @@ export class AdminFaqComponent implements OnInit {
 	resetTopicsList() {
 		this.topicsDataStatus = 2;
 		this.topics = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getTopicsList() {
 		this.resetTopicsList();
-		this.adminTopicService.getTopicsList(this.chapterId)
+		this._topic.getTopicsList(this.chapterId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.topics = response.chapter_details.data;
 			this.topicId = parseInt(this.queryParams.topicId);
 			this.onTopicChange();
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.topicsDataStatus = errorCode;
 		});
 	};
@@ -96,18 +94,18 @@ export class AdminFaqComponent implements OnInit {
 	resetFaqsList() {
 		this.faqsDataStatus = 2;
 		this.faqs = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getFaqsList() {
 		this.resetFaqsList();
-		this.adminFaqService.getFaqsList(this.topicId)
+		this._faq.getFaqsList(this.topicId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.faqsDataStatus = 1;
 			this.faqs = response.reverse();
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.faqsDataStatus = errorCode;
 		});
 	};
@@ -115,7 +113,7 @@ export class AdminFaqComponent implements OnInit {
 	changeRouteParams() {
 		let data = {};
 		data['topicId'] = this.topicId;
-		this.router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
+		this._router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
 	};
 
 	showAddFeatureView(status) {
@@ -134,15 +132,15 @@ export class AdminFaqComponent implements OnInit {
 	};
 
 	addFaq() {
-		this.loader.showLoader();
-		this.adminFaqService.addFaq(this.addDataForm.value, this.topicId)
+		this._loader.showLoader();
+		this._faq.addFaq(this.addDataForm.value, this.topicId)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getFaqsList();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("FAQ")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("FAQ")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
@@ -154,28 +152,28 @@ export class AdminFaqComponent implements OnInit {
 	};
 
 	updateFaq() {
-		this.loader.showLoader();
-		this.adminFaqService.updateFaq(this.editDataForm.value, this.selectedFaq.id)
+		this._loader.showLoader();
+		this._faq.updateFaq(this.editDataForm.value, this.selectedFaq.id)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.getFaqsList();
 			$('#editData').modal('hide');
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("FAQ")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("FAQ")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	deleteFaq(faq) {
-		this.loader.showLoader();
-		this.adminFaqService.deleteFaq(faq.id)
+		this._loader.showLoader();
+		this._faq.deleteFaq(faq.id)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.getFaqsList();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this.translate.instant("FAQ")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_DELETED_SUCCESSFULLY",{ value : this._translate.instant("FAQ")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
-	}
+	};
 
 }

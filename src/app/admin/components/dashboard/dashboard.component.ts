@@ -14,8 +14,8 @@ export class AdminDashboardComponent implements OnInit {
 	dashboardDataStatus : number = 2;
 	dashboardData : any = {};
 	
-  	constructor(private loader: LoaderService,
-	private dashboardService : AdminDashboardService) { }
+  	constructor(private _loader: LoaderService,
+	private _dashboard : AdminDashboardService) { }
 
   	ngOnInit() {
 		this.getDashboardData();
@@ -24,19 +24,19 @@ export class AdminDashboardComponent implements OnInit {
 	resetDashboardData() {
 		this.dashboardDataStatus = 2;
 		this.dashboardData = {};
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getDashboardData() {
 		this.resetDashboardData();
-		this.dashboardService.getDashboardData()
+		this._dashboard.getDashboardData()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.dashboardDataStatus = 1;
 			this.dashboardData = response;
 			this.prepareDashboardReportCards();
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.dashboardDataStatus = errorCode;
 		});
 	};
