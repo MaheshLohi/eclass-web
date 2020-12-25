@@ -21,26 +21,25 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	showAddFeature : boolean = false;
 	addDataForm : FormGroup;
 	editDataForm : FormGroup;
-	logo: File;
 
-	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	public miscellaneousService : MiscellaneousService,
-	private instituteService : SuperAdminInstitutesService) {
+	constructor(public _constants: Constants,
+	public _miscellaneous: MiscellaneousService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _institute: SuperAdminInstitutesService) {
 		this.addDataForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'address' : new FormControl("", []),
 			'phone_number' : new FormControl("", []),
-			'logo' : new FormControl("", [])
+			'logo' : new FormControl("", [Validators.required])
 		});
 		this.editDataForm = new FormGroup({
 			'id' : new FormControl("", []),
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'address' : new FormControl("", []),
 			'phone_number' : new FormControl("", []),
-			'logo' : new FormControl("", [])
+			'logo' : new FormControl("", [Validators.required])
 		});
 	};
 
@@ -59,18 +58,18 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	resetInstitutes() {
 		this.instituteDataStatus = 2;
 		this.institutes = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getInstitutes() {
 		this.resetInstitutes();
-		this.instituteService.getInstitutes()
+		this._institute.getInstitutes()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.instituteDataStatus = 1;
 			this.institutes = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.instituteDataStatus = errorCode;
 		});
 	};
@@ -78,65 +77,63 @@ export class SuperAdminInstitutesComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			this.addDataForm.reset();
-			this.logo = null;
+			$('#addDataForm')[0].reset();
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addDataForm.valid && this.logo) ? false : true;
+		return (this.addDataForm.valid) ? false : true;
 	};
 
-	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+	onFileChange(event, fileTarget, formType) {
+		let formName = (formType === 1) ? "addDataForm" : "editDataForm";
+		this[formName].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this[formName].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	addInstitute() {
-		this.loader.showLoader();
-		this.instituteService.addInstitute(this.addDataForm.value, this.logo)
+		this._loader.showLoader();
+		this._institute.addInstitute(this.addDataForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getInstitutes();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("INSTITUTE")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("INSTITUTE")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	updateStatus(institute) {
-		this.loader.showLoader();
-		this.instituteService.updateStatus(institute)
+		this._loader.showLoader();
+		this._institute.updateStatus(institute)
 		.subscribe(() => {
-			this.loader.hideLoader();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("INSTITUTE_STATUS")} ));
+			this._loader.hideLoader();
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("INSTITUTE_STATUS")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	initiateEditModal(institute) {
-		this.logo = null;
-		this.editDataForm.reset();
-		this.editDataForm.get('id').patchValue(institute.id);
-		this.editDataForm.get('name').patchValue(institute.name);
-		this.editDataForm.get('phone_number').patchValue(institute.phone_number);
-		this.editDataForm.get('address').patchValue(institute.address);
+		$('#editDataForm')[0].reset();
+		this.editDataForm.patchValue({
+			id : institute.id, name : institute.name, phone_number : institute.phone_number, address : institute.address
+		})
 	};
 
 	updateInstitute() {
-		this.loader.showLoader();
-		this.instituteService.updateInstitute(this.editDataForm.value, this.logo)
+		this._loader.showLoader();
+		this._institute.updateInstitute(this.editDataForm.value)
 		.subscribe(() => {
 			$('#update-institute').modal('hide');
 			this.getInstitutes();
-			this.loader.hideLoader();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("INSTITUTE")} ));
+			this._loader.hideLoader();
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("INSTITUTE")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 }

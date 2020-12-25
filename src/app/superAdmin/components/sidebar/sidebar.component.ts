@@ -14,12 +14,12 @@ export class SuperAdminSidebarComponent implements OnInit {
 	sidemenus : any = [];
 	userDetails : any = {};
 
-	constructor(private constants: Constants,
-	private storageService: StorageService) {};
+	constructor(private _constants: Constants,
+	private _storage: StorageService) {};
 
  	ngOnInit() {
-		this.userType = this.constants.SUPER_ADMIN;
-		this.userDetails = this.storageService.getData("userDetails");
+		this.userType = this._constants.SUPER_ADMIN;
+		this.userDetails = this._storage.getData("userDetails");
 		this.sidemenus = [{
 			name : "DASHBOARD",
 			icon : "fas fa-tachometer-alt",

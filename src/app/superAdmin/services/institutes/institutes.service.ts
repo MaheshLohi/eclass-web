@@ -25,9 +25,9 @@ export class SuperAdminInstitutesService {
 		)
 	};
 	
-	addInstitute(instituteData,logo): Observable<any> {
+	addInstitute(instituteData): Observable<any> {
 		const formData = new FormData();
-		formData.append('logo', logo);
+		formData.append('logo', instituteData.logo);
 		formData.append('name', instituteData.name);
 		formData.append('phone_number', instituteData.phone);
 		formData.append('address', instituteData.address);
@@ -40,13 +40,13 @@ export class SuperAdminInstitutesService {
 		return this.http.post<any>(this.constants.INSTITUTE_STATUS_UPDATE_URL, formData);
 	};
 
-	updateInstitute(editFormValue, logo): Observable<any> {
+	updateInstitute(editFormValue): Observable<any> {
 		const formData = new FormData();
 		formData.append('id', editFormValue.id);
 		formData.append('name', editFormValue.name);
 		formData.append('phone_number', editFormValue.phone_number);
 		formData.append('address', editFormValue.address);
-		if(logo) { formData.append('logo', logo);}
+		if(editFormValue.logo) { formData.append('logo', editFormValue.logo);}
 		return this.http.post<any>(this.constants.INSTITUTE_UPDATE_URL, formData);
 	};
   

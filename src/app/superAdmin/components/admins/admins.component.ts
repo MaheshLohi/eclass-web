@@ -3,7 +3,6 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 declare var $: any; 
 
-import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { SuperAdminInstitutesService } from '@app/superAdmin/services/institutes/institutes.service';
@@ -24,12 +23,11 @@ export class SuperAdminAdminsComponent implements OnInit {
 	addAdminForm : FormGroup;
 	editForm : FormGroup;
 
-	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private instituteService : SuperAdminInstitutesService,
-	private adminService : SuperAdminAdminsService) { 
+	constructor(private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _institute: SuperAdminInstitutesService,
+	private _admin: SuperAdminAdminsService) { 
 		this.addAdminForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'email' : new FormControl("", [Validators.email]),
@@ -59,18 +57,18 @@ export class SuperAdminAdminsComponent implements OnInit {
 	resetAdmins() {
 		this.adminDataStatus = 2;
 		this.admins = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getAdmins() {
 		this.resetAdmins();
-		this.adminService.getAdmins()
+		this._admin.getAdmins()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.adminDataStatus = 1;
 			this.admins = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.adminDataStatus = errorCode;
 		});
 	};
@@ -78,18 +76,18 @@ export class SuperAdminAdminsComponent implements OnInit {
 	resetInstitutes() {
 		this.instituteDataStatus = 2;
 		this.institutes = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getInstitutes() {
 		this.resetInstitutes();
-		this.instituteService.getInstitutes()
+		this._institute.getInstitutes()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.instituteDataStatus = 1;
 			this.institutes = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.instituteDataStatus = errorCode;
 		});
 	};
@@ -108,46 +106,46 @@ export class SuperAdminAdminsComponent implements OnInit {
 
 
 	addAdmin() {
-		this.loader.showLoader();
-		this.adminService.addAdmin(this.addAdminForm.value)
+		this._loader.showLoader();
+		this._admin.addAdmin(this.addAdminForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.showAddFeatureView(false);
 			this.getAdmins();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("ADMIN")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("ADMIN")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	initiateEditModal(admin) {
 		this.editForm.reset();
-		this["editForm"].get('name').patchValue(admin.name);
-		this["editForm"].get('email').patchValue(admin.email);
-		this["editForm"].get('id').patchValue(admin.id);
+		this['editForm'].patchValue({
+			name: admin.name, email: admin.email, id: admin.id
+		})
 	};
 
 	updateAdmin() {
-		this.loader.showLoader();
-		this.adminService.updateAdmin(this.editForm.value)
+		this._loader.showLoader();
+		this._admin.updateAdmin(this.editForm.value)
 		.subscribe(() => {
 			$('#update-admin').modal('hide');
 			this.getAdmins();
-			this.loader.hideLoader();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("ADMIN")} ));
+			this._loader.hideLoader();
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("ADMIN")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	updateStatus(admin) {
-		this.loader.showLoader();
-		this.adminService.updateStatus(admin)
+		this._loader.showLoader();
+		this._admin.updateStatus(admin)
 		.subscribe(() => {
-			this.loader.hideLoader();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("ADMIN_STATUS")} ));
+			this._loader.hideLoader();
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("ADMIN_STATUS")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
