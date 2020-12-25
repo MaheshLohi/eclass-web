@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 
 import { Constants } from 'src/app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 
 @Component({
-  selector: 'app-faculty-sidebar',
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  	selector: 'app-faculty-sidebar',
+  	templateUrl: './sidebar.component.html',
+ 	styleUrls: ['./sidebar.component.scss']
 })
 export class FacultySidebarComponent implements OnInit {
 
@@ -14,12 +15,13 @@ export class FacultySidebarComponent implements OnInit {
 	sidemenus : any = [];
 	userDetails : any = {};
 
-	constructor(private constants: Constants,
-	private storageService: StorageService) {};
+	constructor(private _constants: Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _storage: StorageService) {};
 
 	ngOnInit() {
-		this.userType = this.constants.FACULTY;
-		this.userDetails = this.storageService.getData("userDetails");
+		this.userType = this._constants.FACULTY;
+		this.userDetails = this._storage.getData("userDetails");
 		this.sidemenus = [{
 			name : "DASHBOARD",
 			icon : "fa fa-home",

@@ -10,11 +10,11 @@ import { Constants } from '@app/constants';
 })
 export class FacultyQuestionsService {
 
-	constructor(private constants: Constants,
-	private http: HttpClient) { }
+	constructor(private _constants: Constants,
+	private _http: HttpClient) { }
 
 	getQuestionsList(subjectId) : Observable<any> {
-		return this.http.get<any>(this.constants.FACULTY_QUESTIONS_LIST_URL + subjectId)
+		return this._http.get<any>(this._constants.FACULTY_QUESTIONS_LIST_URL + subjectId)
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
@@ -29,7 +29,7 @@ export class FacultyQuestionsService {
 		const formData = new FormData();
 		formData.append('id', question.id);
 		formData.append('answer', question.replay);
-		return this.http.post<any>(this.constants.FACULTY_SUBMIT_REPLAY_URL, formData);
+		return this._http.post<any>(this._constants.FACULTY_SUBMIT_REPLAY_URL, formData);
 	};
 
 }

@@ -10,11 +10,11 @@ import { Constants } from '@app/constants';
 })
 export class FacultySubjectsService {
 
-  	constructor(private constants: Constants,
-	private http: HttpClient) { }
+  	constructor(private _constants: Constants,
+	private _http: HttpClient) { }
 
 	getSubjectsList() : Observable<any> {
-		return this.http.get<any>(this.constants.FACULTY_SUBJECTS_LIST_URL)
+		return this._http.get<any>(this._constants.FACULTY_SUBJECTS_LIST_URL)
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {

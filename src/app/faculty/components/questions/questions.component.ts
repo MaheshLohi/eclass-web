@@ -2,11 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute, Params } from '@angular/router';
 
-import { Constants } from '@app/constants';
+import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
-import { DownloadService } from '@sharedServices/download/download.service';
-import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { FacultyQuestionsService } from '@app/faculty/services/questions/questions.service';
 
 @Component({
@@ -20,15 +18,13 @@ export class FacultyQuestionsComponent implements OnInit {
 	questionsList : any = [];
 	questionsListStatus : number = 2;
 
-	constructor(public constants : Constants,
-	public miscellaneousService : MiscellaneousService,
-	private loader: LoaderService,
-	private route: ActivatedRoute,
-	private toaster: ToasterService,
-	private translate: TranslateService,
-	public downloadService : DownloadService,
-	private facultyQuestionsService : FacultyQuestionsService) { 
-		this.route.params.subscribe((params: Params) => {
+	constructor(public _miscellaneous : MiscellaneousService,
+	private _loader: LoaderService,
+	private _route: ActivatedRoute,
+	private _toaster: ToasterService,
+	private _translate: TranslateService,
+	private _question : FacultyQuestionsService) { 
+		this._route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
 		});
 	};
@@ -40,32 +36,32 @@ export class FacultyQuestionsComponent implements OnInit {
 	resetQuestionsList() {
 		this.questionsListStatus = 2;
 		this.questionsList = {};
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getQuestionsList() {
 		this.resetQuestionsList();
-		this.facultyQuestionsService.getQuestionsList(this.subjectId)
+		this._question.getQuestionsList(this.subjectId)
 		.subscribe((response : any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.questionsListStatus = 1;
 			this.questionsList = response;
 		},(errorStatus)=> {
 			this.questionsListStatus = errorStatus;
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		})
 	};
 
 	submitReplay(question) {
-		this.loader.showLoader();
-		this.facultyQuestionsService.submitReplay(question)
+		this._loader.showLoader();
+		this._question.submitReplay(question)
 		.subscribe(() => {
 			this.getQuestionsList();
-			this.loader.hideLoader();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("REPLAY")} ));
+			this._loader.hideLoader();
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("REPLAY")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
-	}
+	};
 
 }
