@@ -25,23 +25,23 @@ export class StudentTopicComponent implements OnInit {
 	chapterDetails : any = {};
 	queryParams : any = {};
 
-	constructor(public constants : Constants,
-	public downloadService : DownloadService,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private route: ActivatedRoute,
-	private router: Router,
-	private studentTopicService : StudentTopicService,
-	private studentWishlistService : StudentWishlistService) {
-		this.route.params.subscribe((params: Params) => {
+	constructor(public _constants: Constants,
+	public _download: DownloadService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _route: ActivatedRoute,
+	private _router: Router,
+	private _topic: StudentTopicService,
+	private _wishlist: StudentWishlistService) {
+		this._route.params.subscribe((params: Params) => {
 			this.chapterId = params['chapterId'];
 		});
-		this.route.queryParams
+		this._route.queryParams
 		.subscribe((queryParams: Params) => {
 			this.queryParams = queryParams;
 		})
-	}
+	};
 
 	ngOnInit() {
 		this.getTopicsList();
@@ -51,14 +51,14 @@ export class StudentTopicComponent implements OnInit {
 		this.topicsDataStatus = 2;
 		this.topics = [];
 		this.chapterDetails = {};
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getTopicsList() {
 		this.resetTopicsList();
-		this.studentTopicService.getTopicsList(this.chapterId)
+		this._topic.getTopicsList(this.chapterId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.chapterDetails = response;
 			this.topics = response.chapter_details.data;
@@ -70,7 +70,7 @@ export class StudentTopicComponent implements OnInit {
 				this.selectTopic(this.topics[0]);
 			}
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.topicsDataStatus = errorCode;
 		});
 	};
@@ -78,25 +78,25 @@ export class StudentTopicComponent implements OnInit {
 	selectTopic(topic) {
 		this.selectedTopic = topic; 
 		let videoBasePath = JSON.parse(topic.video);
-		this.videoUrl = this.constants.DOMAIN_URL + videoBasePath.video_path['480'];
+		this.videoUrl = this._constants.DOMAIN_URL + videoBasePath.video_path['480'];
 		this.changeRouteParams();
 	};
 
 	changeRouteParams() {
 		let data = {};
 		data['topicId'] = this.selectedTopic.id;
-		this.router.navigate(['student/topics', this.chapterId],{ queryParams: data });
+		this._router.navigate(['student/topics', this.chapterId],{ queryParams: data });
 	};
 
 	updateTopicWishlist() {
-		this.loader.showLoader();
-		this.studentWishlistService.updateTopicWishlist(this.selectedTopic)
+		this._loader.showLoader();
+		this._wishlist.updateTopicWishlist(this.selectedTopic)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.selectedTopic.is_wishlist = !this.selectedTopic.is_wishlist;
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("WISHLIST")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 }

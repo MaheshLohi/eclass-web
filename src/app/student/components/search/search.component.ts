@@ -17,13 +17,13 @@ export class StudentSearchComponent implements OnInit {
 	searchResultsDataStatus : number = 2;
 	searchResults : any = [];
 
-	constructor(public constants : Constants,
-	public miscellaneousService : MiscellaneousService,
-	private route: ActivatedRoute,
-	private router: Router,
-	private loader: LoaderService,
-	private studentSearchService : StudentSearchService) { 
-		this.route.queryParams
+	constructor(public _constants : Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _route: ActivatedRoute,
+	private _router: Router,
+	private _loader: LoaderService,
+	private _search : StudentSearchService) { 
+		this._route.queryParams
 		.subscribe((queryParams: Params) => {
 			this.searchString = queryParams.searchString;
 		});
@@ -44,14 +44,14 @@ export class StudentSearchComponent implements OnInit {
 		this.resetSearchResultsList();
 		this.changeRouteParams();
 		if(this.searchString) {
-			this.loader.showLoader();
-			this.studentSearchService.getSearchResultsList(this.searchString)
+			this._loader.showLoader();
+			this._search.getSearchResultsList(this.searchString)
 			.subscribe((response:any) => {
-				this.loader.hideLoader();
+				this._loader.hideLoader();
 				this.searchResultsDataStatus = 1;
 				this.searchResults = response;
 			}, (errorCode) => {
-				this.loader.hideLoader();
+				this._loader.hideLoader();
 				this.searchResultsDataStatus = errorCode;
 			});
 		}
@@ -61,17 +61,17 @@ export class StudentSearchComponent implements OnInit {
 		if(this.searchString) {
 			let data = {};
 			data['searchString'] = this.searchString;
-			this.router.navigate(['student/search'],{ queryParams: data });
+			this._router.navigate(['student/search'],{ queryParams: data });
 		}
 		else {
-			this.router.navigate(['student/search']);
+			this._router.navigate(['student/search']);
 		}
 	};
 
 	navigateToTopics(topic) {
 		let data = {};
 		data['topicId'] = topic.id;
-		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
+		this._router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
 	};
 
 	preventEvent(event) {

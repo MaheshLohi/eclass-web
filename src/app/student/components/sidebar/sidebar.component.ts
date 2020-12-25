@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Constants } from 'src/app/constants';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
 
 @Component({
@@ -14,12 +15,13 @@ export class StudentSidebarComponent implements OnInit {
 	sidemenus : any = [];
 	userDetails : any = {};
 
-	constructor(private constants: Constants,
-	private storageService: StorageService) {};
+	constructor(public _constants: Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _storage: StorageService) {};
 
  	ngOnInit() {
-		this.userType = this.constants.STUDENT;
-		this.userDetails = this.storageService.getData("userDetails");
+		this.userType = this._constants.STUDENT;
+		this.userDetails = this._storage.getData("userDetails");
 		this.sidemenus = [{
 			name : "HOME",
 			icon : "fa fa-home",

@@ -16,11 +16,11 @@ export class StudentRecentVideosComponent implements OnInit {
 	recentVideosDataStatus : number = 2;
 	recentVideos : any = [];
 
-	constructor(public constants : Constants,
-	public miscellaneous : MiscellaneousService,
-	private loader: LoaderService,
-	private router: Router,
-	private studentRecentVideosService : StudentRecentVideosService) { };
+	constructor(public _constants : Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _loader: LoaderService,
+	private _router: Router,
+	private _recentVideos : StudentRecentVideosService) { };
 
 	ngOnInit() {
 		this.getRecentVideosList();
@@ -29,18 +29,18 @@ export class StudentRecentVideosComponent implements OnInit {
 	resetRecentVideosList() {
 		this.recentVideosDataStatus = 2;
 		this.recentVideos = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getRecentVideosList() {
 		this.resetRecentVideosList();
-		this.studentRecentVideosService.getRecentVideosList()
+		this._recentVideos.getRecentVideosList()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.recentVideosDataStatus = 1;
 			this.recentVideos = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.recentVideosDataStatus = errorCode;
 		});
 	};
@@ -48,7 +48,7 @@ export class StudentRecentVideosComponent implements OnInit {
 	navigateToTopics(topic) {
 		let data = {};
 		data['topicId'] = topic.id;
-		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
+		this._router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
 	};
 
 }

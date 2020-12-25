@@ -75,7 +75,7 @@
                                                 <b>{{ 'NAME' | translate }}</b> : {{ chapterDetails.name }} <br/>
                                                 <b>{{ 'DESCRIPTION' | translate }}</b> : {{ chapterDetails.description }} <br/>
                                                 <b>{{ 'FACULTY' | translate }}</b> : {{ chapterDetails.faculty }}<br/>
-                                                <button class="btn btn-theme-primary mt-2" (click)="downloadService.download(chapterDetails.notes)">
+                                                <button class="btn btn-theme-primary mt-2" (click)="_download.download(chapterDetails.notes)">
                                                     <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_NOTES' | translate}}
                                                 </button>
                                             </div>

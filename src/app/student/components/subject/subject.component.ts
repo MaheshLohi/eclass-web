@@ -19,15 +19,15 @@ export class StudentSubjectComponent implements OnInit{
 	selectedSemester : any = {};
 	featureType : number;
 
-	constructor(public constants : Constants,
-	public downloadService : DownloadService,
-	public miscellaneousService : MiscellaneousService,
-	private loader: LoaderService,
-	private router: Router,
-	private studentSubjectService : StudentSubjectService) { };
+	constructor(public _constants : Constants,
+	public _download : DownloadService,
+	public _miscellaneous : MiscellaneousService,
+	private _loader: LoaderService,
+	private _router: Router,
+	private _subjects : StudentSubjectService) { };
 
 	ngOnInit() {
-		this.featureType = (this.router.url === "/student/home") ? 1 : 2;
+		this.featureType = (this._router.url === "/student/home") ? 1 : 2;
 	}
 
 	onSemesterSelection(semester) {
@@ -38,18 +38,18 @@ export class StudentSubjectComponent implements OnInit{
 	resetSubjectsList() {
 		this.subjectsDataStatus = 2;
 		this.subjects = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getSubjects() {
 		this.resetSubjectsList();
-		this.studentSubjectService.getSubjectsList(this.selectedSemester)
+		this._subjects.getSubjectsList(this.selectedSemester)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectsDataStatus = 1;
 			this.subjects = response[0].subjects.data;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectsDataStatus = errorCode;
 		});
 	};
@@ -57,7 +57,7 @@ export class StudentSubjectComponent implements OnInit{
 	onSubjectSelection(subject) {
 		let data = {};
 		data['contentType'] = this.featureType;
-		this.router.navigate(['student/contents', subject.id],{ queryParams: data });
+		this._router.navigate(['student/contents', subject.id],{ queryParams: data });
 	};
 
 }

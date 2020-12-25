@@ -1,9 +1,7 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Router } from '@angular/router';
 
-import { Constants } from '@app/constants';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentQuestionsService } from '@studentServices/questions/questions.service';
@@ -20,12 +18,10 @@ export class StudentQuestionsComponent implements OnChanges {
 	questions : any = [];
 	addDataForm : FormGroup;
 
-	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	public router: Router,
-	private studentQuestionsService : StudentQuestionsService) { 
+	constructor(private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _question : StudentQuestionsService) { 
 		this.addDataForm = new FormGroup({
 			'question' : new FormControl("", [])
 		});
@@ -46,18 +42,18 @@ export class StudentQuestionsComponent implements OnChanges {
 	resetQuestionsList() {
 		this.questionsDataStatus = 2;
 		this.questions = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getQuestionsList() {
 		this.resetQuestionsList();
-		this.studentQuestionsService.getQuestionsList(this.topicId)
+		this._question.getQuestionsList(this.topicId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.questionsDataStatus = 1;
 			this.questions = response.reverse();
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.questionsDataStatus = 0;
 		});
 	};
@@ -67,15 +63,15 @@ export class StudentQuestionsComponent implements OnChanges {
 	};
 
 	addQuestion() {
-		this.loader.showLoader();
-		this.studentQuestionsService.addQuestion(this.addDataForm.value,this.topicId)
+		this._loader.showLoader();
+		this._question.addQuestion(this.addDataForm.value,this.topicId)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.getQuestionsList();
 			this.addDataForm.reset();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this.translate.instant("QUESTION")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_ADDED_SUCCESSFULLY",{ value : this._translate.instant("QUESTION")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 

@@ -7,8 +7,8 @@
                 <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(wishlist.chapter_details.data[0])">
                     <div class="card-body p-2">
                         <div class="img-container">
-                            <img class="img-fluid br-4" alt="Photo" [src]='this.constants.DOMAIN_URL + wishlist.chapter_details.data[0].thumbnail' 
-                            (error)="miscellaneousService.setDefaultThumbnailImage($event)">
+                            <img class="img-fluid br-4" alt="Photo" [src]='_constants.DOMAIN_URL + wishlist.chapter_details.data[0].thumbnail' 
+                            (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                         </div>
                         <div class="card-header-title">
                             {{wishlist.chapter_details.data[0].name}}

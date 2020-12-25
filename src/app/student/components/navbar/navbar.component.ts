@@ -3,10 +3,10 @@ import { Router } from '@angular/router';
 import * as _ from "lodash";
 
 import { Constants } from '@app/constants';
+import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
 import { StorageService } from '@sharedServices/storage/storage.service';
-import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
 import { StudentSemesterService } from '@studentServices/semester/semester.service';
 
 @Component({

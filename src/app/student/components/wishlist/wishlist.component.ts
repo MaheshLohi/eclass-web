@@ -18,13 +18,13 @@ export class StudentWishlistComponent implements OnInit {
 	wishlistDataStatus : number = 2;
 	wishlists : any = [];
 
-	constructor(public constants : Constants,
-	public miscellaneousService : MiscellaneousService,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private router: Router,
-	private studentWishlistService : StudentWishlistService) {	}
+	constructor(public _constants : Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _router: Router,
+	private _wishlist : StudentWishlistService) { };
 
 	ngOnInit() {
 		this.getWishlistDetails();
@@ -33,18 +33,18 @@ export class StudentWishlistComponent implements OnInit {
 	resetWishlistDetails() {
 		this.wishlistDataStatus = 2;
 		this.wishlists = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getWishlistDetails() {
 		this.resetWishlistDetails();
-		this.studentWishlistService.getWishlistDetails()
+		this._wishlist.getWishlistDetails()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.wishlistDataStatus = 1;
 			this.wishlists = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.wishlistDataStatus = errorCode;
 		});
 	};
@@ -52,7 +52,7 @@ export class StudentWishlistComponent implements OnInit {
 	navigateToTopics(topic) {
 		let data = {};
 		data['topicId'] = topic.id;
-		this.router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
+		this._router.navigate(['student/topics', topic.chapter_id],{ queryParams: data });
 	};
 
 	preventEvent(event) {
@@ -61,17 +61,17 @@ export class StudentWishlistComponent implements OnInit {
 
 	updateTopicWishlist(selectedTopic, event) {
 		this.preventEvent(event)
-		this.loader.showLoader();
+		this._loader.showLoader();
 		let data = {};
 		data['id'] =  selectedTopic.chapter_detail_id;
 		data['is_wishlist'] = 1;
-		this.studentWishlistService.updateTopicWishlist(data)
+		this._wishlist.updateTopicWishlist(data)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.getWishlistDetails();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("WISHLIST")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("WISHLIST")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
