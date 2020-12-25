@@ -157,7 +157,7 @@
                     <label for="customFile" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate}}</label>
                     <div>
                         <input type="file" id="file" (change)="onFileChange($event,'attachmentFile')"
-                        accept="image/*">
+                        [accept]="(fileType === 0)?'.pdf':'image/*'">
                     </div>
                 </div>
                 <button class="btn btn-theme-primary" (click)="uploadSubjectAttachment()"
