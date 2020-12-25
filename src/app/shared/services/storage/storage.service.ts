@@ -8,11 +8,11 @@ import { Constants } from 'src/app/constants';
 })
 export class StorageService {
 
-	constructor(private constants: Constants) { }
+	constructor(private _constants: Constants) { }
 
 	setData(key, value) {
-		if (this.constants.ENABLE_ENCRYPTION) {
-			localStorage.setItem(key, CryptoJS.AES.encrypt(JSON.stringify(value), this.constants.ENCRYPTION_KEY));
+		if (this._constants.ENABLE_ENCRYPTION) {
+			localStorage.setItem(key, CryptoJS.AES.encrypt(JSON.stringify(value), this._constants.ENCRYPTION_KEY));
 		} else {
 			localStorage.setItem(key, JSON.stringify(value));
 		}
@@ -21,8 +21,8 @@ export class StorageService {
 	getData(key) {
 		if(localStorage.getItem(key)) {
 			let value = localStorage.getItem(key);
-			if (this.constants.ENABLE_ENCRYPTION) {
-				let bytes = CryptoJS.AES.decrypt(value, this.constants.ENCRYPTION_KEY);
+			if (this._constants.ENABLE_ENCRYPTION) {
+				let bytes = CryptoJS.AES.decrypt(value, this._constants.ENCRYPTION_KEY);
 				return JSON.parse(bytes.toString(CryptoJS.enc.Utf8));
 			} 
 			else {

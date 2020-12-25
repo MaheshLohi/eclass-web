@@ -7,14 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AlertService {
 
-   constructor(public translate: TranslateService) { };
+   constructor(public _translate: TranslateService) { };
 
    showSuccess(alertMessage, title?: string) {
 		return swal.fire({
-			title: title ? title : this.translate.instant('SUCCESS'),
+			title: title ? title : this._translate.instant('SUCCESS'),
 			text: alertMessage,
 			icon: 'success',
-			confirmButtonText: this.translate.instant('OK'),
+			confirmButtonText: this._translate.instant('OK'),
 			showConfirmButton: true,
             showCancelButton: false,
             allowOutsideClick: false
@@ -23,10 +23,10 @@ export class AlertService {
 
 	showError(alertMessage, title?: string) {
 		return swal.fire({
-			title: title ? title : this.translate.instant('ERROR'),
+			title: title ? title : this._translate.instant('ERROR'),
 			text: alertMessage,
 			icon: 'error',
-			confirmButtonText: this.translate.instant('OK'),
+			confirmButtonText: this._translate.instant('OK'),
 			showConfirmButton: true,
             showCancelButton: false,
             allowOutsideClick: false
@@ -35,10 +35,10 @@ export class AlertService {
 
 	showWarning(alertMessage, title?: string) {
 		return swal.fire({
-			title: title ? title : this.translate.instant('WARNING'),
+			title: title ? title : this._translate.instant('WARNING'),
 			text: alertMessage,
 			icon: 'info',
-			confirmButtonText: this.translate.instant('OK'),
+			confirmButtonText: this._translate.instant('OK'),
 			showConfirmButton: true,
             showCancelButton: false,
             allowOutsideClick: false

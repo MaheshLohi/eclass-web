@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'prepareObject'
+  	name: 'prepareObject'
 })
 export class PrepareObjectPipe implements PipeTransform {
 

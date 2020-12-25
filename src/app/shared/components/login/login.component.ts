@@ -16,9 +16,9 @@ export class LoginComponent implements OnInit {
 	loginType : string;
 	showPassword : boolean = false;
 
-	constructor(private router: Router,
-	private loader: LoaderService,
-	private loginService: LoginService) { 
+	constructor(private _router: Router,
+	private _loader: LoaderService,
+	private _login: LoginService) { 
 		this.loginForm = new FormGroup({
 			'email' : new FormControl("", []),
 			'password' : new FormControl("", [Validators.minLength(6)])
@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
 	};
 
 	getLoginType() {
-		switch(this.router.url) {
+		switch(this._router.url) {
 			case '/school/login' : return 'school';
 			case '/' : return 'student';
 			default : return 'student';
@@ -52,36 +52,36 @@ export class LoginComponent implements OnInit {
 	doLogin() {
 		let data = this.loginForm.value;
 		if(this.loginType === 'student') { data['type'] = 2;}
-		this.loader.showLoader();
-		this.loginService.doLogin(this.loginForm.value)
+		this._loader.showLoader();
+		this._login.doLogin(this.loginForm.value)
 		.subscribe(() => {
 			this.getUserDetails();
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	getUserDetails() {
-		this.loginService.getUserDetails()
+		this._login.getUserDetails()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.navigateToDashboard(response.type)
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
 
 	navigateToDashboard(typeOfUser) {
 		switch(typeOfUser) {
-			case 1:	this.router.navigate(['/superAdmin/dashboard']);
+			case 1:	this._router.navigate(['/superAdmin/dashboard']);
 				break;
-			case 2:	this.router.navigate(['/student/home']);
+			case 2:	this._router.navigate(['/student/home']);
 				break;
-			case 3:	this.router.navigate(['/admin/dashboard']);
+			case 3:	this._router.navigate(['/admin/dashboard']);
 				break;
-			case 4:	this.router.navigate(['/faculty/dashboard']);
+			case 4:	this._router.navigate(['/faculty/dashboard']);
 				break;
-			default:this.router.navigate(['/superAdmin/dashboard']);
+			default:this._router.navigate(['/superAdmin/dashboard']);
 		}
 	};
 }

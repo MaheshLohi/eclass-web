@@ -15,7 +15,7 @@ export class FacultySidebarComponent implements OnInit {
 	sidemenus : any = [];
 	userDetails : any = {};
 
-	constructor(private _constants: Constants,
+	constructor(public _constants: Constants,
 	public _miscellaneous : MiscellaneousService,
 	private _storage: StorageService) {};
 

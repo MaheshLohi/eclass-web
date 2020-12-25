@@ -6,13 +6,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 })
 export class LoaderService {
 
-   	constructor(private spinner: NgxSpinnerService) { };
+   	constructor(private _spinner: NgxSpinnerService) { };
 
    	showLoader() {
-		this.spinner.show();
+		this._spinner.show();
 	};
 	   
 	hideLoader() {
-		this.spinner.hide();
+		this._spinner.hide();
 	};
 }

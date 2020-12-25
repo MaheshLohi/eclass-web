@@ -10,8 +10,8 @@ export class MiscellaneousService {
 
 	toasterStatus : boolean = false;
 
-	constructor(private toaster: ToasterService,
-	private translate: TranslateService) { };
+	constructor(private _toaster: ToasterService,
+	private _translate: TranslateService) { };
 
 	setDefaultStudentLogo(event) {
 		event.target.src = "assets/images/default_usericon.png";
@@ -32,10 +32,10 @@ export class MiscellaneousService {
 	handle(error, toasterStatus?: boolean) {
 		this.toasterStatus = toasterStatus ? toasterStatus : false;
 		if(error && error.error && error.error.message) {
-			this.toaster.showError(error.error.message);
+			this._toaster.showError(error.error.message);
 		}
 		else {
-			this.toaster.showError(this.translate.instant("STANDARD_ERROR"));
+			this._toaster.showError(this._translate.instant("STANDARD_ERROR"));
 		}
 	};
 }

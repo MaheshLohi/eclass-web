@@ -12,16 +12,16 @@ import { StorageService } from '@sharedServices/storage/storage.service';
 })
 export class LoginService {
 
-	constructor(private http: HttpClient,
-	private constants: Constants,
-	private storageService: StorageService) { };
+	constructor(private _http: HttpClient,
+	private _constants: Constants,
+	private _storage: StorageService) { };
 
 	doLogin(loginData) : Observable<any> {
-		return this.http.post<any>(this.constants.LOGIN_URL, loginData)
+		return this._http.post<any>(this._constants.LOGIN_URL, loginData)
 		.pipe(
 			map(response => { 
 				if (response && response.token) {
-					this.storageService.setData('Authorization', response);
+					this._storage.setData('Authorization', response);
 				  	return response; 
 				}
 				throw 0;
@@ -30,11 +30,11 @@ export class LoginService {
 	};
 
 	getUserDetails() : Observable<any> {
-		return this.http.get<any>(this.constants.USER_DETAILS_URL)
+		return this._http.get<any>(this._constants.USER_DETAILS_URL)
 		.pipe(
 			map(response => { 
 				if (response && response.data) {
-					this.storageService.setData('userDetails', response.data);
+					this._storage.setData('userDetails', response.data);
 				  	return response.data; 
 				}
 				throw 0;

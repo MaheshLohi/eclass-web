@@ -15,17 +15,17 @@ export class NavbarComponent implements OnInit {
 	userDetails : any = {};
 	loginType : number;
 
-	constructor(public constants : Constants,
-	private sessionHandler : SessionHandlerService,
-	public miscellaneousService : MiscellaneousService,
-	private storageService: StorageService) { }
+	constructor(public _constants : Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _session : SessionHandlerService,
+	private _storage: StorageService) { };
 
 	ngOnInit() {
-		this.userDetails = this.storageService.getData("userDetails");
+		this.userDetails = this._storage.getData("userDetails");
 		this.loginType = this.userDetails.type;
-	}
+	};
 
 	logout() {
-		this.sessionHandler.handleLogout();
-	}
+		this._session.handleLogout();
+	};
 }

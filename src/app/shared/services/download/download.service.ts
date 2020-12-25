@@ -7,12 +7,12 @@ import { Constants } from '@app/constants';
 })
 export class DownloadService {
 
-  	constructor(private constants: Constants) { }
+  	constructor(private _constants: Constants) { }
 
 	download(file, event?:any) {
 		if(event) { event.stopPropagation(); }
 		var aTag = document.createElement("a");
-		aTag.setAttribute('href', this.constants.DOMAIN_URL + file);
+		aTag.setAttribute('href', this._constants.DOMAIN_URL + file);
 		aTag.setAttribute('download', '');
 		aTag.setAttribute('visibility', 'hidden');
 		aTag.setAttribute('display', 'none');

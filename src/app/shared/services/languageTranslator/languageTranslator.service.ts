@@ -8,16 +8,16 @@ import { Constants } from 'src/app/constants';
 })
 export class LanguageTranslatorService {
 
-	constructor(private translate : TranslateService,
-	private constants : Constants) { };
+	constructor(private _translate : TranslateService,
+	private _constants : Constants) { };
 
 	initiateLanguage() {
-		this.translate.addLangs(this.constants.LANGUAGE_ARRAY);
-		this.translate.setDefaultLang(this.constants.DEFAULT_LANGUAGE);
-		this.setLanguage(this.constants.DEFAULT_LANGUAGE);
+		this._translate.addLangs(this._constants.LANGUAGE_ARRAY);
+		this._translate.setDefaultLang(this._constants.DEFAULT_LANGUAGE);
+		this.setLanguage(this._constants.DEFAULT_LANGUAGE);
 	};
 
 	setLanguage(languageCode) {
-		this.translate.use(languageCode);
+		this._translate.use(languageCode);
 	};
 }

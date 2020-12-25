@@ -7,7 +7,7 @@
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 d-flex">
             <div class="image">
-                <img [src]="this._constants.DOMAIN_URL + userDetails.inst_logo" class="img-circle elevation-2"
+                <img [src]="_constants.DOMAIN_URL + userDetails.inst_logo" class="img-circle elevation-2"
                 (error)="_miscellaneous.setDefaultInstituteLogo($event)">
             </div>
             <div class="info">

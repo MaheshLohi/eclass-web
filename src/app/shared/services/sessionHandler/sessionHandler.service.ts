@@ -12,15 +12,15 @@ import { StorageService } from '@sharedServices/storage/storage.service';
 })
 export class SessionHandlerService {
 
-	constructor(private router: Router,
-	private alert : AlertService,
-	private translate : TranslateService,
-	private storageService : StorageService,
-	private constants: Constants,
-	private http: HttpClient) { }
+	constructor(private _router: Router,
+	private _alert : AlertService,
+	private _translate : TranslateService,
+	private _storage : StorageService,
+	private _constants: Constants,
+	private _http: HttpClient) { }
 
 	handleLogout() {
-		this.http.post(this.constants.LOGOUT_URL, {})
+		this._http.post(this._constants.LOGOUT_URL, {})
 		.subscribe(() => {
 			this.navigateToLogin();
 		}, () => {
@@ -29,19 +29,19 @@ export class SessionHandlerService {
 	};
 
 	navigateToLogin() {
-		let userDetails = this.storageService.getData("userDetails");
-		this.storageService.clear();
+		let userDetails = this._storage.getData("userDetails");
+		this._storage.clear();
 		if(userDetails.type === 2) {
-			this.router.navigate(['/']);
+			this._router.navigate(['/']);
 		}
 		else {
-			this.router.navigate(['/school/login']);
+			this._router.navigate(['/school/login']);
 		}
 	}
 	
 	showSessionExpiredAlert() {
-		this.alert.showError(this.translate.instant('SESSION_EXPIRED_MESSAGE'),
-		this.translate.instant('SESSION_EXPIRED'))
+		this._alert.showError(this._translate.instant('SESSION_EXPIRED_MESSAGE'),
+		this._translate.instant('SESSION_EXPIRED'))
 		.then(() => {
 			this.handleLogout();
 		});

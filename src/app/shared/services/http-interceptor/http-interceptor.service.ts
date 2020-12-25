@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {
     HttpInterceptor,
     HttpRequest,
-    HttpResponse,
     HttpHandler,
     HttpEvent,
     HttpErrorResponse
@@ -19,12 +18,13 @@ import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneou
 })
 @Injectable()
 export class HttpConfigInterceptor implements HttpInterceptor {
-	constructor(private storageService: StorageService,
-	private miscellaneous : MiscellaneousService) { }
+
+	constructor(private _storage: StorageService,
+	private _miscellaneous : MiscellaneousService) { }
 	
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-		let Authorization = this.storageService.getData("Authorization");
-		let userDetails = this.storageService.getData("userDetails");
+		let Authorization = this._storage.getData("Authorization");
+		let userDetails = this._storage.getData("userDetails");
       	if (Authorization) {
           	request = request.clone({ headers: request.headers.set('Authorization',  "Bearer " + Authorization.token) });
 		}
@@ -39,7 +39,7 @@ export class HttpConfigInterceptor implements HttpInterceptor {
 				return event;
 			}),
 			catchError((error: HttpErrorResponse) => {
-				this.miscellaneous.handle(error);
+				this._miscellaneous.handle(error);
 				return throwError(3);
 			})
 		);

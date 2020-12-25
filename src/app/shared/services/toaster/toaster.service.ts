@@ -7,14 +7,14 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ToasterService {
 
-	constructor(private toaster : ToastrService,
-	public translate: TranslateService) { };
+	constructor(private _toaster : ToastrService,
+	public _translate: TranslateService) { };
 
 	showSuccess(message) {
-		this.toaster.success(message, this.translate.instant('SUCCESS'));
+		this._toaster.success(message, this._translate.instant('SUCCESS'));
 	};
 
 	showError(message) {
-		this.toaster.error(message, this.translate.instant('ERROR'));
+		this._toaster.error(message, this._translate.instant('ERROR'));
 	};
 }
