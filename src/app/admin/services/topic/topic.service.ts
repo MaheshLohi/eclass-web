@@ -29,10 +29,10 @@ export class AdminTopicService {
 		)
 	}
 
-	updateTopic(topicFormData, videoFile1?:any, videoFile2?:any) : Observable<any> {
+	updateTopic(topicFormData) : Observable<any> {
 		const formData = new FormData();
-		if(videoFile1) { formData.append('video1', videoFile1); }
-		if(videoFile2) { formData.append('video2', videoFile2); }
+		if(topicFormData.video1) { formData.append('video1', topicFormData.video1); }
+		if(topicFormData.video2) { formData.append('video2', topicFormData.video2); }
 		formData.append('topic', topicFormData.name);
 		formData.append('keywords', topicFormData.keywords);
 		formData.append('related_videos', topicFormData.related_videos);

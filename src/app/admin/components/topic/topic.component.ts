@@ -25,30 +25,28 @@ export class AdminTopicComponent implements OnInit {
 	chapterDetails : any = {};
 	queryParams : any = {};
 	editTopicForm : FormGroup;
-	videoFile1: File;
-	videoFile2: File;
 
-	constructor(public constants : Constants,
-	private translate: TranslateService,
-	private toaster: ToasterService,
-	private loader: LoaderService,
-	private route: ActivatedRoute,
-	public router: Router,
-	private adminTopicService : AdminTopicService) {
-		this.route.params.subscribe((params: Params) => {
+	constructor(public _constants : Constants,
+	private _translate: TranslateService,
+	private _toaster: ToasterService,
+	private _loader: LoaderService,
+	private _route: ActivatedRoute,
+	private _router: Router,
+	private _topic : AdminTopicService) {
+		this._route.params.subscribe((params: Params) => {
 			this.chapterId = params['chapterId'];
 		});
-		this.route.queryParams
+		this._route.queryParams
 		.subscribe((queryParams: Params) => {
 			this.queryParams = queryParams;
 		})
 		this.editTopicForm = new FormGroup({
-			'name' : new FormControl("", [Validators.required]),
-			'chapter_details_id' : new FormControl("", [Validators.required]),
-			'video_file1' : new FormControl("", []),
-			'video_file2' : new FormControl("", []),
-			'keywords' : new FormControl("", [Validators.required]),
-			'related_videos' : new FormControl("", [Validators.required])
+			'name' : new FormControl("", [Validators.minLength(3)]),
+			'chapter_details_id' : new FormControl("", []),
+			'video1' : new FormControl("", [Validators.required]),
+			'video2' : new FormControl("", [Validators.required]),
+			'keywords' : new FormControl("", []),
+			'related_videos' : new FormControl("", [])
 		});
 	};
 
@@ -64,14 +62,14 @@ export class AdminTopicComponent implements OnInit {
 		this.topicsDataStatus = 2;
 		this.topics = [];
 		this.chapterDetails = {};
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getTopicsList() {
 		this.resetTopicsList();
-		this.adminTopicService.getTopicsList(this.chapterId)
+		this._topic.getTopicsList(this.chapterId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.topicsDataStatus = 1;
 			this.chapterDetails = response;
 			this.topics = response.chapter_details.data;
@@ -83,7 +81,7 @@ export class AdminTopicComponent implements OnInit {
 				this.selectTopic(this.topics[0]);
 			}
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.topicsDataStatus = errorCode;
 		});
 	};
@@ -91,49 +89,46 @@ export class AdminTopicComponent implements OnInit {
 	selectTopic(topic) {
 		this.selectedTopic = topic; 
 		let videoBasePath = JSON.parse(topic.video);
-		this.videoUrl = this.constants.DOMAIN_URL + videoBasePath.video_path['480'];
+		this.videoUrl = this._constants.DOMAIN_URL + videoBasePath.video_path['480'];
 		this.changeRouteParams();
 	};
 
 	changeRouteParams() {
 		let data = {};
 		data['topicId'] = this.selectedTopic.id;
-		this.router.navigate(['admin/topics', this.chapterId],{ queryParams: data });
+		this._router.navigate(['admin/topics', this.chapterId],{ queryParams: data });
 	};
 
 	navigateToFaqs(topic) {
 		let data = {};
 		data['topicId'] = topic.id;
-		this.router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
+		this._router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
 	};
 
 	editTopic(topic) {
-		this.editTopicForm.reset();
-		this["editTopicForm"].get('name').patchValue(topic.name);
-		this["editTopicForm"].get('chapter_details_id').patchValue(topic.id);
-		this["editTopicForm"].get('keywords').patchValue(topic.keywords);
-		this["editTopicForm"].get('related_videos').patchValue(topic.related_videos);
+		$('#editTopicForm')[0].reset();
+		this['editTopicForm'].patchValue({
+			name: topic.name, chapter_details_id: topic.id, keywords: topic.keywords, related_videos: topic.related_videos
+		})
 	};
 
 	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+		this["editTopicForm"].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this["editTopicForm"].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	updateTopic() {
-		this.loader.showLoader();
-		this.adminTopicService.updateTopic(this.editTopicForm.value, this.videoFile1, this.videoFile2)
+		this._loader.showLoader();
+		this._topic.updateTopic(this.editTopicForm.value)
 		.subscribe(() => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			$('#update-topic').modal('hide');
 			this.getTopicsList();
-			this.toaster.showSuccess(this.translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this.translate.instant("TOPIC")} ));
+			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("TOPIC")} ));
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 		});
 	};
-
-
 }

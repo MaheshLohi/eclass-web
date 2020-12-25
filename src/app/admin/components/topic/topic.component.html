@@ -77,7 +77,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form role="form" (ngSubmit)="updateTopic()" [formGroup]="editTopicForm">
+                <form role="form" (ngSubmit)="updateTopic()" [formGroup]="editTopicForm" id="editTopicForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'TOPIC_NAME' | translate}} *</label>
                         <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
@@ -96,14 +96,14 @@
                     <div class="form-group">
                         <label for="customFile">Video 1</label>
                         <div>
-                            <input type="file" id="video_file1" formControlName="video_file1" (change)="onFileChange($event,'videoFile1')"
+                            <input type="file" (change)="onFileChange($event,'video1')"
                             accept="video/*">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="customFile">Video 2</label>
                         <div>
-                            <input type="file" id="video_file2" formControlName="video_file2" (change)="onFileChange($event,'videoFile2')"
+                            <input type="file" (change)="onFileChange($event,'video2')"
                             accept="video/*">
                         </div>
                     </div>
