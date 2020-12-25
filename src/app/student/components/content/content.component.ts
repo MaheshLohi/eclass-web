@@ -19,17 +19,17 @@ export class StudentContentComponent implements OnInit {
 	subjectDetails: any = {};
 	contentType: number;
 
-	constructor(public constants: Constants,
-	public download: DownloadService,
-	public miscellaneous: MiscellaneousService,
-	private loader: LoaderService,
-	private route: ActivatedRoute,
-	private router: Router,
-	private studentSubjectService: StudentSubjectService) {
-    	this.route.params.subscribe((params: Params) => {
+	constructor(public _constants: Constants,
+	public _download: DownloadService,
+	public _miscellaneous: MiscellaneousService,
+	private _loader: LoaderService,
+	private _route: ActivatedRoute,
+	private _router: Router,
+	private _subject: StudentSubjectService) {
+    	this._route.params.subscribe((params: Params) => {
 			this.subjectId = params['subjectId'];
 		});
-		this.route.queryParams
+		this._route.queryParams
 		.subscribe((queryParams: Params) => {
 			this.contentType = parseInt(queryParams.contentType);
 		});
@@ -42,18 +42,18 @@ export class StudentContentComponent implements OnInit {
 	resetSubjectDetailsList() {
 		this.subjectDetailsDataStatus = 2;
 		this.subjectDetails = {};
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getSubjectDetails() {
 		this.resetSubjectDetailsList();
-		this.studentSubjectService.getSubjectDetails(this.subjectId)
+		this._subject.getSubjectDetails(this.subjectId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectDetailsDataStatus = 1;
 			this.subjectDetails = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.subjectDetailsDataStatus = errorCode;
 		});
 	};
@@ -62,6 +62,6 @@ export class StudentContentComponent implements OnInit {
 		this.contentType = contentType;
 		let data = {};
 		data['contentType'] = contentType;
-		this.router.navigate(['student/contents', this.subjectId],{ queryParams: data });
+		this._router.navigate(['student/contents', this.subjectId],{ queryParams: data });
 	};
 }

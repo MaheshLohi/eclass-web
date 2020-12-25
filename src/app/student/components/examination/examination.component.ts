@@ -1,6 +1,5 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
-import { Constants } from '@app/constants';
 import { DownloadService } from '@sharedServices/download/download.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentExaminationService } from '@studentServices/examination/examination.service';
@@ -16,10 +15,9 @@ export class StudentExaminationComponent implements OnChanges {
 	examDataStatus : number = 2;
 	examsList : any = [];
 
-	constructor(public constants: Constants,
-	public download: DownloadService,
-	private loader: LoaderService,
-	private studentExaminationService: StudentExaminationService) { };
+	constructor(public _download: DownloadService,
+	private _loader: LoaderService,
+	private _examination: StudentExaminationService) { };
 
 	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 
@@ -32,18 +30,18 @@ export class StudentExaminationComponent implements OnChanges {
 	resetExamsList() {
 		this.examDataStatus = 2;
 		this.examsList = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getExamsList() {
 		this.resetExamsList();
-		this.studentExaminationService.getExamsList(this.subjectId)
+		this._examination.getExamsList(this.subjectId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.examDataStatus = 1;
 			this.examsList = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.examDataStatus = errorCode;
 		});
 	};

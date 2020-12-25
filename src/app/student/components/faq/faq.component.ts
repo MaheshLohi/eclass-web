@@ -1,6 +1,5 @@
 import { Component, OnChanges, SimpleChanges, Input } from '@angular/core';
 
-import { Constants } from '@app/constants';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentFaqService } from '@studentServices/faq/faq.service';
 
@@ -15,9 +14,8 @@ export class StudentFaqComponent implements OnChanges {
 	faqsDataStatus : number = 2;
 	faqs : any = [];
 
-	constructor(public constants : Constants,
-	private loader: LoaderService,
-	private studentFaqService : StudentFaqService) { };
+	constructor(private _loader: LoaderService,
+	private _faq : StudentFaqService) { };
 
 	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 
@@ -30,18 +28,18 @@ export class StudentFaqComponent implements OnChanges {
 	resetQuestionsList() {
 		this.faqsDataStatus = 2;
 		this.faqs = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getFaqsList() {
 		this.resetQuestionsList();
-		this.studentFaqService.getFaqsList(this.topicId)
+		this._faq.getFaqsList(this.topicId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.faqsDataStatus = 1;
 			this.faqs = response.reverse();
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.faqsDataStatus = 0;
 		});
 	};

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 declare var $: any; 
 
@@ -38,7 +38,7 @@ export class AdminStudentsComponent implements OnInit {
 			'inst_class_id' : new FormControl(null, [])
 		});
 		this.addDataForm = new FormGroup({
-			'students' : new FormControl("", [])
+			'students' : new FormControl("", [Validators.required])
 		});
 	};
 

@@ -25,14 +25,14 @@
 		</li>
 		<li class="nav-item dropdown user-menu cursor-pointer">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-			  <img [src]='this.constants.DOMAIN_URL + userDetails.profile_pic' class="user-image img-circle elevation-2" alt="User Image"
-			  (error)="miscellaneous.setDefaultStudentLogo($event)">
+			  <img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="user-image img-circle elevation-2" alt="User Image"
+			  (error)="_miscellaneous.setDefaultStudentLogo($event)">
 			  <span class="d-none d-md-inline">{{userDetails.name | verifyData}}</span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 			  	<li class="user-header">
-					<img [src]='this.constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
-					(error)="miscellaneous.setDefaultStudentLogo($event)">
+					<img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
+					(error)="_miscellaneous.setDefaultStudentLogo($event)">
 					<p>
 						<b>{{userDetails.name | verifyData}}</b>
 						<small>{{userDetails.email}}</small>

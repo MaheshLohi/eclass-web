@@ -19,12 +19,12 @@ export class StudentChapterComponent implements OnChanges {
 	chapters : any = [];
 	chaptersDataStatus : number = 2;
 
-	constructor(public constants: Constants,
-	public download: DownloadService,
-	public miscellaneous: MiscellaneousService,
-	private loader: LoaderService,
-	private router: Router,
-	private chapterService: StudentChapterService) { };
+	constructor(public _constants: Constants,
+	public _download: DownloadService,
+	public _miscellaneous: MiscellaneousService,
+	private _loader: LoaderService,
+	private _router: Router,
+	private _chapter: StudentChapterService) { };
 	  
 	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 
@@ -37,23 +37,23 @@ export class StudentChapterComponent implements OnChanges {
 	resetChaptersList() {
 		this.chaptersDataStatus = 2;
 		this.chapters = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getChaptersList() {
 		this.resetChaptersList();
-		this.chapterService.getChaptersList(this.subjectId)
+		this._chapter.getChaptersList(this.subjectId)
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.chaptersDataStatus = 1;
 			this.chapters = response;
 		}, (errorCode) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.chaptersDataStatus = errorCode;
 		});
 	};
 
 	navigateToTopics(chapter) {
-		this.router.navigate(['student/topics', chapter.id]);
+		this._router.navigate(['student/topics', chapter.id]);
 	};
 }

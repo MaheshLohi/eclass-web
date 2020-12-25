@@ -48,7 +48,7 @@ export class AdminSubjectsComponent implements OnInit {
 			'inst_class_id' : new FormControl(null, [])
 		});
 		this.addSubjectsForm = new FormGroup({
-			'subjectsFile' : new FormControl("", [])
+			'subjectsFile' : new FormControl("", [Validators.required])
 		});
 		this.assignFacultyForm = new FormGroup({
 			'faculty_id' : new FormControl(null, [])

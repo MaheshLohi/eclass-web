@@ -26,16 +26,16 @@ export class StudentNavbarComponent implements OnInit {
 	searchString : string;
 	@Output() public semesterChanged = new EventEmitter();
 
-	constructor(public constants : Constants,
-	public miscellaneous : MiscellaneousService,
-	private loader: LoaderService,
-	private router: Router,
-	private studentSemesterService : StudentSemesterService,
-	private sessionHandler : SessionHandlerService,
-	private storageService: StorageService) { }
+	constructor(public _constants : Constants,
+	public _miscellaneous : MiscellaneousService,
+	private _loader: LoaderService,
+	private _router: Router,
+	private _semester: StudentSemesterService,
+	private _session: SessionHandlerService,
+	private _storage: StorageService) { };
 
 	ngOnInit() {
-		this.userDetails = this.storageService.getData("userDetails");
+		this.userDetails = this._storage.getData("userDetails");
 		this.loginType = this.userDetails.type;
 		this.searchString = '';
 		if(this.semestersDataStatus != 1) { this.getSemestersList(); };
@@ -45,14 +45,14 @@ export class StudentNavbarComponent implements OnInit {
 
 	toggleSearchBar() {
 		this.showSearhBar = true;
-		if (this.router.url.split('?')[0] === "/student/search") {
+		if (this._router.url.split('?')[0] === "/student/search") {
 			this.showSearhBar = false;
 		}
-	}
+	};
 
 	toggleSemestersListSelector() {
 		this.showSemesterDropdown = false;
-		if (this.router.url === "/student/home" || this.router.url === "/student/examination") {
+		if (this._router.url === "/student/home" || this._router.url === "/student/examination") {
 			this.showSemesterDropdown = true;
 		}
 	};
@@ -60,26 +60,26 @@ export class StudentNavbarComponent implements OnInit {
 	resetSemestersList() {
 		this.semestersDataStatus = 2;
 		this.semesters = [];
-		this.loader.showLoader();
+		this._loader.showLoader();
 	};
 
 	getSemestersList() {
 		this.resetSemestersList();
-		this.studentSemesterService.getSemestersList()
+		this._semester.getSemestersList()
 		.subscribe((response:any) => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.semestersDataStatus = 1;
 			this.semesters = response.inst_class;
 			this.renderSemestersList();
 		}, () => {
-			this.loader.hideLoader();
+			this._loader.hideLoader();
 			this.semestersDataStatus = 0;
 		});
 	};
 
 	renderSemestersList() {
-		if(this.storageService.getData("selected_semester")) {
-			let semester= this.storageService.getData("selected_semester");
+		if(this._storage.getData("selected_semester")) {
+			let semester= this._storage.getData("selected_semester");
 			this.selectSemesterId = semester.id;
 		}
 		else {
@@ -95,26 +95,26 @@ export class StudentNavbarComponent implements OnInit {
 
 	emitSelectionEvent() {
 		let index = _.findIndex(this.semesters, { id: this.selectSemesterId});
-		this.storageService.setData("selected_semester",this.semesters[index]);
+		this._storage.setData("selected_semester",this.semesters[index]);
 		this.semesterChanged.emit(this.semesters[index]);
 	};
 
 	logout() {
-		this.sessionHandler.handleLogout();
+		this._session.handleLogout();
 	};
 
 	navigateToSearch() {
 		if(this.searchString) {
 			let data = {};
 			data['searchString'] = this.searchString;
-			this.router.navigate(['student/search'],{ queryParams: data });
+			this._router.navigate(['student/search'],{ queryParams: data });
 		}
 		else {
-			this.router.navigate(['student/search']);
+			this._router.navigate(['student/search']);
 		}
 	};
 
 	navigteToProfile() {
-		this.router.navigate(['student/profile']);
+		this._router.navigate(['student/profile']);
 	};
 }
