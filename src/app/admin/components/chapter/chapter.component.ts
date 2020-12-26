@@ -64,7 +64,7 @@ export class AdminChapterComponent implements OnInit {
 			'related_videos' : new FormControl("", [])
 		});
 		this.editChapterForm = new FormGroup({
-			'chapter_id' : new FormControl("", []),
+			'chapter_id' : new FormControl(null, []),
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'description' : new FormControl("", []),
 			'notes' : new FormControl("", []),
