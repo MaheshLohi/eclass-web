@@ -7,16 +7,32 @@
             </span>
         </div>
         <div class="message" *ngIf="errorCode === 0"> 
-           <span *ngIf="errorId === 0">No subjects found for this semester.</span> 
-           <span *ngIf="errorId === 1">No chapters found for this subject.</span>
-           <span *ngIf="errorId === 2">No examination details found for this subject.</span>
-           <span *ngIf="errorId === 3">No wishlists found.</span>
-           <span *ngIf="errorId === 4">No topics found for this chapter.</span>
-           <span *ngIf="errorId === 5">No search results found.</span>
-           <span *ngIf="errorId === 6">Subject details not found</span>
+            <span *ngIf="errorId === 0">
+                {{ 'NO_SUBJECTS_FOUND_STUDENT' | translate }}
+            </span> 
+            <span *ngIf="errorId === 1">
+                {{ 'NO_CHAPTERS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 2">
+                {{ 'NO_EXAMINATIONS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 3">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('WISHLISTS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 4">
+                {{ 'NO_TOPICS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 5">
+                {{ 'NO_SEARCH_RESULTS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 6">
+                {{ 'SUBJECT_DETAILS_NOT_FOUND_STUDENT' | translate }}
+            </span>
         </div>
         <div class="message" *ngIf="errorCode === 3"> 
-            <span>Something went wrong.<br/> Please contact your school.</span> 
+            <span>
+                {{ 'STANDARD_ERROR' | translate }}
+            </span> 
         </div>
     </div>
 </section>

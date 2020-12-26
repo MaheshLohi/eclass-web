@@ -7,40 +7,40 @@
                 <div *ngFor="let question of questionsList; let i = index">
                     <div class="card mb-2">
                         <div class="card-header">
-                            <h3 class="card-title text-bold">{{'QUESTION' | translate}} {{i+1}}</h3>
+                            <h3 class="card-title text-bold">{{ 'QUESTION' | translate }} {{ i+1 }}</h3>
                         </div>
                         <div class="card-body">
                             <div class="direct-chat-messages">
                                 <div class="direct-chat-msg">
                                     <div class="direct-chat-infos clearfix">
                                         <span class="direct-chat-name float-left">
-                                            {{question.usn}}
+                                            {{ question.usn }}
                                         </span>
                                     </div>
                                     <img class="direct-chat-img" [src]="question.profile_pic"
                                     (error)="_miscellaneous.setDefaultStudentLogo($event)">
                                     <div class="direct-chat-text">
-                                        {{question.question}}
+                                        {{ question.question }}
                                     </div>
                                 </div>
                                 <div class="direct-chat-msg right" *ngIf="question.answer">
                                     <div class="direct-chat-infos clearfix">
-                                        <span class="direct-chat-name float-right">You</span>
+                                        <span class="direct-chat-name float-right">{{ 'YOU' | translate }}</span>
                                     </div>
                                     <img class="direct-chat-img" src="assets/images/default_usericon.png"
                                     (error)="_miscellaneous.setDefaultAdminLogo($event)">
                                     <div class="direct-chat-text">
-                                        {{question.answer}}
+                                        {{ question.answer }}
                                     </div>
                                 </div>
                                 <div *ngIf="!question.answer">
                                     <div class="form-group">
-                                        <label>{{ 'REPLAY' | translate}}</label>
-                                        <textarea class="form-control" rows="3" placeholder="{{ 'REPLAY' | translate}}"
+                                        <label>{{ 'REPLAY' | translate }}</label>
+                                        <textarea class="form-control" rows="3" placeholder="{{ 'REPLAY' | translate }}"
                                         [(ngModel)]="question.replay"></textarea>
                                     </div>
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="!question.replay" (click)="submitReplay(question)">
-                                        {{ 'SUBMIT' | translate}}
+                                        {{ 'SUBMIT' | translate }}
                                     </button>
                                 </div>
                             </div>

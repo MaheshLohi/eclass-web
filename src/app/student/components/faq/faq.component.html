@@ -1,10 +1,10 @@
 
 <div *ngIf="faqsDataStatus === 1">
     <dl *ngFor="let faq of faqs;let i = index">
-        <dt>{{i+1}}.&nbsp;{{faq.question}}</dt>
-        <dd>{{faq.answer}}</dd>
+        <dt>{{ i+1 }}.&nbsp;{{ faq.question }}</dt>
+        <dd>{{ faq.answer }}</dd>
     </dl>
 </div>
 <div *ngIf="faqsDataStatus === 0">
-   N/A
+    {{ 'NA' | translate }}
 </div>

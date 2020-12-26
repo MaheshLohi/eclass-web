@@ -13,7 +13,7 @@
                                     <form class="col-5" role="form" [formGroup]="filterForm">
                                         <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
                                         (change)="getFaculties()">
-                                            <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
+                                            <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
                                             <option *ngFor="let department of departments" [ngValue]="department.id">
                                                 {{ department.name }}
                                             </option>
@@ -21,10 +21,10 @@
                                     </form>
                                     <div class="col-7 card-tools text-right">
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
-                                            <i class="fa fa-plus"></i> {{ 'ADD_FACULTIES' | translate}}
+                                            <i class="fa fa-plus"></i> {{ 'ADD_FACULTIES' | translate }}
                                         </button>
                                         <button type="button" class="btn btn-theme-primary" (click)="_download.download('public/storage/faculties.csv')" *ngIf="showAddFeature === true">
-                                            <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
+                                            <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate }}
                                         </button>
                                     </div>
                                 </div>
@@ -35,9 +35,9 @@
                                         <tbody>
                                             <tr>
                                                 <th>#</th>
-                                                <th>{{ 'NAME' | translate}}</th>
-                                                <th>{{ 'EMAIL_ADDRESS' | translate}}</th>
-                                                <th>{{ 'PHONE_NUMBER' | translate}}</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'EMAIL_ADDRESS' | translate }}</th>
+                                                <th>{{ 'PHONE_NUMBER' | translate }}</th>
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let faculty of faculties;let i = index">
@@ -69,7 +69,7 @@
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addFaculties()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group">
-                                            <label for="customFile">{{ 'File' | translate}}</label>
+                                            <label for="customFile">{{ 'FILE' | translate }}</label>
                                             <div>
                                                 <input type="file" (change)="onFileChange($event,'faculties')" required
                                                 accept=".csv">
@@ -77,10 +77,10 @@
                                         </div>
                                         <app-form-validator [data]="validateAddFormValue('facultiesFile')"></app-form-validator>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                         </button>
                                     </form>
                                 </div>

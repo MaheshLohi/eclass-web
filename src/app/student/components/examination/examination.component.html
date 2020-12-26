@@ -3,14 +3,14 @@
     <div class="card mb-4" *ngFor="let exam of examsList">
         <div *ngFor="let year of exam | prepareObject">
             <div class="card-header">
-                <h5 class="mb-2">{{ year.key }} examination papers</h5>
+                <h5 class="mb-2">{{ year.key }} {{ 'EXAMINATION_PAPER' | translate }}</h5>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="_download.download(paper.paper)">
                         <div class="info-box filter-boxes">
                             <div class="info-box-content">
-                                <span class="info-box-text">{{ paper.name | verifyData}}</span>
+                                <span class="info-box-text">{{ paper.name | verifyData }}</span>
                             </div>
                         </div>
                     </div>

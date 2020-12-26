@@ -40,7 +40,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{ 'UPDATE_PROFILE' | translate}}</h4>
+                <h4 class="modal-title">{{ 'UPDATE_PROFILE' | translate }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -48,8 +48,8 @@
             <div class="modal-body">
                 <form role="form" (ngSubmit)="updateProfile()" [formGroup]="editProfileForm" id="editProfileForm">
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'NAME' | translate}} *</label>
-                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                        <label for="name">{{ 'NAME' | translate }} *</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateProfileEditFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
@@ -59,7 +59,7 @@
                     <app-form-validator [data]="validateProfileEditFormValue('email')" [validateEmail]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
-                        <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
+                        <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateProfileEditFormValue('phone_number')"></app-form-validator>
                     <div class="form-group">

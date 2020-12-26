@@ -8,14 +8,14 @@
                     (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                 </div>
                 <div class="card-header-portion">
-                    {{subjectDetails.code | verifyData}}
+                    {{ subjectDetails.code | verifyData }}
                     <button class="btn btn-theme-primary float-right btn-sm"
                     (click)="_download.download(chapter.notes, $event)" *ngIf="chapter.notes">
                         <i class="pr-1 fa fa-download"></i> {{ 'NOTES' | translate }}
                     </button>
                 </div>
                 <div class="card-header-title">
-                    {{chapter.name | verifyData}}
+                    {{ chapter.name | verifyData }}
                 </div>
             </div>
         </div>

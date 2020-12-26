@@ -2,7 +2,7 @@
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
     <div class="content-wrapper" *ngIf="filterDataStatus === 1">
-        <app-breadcrumb [title]="'EXAMINATION'"></app-breadcrumb>
+        <app-breadcrumb [title]="'EXAMINATIONS'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
                 <div class="row"> 
@@ -14,7 +14,7 @@
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
                                             (change)="getSubjectsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
                                                 </option>
@@ -23,7 +23,7 @@
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
                                             (change)="getSubjectsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
                                                 <option *ngFor="let semester of semesters" [ngValue]="semester.id">
                                                     {{ 'SEMESTER' | translate }} {{semester.name}}
                                                 </option>
@@ -32,9 +32,9 @@
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="subject_id" formControlName="subject_id" required
                                             (change)="getExamsList()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate }}</option>
                                                 <option *ngFor="let subject of subjects" [ngValue]="subject.id">
-                                                    {{subject.name}}
+                                                    {{ subject.name }}
                                                 </option>
                                             </select>
                                         </div>
@@ -42,7 +42,7 @@
                                     <div class="col-3 card-tools text-right">
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
                                         [disabled]="!this.filterForm.valid">
-                                            <i class="fa fa-plus"></i> {{ 'ADD_EXAMINATION' | translate}}
+                                            <i class="fa fa-plus"></i> {{ 'ADD_EXAMINATION' | translate }}
                                         </button>
                                     </div>
                                 </div>
@@ -54,8 +54,8 @@
                                             <tbody>
                                                 <tr>
                                                     <th>#</th>
-                                                    <th>{{ 'NAME' | translate}}</th>
-                                                    <th>{{ 'YEAR' | translate}}</th>
+                                                    <th>{{ 'NAME' | translate }}</th>
+                                                    <th>{{ 'YEAR' | translate }}</th>
                                                     <th></th>
                                                 </tr>
                                                 <ng-container *ngFor="let exam of examsList">
@@ -95,31 +95,31 @@
                             <div class="card-body" *ngIf="showAddFeature === true">
                                 <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
                                     <div class="form-group mb-0">
-                                        <label for="name">{{ 'EXAM_NAME' | translate}} *</label>
-                                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                                        <label for="name">{{ 'EXAMINATION_NAME' | translate }} *</label>
+                                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                                     </div>
                                     <app-form-validator [data]="validateAddFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                     <div class="form-group mb-0">
-                                        <label for="name">{{ 'SELECT_YEAR' | translate}} *</label>
+                                        <label for="name">{{ 'SELECT_YEAR' | translate }} *</label>
                                         <select class="custom-select form-control select2" id="year" formControlName="year" required>
-                                            <option [value]=null selected disabled>{{ 'SELECT_YEAR' | translate}}</option>
+                                            <option [value]=null selected disabled>{{ 'SELECT_YEAR' | translate }}</option>
                                             <option *ngFor="let year of years" [ngValue]="year">
-                                                {{year}}
+                                                {{ year }}
                                             </option>
                                         </select>
                                     </div>
                                     <app-form-validator [data]="validateAddFormValue('year')"></app-form-validator>
                                     <div class="form-group">
-                                        <label for="customFile">{{ 'FILE' | translate}}</label>
+                                        <label for="customFile">{{ 'EXAMINATION_PAPER' | translate }}</label>
                                         <div>
                                             <input type="file" (change)="onFileChange($event,'paper')" accept=".pdf">
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                        <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                        <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                     </button>
                                     <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                     </button>
                                 </form>
                             </div>

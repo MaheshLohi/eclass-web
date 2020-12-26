@@ -7,11 +7,19 @@
             </span>
         </div>
         <div class="message" *ngIf="errorCode === 0"> 
-           <span *ngIf="errorId === 0">No institutes found.<br/> Please add institutes to continue.</span> 
-           <span *ngIf="errorId === 1">No admins found.<br/> Please add admins to continue.</span>
+            <span *ngIf="errorId === 0">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('INSTITUTES' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('INSTITUTES' | translate) } }}
+            </span> 
+            <span *ngIf="errorId === 1">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('ADMINS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('ADMINS' | translate) } }}
+            </span>
         </div>
         <div class="message" *ngIf="errorCode === 3"> 
-            <span>Something went wrong.<br/> Please try again later.</span> 
+            <span>
+                {{ 'STANDARD_ERROR' | translate }}
+            </span> 
         </div>
     </div>
 </section>

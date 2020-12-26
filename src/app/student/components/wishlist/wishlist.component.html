@@ -11,12 +11,12 @@
                             (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                         </div>
                         <div class="card-header-title">
-                            {{wishlist.chapter_details.data[0].name}}
+                            {{ wishlist.chapter_details.data[0].name }}
                         </div>
                         <div class="cursor-pointer mt-2">
                             <button class="btn btn-theme-primary btn-sm" (click)="updateTopicWishlist(wishlist, $event)">
                                 <i class="fa fa-check"></i>
-                                Wishlisted
+                                {{ 'WISHLISTED' | translate }}
                             </button>
                         </div>
                     </div>

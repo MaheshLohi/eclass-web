@@ -7,18 +7,46 @@
             </span>
         </div>
         <div class="message" *ngIf="errorCode === 0"> 
-            <span *ngIf="errorId === 0">Dashboard details not found.</span>
-            <span *ngIf="errorId === 1">No departments found.<br/> Please add departments to continue.</span> 
-            <span *ngIf="errorId === 2">No faculties found<br/> Please add faculties to continue.</span>
-            <span *ngIf="errorId === 3">No faq's found<br/> Please add faq's to continue.</span>
-            <span *ngIf="errorId === 4">No students found<br/> Please add students to continue.</span>
-            <span *ngIf="errorId === 5">No subjects found<br/> Please add subjects to continue.</span>
-            <span *ngIf="errorId === 6">No topics found<br/> Please add topics to continue.</span>
-            <span *ngIf="errorId === 7">No chapters found<br/> Please add chapters to continue.</span>
-            <span *ngIf="errorId === 8">No examination found<br/> Please add examination to continue.</span>
+            <span *ngIf="errorId === 0">
+                {{ 'DASHBOARD_ERROR' | translate }}
+            </span>
+            <span *ngIf="errorId === 1">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('DEPARTMENTS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('DEPARTMENTS' | translate) } }}
+            </span> 
+            <span *ngIf="errorId === 2">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('FACULTIES' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('FACULTIES' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 3">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('FAQS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('FAQS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 4">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('STUDENTS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('STUDENTS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 5">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('SUBJECTS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('SUBJECTS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 6">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('TOPICS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('TOPICS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 7">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('CHAPTERS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('CHAPTERS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 8">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('EXAMINATION' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('EXAMINATION' | translate) } }}
+            </span>
         </div>
         <div class="message" *ngIf="errorCode === 3"> 
-            <span>Something went wrong.<br/> Please try again later.</span> 
+            <span>
+                {{ 'STANDARD_ERROR' | translate }}
+            </span> 
         </div>
     </div>
 </section>

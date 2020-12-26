@@ -9,10 +9,10 @@
                     <div class="col-12">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <h3 class="card-title custom-title">{{ 'INSTITUTES' | translate}}</h3>
+                                <h3 class="card-title custom-title">{{ 'INSTITUTES' | translate }}</h3>
                                 <div class="col-7 card-tools text-right">
                                     <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
-                                        <i class="fa fa-plus"></i> {{ 'ADD_INSTITUTE' | translate}}
+                                        <i class="fa fa-plus"></i> {{ 'ADD_INSTITUTE' | translate }}
                                     </button>
                                 </div>
                             </div>
@@ -22,10 +22,10 @@
                                         <tbody>
                                             <tr>
                                                 <th>#</th>
-                                                <th>{{ 'NAME' | translate}}</th>
-                                                <th>{{ 'PHONE_NUMBER' | translate}}</th>
-                                                <th>{{ 'ADDRESS' | translate}}</th>
-                                                <th>{{ 'STATUS' | translate}}</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'PHONE_NUMBER' | translate }}</th>
+                                                <th>{{ 'ADDRESS' | translate }}</th>
+                                                <th>{{ 'STATUS' | translate }}</th>
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let institute of institutes;let i = index">
@@ -70,32 +70,32 @@
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group mb-0">
-                                            <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
-                                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                                            <label for="name">{{ 'INSTITUTE_NAME' | translate }} *</label>
+                                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                         <div class="form-group mb-0">
-                                            <label for="address">{{ 'ADDRESS' | translate}} *</label>
-                                            <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
+                                            <label for="address">{{ 'ADDRESS' | translate }} *</label>
+                                            <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('address')"></app-form-validator>
                                         <div class="form-group mb-0">
-                                            <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
-                                            <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
+                                            <label for="name">{{ 'PHONE_NUMBER' | translate }} *</label>
+                                            <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('phone_number')"></app-form-validator>
                                         <div class="form-group">
-                                            <label for="customFile">{{ 'LOGO' | translate}}</label>
+                                            <label for="customFile">{{ 'LOGO' | translate }}</label>
                                             <div>
                                                 <input type="file" (change)="onFileChange($event,'logo',1)"
                                                 accept="image/*">
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                         </button>
                                     </form>
                                 </div>
@@ -112,7 +112,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{ 'UPDATE_INSTITUTE' | translate}}</h4>
+                <h4 class="modal-title">{{ 'UPDATE_INSTITUTE' | translate }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -120,32 +120,32 @@
             <div class="modal-body">
                 <form role="form" (ngSubmit)="updateInstitute()" [formGroup]="editDataForm" id="editDataForm">
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'INSTITUTE_NAME' | translate}} *</label>
-                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                        <label for="name">{{ 'INSTITUTE_NAME' | translate }} *</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="address">{{ 'ADDRESS' | translate}} *</label>
-                        <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate}}" required>
+                        <label for="address">{{ 'ADDRESS' | translate }} *</label>
+                        <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('address')"></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'PHONE_NUMBER' | translate}} *</label>
-                        <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate}}" required>
+                        <label for="name">{{ 'PHONE_NUMBER' | translate }} *</label>
+                        <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('phone_number')"></app-form-validator>
                     <div class="form-group">
-                        <label for="customFile">{{ 'LOGO' | translate}}</label>
+                        <label for="customFile">{{ 'LOGO' | translate }}</label>
                         <div>
                             <input type="file" (change)="onFileChange($event,'logo',2)"
                             accept="image/*">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editDataForm.valid">
-                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate}}
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
                     </button>
                     <button class="btn btn-danger ml-2" data-dismiss="modal">
-                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                     </button>
                 </form>
             </div>

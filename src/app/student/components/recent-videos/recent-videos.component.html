@@ -1,7 +1,7 @@
 <div class="col-md-12 mt-3" *ngIf="recentVideosDataStatus === 1">
     <section class="content recent-videos">
         <div class="col-md-12">
-            <h3 class="pb-2 text-dark">Recent Videos</h3>
+            <h3 class="pb-2 text-dark">{{ 'RECENT_VIDEOS' | translate }}</h3>
             <section class="row">
                 <div class="col-lg-3 col-md-4 col-12 mt-1" *ngFor="let video of recentVideos">
                     <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(video)">
@@ -11,7 +11,7 @@
                                 (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                             </div>
                             <div class="card-header-title">
-                                {{video.name}}
+                                {{ video.name }}
                             </div>
                         </div>
                     </div>

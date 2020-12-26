@@ -4,7 +4,7 @@
     <div class="content-wrapper">
         <div class="content col-lg-12 p-4">
             <form name="searchForm" class="col-lg-8 col-12 m-auto" (submit)="getSearchResults()">
-                <input type="search" [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}" class="form-control custom-search-input" placeholder="Type your keywords here">
+                <input type="search" [(ngModel)]="searchString" [ngModelOptions]="{standalone: true}" class="form-control custom-search-input" placeholder="{ 'SEARCH_MESSAGE' | translate }">
             </form>
         </div>
         <section class="content col-lg-12 row p-4" *ngIf="searchResultsDataStatus === 1">
@@ -16,7 +16,7 @@
                             (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                         </div>
                         <div class="card-header-title">
-                            {{result.name}}
+                            {{ result.name }}
                         </div>
                     </div>
                 </div>

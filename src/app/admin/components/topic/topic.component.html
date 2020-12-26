@@ -37,17 +37,17 @@
                                                         {{ topic.related_videos | verifyData }}
                                                     </a><br/>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm" (click)="selectTopic(topic)">
-                                                        <i class="pr-1 fa fa-play-circle"></i> {{ 'PLAY' | translate}}
+                                                        <i class="pr-1 fa fa-play-circle"></i> {{ 'PLAY' | translate }}
                                                     </button>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#update-topic'"
                                                     (click)="editTopic(topic)">
-                                                        <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate}}
+                                                        <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate }}
                                                     </button>
                                                     <button class="btn btn-danger mt-2 btn-sm ml-1">
-                                                        <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate}}
+                                                        <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate }}
                                                     </button>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm ml-1" (click)="navigateToFaqs(topic)">
-                                                        <i class="pr-1 fa fa-eye"></i> {{ 'FAQS' | translate}}
+                                                        <i class="pr-1 fa fa-eye"></i> {{ 'FAQS' | translate }}
                                                     </button>
                                                 </td>
                                             </tr>
@@ -71,7 +71,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{ 'UPDATE_TOPIC' | translate}}</h4>
+                <h4 class="modal-title">{{ 'UPDATE_TOPIC' | translate }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -79,39 +79,39 @@
             <div class="modal-body">
                 <form role="form" (ngSubmit)="updateTopic()" [formGroup]="editTopicForm" id="editTopicForm">
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'TOPIC_NAME' | translate}} *</label>
-                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                        <label for="name">{{ 'TOPIC_NAME' | translate }} *</label>
+                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'KEYWORDS' | translate}} *</label>
-                        <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate}}" required>
+                        <label for="name">{{ 'KEYWORDS' | translate }} *</label>
+                        <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('keywords')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'RELATED_VIDEOS' | translate}} *</label>
-                        <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate}}" required>
+                        <label for="name">{{ 'RELATED_VIDEOS' | translate }} *</label>
+                        <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group">
-                        <label for="customFile">Video 1</label>
+                        <label for="customFile">{{ 'VIDEO_1' | translate }}</label>
                         <div>
                             <input type="file" (change)="onFileChange($event,'video1')"
                             accept="video/*">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="customFile">Video 2</label>
+                        <label for="customFile">{{ 'VIDEO_2' | translate }}</label>
                         <div>
                             <input type="file" (change)="onFileChange($event,'video2')"
                             accept="video/*">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editTopicForm.valid">
-                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate}}
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
                     </button>
                     <button class="btn btn-danger ml-2" data-dismiss="modal">
-                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                     </button>
                 </form>
             </div>

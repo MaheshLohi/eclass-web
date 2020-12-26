@@ -14,14 +14,14 @@
                                     (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                                 </div>
                                 <div class="card-header-portion">
-                                    {{subject.code}}
+                                    {{ subject.code }}
                                     <button class="btn btn-theme-primary float-right btn-sm"
                                     (click)="_download.download(subject.syllabus, $event)" *ngIf="subject.syllabus">
-                                        <i class="pr-1 fa fa-download"></i> Syllabus
+                                        <i class="pr-1 fa fa-download"></i> {{ 'SYLLABUS' | translate }}
                                     </button>
                                 </div>
                                 <div class="card-header-title">
-                                    {{subject.name}}
+                                    {{ subject.name }}
                                 </div>
                             </div>
                         </div>

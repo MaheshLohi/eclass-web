@@ -7,11 +7,17 @@
             </span>
         </div>
         <div class="message" *ngIf="errorCode === 0"> 
-           <span *ngIf="errorId === 0">No subjects assigned to you from your school.</span> 
-           <span *ngIf="errorId === 1">No questions found for this subject.</span>
+           <span *ngIf="errorId === 0">
+                {{ 'NO_SUBJECTS_FOUND_MESSAGE' | translate }}
+           </span> 
+           <span *ngIf="errorId === 1">
+                {{ 'NO_QUESTIONS_FOUND_MESSAGE' | translate }}
+           </span>
         </div>
         <div class="message" *ngIf="errorCode === 3"> 
-            <span>Something went wrong.<br/> Please contact your school.</span> 
+            <span>
+                {{ 'STANDARD_ERROR' | translate }}
+            </span> 
         </div>
     </div>
 </section>

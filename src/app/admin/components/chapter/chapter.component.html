@@ -14,7 +14,7 @@
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
                                             (change)="getSubjectsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
                                                 </option>
@@ -23,18 +23,18 @@
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
                                             (change)="getSubjectsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
                                                 <option *ngFor="let semester of semesters" [ngValue]="semester.id">
-                                                    {{ 'SEMESTER' | translate }} {{semester.name}}
+                                                    {{ 'SEMESTER' | translate }} {{ semester.name }}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="col-4">
                                             <select class="custom-select form-control select2" id="subject_id" formControlName="subject_id" required
                                             (change)="getChapters()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate }}</option>
                                                 <option *ngFor="let subject of subjects" [ngValue]="subject.id">
-                                                    {{subject.name}}
+                                                    {{ subject.name }}
                                                 </option>
                                             </select>
                                         </div>
@@ -42,7 +42,7 @@
                                     <div class="col-3 card-tools text-right">
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
                                         [disabled]="!this.filterForm.valid">
-                                            <i class="fa fa-plus"></i> {{ 'ADD_CHAPTER' | translate}}
+                                            <i class="fa fa-plus"></i> {{ 'ADD_CHAPTER' | translate }}
                                         </button>
                                     </div>
                                 </div>
@@ -53,10 +53,10 @@
                                         <tbody>
                                             <tr>
                                                 <th>#</th>
-                                                <th>{{ 'CHAPTER_TITLE' | translate}}</th>
-                                                <th>{{ 'DESCRIPTION' | translate}}</th>
-                                                <th>{{ 'TOPICS' | translate}}</th>
-                                                <th>{{ 'NOTES' | translate}}</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'DESCRIPTION' | translate }}</th>
+                                                <th>{{ 'TOPICS' | translate }}</th>
+                                                <th>{{ 'NOTES' | translate }}</th>
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let chapter of chapters;let i = index">
@@ -74,7 +74,7 @@
                                                 <td *ngIf="chapter.chapter_details.data.length">
                                                     <button class="btn btn-theme-primary btn-sm"
                                                     (click)="navigateToTopics(chapter)">
-                                                        <i class="pr-1 fa fa-eye"></i> View Topics
+                                                        <i class="pr-1 fa fa-eye"></i> {{ 'VIEW_TOPICS' | translate }}
                                                     </button>
                                                     <button class="btn btn-theme-primary btn-sm ml-1"
                                                     (click)="addTopics(chapter)">
@@ -84,13 +84,13 @@
                                                 <td *ngIf="!chapter.chapter_details.data.length">
                                                     <button class="btn btn-theme-primary btn-sm"
                                                     (click)="addTopics(chapter)">
-                                                        <i class="pr-1 fa fa-plus"></i> Add Topics
+                                                        <i class="pr-1 fa fa-plus"></i> {{ 'ADD_TOPIC' | translate }}
                                                     </button>
                                                 </td>
                                                 <td>
                                                     <button class="btn btn-theme-primary btn-sm" (click)="_download.download(chapter.notes)"
                                                     *ngIf="chapter.notes">
-                                                        <i class="fa fa-download pr-1"></i> {{ 'NOTES' | translate}}
+                                                        <i class="fa fa-download pr-1"></i> {{ 'NOTES' | translate }}
                                                     </button>
                                                     <span *ngIf="!chapter.notes">{{ 'NA' | translate}}</span>
                                                 </td>
@@ -98,7 +98,7 @@
                                                     <button class="btn btn-theme-primary btn-sm"
                                                     (click)="editChapter(chapter)" data-toggle="modal" [attr.data-target]="'#update-chapter'">
                                                         <i class="pr-1 fa fa-pen"></i> 
-                                                        {{ 'EDIT' | translate}}
+                                                        {{ 'EDIT' | translate }}
                                                     </button>
                                                 </td>
                                             </tr>
@@ -113,99 +113,103 @@
                             <div class="card-body" [hidden]="showAddFeature === false">
                                 <ul class="nav nav-tabs" role="tablist" id="tab">
                                     <li class="nav-item">
-                                        <a class="nav-link active" data-toggle="pill" href="#add-chapter" role="tab" aria-controls="add-chapter" aria-selected="true">Chapter</a>
+                                        <a class="nav-link active" data-toggle="pill" href="#add-chapter" role="tab" aria-controls="add-chapter" aria-selected="true">
+                                            {{ 'CHAPTER' | translate }}
+                                        </a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="nav-link" id="topic-tab" data-toggle="pill" href="#add-topic" role="tab" aria-controls="add-topic" aria-selected="true">Topic</a>
+                                        <a class="nav-link" id="topic-tab" data-toggle="pill" href="#add-topic" role="tab" aria-controls="add-topic" aria-selected="true">
+                                            {{ 'TOPIC' | translate }}
+                                        </a>
                                     </li>
                                 </ul>
                                 <div class="tab-content pt-3">
                                     <div class="col-lg-6 tab-pane fade show active" id="add-chapter" role="tabpanel">
                                         <form role="form" (ngSubmit)="addChapter()" [formGroup]="addChapterForm" id="addChapterForm">
                                             <div class="form-group mb-0">
-                                                <label for="name">{{ 'CHAPTER_NAME' | translate}} *</label>
+                                                <label for="name">{{ 'CHAPTER_NAME' | translate }} *</label>
                                                 <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                                             </div>
                                             <app-form-validator [data]="validateForm('name',1)" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group mb-0">
-                                                <label for="description">{{ 'DESCRIPTION' | translate}} *</label>
+                                                <label for="description">{{ 'DESCRIPTION' | translate }} *</label>
                                                 <input type="text" class="form-control" id="description" formControlName="description" placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
                                             </div>
                                             <app-form-validator [data]="validateForm('description',1)"></app-form-validator>
                                             <div class="form-group">
-                                                <label for="customFile">{{ 'NOTES' | translate}}</label>
+                                                <label for="customFile">{{ 'NOTES' | translate }}</label>
                                                 <div>
                                                     <input type="file" (change)="onFileChange($event,'notes',1)" required
                                                     accept=".pdf">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
+                                                <label for="customFile">{{ 'THUMBNAIL' | translate }}</label>
                                                 <div>
                                                     <input type="file" (change)="onFileChange($event,'thumbnail',1)" required
                                                     accept="image/*">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                             </button>
                                             <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
-                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                             </button>
                                         </form>
                                     </div>
                                     <div class="col-lg-6 tab-pane fade" id="add-topic" role="tabpanel">
                                         <form role="form" (ngSubmit)="addTopic()" [formGroup]="addTopicForm" id="addTopicForm">
                                             <div class="form-group mb-0">
-                                                <label for="name">{{ 'TOPIC_NAME' | translate}} *</label>
-                                                <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                                                <label for="name">{{ 'TOPIC_NAME' | translate }} *</label>
+                                                <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                                             </div>
                                             <app-form-validator [data]="validateForm('name',2)" [validateNameMinLength]=true></app-form-validator>
                                             <div class="form-group mb-0">
-                                                <label for="name">{{ 'SELECT_CHAPTER' | translate}} *</label>
+                                                <label for="name">{{ 'CHAPTER' | translate }} *</label>
                                                 <select class="custom-select form-control select2" id="chapter_id" formControlName="chapter_id" required [hidden]="chaptersDataStatus != 1">
-                                                    <option [value]=null selected disabled>{{ 'SELECT_CHAPTER' | translate}}</option>
+                                                    <option [value]=null selected disabled>{{ 'SELECT_CHAPTER' | translate }}</option>
                                                     <option *ngFor="let chapter of chapters" [ngValue]="chapter.id">
-                                                        {{chapter.name}}
+                                                        {{ chapter.name }}
                                                     </option>
                                                 </select>
                                                 <div class="error-message" *ngIf="chaptersDataStatus === 0">
-                                                    {{ 'PLEASE_ADD_CHAPTERS_TO_CONTINUE' | translate }}<br/>
+                                                    {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('CHAPTER' | translate) } }}
                                                 </div>
                                                 <div class="error-message" *ngIf="chaptersDataStatus === 3">
-                                                    {{ 'STANDARD_ERROR' | translate}}
+                                                    {{ 'STANDARD_ERROR' | translate }}
                                                 </div>
                                             </div>
                                             <app-form-validator [data]="validateForm('chapter_id',2)"></app-form-validator>
                                             <div class="form-group mb-0">
-                                                <label for="name">{{ 'KEYWORDS' | translate}} *</label>
-                                                <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate}}" required>
+                                                <label for="name">{{ 'KEYWORDS' | translate }} *</label>
+                                                <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate }}" required>
                                             </div>
                                             <app-form-validator [data]="validateForm('keywords',2)"></app-form-validator>
                                             <div class="form-group mb-0">
-                                                <label for="name">{{ 'RELATED_VIDEOS' | translate}} *</label>
-                                                <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate}}" required>
+                                                <label for="name">{{ 'RELATED_VIDEOS' | translate }} *</label>
+                                                <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
                                             </div>
                                             <app-form-validator [data]="validateForm('related_videos',2)"></app-form-validator>
                                             <div class="form-group">
-                                                <label for="customFile">Video 1</label>
+                                                <label for="customFile">{{ 'VIDEO_1' | translate }} *</label>
                                                 <div>
                                                     <input type="file" (change)="onFileChange($event,'video1',2)" required
                                                     accept="video/*">
                                                 </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="customFile">Video 2</label>
+                                                <label for="customFile">{{ 'VIDEO_2' | translate }} *</label>
                                                 <div>
                                                     <input type="file" (change)="onFileChange($event,'video2',2)" required
                                                     accept="video/*">
                                                 </div>
                                             </div>
                                             <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddTopicFeatureForm()">
-                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                                <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                             </button>
                                             <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
-                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                                <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                             </button>
                                         </form>
                                     </div>
@@ -227,7 +231,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">{{ 'UPDATE_CHAPTER' | translate}}</h4>
+                <h4 class="modal-title">{{ 'UPDATE_CHAPTER' | translate }}</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -235,34 +239,34 @@
             <div class="modal-body">
                 <form role="form" (ngSubmit)="updateChapter()" [formGroup]="editChapterForm" id="editChapterForm">
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'CHAPTER_NAME' | translate}} *</label>
+                        <label for="name">{{ 'CHAPTER_NAME' | translate }} *</label>
                         <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate}}" required>
                     </div>
                     <app-form-validator [data]="validateForm('name',3)" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="description">{{ 'DESCRIPTION' | translate}} *</label>
+                        <label for="description">{{ 'DESCRIPTION' | translate }} *</label>
                         <input type="text" class="form-control" id="description" formControlName="description" placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
                     </div>
                     <app-form-validator [data]="validateForm('description',3)"></app-form-validator>
                     <div class="form-group">
-                        <label for="customFile">{{ 'NOTES' | translate}}</label>
+                        <label for="customFile">{{ 'NOTES' | translate }}</label>
                         <div>
                             <input type="file" (change)="onFileChange($event,'notes',3)"
                             accept=".pdf">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="customFile">{{ 'THUMBNAIL' | translate}}</label>
+                        <label for="customFile">{{ 'THUMBNAIL' | translate }}</label>
                         <div>
                             <input type="file" (change)="onFileChange($event,'thumbnail',3)"
                             accept="image/*">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editChapterForm.valid">
-                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate}}
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
                     </button>
                     <button class="btn btn-danger ml-2" data-dismiss="modal">
-                        <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                     </button>
                 </form>
             </div>

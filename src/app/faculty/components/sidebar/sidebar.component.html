@@ -2,7 +2,7 @@
     <a class="brand-link">
         <img src="assets/images/logo.jpg" alt="App Logo" class="brand-image"
            style="opacity: .8">
-        <span class="brand-text">Rewind</span>
+        <span class="brand-text">{{ 'APP_NAME' | translate }}</span>
     </a>
     <div class="sidebar">
         <div class="user-panel mt-3 pb-3 d-flex">
@@ -11,15 +11,15 @@
                 (error)="_miscellaneous.setDefaultInstituteLogo($event)">
             </div>
             <div class="info">
-                <a class="d-block">{{userDetails.inst_name}}</a>
+                <a class="d-block">{{ userDetails.inst_name }}</a>
             </div>
         </div>
         <nav>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item" *ngFor="let sidemenu of sidemenus">
-                    <a routerLink="{{sidemenu.link}}" routerLinkActive="active" class="nav-link">
+                    <a routerLink="{{ sidemenu.link }}" routerLinkActive="active" class="nav-link">
                         <i class="nav-icon" [ngClass]="sidemenu.icon"></i>&nbsp;
-                        <p>{{sidemenu.name | translate}}</p>
+                        <p>{{ sidemenu.name | translate }}</p>
                     </a>
                 </li>
             </ul>

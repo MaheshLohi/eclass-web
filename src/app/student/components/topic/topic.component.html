@@ -8,7 +8,7 @@
                     <div class="card card-primary card-outline">
                         <div class="col-lg-12 row card-body">
                             <div class="col-lg-8 pr-0">
-                                <video src="{{videoUrl}}" width="100%" height="400px" controls class="video-player" autoplay>
+                                <video src="{{ videoUrl }}" width="100%" height="400px" controls class="video-player" autoplay>
                                 </video>
                             </div>
                             <div class="col-lg-4 pl-0">
@@ -18,7 +18,7 @@
                                             <tr class="bg-theme"><td><b>{{ 'COURSE_CONTENT' | translate }}</b></td></tr>
                                             <tr class="bg-white" *ngFor="let topic of topics" (click)="selectTopic(topic)"
                                             [ngClass]="{'active-topic': topic.id === selectedTopic.id}">
-                                                <td><span class="topic-heading">{{topic.name}}</span><i class="fas fa-play-circle pr-1 text-muted float-right"></i></td>
+                                                <td><span class="topic-heading">{{ topic.name }}</span><i class="fas fa-play-circle pr-1 text-muted float-right"></i></td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -30,13 +30,13 @@
                                         <div class="cursor-pointer d-inline-block float-right" *ngIf="!selectedTopic.is_wishlist">
                                             <button class="btn btn-theme-primary" (click)="updateTopicWishlist()">
                                                 <i class="fa fa-plus"></i>
-                                                Add To Wishlist
+                                                {{ 'ADD_TO_WISHLIST' | translate }}
                                             </button>
                                         </div>
                                         <div class="cursor-pointer d-inline-block float-right" *ngIf="selectedTopic.is_wishlist">
                                             <button class="btn btn-theme-primary" (click)="updateTopicWishlist()">
                                                 <i class="fa fa-check"></i>
-                                                Wishlisted
+                                                {{ 'WISHLISTED' | translate }}
                                             </button>
                                         </div>
                                     </div>
@@ -54,12 +54,12 @@
                                         <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
                                             <li class="nav-item">
                                                 <a class="nav-link active" data-toggle="pill" href="#tab-details" role="tab" aria-controls="tab-details" aria-selected="true">
-                                                    Chapter Details
+                                                   {{ 'CHAPTER_DETAILS' | translate }}
                                                 </a>
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" data-toggle="pill" href="#comments" role="tab" aria-controls="comments" aria-selected="false">
-                                                    {{ 'QUESTIONS' | translate}}
+                                                    {{ 'QUESTIONS' | translate }}
                                                 </a>
                                             </li>
                                             <li class="nav-item">

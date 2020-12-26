@@ -11,19 +11,19 @@
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown">
 			  <img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="user-image img-circle elevation-2" alt="User Image"
 			  (error)="_miscellaneous.setDefaultAdminLogo($event)">
-			  <span class="d-none d-md-inline">{{userDetails.name | verifyData}}</span>
+			  <span class="d-none d-md-inline">{{ userDetails.name | verifyData }}</span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 			  	<li class="user-header">
 					<img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
 					(error)="_miscellaneous.setDefaultAdminLogo($event)">
 					<p>
-						<b>{{userDetails.name | verifyData}}</b>
-						<small>{{userDetails.email}}</small>
+						<b>{{ userDetails.name | verifyData }}</b>
+						<small>{{ userDetails.email }}</small>
 					</p>
 			  	</li>
 			  	<li class="user-footer">
-					<a class="btn btn-theme-light btn-flat float-right" (click)="logout()">{{'LOGOUT' | translate}}</a>
+					<a class="btn btn-theme-light btn-flat float-right" (click)="logout()">{{ 'LOGOUT' | translate }}</a>
 			  	</li>
 			</ul>
 		</li>

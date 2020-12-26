@@ -14,7 +14,7 @@
                                         <div class="col-6">
                                             <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
                                             (change)="getStudentsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
                                                 </option>
@@ -23,19 +23,19 @@
                                         <div class="col-6">
                                             <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
                                             (change)="getStudentsData()">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate}}</option>
+                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
                                                 <option *ngFor="let semester of semesters" [ngValue]="semester.id">
-                                                    {{ 'SEMESTER' | translate }} {{semester.name}}
+                                                    {{ 'SEMESTER' | translate }} {{ semester.name }}
                                                 </option>
                                             </select>
                                         </div>
                                     </form>
                                     <div class="col-4 card-tools text-right">
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
-                                            <i class="fa fa-plus"></i> {{ 'ADD_STUDENTS' | translate}}
+                                            <i class="fa fa-plus"></i> {{ 'ADD_STUDENTS' | translate }}
                                         </button>
                                         <button type="button" class="btn btn-theme-primary" (click)="_download.download('public/storage/student.csv')" *ngIf="showAddFeature === true">
-                                            <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate}}
+                                            <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate }}
                                         </button>
                                     </div>
                                 </div>
@@ -46,10 +46,10 @@
                                         <tbody>
                                             <tr>
                                                 <th>#</th>
-                                                <th>{{ 'NAME' | translate}}</th>
-                                                <th>{{ 'USN_NUMBER' | translate}}</th>
-                                                <th>{{ 'EMAIL_ADDRESS' | translate}}</th>
-                                                <th>{{ 'PHONE_NUMBER' | translate}}</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'USN' | translate }}</th>
+                                                <th>{{ 'EMAIL_ADDRESS' | translate }}</th>
+                                                <th>{{ 'PHONE_NUMBER' | translate }}</th>
                                             </tr>
                                             <tr *ngFor="let student of students;let i = index">
                                                 <td>
@@ -78,7 +78,7 @@
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addStudents()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group">
-                                            <label for="customFile">{{ 'FILE' | translate}}</label>
+                                            <label for="customFile">{{ 'FILE' | translate }}</label>
                                             <div>
                                                 <input type="file" id="studentsFile" formControlName="studentsFile" (change)="onFileChange($event,'students')" required
                                                 accept=".csv">
@@ -86,10 +86,10 @@
                                         </div>
                                         <app-form-validator [data]="validateAddFormValue('studentsFile')"></app-form-validator>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
-                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate}}
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                         </button>
                                         <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
-                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate}}
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                         </button>
                                     </form>
                                 </div>

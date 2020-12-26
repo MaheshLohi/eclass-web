@@ -13,10 +13,10 @@
                             </div>
                         </div>
                         <div class="col-md-8 col-12 pl-3">
-                            <h4 class="text-bold">{{ 'SUBJECT' | translate }} : {{subjectDetails.name | verifyData}}({{subjectDetails.code | verifyData}})</h4>
-                            <div>{{ 'FACULTY_NAME' | translate }} : {{subjectDetails.faculty | verifyData}}</div>
+                            <h4 class="text-bold">{{ 'SUBJECT' | translate }} : {{ subjectDetails.name | verifyData }}({{ subjectDetails.code | verifyData }})</h4>
+                            <div>{{ 'FACULTY_NAME' | translate }} : {{ subjectDetails.faculty | verifyData }}</div>
                             <button class="btn btn-theme-primary mt-3 br-20" (click)="_download.download(subjectDetails.syllabus)">
-                                <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_SYLLABUS' | translate}}
+                                <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_SYLLABUS' | translate }}
                             </button>
                         </div>
                     </div>
