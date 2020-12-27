@@ -12,8 +12,8 @@
                                 <div class="col-12 row">
                                     <form class="col-8 row" role="form" [formGroup]="filterForm">
                                         <div class="col-6">
-                                            <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
-                                            (change)="getStudentsData()">
+                                            <select class="custom-select form-control" formControlName="department_id"
+                                            (change)="getStudentsData()" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
@@ -21,8 +21,8 @@
                                             </select>
                                         </div>
                                         <div class="col-6">
-                                            <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
-                                            (change)="getStudentsData()">
+                                            <select class="custom-select form-control" formControlName="inst_class_id"
+                                            (change)="getStudentsData()" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
                                                 <option *ngFor="let semester of semesters" [ngValue]="semester.id">
                                                     {{ 'SEMESTER' | translate }} {{ semester.name }}
@@ -52,21 +52,11 @@
                                                 <th>{{ 'PHONE_NUMBER' | translate }}</th>
                                             </tr>
                                             <tr *ngFor="let student of students;let i = index">
-                                                <td>
-                                                    {{ i + 1 }}
-                                                </td>
-                                                <td>
-                                                    {{ student.name | verifyData }}
-                                                </td>
-                                                <td>
-                                                    {{ student.usn | verifyData }}
-                                                </td>
-                                                <td>
-                                                    {{ student.email | verifyData }}
-                                                </td>
-                                                <td>
-                                                    {{ student.phone_number | verifyData }}
-                                                </td>
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ student.name | verifyData }}</td>
+                                                <td>{{ student.usn | verifyData }}</td>
+                                                <td>{{ student.email | verifyData }}</td>
+                                                <td>{{ student.phone_number | verifyData }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -78,13 +68,12 @@
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addStudents()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group">
-                                            <label for="customFile">{{ 'FILE' | translate }}</label>
+                                            <label for="students">{{ 'FILE' | translate }}</label>
                                             <div>
-                                                <input type="file" id="studentsFile" formControlName="studentsFile" (change)="onFileChange($event,'students')" required
-                                                accept=".csv">
+                                                <input type="file" (change)="onFileChange($event,'students')" accept=".csv" required>
                                             </div>
                                         </div>
-                                        <app-form-validator [data]="validateAddFormValue('studentsFile')"></app-form-validator>
+                                        <app-form-validator [data]="validateAddFormValue('students')"></app-form-validator>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                         </button>

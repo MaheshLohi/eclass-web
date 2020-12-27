@@ -12,8 +12,8 @@
                                 <div class="col-12 row">
                                     <form class="col-9 row" role="form" [formGroup]="filterForm">
                                         <div class="col-4">
-                                            <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
-                                            (change)="getSubjectsData()">
+                                            <select class="custom-select form-control" formControlName="department_id" 
+                                            (change)="getSubjectsData()" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
                                                 <option *ngFor="let department of departments" [ngValue]="department.id">
                                                     {{ department.name }}
@@ -21,17 +21,17 @@
                                             </select>
                                         </div>
                                         <div class="col-4">
-                                            <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
-                                            (change)="getSubjectsData()">
+                                            <select class="custom-select form-control" formControlName="inst_class_id" 
+                                            (change)="getSubjectsData()" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
                                                 <option *ngFor="let semester of semesters" [ngValue]="semester.id">
-                                                    {{ 'SEMESTER' | translate }} {{semester.name}}
+                                                    {{ 'SEMESTER' | translate }} {{ semester.name }}
                                                 </option>
                                             </select>
                                         </div>
                                         <div class="col-4">
-                                            <select class="custom-select form-control select2" id="subject_id" formControlName="subject_id" required
-                                            (change)="getExamsList()">
+                                            <select class="custom-select form-control" formControlName="subject_id" 
+                                            (change)="getExamsList()" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate }}</option>
                                                 <option *ngFor="let subject of subjects" [ngValue]="subject.id">
                                                     {{ subject.name }}
@@ -61,15 +61,9 @@
                                                 <ng-container *ngFor="let exam of examsList">
                                                     <ng-container *ngFor="let year of exam | prepareObject" >
                                                         <tr *ngFor="let paper of year.value;let i = index">
-                                                            <td>
-                                                                {{ i + 1 }}
-                                                            </td>
-                                                            <td>
-                                                                {{ paper.name | verifyData }}
-                                                            </td>
-                                                            <td>
-                                                                {{ paper.year }}
-                                                            </td>
+                                                            <td>{{ i + 1 }}</td>
+                                                            <td>{{ paper.name | verifyData }}</td>
+                                                            <td>{{ paper.year }}</td>
                                                             <td>
                                                                 <button class="btn btn-theme-primary btn-sm"
                                                                 (click)="_download.download(paper.paper, $event)" *ngIf="paper.paper">
@@ -96,12 +90,13 @@
                                 <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
                                     <div class="form-group mb-0">
                                         <label for="name">{{ 'EXAMINATION_NAME' | translate }} *</label>
-                                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                                        <input type="text" class="form-control" 
+                                        formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
                                     </div>
                                     <app-form-validator [data]="validateAddFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                     <div class="form-group mb-0">
                                         <label for="name">{{ 'SELECT_YEAR' | translate }} *</label>
-                                        <select class="custom-select form-control select2" id="year" formControlName="year" required>
+                                        <select class="custom-select form-control" formControlName="year" required>
                                             <option [value]=null selected disabled>{{ 'SELECT_YEAR' | translate }}</option>
                                             <option *ngFor="let year of years" [ngValue]="year">
                                                 {{ year }}
@@ -110,9 +105,9 @@
                                     </div>
                                     <app-form-validator [data]="validateAddFormValue('year')"></app-form-validator>
                                     <div class="form-group">
-                                        <label for="customFile">{{ 'EXAMINATION_PAPER' | translate }}</label>
+                                        <label for="paper">{{ 'EXAMINATION_PAPER' | translate }}</label>
                                         <div>
-                                            <input type="file" (change)="onFileChange($event,'paper')" accept=".pdf">
+                                            <input type="file" (change)="onFileChange($event,'paper')" accept=".pdf" required>
                                         </div>
                                     </div>
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">

@@ -11,7 +11,7 @@
                             <div class="card-header">
                                 <div class="col-12 row">
                                     <form class="col-5" role="form">
-                                        <select class="custom-select form-control select2" id="topicId" required
+                                        <select class="custom-select form-control" required
                                         (change)="onTopicChange()" [(ngModel)] ="topicId" [ngModelOptions]="{standalone: true}">
                                             <option [value]=null selected disabled>{{ 'SELECT_TOPIC' | translate }}</option>
                                             <option *ngFor="let topic of topics" [ngValue]="topic.id">
@@ -57,12 +57,14 @@
                                     <form role="form" (ngSubmit)="addFaq()" [formGroup]="addDataForm">
                                         <div class="form-group mb-0">
                                             <label for="question">{{ 'QUESTION' | translate }} *</label>
-                                            <input type="text" class="form-control" id="question" formControlName="question" placeholder="{{ 'ENTER_QUESTION' | translate }}" required>
+                                            <input type="text" class="form-control" formControlName="question" 
+                                            placeholder="{{ 'ENTER_QUESTION' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('question')" [validateNameMinLength]=true></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label for="answer">{{ 'ANSWER' | translate }} *</label>
-                                            <input type="text" class="form-control" id="answer" formControlName="answer" placeholder="{{ 'ENTER_ANSWER' | translate }}" required>
+                                            <input type="text" class="form-control" formControlName="answer" 
+                                            placeholder="{{ 'ENTER_ANSWER' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('answer')"></app-form-validator>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
@@ -95,12 +97,14 @@
                 <form role="form" (ngSubmit)="updateFaq()" [formGroup]="editDataForm">
                     <div class="form-group mb-0">
                         <label for="question">{{ 'QUESTION' | translate }} *</label>
-                        <input type="text" class="form-control" id="question" formControlName="question" placeholder="{{ 'ENTER_QUESTION' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="question" 
+                        placeholder="{{ 'ENTER_QUESTION' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('question')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="answer">{{ 'ANSWER' | translate }} *</label>
-                        <input type="text" class="form-control" id="answer" formControlName="answer" placeholder="{{ 'ENTER_ANSWER' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="answer" 
+                        placeholder="{{ 'ENTER_ANSWER' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('answer')"></app-form-validator>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableEditFeatureForm()">
