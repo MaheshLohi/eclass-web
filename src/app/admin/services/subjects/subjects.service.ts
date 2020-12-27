@@ -30,30 +30,30 @@ export class AdminSubjectsService {
 		)
 	};
 	  
-	addSubjects(selectedFile) : Observable<any> {
+	addSubjects(data) : Observable<any> {
 		this.userDetails = this.storageService.getData("userDetails");
 		const formData = new FormData();
-		formData.append('subjects', selectedFile);
+		formData.append('subjects', data.subjects);
 		formData.append('inst_id', this.userDetails.inst_id);
 		return this.http.post<any>(this.constants.ADD_SUBJECTS_URL, formData);
 	};
 
-	uploadSubjectAttachment(subject_id, selectedFile, fileType) : Observable<any> {
+	uploadSubjectAttachment(subject_id, data, fileType) : Observable<any> {
 		const formData = new FormData();
 		if(fileType === 0) {
-			formData.append('syllabus', selectedFile);
+			formData.append('syllabus', data.attachment);
 		}
 		else {
-			formData.append('bg_image', selectedFile);
+			formData.append('bg_image', data.attachment);
 		}
 		formData.append('subject_id', subject_id);
 		return this.http.post<any>(this.constants.ADD_SUBJECT_SYLLABUS_URL, formData);
 	};
 
-	assignFaculties(assignFacultyForm, subjectId) : Observable<any> {
+	assignFaculties(data, subjectId) : Observable<any> {
 		const formData = new FormData();
 		formData.append('subject_id', subjectId);
-		formData.append('faculty_id', assignFacultyForm.faculty_id);
+		formData.append('faculty_id', data.faculty_id);
 		return this.http.post<any>(this.constants.ADD_SUBJECT_FACULTY_URL, formData);
 	};
 }

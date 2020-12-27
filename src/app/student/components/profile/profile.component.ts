@@ -67,7 +67,8 @@ export class StudentProfileComponent implements OnInit {
 
 	initiateEditModal() {
 		$('#editProfileForm')[0].reset();
-		this["editProfileForm"].patchValue({
+		this.editProfileForm.reset();
+		this.editProfileForm.patchValue({
 			name : this.profileDetails.name,
 			phone_number : this.profileDetails.phone_number,
 			email : this.profileDetails.email

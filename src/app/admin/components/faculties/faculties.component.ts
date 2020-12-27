@@ -91,6 +91,7 @@ export class AdminFacultiesComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			$('#addDataForm')[0].reset();
+			this.addDataForm.reset();
 		}
 		else {
 			this.getFaculties();
@@ -110,7 +111,7 @@ export class AdminFacultiesComponent implements OnInit {
 
 	addFaculties() {
 		this._loader.showLoader();
-		this._faculty.addFaculties(this.filterForm.value)
+		this._faculty.addFaculties(this.filterForm.value, this.addDataForm.value)
 		.subscribe((response:any) => {
 			this._loader.hideLoader();
 			this._download.downloadAsCsv(response.data,this._constants.FACULTY_CSV_CONTENTS,'faculties_list.csv');

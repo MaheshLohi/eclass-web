@@ -30,10 +30,10 @@ export class AdminStudentsService {
 		)
 	};
 	  
-	addStudents(filterData) : Observable<any> {
+	addStudents(filterData, data) : Observable<any> {
 		this.userDetails = this.storageService.getData("userDetails");
 		const formData = new FormData();
-		formData.append('students', filterData.students);
+		formData.append('students', data.students);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_class_id', filterData.inst_class_id);
 		formData.append('inst_id', this.userDetails.inst_id);

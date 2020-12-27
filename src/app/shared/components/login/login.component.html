@@ -10,13 +10,15 @@
                     <form (ngSubmit)="doLogin()" [formGroup]="loginForm" class="mt-5">
                         <div class="form-group mb-0">
                             <label for="email">{{ (loginType === 'student') ? ('USN' | translate) : ('EMAIL_ADDRESS' | translate) }} *</label>
-                            <input type="email" class="form-control br-basic-form" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ (loginType === 'student') ? ('ENTER_USN' | translate) : ('EMAIL_ADDRESS' | translate) }}" required>
+                            <input type="email" class="form-control br-basic-form" formControlName="email" 
+                            placeholder="{{ (loginType === 'student') ? ('ENTER_USN' | translate) : ('EMAIL_ADDRESS' | translate) }}" required>
                         </div>
                         <app-form-validator [data]="validateLoginForm('email')" [validateEmail]=true></app-form-validator>
                         <div class="form-group mb-0 mt-1">
                             <label for="password">{{ 'PASSWORD' | translate }} *</label>
                             <div class="input-group">
-                                <input [type]="showPassword ? 'text' : 'password'" class="form-control" class="form-control br-basic-form" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}" required>
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control br-basic-form" 
+                                formControlName="password" placeholder="{{ 'PASSWORD' | translate }}" required>
                                 <div class="input-group-append" (click)="togglePassword()">
                                     <div class="input-group-text br-basic-form bg-white cursor-ponter" type="button">
                                         <i *ngIf="showPassword" class="fa fa-eye-slash"></i>

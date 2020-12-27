@@ -86,8 +86,8 @@
                             <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3" 
                             [hidden]="showAddFeature === true">
                             </app-admin-list-error>
-                            <div class="card-body" *ngIf="showAddFeature === true">
-                                <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm">
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <form role="form" (ngSubmit)="addExam()" [formGroup]="addDataForm" id="addDataForm">
                                     <div class="form-group mb-0">
                                         <label for="name">{{ 'EXAMINATION_NAME' | translate }} *</label>
                                         <input type="text" class="form-control" 
@@ -111,7 +111,7 @@
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                         <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                     </button>
-                                    <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                    <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
                                         <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                     </button>
                                 </form>

@@ -30,10 +30,10 @@ export class AdminFacultiesService {
 		)
 	};
 	  
-	addFaculties(filterData) : Observable<any>  {
+	addFaculties(filterData, data) : Observable<any>  {
 		this.userDetails = this.storageService.getData("userDetails");
 		const formData = new FormData();
-		formData.append('faculties', filterData.faculties);
+		formData.append('faculties', data.faculties);
 		formData.append('department_id', filterData.department_id);
 		formData.append('inst_id', this.userDetails.inst_id);
 		return this.http.post<any>(this.constants.ADD_FACULTIES_URL, formData);

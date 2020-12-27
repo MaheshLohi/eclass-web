@@ -158,8 +158,10 @@ export class AdminChapterComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
-			$('#'+this.availableForms[1])[0].reset();
-			$('#'+this.availableForms[2])[0].reset();
+			$('#addChapterForm')[0].reset();
+			this.addChapterForm.reset();
+			$('#addTopicForm')[0].reset();
+			this.addTopicForm.reset();
 		}
 	};
 
@@ -216,8 +218,9 @@ export class AdminChapterComponent implements OnInit {
 	};
 
 	editChapter(chapter) {
-		$('#'+this.availableForms[3])[0].reset();
-		this[this.availableForms[3]].patchValue({
+		$('#editChapterForm')[0].reset();
+		this.editChapterForm.reset();
+		this.editChapterForm.patchValue({
 			name : chapter.name, chapter_id : chapter.id, description : chapter.description
 		})
 	};

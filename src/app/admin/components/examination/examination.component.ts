@@ -43,7 +43,7 @@ export class AdminExaminationComponent implements OnInit {
 		});
 		this.addDataForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
-			'year' : new FormControl("", []),
+			'year' : new FormControl(null, []),
 			'paper' : new FormControl("", [Validators.required])
 		});
 	}
@@ -133,6 +133,7 @@ export class AdminExaminationComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			$('#addDataForm')[0].reset();
+			this.addDataForm.reset();
 		}
 	};
 

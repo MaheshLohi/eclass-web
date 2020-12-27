@@ -60,7 +60,7 @@
                                 <app-sAdmin-list-error [errorId]=0 [errorCode]="instituteDataStatus" *ngIf="instituteDataStatus === 0 || instituteDataStatus === 3">
                                 </app-sAdmin-list-error>
                             </div>
-                            <div class="card-body" *ngIf="showAddFeature === true">
+                            <div class="card-body" [hidden]="showAddFeature === false">
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group mb-0">
@@ -82,14 +82,14 @@
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('phone_number')"></app-form-validator>
                                         <div class="form-group">
-                                            <label for="logo">{{ 'LOGO' | translate }}</label><br/>
+                                            <label for="logo">{{ 'LOGO' | translate }} *</label><br/>
                                             <input type="file" (change)="onFileChange($event,'logo',1)" accept="image/*" 
                                             required>
                                         </div>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                         </button>
-                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                        <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
                                             <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                         </button>
                                     </form>
@@ -134,13 +134,12 @@
                     <app-form-validator [data]="validateEditDataFormValue('phone_number')"></app-form-validator>
                     <div class="form-group">
                         <label for="logo">{{ 'LOGO' | translate }}</label><br/>
-                        <input type="file" (change)="onFileChange($event,'logo',2)"
-                        accept="image/*">
+                        <input type="file" (change)="onFileChange($event,'logo',2)" accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editDataForm.valid">
                         <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
                     </button>
-                    <button class="btn btn-danger ml-2" data-dismiss="modal">
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
                         <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                     </button>
                 </form>

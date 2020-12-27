@@ -10,11 +10,11 @@ import { Constants } from '@app/constants';
 })
 export class SuperAdminAdminsService {
 
-	constructor(private constants: Constants,
-	private http: HttpClient) { };
+	constructor(private _constants: Constants,
+	private _http: HttpClient) { };
 
 	getAdmins(): Observable<any> {
-		return this.http.get<any>(this.constants.ADMINS_LIST_URL)
+		return this._http.get<any>(this._constants.ADMINS_LIST_URL)
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
@@ -25,27 +25,27 @@ export class SuperAdminAdminsService {
 		)
   	};
   
-  	addAdmin(adminData): Observable<any> {
+  	addAdmin(data): Observable<any> {
 		const formData = new FormData();
-		formData.append('name', adminData.name);
-		formData.append('email', adminData.email);
-		formData.append('password', adminData.password);
-		formData.append('inst_id', adminData.inst_id);
-		return this.http.post<any>(this.constants.ADD_ADMIN_URL, formData);
+		formData.append('name', data.name);
+		formData.append('email', data.email);
+		formData.append('password', data.password);
+		formData.append('inst_id', data.inst_id);
+		return this._http.post<any>(this._constants.ADD_ADMIN_URL, formData);
 	};
 	  
-	updateAdmin(editFormValue): Observable<any> {
+	updateAdmin(data): Observable<any> {
 		const formData = new FormData();
-		formData.append('id', editFormValue.id);
-		formData.append('name', editFormValue.name);
-		formData.append('email', editFormValue.email);
-		if(editFormValue.password) { formData.append('password', editFormValue.password); }
-		return this.http.post<any>(this.constants.ADMIN_UPDATE_URL, formData);
+		formData.append('id', data.id);
+		formData.append('name', data.name);
+		formData.append('email', data.email);
+		if(data.password) { formData.append('password', data.password); }
+		return this._http.post<any>(this._constants.ADMIN_UPDATE_URL, formData);
 	};
 
-	updateStatus(admin): Observable<any> {
+	updateStatus(data): Observable<any> {
 		const formData = new FormData();
-		formData.append('id', admin.id);
-		return this.http.post<any>(this.constants.ADMIN_STATUS_UPDATE_URL, formData);
+		formData.append('id', data.id);
+		return this._http.post<any>(this._constants.ADMIN_STATUS_UPDATE_URL, formData);
 	};
 }

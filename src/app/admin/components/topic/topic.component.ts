@@ -107,7 +107,8 @@ export class AdminTopicComponent implements OnInit {
 
 	editTopic(topic) {
 		$('#editTopicForm')[0].reset();
-		this['editTopicForm'].patchValue({
+		this.editTopicForm.reset();
+		this.editTopicForm.patchValue({
 			name: topic.name, chapter_details_id: topic.id, keywords: topic.keywords, related_videos: topic.related_videos
 		})
 	};

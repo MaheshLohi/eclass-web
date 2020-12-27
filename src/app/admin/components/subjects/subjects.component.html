@@ -114,20 +114,18 @@
                             </div>
                             <app-admin-list-error [errorId]=5 [errorCode]="filterDataStatus" *ngIf="filterDataStatus === 0 || filterDataStatus === 3" [hidden]="showAddFeature === true">
                             </app-admin-list-error>
-                            <div class="card-body" *ngIf="showAddFeature === true">
+                            <div class="card-body" [hidden]="showAddFeature === false">
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addSubjects()" [formGroup]="addSubjectsForm">
                                         <div class="form-group">
-                                            <label for="subjectsFile">{{ 'FILE' | translate }}</label>
-                                            <div>
-                                                <input type="file" id="subjectsFile" formControlName="subjectsFile" (change)="onFileChange($event,'subjectsFile')"
-                                                accept=".csv">
-                                            </div>
+                                            <label for="subjects">{{ 'FILE' | translate }}</label><br/>
+                                            <input type="file" (change)="onFileChange($event,'subjects',1)"
+                                            accept=".csv">
                                         </div>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                         </button>
-                                        <button class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                        <button type="button" class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
                                             <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                                         </button>
                                     </form>
@@ -152,21 +150,22 @@
                 </button>
             </div>
             <div class="modal-body">
-                <div class="form-group mb-4 mt-2">
-                    <label for="attachmentFile" *ngIf="fileType === 0">{{ 'SYLLABUS_FILE' | translate }}</label>
-                    <label for="attachmentFile" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate }}</label>
-                    <div>
-                        <input type="file" id="file" (change)="onFileChange($event,'attachmentFile')"
+                <form role="form" (ngSubmit)="uploadSubjectAttachment()" [formGroup]="addAttachmentForm"
+                id="addAttachmentForm">
+                    <div class="form-group mb-4 mt-2">
+                        <label for="attachment" *ngIf="fileType === 0">{{ 'SYLLABUS_FILE' | translate }}</label>
+                        <label for="attachment" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate }}</label><br/>
+                        <input type="file" (change)="onFileChange($event,'attachment',2)"
                         [accept]="(fileType === 0)?'.pdf':'image/*'">
                     </div>
-                </div>
-                <button class="btn btn-theme-primary" (click)="uploadSubjectAttachment()"
-                [disabled]="!attachmentFile">
-                    <i class="pr-1 fa fa-upload"></i> {{ 'UPLOAD' | translate }}
-                </button>
-                <button class="btn btn-danger ml-2" data-dismiss="modal">
-                    <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
-                </button>
+                    <button class="btn btn-theme-primary"
+                    [disabled]="!this.addAttachmentForm.valid">
+                        <i class="pr-1 fa fa-upload"></i> {{ 'UPLOAD' | translate }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
             </div>
         </div>
     </div>
@@ -201,7 +200,7 @@
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!assignFacultyForm.valid">
                         <i class="fa fa-plus-circle"></i> {{ (assignFacultyType ? ('UPDATE' | translate) : ('SUBMIT' | translate)) }}
                     </button>
-                    <button class="btn btn-danger ml-2" data-dismiss="modal">
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
                         <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
                     </button>
                 </form>

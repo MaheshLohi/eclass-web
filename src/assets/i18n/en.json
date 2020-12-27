@@ -162,12 +162,14 @@
     "ADD_ADMIN" : "Add Admin",
     "ADMIN_NAME" : "Admin Name",
     "UPDATE_ADMIN" : "Update Admin",
+    "ADMIN_STATUS" : "Admin Status",
 
     "INSTITUTE" : "Institute",
     "INSTITUTES" : "Institutes",
     "INSTITUTE_NAME" : "Institute Name",
     "SELECT_INSTITUTE" : "Select Institute",
     "ADD_INSTITUTE" : "Add Institute",
-    "UPDATE_INSTITUTE" : "Update Institute" 
+    "UPDATE_INSTITUTE" : "Update Institute",
+    "INSTITUTE_STATUS" : "Institute Status" 
    
 }

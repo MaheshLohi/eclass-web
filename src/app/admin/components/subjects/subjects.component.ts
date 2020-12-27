@@ -29,8 +29,7 @@ export class AdminSubjectsComponent implements OnInit {
 	filterForm : FormGroup;
 	addSubjectsForm : FormGroup;
 	assignFacultyForm : FormGroup;
-	subjectsFile: File;
-	attachmentFile : File;
+	addAttachmentForm : FormGroup;
 	selectedSubjectId : number;
 	fileType : number;
 	assignFacultyType : number;
@@ -48,7 +47,10 @@ export class AdminSubjectsComponent implements OnInit {
 			'inst_class_id' : new FormControl(null, [])
 		});
 		this.addSubjectsForm = new FormGroup({
-			'subjectsFile' : new FormControl("", [Validators.required])
+			'subjects' : new FormControl("", [Validators.required])
+		});
+		this.addAttachmentForm = new FormGroup({
+			'attachment' : new FormControl("", [Validators.required])
 		});
 		this.assignFacultyForm = new FormGroup({
 			'faculty_id' : new FormControl(null, [])
@@ -139,24 +141,24 @@ export class AdminSubjectsComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			this.addSubjectsForm.reset();
-			this.subjectsFile = null;
 		}
 	};
 
 	disableAddFeatureForm() {
-		return (this.addSubjectsForm.valid && this.subjectsFile) ? false : true;
+		return (this.addSubjectsForm.valid) ? false : true;
 	};
 
-	onFileChange(event, fileTarget) {
-		this[fileTarget] = null;
+	onFileChange(event, fileTarget, formType) {
+		let formName = (formType === 1) ? 'addSubjectsForm' : 'addAttachmentForm';
+		this[formName].get(fileTarget).setValue(null);
 		if (event.target.files.length > 0) {
-			this[fileTarget] = event.target.files[0];
+			this[formName].get(fileTarget).setValue(event.target.files[0]);
 		}
 	};
 
 	addSubjects() {
 		this.loader.showLoader();
-		this.subjectsService.addSubjects(this.subjectsFile)
+		this.subjectsService.addSubjects(this.addSubjectsForm.value)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.showAddFeatureView(false);
@@ -174,7 +176,7 @@ export class AdminSubjectsComponent implements OnInit {
 
 	uploadSubjectAttachment() {
 		this.loader.showLoader();
-		this.subjectsService.uploadSubjectAttachment(this.selectedSubjectId, this.attachmentFile, this.fileType)
+		this.subjectsService.uploadSubjectAttachment(this.selectedSubjectId, this.addAttachmentForm.value, this.fileType)
 		.subscribe(() => {
 			this.loader.hideLoader();
 			this.getSubjects(this.filterForm.value);
@@ -188,6 +190,8 @@ export class AdminSubjectsComponent implements OnInit {
 	initialiseModal(fileType,subject) {
 		this.fileType = fileType;
 		this.selectedSubjectId = subject.id;
+		$('#addAttachmentForm')[0].reset();
+		this.addAttachmentForm.reset();
 	}
 
 	initialiseAssignModal(subject,type) {

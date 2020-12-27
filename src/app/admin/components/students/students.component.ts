@@ -100,6 +100,7 @@ export class AdminStudentsComponent implements OnInit {
 	showAddFeatureView(status) {
 		this.showAddFeature = status;
 		if(status) {
+			this.addDataForm.reset();
 			$('#addDataForm')[0].reset();
 		}
 	};
@@ -117,7 +118,7 @@ export class AdminStudentsComponent implements OnInit {
 
 	addStudents() {
 		this._loader.showLoader();
-		this._students.addStudents(this.filterForm.value)
+		this._students.addStudents(this.filterForm.value, this.addDataForm.value)
 		.subscribe((response:any) => {
 			this._loader.hideLoader();
 			this.showAddFeatureView(false);

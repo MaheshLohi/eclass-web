@@ -39,7 +39,7 @@ export class SuperAdminInstitutesComponent implements OnInit {
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'address' : new FormControl("", []),
 			'phone_number' : new FormControl("", []),
-			'logo' : new FormControl("", [Validators.required])
+			'logo' : new FormControl("", [])
 		});
 	};
 
@@ -78,6 +78,7 @@ export class SuperAdminInstitutesComponent implements OnInit {
 		this.showAddFeature = status;
 		if(status) {
 			$('#addDataForm')[0].reset();
+			this.addDataForm.reset();
 		}
 	};
 
@@ -119,6 +120,7 @@ export class SuperAdminInstitutesComponent implements OnInit {
 
 	initiateEditModal(institute) {
 		$('#editDataForm')[0].reset();
+		this.editDataForm.reset();
 		this.editDataForm.patchValue({
 			id : institute.id, name : institute.name, phone_number : institute.phone_number, address : institute.address
 		})

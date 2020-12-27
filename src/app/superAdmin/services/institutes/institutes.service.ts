@@ -10,11 +10,11 @@ import { Constants } from '@app/constants';
 })
 export class SuperAdminInstitutesService {
 
-	constructor(private constants: Constants,
-	private http: HttpClient) { };
+	constructor(private _constants: Constants,
+	private _http: HttpClient) { };
 
 	getInstitutes(): Observable<any> {
-		return this.http.get<any>(this.constants.INSTITUTES_LIST_URL)
+		return this._http.get<any>(this._constants.INSTITUTES_LIST_URL)
 		.pipe(
 			map(response => { 
 				if (response && response.data && response.data.length) {
@@ -25,29 +25,29 @@ export class SuperAdminInstitutesService {
 		)
 	};
 	
-	addInstitute(instituteData): Observable<any> {
+	addInstitute(data): Observable<any> {
 		const formData = new FormData();
-		formData.append('logo', instituteData.logo);
-		formData.append('name', instituteData.name);
-		formData.append('phone_number', instituteData.phone);
-		formData.append('address', instituteData.address);
-		return this.http.post<any>(this.constants.ADD_INSTITUTE_URL, formData);
+		formData.append('logo', data.logo);
+		formData.append('name', data.name);
+		formData.append('phone_number', data.phone_number);
+		formData.append('address', data.address);
+		return this._http.post<any>(this._constants.ADD_INSTITUTE_URL, formData);
 	};
 
-	updateStatus(institute): Observable<any> {
+	updateStatus(data): Observable<any> {
 		const formData = new FormData();
-		formData.append('id', institute.id);
-		return this.http.post<any>(this.constants.INSTITUTE_STATUS_UPDATE_URL, formData);
+		formData.append('id', data.id);
+		return this._http.post<any>(this._constants.INSTITUTE_STATUS_UPDATE_URL, formData);
 	};
 
-	updateInstitute(editFormValue): Observable<any> {
+	updateInstitute(data): Observable<any> {
 		const formData = new FormData();
-		formData.append('id', editFormValue.id);
-		formData.append('name', editFormValue.name);
-		formData.append('phone_number', editFormValue.phone_number);
-		formData.append('address', editFormValue.address);
-		if(editFormValue.logo) { formData.append('logo', editFormValue.logo);}
-		return this.http.post<any>(this.constants.INSTITUTE_UPDATE_URL, formData);
+		formData.append('id', data.id);
+		formData.append('name', data.name);
+		formData.append('phone_number', data.phone_number);
+		formData.append('address', data.address);
+		if(data.logo) { formData.append('logo', data.logo); }
+		return this._http.post<any>(this._constants.INSTITUTE_UPDATE_URL, formData);
 	};
   
 }
