@@ -118,7 +118,7 @@
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addSubjects()" [formGroup]="addSubjectsForm">
                                         <div class="form-group">
-                                            <label for="customFile">{{ 'FILE' | translate }}</label>
+                                            <label for="subjectsFile">{{ 'FILE' | translate }}</label>
                                             <div>
                                                 <input type="file" id="subjectsFile" formControlName="subjectsFile" (change)="onFileChange($event,'subjectsFile')"
                                                 accept=".csv">
@@ -153,8 +153,8 @@
             </div>
             <div class="modal-body">
                 <div class="form-group mb-4 mt-2">
-                    <label for="customFile" *ngIf="fileType === 0">{{ 'SYLLABUS_FILE' | translate }}</label>
-                    <label for="customFile" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate }}</label>
+                    <label for="attachmentFile" *ngIf="fileType === 0">{{ 'SYLLABUS_FILE' | translate }}</label>
+                    <label for="attachmentFile" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate }}</label>
                     <div>
                         <input type="file" id="file" (change)="onFileChange($event,'attachmentFile')"
                         [accept]="(fileType === 0)?'.pdf':'image/*'">
@@ -194,7 +194,7 @@
                             {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('DEPARTMENTS' | translate) } }}
                         </div>
                         <div class="error-message" *ngIf="facultiesDataStatus === 3">
-                            {{ 'STANDARD_ERROR' | translate}}
+                            {{ 'STANDARD_ERROR' | translate }}
                         </div>
                     </div>
                     <app-form-validator [data]="validateAssignFacultyFormValue('faculty_id')"></app-form-validator>

@@ -230,13 +230,13 @@
                     <div class="form-group mb-0">
                         <label for="name">{{ 'CHAPTER_NAME' | translate }} *</label>
                         <input type="text" class="form-control" formControlName="name" 
-                        placeholder="{{ 'ENTER_NAME' | translate}}" required>
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateForm('name',3)" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="description">{{ 'DESCRIPTION' | translate }} *</label>
                         <input type="text" class="form-control" formControlName="description" 
-                        placeholder="{{ 'ENTER_DESCRIPTION' | translate}}" required>
+                        placeholder="{{ 'ENTER_DESCRIPTION' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateForm('description',3)"></app-form-validator>
                     <div class="form-group">

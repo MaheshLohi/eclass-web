@@ -9,13 +9,13 @@
     <ul class="navbar-nav ml-auto">
 		<li class="nav-item dropdown user-menu cursor-pointer">
 			<a class="nav-link dropdown-toggle" data-toggle="dropdown">
-			  <img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="user-image img-circle elevation-2" alt="User Image"
+			  <img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="user-image img-circle elevation-2"
 			  (error)="_miscellaneous.setDefaultAdminLogo($event)">
 			  <span class="d-none d-md-inline">{{ userDetails.name | verifyData }}</span>
 			</a>
 			<ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 			  	<li class="user-header">
-					<img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2" alt="User Image"
+					<img [src]='_constants.DOMAIN_URL + userDetails.profile_pic' class="img-circle elevation-2"
 					(error)="_miscellaneous.setDefaultAdminLogo($event)">
 					<p>
 						<b>{{ userDetails.name | verifyData }}</b>

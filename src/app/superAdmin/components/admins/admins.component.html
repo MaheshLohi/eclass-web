@@ -23,10 +23,10 @@
                                         <tbody>
                                             <tr>
                                                 <th>#</th>
-                                                <th>{{ 'NAME' | translate}}</th>
-                                                <th>{{ 'EMAIL_ADDRESS' | translate}}</th>
-                                                <th>{{ 'INSTITUTE_NAME' | translate}}</th>
-                                                <th>{{ 'STATUS' | translate}}</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'EMAIL_ADDRESS' | translate }}</th>
+                                                <th>{{ 'INSTITUTE_NAME' | translate }}</th>
+                                                <th>{{ 'STATUS' | translate }}</th>
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let admin of admins;let i = index">
@@ -37,8 +37,8 @@
                                                 <td>
                                                     <span class="badge bg-danger mr-1">{{ 'INACTIVE' | translate }}</span>
                                                     <div class="custom-control custom-switch d-inline-block">
-                                                        <input type="checkbox" class="custom-control-input" [(ngModel)]="admin.status" id="{{admin.name}}" (change)="updateStatus(admin)">
-                                                        <label class="custom-control-label" for="{{admin.name}}">
+                                                        <input type="checkbox" class="custom-control-input" [(ngModel)]="admin.status" id="{{ admin.name }}" (change)="updateStatus(admin)">
+                                                        <label class="custom-control-label" for="{{ admin.name }}">
                                                             <span class="badge bg-success">{{ 'ACTIVE' | translate }}</span>
                                                         </label>
                                                     </div>

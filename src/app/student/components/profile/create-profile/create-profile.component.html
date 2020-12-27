@@ -37,12 +37,12 @@
                                 {{ 'NO_SEMESTER_FOUND_STUDENT' | translate }}
                             </div>
                             <div class="error-message" *ngIf="semestersDataStatus === 3">
-                                {{ 'STANDARD_ERROR' | translate}}
+                                {{ 'STANDARD_ERROR' | translate }}
                             </div>
                         </div>
                         <app-form-validator [data]="validateCreateProfileForm('semesterId')"></app-form-validator>
                         <div class="form-group">
-                            <label for="customFile">{{ 'PROFILE_PICTURE' | translate }}</label>
+                            <label for="profile_pic">{{ 'PROFILE_PICTURE' | translate }}</label>
                             <div>
                                 <input type="file" (change)="onFileChange($event,'profile_pic')"
                                 accept="image/*">

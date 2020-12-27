@@ -41,7 +41,7 @@
                                         </div>
                                     </div>
                                     {{ 'RELATED_VIDEOS' | translate }} :
-                                    <a href={{selectedTopic.related_videos}} target="_blank">
+                                    <a href="{{ selectedTopic.related_videos }}" target="_blank">
                                         {{ selectedTopic.related_videos | verifyData }}
                                     </a>
                                     <br/>
@@ -64,7 +64,7 @@
                                             </li>
                                             <li class="nav-item">
                                                 <a class="nav-link" data-toggle="pill" href="#faqs" role="tab" aria-controls="faqs" aria-selected="false">
-                                                    {{ 'FAQS' | translate}}
+                                                    {{ 'FAQS' | translate }}
                                                 </a>
                                             </li>
                                         </ul>

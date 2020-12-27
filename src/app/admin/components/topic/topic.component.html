@@ -31,9 +31,9 @@
                                             <tr *ngFor="let topic of topics;let i = index">
                                                 <td>
                                                     <b>{{ i + 1 }}.{{ topic.name | verifyData }}</b><br/>
-                                                    {{'KEYWORDS' | translate }} : {{ topic.keywords | verifyData }}<br/>
-                                                    {{'RELATED_VIDEOS' | translate }} : 
-                                                    <a href={{topic.related_videos}} target="_blank">
+                                                    {{ 'KEYWORDS' | translate }} : {{ topic.keywords | verifyData }}<br/>
+                                                    {{ 'RELATED_VIDEOS' | translate }} : 
+                                                    <a href="{{ topic.related_videos }}" target="_blank">
                                                         {{ topic.related_videos | verifyData }}
                                                     </a><br/>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm" (click)="selectTopic(topic)">
@@ -97,12 +97,12 @@
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group">
-                        <label for="customFile">{{ 'VIDEO_1' | translate }}</label>
+                        <label for="video1">{{ 'VIDEO_1' | translate }}</label>
                         <input type="file" (change)="onFileChange($event,'video1')" accept="video/*" 
                         required>
                     </div>
                     <div class="form-group">
-                        <label for="customFile">{{ 'VIDEO_2' | translate }}</label>
+                        <label for="video2">{{ 'VIDEO_2' | translate }}</label>
                         <div>
                             <input type="file" (change)="onFileChange($event,'video2')" accept="video/*"
                             required>
