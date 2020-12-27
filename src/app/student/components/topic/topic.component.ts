@@ -88,12 +88,12 @@ export class StudentTopicComponent implements OnInit {
 		this._router.navigate(['student/topics', this.chapterId],{ queryParams: data });
 	};
 
-	updateTopicWishlist() {
+	updateTopicWishlist(status) {
 		this._loader.showLoader();
 		this._wishlist.updateTopicWishlist(this.selectedTopic)
 		.subscribe(() => {
 			this._loader.hideLoader();
-			this.selectedTopic.is_wishlist = !this.selectedTopic.is_wishlist;
+			this.selectedTopic.is_wishlist = status;
 			this._toaster.showSuccess(this._translate.instant("FEATURE_UPDATED_SUCCESSFULLY",{ value : this._translate.instant("WISHLIST")} ));
 		}, () => {
 			this._loader.hideLoader();

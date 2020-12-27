@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { TranslateService } from '@ngx-translate/core';
 
 import { Constants } from '@app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
+import { AlertService } from '@sharedServices/alert/alert.service';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +13,8 @@ import { StorageService } from '@sharedServices/storage/storage.service';
 export class SessionHandlerService {
 
 	constructor(private _router: Router,
+	private _alert : AlertService,
+	private _translate : TranslateService,
 	private _storage : StorageService,
 	private _constants: Constants,
 	private _http: HttpClient) { }
@@ -33,5 +37,16 @@ export class SessionHandlerService {
 		else {
 			this._router.navigate(['/school/login']);
 		}
-	}
+	};
+
+	showLogoutPopup() {
+		this._alert.showWarning(this._translate.instant('LOGOUT_MESSAGE2'),
+		this._translate.instant('LOGOUT_MESSAGE1'))
+		.then((response) => {
+			if (response.isConfirmed) {
+				this.handleLogout();
+			}
+		});
+	};
+
 }

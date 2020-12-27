@@ -65,6 +65,9 @@
     "ADDRESS" : "Address",
     "ENTER_ADDRESS" : "Enter Address",
     "LOGO" : "Logo",
+    "LOGOUT_MESSAGE1" : "Are you sure?",
+    "LOGOUT_MESSAGE2" : "You want to logout from Rewind",
+    "YES" : "Yes",
 
     "HOME" : "Home",
     "DASHBOARD" : "Dashboard",
@@ -136,6 +139,7 @@
 
     "HELP" : "Help",
 
+    "WISHLIST" : "Wishlist",
     "WISHLISTS" : "Wishlists",
     "ADD_TO_WISHLIST" : "Add To Wishlist",
     "WISHLISTED" : "Wishlisted",

@@ -26,6 +26,6 @@ export class NavbarComponent implements OnInit {
 	};
 
 	logout() {
-		this._session.handleLogout();
+		this._session.showLogoutPopup();
 	};
 }
