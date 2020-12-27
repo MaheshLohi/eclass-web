@@ -29,20 +29,14 @@
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let institute of institutes;let i = index">
-                                                <td>
-                                                    {{ i + 1 }}
-                                                </td>
+                                                <td>{{ i + 1 }}</td>
                                                 <td>
                                                     <img [src]="_constants.DOMAIN_URL + institute.logo" class="img-circle img-size-32 mr-2"
                                                     (error)="_miscellaneous.setDefaultInstituteLogo($event)">
                                                     {{ institute.name | verifyData }}
                                                 </td>
-                                                <td>
-                                                    {{ institute.phone_number | verifyData }}
-                                                </td>
-                                                <td>
-                                                    {{ institute.address | verifyData }}
-                                                </td>
+                                                <td>{{ institute.phone_number | verifyData }}</td>
+                                                <td>{{ institute.address | verifyData }}</td>
                                                 <td>
                                                     <span class="badge bg-danger mr-1">{{ 'INACTIVE' | translate }}</span>
                                                     <div class="custom-control custom-switch d-inline-block">
@@ -71,25 +65,26 @@
                                     <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group mb-0">
                                             <label for="name">{{ 'INSTITUTE_NAME' | translate }} *</label>
-                                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                                            <input type="text" class="form-control" formControlName="name" 
+                                            placeholder="{{ 'ENTER_NAME' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label for="address">{{ 'ADDRESS' | translate }} *</label>
-                                            <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
+                                            <input type="text" class="form-control" formControlName="address" 
+                                            placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('address')"></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label for="name">{{ 'PHONE_NUMBER' | translate }} *</label>
-                                            <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
+                                            <input type="number" class="form-control" formControlName="phone_number" 
+                                            placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddDataFormValue('phone_number')"></app-form-validator>
                                         <div class="form-group">
-                                            <label for="customFile">{{ 'LOGO' | translate }}</label>
-                                            <div>
-                                                <input type="file" (change)="onFileChange($event,'logo',1)"
-                                                accept="image/*">
-                                            </div>
+                                            <label for="logo">{{ 'LOGO' | translate }}</label><br/>
+                                            <input type="file" (change)="onFileChange($event,'logo',1)" accept="image/*" 
+                                            required>
                                         </div>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                             <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
@@ -121,25 +116,26 @@
                 <form role="form" (ngSubmit)="updateInstitute()" [formGroup]="editDataForm" id="editDataForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'INSTITUTE_NAME' | translate }} *</label>
-                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="name" 
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="address">{{ 'ADDRESS' | translate }} *</label>
-                        <input type="text" class="form-control" id="address" formControlName="address" placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="address" 
+                        placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('address')"></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="name">{{ 'PHONE_NUMBER' | translate }} *</label>
-                        <input type="number" class="form-control" id="phone_number" formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
+                        <input type="number" class="form-control" formControlName="phone_number" 
+                        placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditDataFormValue('phone_number')"></app-form-validator>
                     <div class="form-group">
-                        <label for="customFile">{{ 'LOGO' | translate }}</label>
-                        <div>
-                            <input type="file" (change)="onFileChange($event,'logo',2)"
-                            accept="image/*">
-                        </div>
+                        <label for="logo">{{ 'LOGO' | translate }}</label><br/>
+                        <input type="file" (change)="onFileChange($event,'logo',2)"
+                        accept="image/*">
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editDataForm.valid">
                         <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}

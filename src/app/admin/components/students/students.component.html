@@ -68,10 +68,8 @@
                                 <div class="col-lg-12">
                                     <form role="form" (ngSubmit)="addStudents()" [formGroup]="addDataForm" id="addDataForm">
                                         <div class="form-group">
-                                            <label for="students">{{ 'FILE' | translate }}</label>
-                                            <div>
-                                                <input type="file" (change)="onFileChange($event,'students')" accept=".csv" required>
-                                            </div>
+                                            <label for="students">{{ 'FILE' | translate }}</label><br/>
+                                            <input type="file" (change)="onFileChange($event,'students')" accept=".csv" required>
                                         </div>
                                         <app-form-validator [data]="validateAddFormValue('students')"></app-form-validator>
                                         <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">

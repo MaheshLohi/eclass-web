@@ -32,7 +32,7 @@ export class SuperAdminAdminsComponent implements OnInit {
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'email' : new FormControl("", [Validators.email]),
 			'password' : new FormControl("", [Validators.minLength(6)]),
-			'inst_id' : new FormControl("", [])
+			'inst_id' : new FormControl(null, [])
 		});
 		this.editForm = new FormGroup({
 			'id' : new FormControl("", []),

@@ -105,10 +105,8 @@
                                     </div>
                                     <app-form-validator [data]="validateAddFormValue('year')"></app-form-validator>
                                     <div class="form-group">
-                                        <label for="paper">{{ 'EXAMINATION_PAPER' | translate }}</label>
-                                        <div>
-                                            <input type="file" (change)="onFileChange($event,'paper')" accept=".pdf" required>
-                                        </div>
+                                        <label for="paper">{{ 'EXAMINATION_PAPER' | translate }}</label><br/>
+                                        <input type="file" (change)="onFileChange($event,'paper')" accept=".pdf" required>
                                     </div>
                                     <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
                                         <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}

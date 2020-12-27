@@ -11,7 +11,8 @@
                             <div class="card-header">
                                 <h3 class="card-title custom-title">{{ 'ADMINS' | translate }}</h3>
                                 <div class="col-7 card-tools text-right">
-                                    <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                    <button type="button" class="btn btn-theme-primary" 
+                                    (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                         <i class="fa fa-plus"></i> {{ 'ADD_ADMIN' | translate }}
                                     </button>
                                 </div>
@@ -29,18 +30,10 @@
                                                 <th></th>
                                             </tr>
                                             <tr *ngFor="let admin of admins;let i = index">
-                                                <td>
-                                                    {{ i + 1 }}
-                                                </td>
-                                                <td>
-                                                    {{ admin.name | verifyData }}
-                                                </td>
-                                                <td>
-                                                    {{ admin.email | verifyData }}
-                                                </td>
-                                                <td>
-                                                    {{ admin.inst_name | verifyData }}
-                                                </td>
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ admin.name | verifyData }}</td>
+                                                <td>{{ admin.email | verifyData }}</td>
+                                                <td>{{ admin.inst_name | verifyData }}</td>
                                                 <td>
                                                     <span class="badge bg-danger mr-1">{{ 'INACTIVE' | translate }}</span>
                                                     <div class="custom-control custom-switch d-inline-block">
@@ -69,22 +62,25 @@
                                     <form role="form" (ngSubmit)="addAdmin()" [formGroup]="addAdminForm">
                                         <div class="form-group mb-0">
                                             <label for="name">{{ 'ADMIN_NAME' | translate }} *</label>
-                                            <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                                            <input type="text" class="form-control" formControlName="name" 
+                                            placeholder="{{ 'ENTER_NAME' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddAdminFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
-                                            <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                                            <input type="email" class="form-control" formControlName="email" 
+                                            placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddAdminFormValue('email')" [validateEmail]=true></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label for="password">{{ 'PASSWORD' | translate }} *</label>
-                                            <input type="password" class="form-control" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}" required>
+                                            <input type="password" class="form-control" formControlName="password" 
+                                            placeholder="{{ 'PASSWORD' | translate }}" required>
                                         </div>
                                         <app-form-validator [data]="validateAddAdminFormValue('password')" [validatePasswordLength]=true></app-form-validator>
                                         <div class="form-group mb-0">
                                             <label>{{ 'INSTITUTE_NAME' | translate }} *</label>
-                                            <select class="custom-select" id="inst_id" formControlName="inst_id" [hidden]="instituteDataStatus != 1" required>
+                                            <select class="custom-select" formControlName="inst_id" [hidden]="instituteDataStatus != 1" required>
                                                 <option [value]=null selected disabled>{{ 'SELECT_INSTITUTE' | translate }}</option>
                                                 <option *ngFor="let institute of institutes" [ngValue]="institute.id">
                                                     {{ institute.name }}
@@ -128,17 +124,20 @@
                 <form role="form" (ngSubmit)="updateAdmin()" [formGroup]="editForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'ADMIN_NAME' | translate }} *</label>
-                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="name" 
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
-                        <input type="email" class="form-control" name="email" formControlName="email" autocomplete="off" id="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                        <input type="email" class="form-control" 
+                        formControlName="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateEditFormValue('email')" [validateEmail]=true></app-form-validator>
                     <div class="form-group">
                         <label for="password">{{ 'PASSWORD' | translate }}</label>
-                        <input type="password" class="form-control" name="password" formControlName="password" autocomplete="off" id="password" placeholder="{{ 'PASSWORD' | translate }}">
+                        <input type="password" class="form-control" formControlName="password" 
+                        placeholder="{{ 'PASSWORD' | translate }}">
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editForm.valid">
                         <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}

@@ -7,7 +7,8 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" (click)="_download.download(paper.paper)">
+                    <div class="col-md-3 col-sm-6 col-12" *ngFor="let paper of year.value" 
+                    (click)="_download.download(paper.paper)">
                         <div class="info-box filter-boxes">
                             <div class="info-box-content">
                                 <span class="info-box-text">{{ paper.name | verifyData }}</span>
@@ -19,6 +20,7 @@
         </div>
     </div>
 </div>
-<app-student-list-error [errorId]=2 [errorCode]="examDataStatus" *ngIf="examDataStatus === 0 || examDataStatus === 3">
+<app-student-list-error [errorId]=2 [errorCode]="examDataStatus" 
+*ngIf="examDataStatus === 0 || examDataStatus === 3">
 </app-student-list-error>
 		

@@ -4,7 +4,7 @@
         <div class="card card-widget mb-3 custom-card">
             <div class="card-body p-2" (click)="navigateToTopics(chapter)">
                 <div class="img-container ctmimg-wdt">
-                    <img class="img-fluid br-4" alt="Photo" [src]='this._constants.DOMAIN_URL + chapter.thumbnail' 
+                    <img class="img-fluid br-4" [src]='this._constants.DOMAIN_URL + chapter.thumbnail' 
                     (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                 </div>
                 <div class="card-header-portion">
@@ -21,5 +21,6 @@
         </div>
     </div>
 </section>
-<app-student-list-error [errorId]=1 [errorCode]="chaptersDataStatus" *ngIf="chaptersDataStatus === 0 || chaptersDataStatus === 3">
+<app-student-list-error [errorId]=1 [errorCode]="chaptersDataStatus" 
+*ngIf="chaptersDataStatus === 0 || chaptersDataStatus === 3">
 </app-student-list-error>

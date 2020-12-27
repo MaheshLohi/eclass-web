@@ -1,7 +1,8 @@
 <form role="form" (ngSubmit)="addQuestion()" [formGroup]="addDataForm">
     <div class="form-group">
         <label>{{ 'QUESTION' | translate }} *</label>
-        <textarea class="form-control" id="question" formControlName="question" placeholder="{{ 'ENTER_QUESTION' | translate }}" required></textarea>
+        <textarea class="form-control" formControlName="question" 
+        placeholder="{{ 'ENTER_QUESTION' | translate }}" required></textarea>
     </div>
     <app-form-validator [data]="validateAddFormValue('question')" [validateNameMinLength]=true></app-form-validator>
     <button type="submit" class="btn btn-theme-primary mb-3" [disabled]="disableAddFeatureForm()">

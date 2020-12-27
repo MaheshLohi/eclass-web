@@ -7,7 +7,7 @@
                     <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(video)">
                         <div class="card-body p-2">
                             <div class="img-container">
-                                <img class="img-fluid br-4" alt="Photo" [src]='_constants.DOMAIN_URL + video.thumbnail' 
+                                <img class="img-fluid br-4" [src]='_constants.DOMAIN_URL + video.thumbnail' 
                                 (error)="_miscellaneous.setDefaultThumbnailImage($event)">
                             </div>
                             <div class="card-header-title">

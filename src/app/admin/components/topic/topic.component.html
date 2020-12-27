@@ -10,14 +10,14 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body row">
                                 <div class="col-lg-6">
-                                    <video src="{{videoUrl}}" width="99%" height="400px" controls class="video-player" autoplay>
+                                    <video src="{{ videoUrl }}" width="99%" height="400px" controls class="video-player" autoplay>
                                     </video>
                                     <div class="pt-2">
                                         <div class="topic-title mb-2">
                                             <b>{{ selectedTopic.name }}</b>
                                         </div>
                                         {{ 'RELATED_VIDEOS' | translate }} :
-                                        <a href={{selectedTopic.related_videos[0]}} target="_blank">
+                                        <a href='{{ selectedTopic.related_videos[0] }}' target="_blank">
                                             {{ selectedTopic.related_videos[0] | verifyData }}
                                         </a>
                                     </div>
@@ -26,7 +26,7 @@
                                     <table class="table table-striped mb-0">
                                         <tbody>
                                             <tr class="bg-theme">
-                                                <th>{{ 'TOPIC' | translate}}</th>
+                                                <th>{{ 'TOPIC' | translate }}</th>
                                             </tr>
                                             <tr *ngFor="let topic of topics;let i = index">
                                                 <td>
@@ -80,31 +80,32 @@
                 <form role="form" (ngSubmit)="updateTopic()" [formGroup]="editTopicForm" id="editTopicForm">
                     <div class="form-group mb-0">
                         <label for="name">{{ 'TOPIC_NAME' | translate }} *</label>
-                        <input type="text" class="form-control" id="name" formControlName="name" placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="name" 
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="name">{{ 'KEYWORDS' | translate }} *</label>
-                        <input type="text" class="form-control" id="keywords" formControlName="keywords" placeholder="{{ 'ENTER_KEYWORDS' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="keywords" 
+                        placeholder="{{ 'ENTER_KEYWORDS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('keywords')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
                         <label for="name">{{ 'RELATED_VIDEOS' | translate }} *</label>
-                        <input type="text" class="form-control" id="related_videos" formControlName="related_videos" placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
+                        <input type="text" class="form-control" formControlName="related_videos" 
+                        placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group">
                         <label for="customFile">{{ 'VIDEO_1' | translate }}</label>
-                        <div>
-                            <input type="file" (change)="onFileChange($event,'video1')"
-                            accept="video/*">
-                        </div>
+                        <input type="file" (change)="onFileChange($event,'video1')" accept="video/*" 
+                        required>
                     </div>
                     <div class="form-group">
                         <label for="customFile">{{ 'VIDEO_2' | translate }}</label>
                         <div>
-                            <input type="file" (change)="onFileChange($event,'video2')"
-                            accept="video/*">
+                            <input type="file" (change)="onFileChange($event,'video2')" accept="video/*"
+                            required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editTopicForm.valid">
