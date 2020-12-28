@@ -74,7 +74,8 @@ export class Constants {
     STUDENT_SEARCH_LIST_URL = this.STUDENT_URL + 'search/';
     STUDENT_PROFILE_UPDATE_URL = this.STUDENT_URL + 'update-profile'; 
     STUDENT_RECENT_VIDEOS_LIST_URL = this.STUDENT_URL + 'recent-videos'; 
-
+    SEND_OTP_URL = this.STUDENT_URL + 'otp'; 
+    VERIFY_OTP_URL = this.STUDENT_URL + 'verify-otp'; 
 
     FACULTY_SUBJECTS_LIST_URL = this.ADMIN_URL + 'faculty-subjects';
     FACULTY_QUESTIONS_LIST_URL = this.ADMIN_URL + 'subject-questions/';

@@ -25,6 +25,7 @@
     "FEATURE_ADDED_SUCCESSFULLY" : "{{ value }} added successfully",
     "FEATURE_UPDATED_SUCCESSFULLY" : "{{ value }} updated successfully",
     "FEATURE_DELETED_SUCCESSFULLY" : "{{ value }} deleted successfully",
+    "FEATURE_CREATED_SUCCESSFULLY" : "{{ value }} created successfully",
     "NO_DATA_FOUND_MESSAGE1" : "No {{ value }} found.",
     "MORE_INFO" : "More Info",
     "YEAR" : "Year",
@@ -68,6 +69,12 @@
     "LOGOUT_MESSAGE1" : "Are you sure?",
     "LOGOUT_MESSAGE2" : "You want to logout from Rewind",
     "YES" : "Yes",
+    "CONFIRM_PASSWORD" : "Confirm Password",
+    "OTP_SENT_SUCCESSFULLY" : "OTP sent successfully!",
+    "SEND_OTP" : "Send OTP",
+    "RESEND_OTP" : "Resend OTP",
+    "PASSWORD_DOES_NOT_MATCH" : "Password does not match!",
+    "NEXT" : "Next",
 
     "HOME" : "Home",
     "DASHBOARD" : "Dashboard",
@@ -147,6 +154,7 @@
     "PROFILE" : "Profile",
     "PROFILE_PICTURE" : "Profile Picture",
     "UPDATE_PROFILE" : "Update Profile",
+    "PROFILE_CREATED_SUCCESSFULLY" : "Profile created successfully",
 
     "RECENT_VIDEOS" : "Recent Videos",
 

@@ -21,4 +21,17 @@ export class AlertService {
             allowOutsideClick: true
 		});
 	};
+
+	showSuccess(alertMessage, title?: string) {
+		return swal.fire({
+			title: title ? title : this._translate.instant('SUCCESS'),
+			text: alertMessage,
+			icon: 'success',
+			confirmButtonColor: '#7d4acb',
+			confirmButtonText: this._translate.instant('OK'),
+			showConfirmButton: true,
+			showCancelButton: false,
+            allowOutsideClick: true
+		});
+	};
 }
