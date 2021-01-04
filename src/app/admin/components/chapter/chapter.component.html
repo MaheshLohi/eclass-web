@@ -184,16 +184,12 @@
                                                 placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
                                             </div>
                                             <app-form-validator [data]="validateForm('related_videos',2)"></app-form-validator>
-                                            <div class="form-group">
-                                                <label for="video1">{{ 'VIDEO_1' | translate }} *</label><br/>
-                                                <input type="file" (change)="onFileChange($event,'video1',2)" accept="video/*"
-                                                required>
+                                            <div class="form-group mb-0">
+                                                <label for="name">{{ 'VIDEO_ID' | translate }} *</label>
+                                                <input type="text" class="form-control" formControlName="video_id" 
+                                                placeholder="{{ 'VIDEO_ID' | translate }}" required>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="video2">{{ 'VIDEO_2' | translate }} *</label><br/>
-                                                <input type="file" (change)="onFileChange($event,'video2',2)" accept="video/*"
-                                                required>
-                                            </div>
+                                            <app-form-validator [data]="validateForm('video_id',2)"></app-form-validator>
                                             <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddTopicFeatureForm()">
                                                 <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
                                             </button>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import * as _ from "lodash";
+import Player from '@vimeo/player';
 
 import { Constants } from '@app/constants';
 import { DownloadService } from '@sharedServices/download/download.service';
@@ -21,9 +22,10 @@ export class StudentTopicComponent implements OnInit {
 	topicsDataStatus : number = 2;
 	topics : any = [];
 	selectedTopic : any = {};
-	videoUrl : string;
 	chapterDetails : any = {};
 	queryParams : any = {};
+	player : any;
+    playerOptions : any = {};
 
 	constructor(public _constants: Constants,
 	public _download: DownloadService,
@@ -64,10 +66,10 @@ export class StudentTopicComponent implements OnInit {
 			this.topics = response.chapter_details.data;
 			if(this.queryParams.topicId) {
 				let index = _.findIndex(this.topics, { id: parseInt(this.queryParams.topicId)});
-				this.selectTopic((index > -1)? this.topics[index] : this.topics[0]);
+				this.prepareVimeoPlayer((index > -1)? this.topics[index] : this.topics[0]);
 			}
 			else {
-				this.selectTopic(this.topics[0]);
+				this.prepareVimeoPlayer(this.topics[0]);
 			}
 		}, (errorCode) => {
 			this._loader.hideLoader();
@@ -75,12 +77,33 @@ export class StudentTopicComponent implements OnInit {
 		});
 	};
 
-	selectTopic(topic) {
+	prepareVimeoPlayer(topic) {
 		this.selectedTopic = topic; 
-		let videoBasePath = JSON.parse(topic.video);
-		this.videoUrl = this._constants.DOMAIN_URL + videoBasePath.video_path['480'];
 		this.changeRouteParams();
+        this.player = new Player('vimeo-player', {
+            id: this.selectedTopic.vimeo_id,
+            loop: true, responsive : true,
+            portrait : true, title : false,
+            autoplay : true
+        });
+    };
+
+	selectTopic(topic) {
+		if(topic !== this.selectedTopic) {
+            this.selectedTopic = topic; 
+			this.changeRouteParams();
+			this.changeVimeoSource();
+        }
 	};
+
+	changeVimeoSource() {
+        this.player.loadVideo(this.selectedTopic.vimeo_id)
+        .then(function() {
+			console.log("Video src updated");
+        }).catch(function() {
+            console.log("Video src cannot be updated");
+        });
+    };
 
 	changeRouteParams() {
 		let data = {};

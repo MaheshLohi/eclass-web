@@ -1,7 +1,7 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
     <app-admin-sidebar></app-admin-sidebar>
-    <div class="content-wrapper" *ngIf="topicsDataStatus === 1">
+    <div class="content-wrapper" [hidden]="topicsDataStatus !== 1">
         <app-breadcrumb [title]="'TOPICS'"></app-breadcrumb>
         <section class="content">
             <div class="container-fluid">
@@ -10,8 +10,7 @@
                         <div class="card card-primary card-outline">
                             <div class="card-body row">
                                 <div class="col-lg-6">
-                                    <video src="{{ videoUrl }}" width="99%" height="400px" controls class="video-player" autoplay>
-                                    </video>
+                                    <div id="vimeo-player"></div>
                                     <div class="pt-2">
                                         <div class="topic-title mb-2">
                                             <b>{{ selectedTopic.name }}</b>
@@ -96,18 +95,12 @@
                         placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
-                    <div class="form-group">
-                        <label for="video1">{{ 'VIDEO_1' | translate }}</label>
-                        <input type="file" (change)="onFileChange($event,'video1')" accept="video/*" 
-                        required>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'VIDEO_ID' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="video_id" 
+                        placeholder="{{ 'VIDEO_ID' | translate }}" required>
                     </div>
-                    <div class="form-group">
-                        <label for="video2">{{ 'VIDEO_2' | translate }}</label>
-                        <div>
-                            <input type="file" (change)="onFileChange($event,'video2')" accept="video/*"
-                            required>
-                        </div>
-                    </div>
+                    <app-form-validator [data]="validateUpdateTopicFormValue('video_id')"></app-form-validator>
                     <button type="submit" class="btn btn-theme-primary" [disabled]="!editTopicForm.valid">
                         <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
                     </button>

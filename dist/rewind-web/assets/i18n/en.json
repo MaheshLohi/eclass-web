@@ -75,6 +75,7 @@
     "RESEND_OTP" : "Resend OTP",
     "PASSWORD_DOES_NOT_MATCH" : "Password does not match!",
     "NEXT" : "Next",
+    "VIDEO_ID" : "Video ID",
 
     "HOME" : "Home",
     "DASHBOARD" : "Dashboard",

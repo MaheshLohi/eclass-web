@@ -38,8 +38,7 @@ export class AdminChapterService {
 
 	addTopic(topicFormData) {
 		const formData = new FormData();
-		formData.append('video1', topicFormData.video1);
-		formData.append('video2', topicFormData.video2);
+		formData.append('video_id', topicFormData.video_id);
 		formData.append('topic', topicFormData.name);
 		formData.append('keywords', topicFormData.keywords);
 		formData.append('related_videos', topicFormData.related_videos);

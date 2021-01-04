@@ -58,8 +58,7 @@ export class AdminChapterComponent implements OnInit {
 		this.addTopicForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'chapter_id' : new FormControl(null, []),
-			'video1' : new FormControl("", [Validators.required]),
-			'video2' : new FormControl("", [Validators.required]),
+			'video_id' : new FormControl("", []),
 			'keywords' : new FormControl("", []),
 			'related_videos' : new FormControl("", [])
 		});
