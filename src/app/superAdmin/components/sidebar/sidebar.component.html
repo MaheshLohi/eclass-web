@@ -15,7 +15,7 @@
         <nav>
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <li class="nav-item" *ngFor="let sidemenu of sidemenus">
-                    <a routerLink="{{ sidemenu.link }}" routerLinkActive="active" class="nav-link">
+                    <a routerLink="{{ sidemenu.link }}" routerLinkActive="active" class="nav-link" (click)="minimizeSidemenu()">
                         <i class="nav-icon" [ngClass]="sidemenu.icon"></i>&nbsp;
                         <p>{{ sidemenu.name | translate }}</p>
                     </a>

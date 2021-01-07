@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+declare var $: any;
 
 import { Constants } from 'src/app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
@@ -14,10 +15,16 @@ export class AdminSidebarComponent implements OnInit {
 	userType : string;
 	sidemenus : any = [];
 	userDetails : any = {};
+	width : number = window.innerWidth;
 
 	constructor(public _constants: Constants,
 	private _storage: StorageService,
 	public _miscellaneous : MiscellaneousService) {};
+
+	@HostListener('window:resize')
+	onResize() {
+		this.width = window.innerWidth;
+	};
 
  	ngOnInit() {
 		this.userType = this._constants.ADMIN;
@@ -57,5 +64,12 @@ export class AdminSidebarComponent implements OnInit {
 			icon : "fas fa-chalkboard-teacher",
 			link : '/'+ this.userType +"/faculties"
 		}];
-  	};
+	};
+	  
+	minimizeSidemenu() {
+		if(this.width <= 768) {
+			$('body').removeClass('sidebar-open');
+			$('body').addClass('sidebar-collapse');
+		}
+	};
 }

@@ -6,48 +6,46 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row"> 
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <div class="col-12 row">
-                                    <form class="col-9 row" role="form" [formGroup]="filterForm">
-                                        <div class="col-4">
-                                            <select class="custom-select form-control" formControlName="department_id" 
-                                            (change)="getSubjectsData()" required>
-                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
-                                                <option *ngFor="let department of departments" [ngValue]="department.id">
-                                                    {{ department.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <select class="custom-select form-control" formControlName="inst_class_id" 
-                                            (change)="getSubjectsData()" required>
-                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
-                                                <option *ngFor="let semester of semesters" [ngValue]="semester.id">
-                                                    {{ 'SEMESTER' | translate }} {{ semester.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-4">
-                                            <select class="custom-select form-control" formControlName="subject_id" 
-                                            (change)="getChapters()" required>
-                                                <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate }}</option>
-                                                <option *ngFor="let subject of subjects" [ngValue]="subject.id">
-                                                    {{ subject.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                    <div class="col-3 card-tools text-right">
+                                <form class="col-lg-12 row" role="form" [formGroup]="filterForm">
+                                    <div class="col-lg-3 p-1">
+                                        <select class="custom-select form-control" formControlName="department_id" 
+                                        (change)="getSubjectsData()" required>
+                                            <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
+                                            <option *ngFor="let department of departments" [ngValue]="department.id">
+                                                {{ department.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 p-1">
+                                        <select class="custom-select form-control" formControlName="inst_class_id" 
+                                        (change)="getSubjectsData()" required>
+                                            <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
+                                            <option *ngFor="let semester of semesters" [ngValue]="semester.id">
+                                                {{ 'SEMESTER' | translate }} {{ semester.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 p-1">
+                                        <select class="custom-select form-control" formControlName="subject_id" 
+                                        (change)="getChapters()" required>
+                                            <option [value]=null selected disabled>{{ 'SELECT_SUBJECT' | translate }}</option>
+                                            <option *ngFor="let subject of subjects" [ngValue]="subject.id">
+                                                {{ subject.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-3 p-1 text-right">
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" 
                                         *ngIf="showAddFeature === false" [disabled]="!this.filterForm.valid">
                                             <i class="fa fa-plus"></i> {{ 'ADD_CHAPTER' | translate }}
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                            <div class="card-body" *ngIf="showAddFeature === false && chaptersDataStatus != 2">
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && chaptersDataStatus != 2">
                                 <div class="col-lg-12" *ngIf="chaptersDataStatus === 1">
                                     <table class="table table-striped">
                                         <tbody>
@@ -68,11 +66,11 @@
                                                 </td>
                                                 <td>{{ chapter.description | verifyData }}</td>
                                                 <td>
-                                                    <button class="btn btn-theme-primary btn-sm mr-1"
+                                                    <button class="btn btn-theme-primary btn-sm mr-1 mb-1"
                                                     (click)="navigateToTopics(chapter)" *ngIf="chapter.chapter_details.data.length">
                                                         <i class="pr-1 fa fa-eye"></i> {{ 'VIEW_TOPICS' | translate }}
                                                     </button>
-                                                    <button class="btn btn-theme-primary btn-sm"
+                                                    <button class="btn btn-theme-primary btn-sm mb-1"
                                                     (click)="addTopics(chapter)">
                                                         <i class="fa fa-plus"></i> 
                                                         <span *ngIf="!chapter.chapter_details.data.length"> {{ 'ADD_TOPIC' | translate }} </span>

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+declare var $: any;
 
 import { Constants } from 'src/app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
@@ -13,9 +14,15 @@ export class SuperAdminSidebarComponent implements OnInit {
 	userType : string;
 	sidemenus : any = [];
 	userDetails : any = {};
+	width : number = window.innerWidth;
 
 	constructor(private _constants: Constants,
 	private _storage: StorageService) {};
+
+	@HostListener('window:resize')
+	onResize() {
+		this.width = window.innerWidth;
+	};
 
  	ngOnInit() {
 		this.userType = this._constants.SUPER_ADMIN;
@@ -35,5 +42,12 @@ export class SuperAdminSidebarComponent implements OnInit {
 			icon : "fas fa-chalkboard-teacher",
 			link : '/'+ this.userType +"/admins"
 		}];
-  	};
+	};
+	  
+	minimizeSidemenu() {
+		if(this.width <= 768) {
+			$('body').removeClass('sidebar-open');
+			$('body').addClass('sidebar-collapse');
+		}
+	};
 }

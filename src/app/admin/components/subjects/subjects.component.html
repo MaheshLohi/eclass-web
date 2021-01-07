@@ -6,31 +6,29 @@
         <section class="content">
             <div class="container-fluid">
                 <div class="row"> 
-                    <div class="col-12">
+                    <div class="col-lg-12">
                         <div class="card card-primary card-outline">
                             <div class="card-header">
-                                <div class="col-12 row">
-                                    <form class="col-8 row" role="form" [formGroup]="filterForm">
-                                        <div class="col-6">
-                                            <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
-                                            (change)="getSubjectsData()" *ngIf="filterDataStatus">
-                                                <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
-                                                <option *ngFor="let department of departments" [ngValue]="department.id">
-                                                    {{ department.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6">
-                                            <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
-                                            (change)="getSubjectsData()" *ngIf="filterDataStatus">
-                                                <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
-                                                <option *ngFor="let semester of semesters" [ngValue]="semester.id">
-                                                    {{ 'SEMESTER' | translate }} {{ semester.name }}
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </form>
-                                    <div class="col-4 card-tools text-right">
+                                <form class="col-lg-12 row" role="form" [formGroup]="filterForm">
+                                    <div class="col-lg-4 p-1">
+                                        <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
+                                        (change)="getSubjectsData()" *ngIf="filterDataStatus">
+                                            <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
+                                            <option *ngFor="let department of departments" [ngValue]="department.id">
+                                                {{ department.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 p-1">
+                                        <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
+                                        (change)="getSubjectsData()" *ngIf="filterDataStatus">
+                                            <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
+                                            <option *ngFor="let semester of semesters" [ngValue]="semester.id">
+                                                {{ 'SEMESTER' | translate }} {{ semester.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 p-1 text-right">
                                         <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
                                             <i class="fa fa-plus"></i> {{ 'ADD_DEPARTMENTS_AND_SUBJECTS' | translate }}
                                         </button>
@@ -38,9 +36,9 @@
                                             <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate }}
                                         </button>
                                     </div>
-                                </div>
+                                </form>
                             </div>
-                            <div class="card-body" *ngIf="showAddFeature === false && subjectsDataStatus != 2">
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && subjectsDataStatus != 2">
                                 <div class="col-lg-12" *ngIf="subjectsDataStatus === 1">
                                     <table class="table table-striped">
                                         <tbody>

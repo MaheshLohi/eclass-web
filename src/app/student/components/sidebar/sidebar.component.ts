@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+declare var $: any;
 
 import { Constants } from 'src/app/constants';
 import { MiscellaneousService } from '@app/shared/services/miscellaneous/miscellaneous.service';
@@ -14,10 +15,16 @@ export class StudentSidebarComponent implements OnInit {
 	userType : string;
 	sidemenus : any = [];
 	userDetails : any = {};
+	width : number = window.innerWidth;
 
 	constructor(public _constants: Constants,
 	public _miscellaneous : MiscellaneousService,
 	private _storage: StorageService) {};
+
+	@HostListener('window:resize')
+	onResize() {
+		this.width = window.innerWidth;
+	};
 
  	ngOnInit() {
 		this.userType = this._constants.STUDENT;
@@ -51,5 +58,12 @@ export class StudentSidebarComponent implements OnInit {
 			icon : "fa fa-user",
 			link : '/'+ this.userType +'/profile'
 		}];
-  	};
+	};
+	  
+	minimizeSidemenu() {
+		if(this.width <= 768) {
+			$('body').removeClass('sidebar-open');
+			$('body').addClass('sidebar-collapse');
+		}
+	};
 }

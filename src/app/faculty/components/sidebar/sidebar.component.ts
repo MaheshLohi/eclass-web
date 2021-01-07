@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
+declare var $: any;
 
 import { Constants } from 'src/app/constants';
 import { StorageService } from '@sharedServices/storage/storage.service';
@@ -14,10 +15,16 @@ export class FacultySidebarComponent implements OnInit {
   	userType : string;
 	sidemenus : any = [];
 	userDetails : any = {};
+	width : number = window.innerWidth;
 
 	constructor(public _constants: Constants,
 	public _miscellaneous : MiscellaneousService,
 	private _storage: StorageService) {};
+
+	@HostListener('window:resize')
+	onResize() {
+		this.width = window.innerWidth;
+	};
 
 	ngOnInit() {
 		this.userType = this._constants.FACULTY;
@@ -31,6 +38,13 @@ export class FacultySidebarComponent implements OnInit {
 			icon : "fa fa-question-circle",
 			link : '/'+ this.userType +'/subjects'
 		}];
-  	};
+	};
+	  
+	minimizeSidemenu() {
+		if(this.width <= 768) {
+			$('body').removeClass('sidebar-open');
+			$('body').addClass('sidebar-collapse');
+		}
+	};
 
 }

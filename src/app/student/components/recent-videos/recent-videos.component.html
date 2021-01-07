@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <h3 class="pb-2 text-dark">{{ 'RECENT_VIDEOS' | translate }}</h3>
             <section class="row">
-                <div class="col-lg-3 col-md-4 col-12 mt-1" *ngFor="let video of recentVideos">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-1" *ngFor="let video of recentVideos">
                     <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(video)">
                         <div class="card-body p-2">
                             <div class="img-container">
