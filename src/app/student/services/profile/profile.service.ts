@@ -44,6 +44,7 @@ export class StudentProfileService {
 		formData.append('name', profileFormValue.name);
 		formData.append('phone_number', profileFormValue.phone_number);
 		formData.append('email', profileFormValue.email);
+		formData.append('inst_class_id', profileFormValue.semester_id)
 		return this.http.post<any>(this.constants.STUDENT_PROFILE_UPDATE_URL, formData);
 	};
 }

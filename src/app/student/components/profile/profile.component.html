@@ -65,6 +65,23 @@
                         formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
                     </div>
                     <app-form-validator [data]="validateProfileEditFormValue('phone_number')"></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'SEMESTER' | translate }} *</label>
+                        <select class="custom-select form-control" formControlName="semester_id" 
+                        [hidden]="semestersDataStatus != 1" required>
+                            <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
+                            <option *ngFor="let semester of semesters" [ngValue]="semester.id">
+                                {{ 'SEMESTER' | translate }} {{ semester.name }}
+                            </option>
+                        </select>
+                        <div class="error-message" *ngIf="semestersDataStatus === 0">
+                            {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('SEMESTER' | translate) } }}
+                        </div>
+                        <div class="error-message" *ngIf="semestersDataStatus === 3">
+                            {{ 'STANDARD_ERROR' | translate }}
+                        </div>
+                    </div>
+                    <app-form-validator [data]="validateProfileEditFormValue('semester_id')"></app-form-validator>
                     <div class="form-group">
                         <label for="password">{{ 'PASSWORD' | translate }}</label>
                         <input type="password" class="form-control" name="password" 
