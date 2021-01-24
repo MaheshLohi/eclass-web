@@ -9,7 +9,7 @@ export class Constants {
     ENCRYPTION_KEY = "Rewind";
 
     STUDENT_CSV_CONTENTS = ["USN","Password"];
-    FACULTY_CSV_CONTENTS = ["Name","Password"];
+    FACULTY_CSV_CONTENTS = ["Name","Email","Password"];
 
     SUPER_ADMIN = "superAdmin";
     ADMIN = "admin";

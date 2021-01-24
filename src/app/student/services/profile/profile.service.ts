@@ -41,6 +41,7 @@ export class StudentProfileService {
 		const formData = new FormData();
 		if(profileFormValue.profile_pic) { formData.append('profile_pic', profileFormValue.profile_pic); }
 		if(profileFormValue.password) { formData.append('password', profileFormValue.password); }
+		if(profileFormValue.confirm_password) { formData.append('confirm_password', profileFormValue.confirm_password); }
 		formData.append('name', profileFormValue.name);
 		formData.append('phone_number', profileFormValue.phone_number);
 		formData.append('email', profileFormValue.email);

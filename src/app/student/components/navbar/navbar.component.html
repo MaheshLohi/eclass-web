@@ -5,7 +5,12 @@
 				<i class="fas fa-bars"></i>
 			</a>
 		</li>
-		<li class="nav-item custom-search-navbar ml-5">
+		<li class="nav-item search-icon" (click)="navigateToSearch()">
+        	<a class="nav-link" role="button">
+				<i class="fa fa-search"></i>
+			</a>
+		</li>
+		<li class="nav-item custom-search-navbar ml-lg-5">
 			<div class="input-group" *ngIf="showSearhBar">
 				<form name="searchForm" class="w-100" (submit)="navigateToSearch()">
 					<input type="search" [(ngModel)]="searchString" [ngModelOptions]="{ standalone: true }" 
@@ -16,8 +21,8 @@
 	</ul>
 	<ul class="navbar-nav ml-auto">
 		<li class="nav-item">
-			<form class="form-inline ml-3" *ngIf="showSemesterDropdown && semestersDataStatus === 1">
-				<div class="form-group">
+			<form class="form-inline ml-lg-3 mt-1 mt-lg-0" *ngIf="showSemesterDropdown && semestersDataStatus === 1">
+				<div class="form-group mb-0">
 					<select class="custom-select selector-medium sem-dropdown" [(ngModel)] ="selectSemesterId" 
 					[ngModelOptions]="{standalone: true}" (change)="onSemesterSelection(selectSemesterId)">
 						<option *ngFor="let semester of semesters" [value]="semester.id">{{ 'SEMESTER' | translate }} {{ semester.name }}</option>

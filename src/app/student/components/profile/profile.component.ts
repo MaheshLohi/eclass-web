@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 declare var $: any; 
 
@@ -33,16 +33,33 @@ export class StudentProfileComponent implements OnInit {
 	public miscellaneousService : MiscellaneousService,
 	private _semester: StudentSemesterService,
 	private toaster: ToasterService,
-	private _storage: StorageService) { 
+	private _storage: StorageService,
+	public _fb: FormBuilder) { 
 		this.editProfileForm = new FormGroup({
-			'name' : new FormControl("", [Validators.minLength(3)]),
-			'phone_number' : new FormControl("", []),
-			'email' : new FormControl("", []),
-			'profile_pic' : new FormControl("", []),
-			'password' : new FormControl("", []),
-			'semester_id' : new FormControl("", [])
+			'name' : new FormControl(),
+			'phone_number' : new FormControl(),
+			'email' : new FormControl(),
+			'profile_pic' : new FormControl(),
+			'password' : new FormControl(),
+			'confirm_password' : new FormControl(),
+			'semester_id' : new FormControl()
 		});
+		this.editProfileForm = _fb.group({
+			name : ['', Validators.compose([Validators.minLength(3)])],
+			phone_number : [],
+			email : [],
+			profile_pic : [],
+			password : ['', Validators.compose([Validators.minLength(6)])],
+			confirm_password : ['', Validators.compose([Validators.minLength(6)])],
+			semester_id : []
+		}, { validator: this.checkPasswords });
 	}
+
+	checkPasswords(group: FormGroup) {
+		const password = group.controls.password.value;
+		const confirmPassword = group.controls.confirm_password.value;
+		return password === confirmPassword ? null : { passwordNotSame: true };
+ 	};
 
   	ngOnInit() {
 		this.getProfileDetails();
