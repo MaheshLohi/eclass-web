@@ -23,6 +23,8 @@ export class Constants {
 
     ADMIN_URL = this.BASE_URL + "admin/";
     STUDENT_URL = this.BASE_URL + "student/";
+
+    SUPER_ADMIN_DASHBOARD_LIST_URL = this.ADMIN_URL + 'super-admin-dashboard';
     
     ADD_INSTITUTE_URL = this.ADMIN_URL + 'add-institute';
     ADMINS_LIST_URL = this.ADMIN_URL + 'inst-admin';

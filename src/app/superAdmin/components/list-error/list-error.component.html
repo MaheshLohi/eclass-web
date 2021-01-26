@@ -15,6 +15,9 @@
                 {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('ADMINS' | translate) } }}<br/> 
                 {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('ADMINS' | translate) } }}
             </span>
+            <span *ngIf="errorId === 2">
+                {{ 'DASHBOARD_ERROR' | translate }}
+            </span>
         </div>
         <div class="message" *ngIf="errorCode === 3"> 
             <span>
