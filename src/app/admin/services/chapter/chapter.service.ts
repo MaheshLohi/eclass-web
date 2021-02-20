@@ -28,7 +28,9 @@ export class AdminChapterService {
 	  
 	addChapter(filterData, addFormValue) : Observable<any> {
 		const formData = new FormData();
-		formData.append('notes', addFormValue.notes);
+		if(addFormValue.notes) {
+			formData.append('notes', addFormValue.notes);
+		}
 		formData.append('thumbnail', addFormValue.thumbnail);
 		formData.append('name', addFormValue.name);
 		formData.append('subject_id', filterData.subject_id);
@@ -40,8 +42,12 @@ export class AdminChapterService {
 		const formData = new FormData();
 		formData.append('video_id', topicFormData.video_id);
 		formData.append('topic', topicFormData.name);
-		formData.append('keywords', topicFormData.keywords);
-		formData.append('related_videos', topicFormData.related_videos);
+		if(topicFormData.keywords) {
+			formData.append('keywords', topicFormData.keywords);
+		}
+		if(topicFormData.related_videos) {
+			formData.append('related_videos', topicFormData.related_videos);
+		}
 		formData.append('chapter_id', topicFormData.chapter_id);
 		return this.http.post<any>(this.constants.ADD_TOPIC_URL, formData);
 	}

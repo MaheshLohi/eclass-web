@@ -84,15 +84,15 @@
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'KEYWORDS' | translate }} *</label>
+                        <label for="name">{{ 'KEYWORDS' | translate }}</label>
                         <input type="text" class="form-control" formControlName="keywords" 
-                        placeholder="{{ 'ENTER_KEYWORDS' | translate }}" required>
+                        placeholder="{{ 'ENTER_KEYWORDS' | translate }}">
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('keywords')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">
-                        <label for="name">{{ 'RELATED_VIDEOS' | translate }} *</label>
+                        <label for="name">{{ 'RELATED_VIDEOS' | translate }}</label>
                         <input type="text" class="form-control" formControlName="related_videos" 
-                        placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}" required>
+                        placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}">
                     </div>
                     <app-form-validator [data]="validateUpdateTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
                     <div class="form-group mb-0">

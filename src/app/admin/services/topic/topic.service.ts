@@ -33,8 +33,12 @@ export class AdminTopicService {
 		const formData = new FormData();
 		formData.append('topic', topicFormData.name);
 		formData.append('video_id', topicFormData.video_id);
-		formData.append('keywords', topicFormData.keywords);
-		formData.append('related_videos', topicFormData.related_videos);
+		if(topicFormData.keywords) {
+			formData.append('keywords', topicFormData.keywords);
+		}
+		if(topicFormData.related_videos) {
+			formData.append('related_videos', topicFormData.related_videos);
+		}
 		formData.append('chapter_details_id', topicFormData.chapter_details_id);
 		return this.http.post<any>(this.constants.UPDATE_TOPIC_URL, formData);
 	}

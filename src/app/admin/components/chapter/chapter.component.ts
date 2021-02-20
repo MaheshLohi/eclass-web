@@ -52,7 +52,7 @@ export class AdminChapterComponent implements OnInit {
 		this.addChapterForm = new FormGroup({
 			'name' : new FormControl("", [Validators.minLength(3)]),
 			'description' : new FormControl("", []),
-			'notes' : new FormControl("", [Validators.required]),
+			'notes' : new FormControl("", []),
 			'thumbnail' : new FormControl("", [Validators.required])
 		});
 		this.addTopicForm = new FormGroup({
