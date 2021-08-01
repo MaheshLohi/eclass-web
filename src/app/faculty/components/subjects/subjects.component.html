@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-faculty-sidebar></app-faculty-sidebar>
+    <div class="content-wrapper">
+      	<section class="content">
+          	<div class="col-md-12 pt-4">
+				<section class="row" *ngIf="subjectsListStatus === 1">
+                    <div class="col-lg-3 col-12 mt-1" *ngFor="let subject of subjectsList">
+                        <div class="card card-widget mb-3 custom-card" (click)="onSubjectSelection(subject)">
+                            <div class="card-body p-2">
+                                <div class="img-container">
+                                    <img class="img-fluid br-4" [src]='_constants.DOMAIN_URL + subject.bg_image' 
+                                    (error)="_miscellaneous.setDefaultThumbnailImage($event)">
+                                </div>
+                                <div class="card-header-portion">
+                                    {{ subject.code }}
+                                    <button class="btn btn-theme-primary float-right btn-sm"
+                                    (click)="_download.download(subject.sylabus_copy, $event)" *ngIf="subject.sylabus_copy">
+                                        <i class="pr-1 fa fa-download"></i> {{ 'SYLLABUS' | translate }}
+                                    </button>
+                                </div>
+                                <div class="card-header-title">
+                                    {{ subject.name }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <app-faculty-list-error [errorId]=0 [errorCode]="subjectsListStatus" *ngIf="subjectsListStatus === 0 || subjectsListStatus === 3">
+                </app-faculty-list-error>
+          	</div>
+		</section>
+    </div>
+    <app-footer></app-footer>
+</div>

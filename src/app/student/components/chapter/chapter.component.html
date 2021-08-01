@@ -1,0 +1,26 @@
+
+<section class="content col-12 row p-4" *ngIf="chaptersDataStatus === 1">
+    <div class="col-lg-4 col-md-4 col-sm-6 col-12 mt-1" *ngFor="let chapter of chapters">
+        <div class="card card-widget mb-3 custom-card">
+            <div class="card-body p-2" (click)="navigateToTopics(chapter)">
+                <div class="img-container ctmimg-wdt">
+                    <img class="img-fluid br-4" [src]='this._constants.DOMAIN_URL + chapter.thumbnail' 
+                    (error)="_miscellaneous.setDefaultThumbnailImage($event)">
+                </div>
+                <div class="card-header-portion">
+                    {{ subjectDetails.code | verifyData }}
+                    <button class="btn btn-theme-primary float-right btn-sm"
+                    (click)="_download.download(chapter.notes, $event)" *ngIf="chapter.notes">
+                        <i class="pr-1 fa fa-download"></i> {{ 'NOTES' | translate }}
+                    </button>
+                </div>
+                <div class="card-header-title">
+                    {{ chapter.name | verifyData }}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-student-list-error [errorId]=1 [errorCode]="chaptersDataStatus" 
+*ngIf="chaptersDataStatus === 0 || chaptersDataStatus === 3">
+</app-student-list-error>

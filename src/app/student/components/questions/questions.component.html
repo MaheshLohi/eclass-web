@@ -1,0 +1,20 @@
+<form role="form" (ngSubmit)="addQuestion()" [formGroup]="addDataForm">
+    <div class="form-group">
+        <label>{{ 'QUESTION' | translate }} *</label>
+        <textarea class="form-control" formControlName="question" 
+        placeholder="{{ 'ENTER_QUESTION' | translate }}" required></textarea>
+    </div>
+    <app-form-validator [data]="validateAddFormValue('question')" [validateNameMinLength]=true></app-form-validator>
+    <button type="submit" class="btn btn-theme-primary mb-3" [disabled]="disableAddFeatureForm()">
+        <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+    </button>
+</form>
+<div *ngIf="questionsDataStatus === 1" class="questions-list">
+    <b>{{ 'QUESTIONS' | translate }}</b><br/><br/>
+    <div *ngFor="let question of questions">
+        <div class="callout callout-info">
+            <b>{{ question.question }}</b>
+            <p>{{ question.answer| verifyData }}</p>
+        </div>
+    </div>
+</div>

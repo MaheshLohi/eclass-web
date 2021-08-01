@@ -1,0 +1,208 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper">
+        <app-breadcrumb [title]="'SUBJECTS'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-lg-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <form class="col-lg-12 row" role="form" [formGroup]="filterForm">
+                                    <div class="col-lg-4 p-1">
+                                        <select class="custom-select form-control select2" id="department_id" formControlName="department_id" required
+                                        (change)="getSubjectsData()" *ngIf="filterDataStatus">
+                                            <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
+                                            <option *ngFor="let department of departments" [ngValue]="department.id">
+                                                {{ department.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 p-1">
+                                        <select class="custom-select form-control select2" id="inst_class_id" formControlName="inst_class_id" required
+                                        (change)="getSubjectsData()" *ngIf="filterDataStatus">
+                                            <option [value]=null selected disabled>{{ 'SELECT_SEMESTER' | translate }}</option>
+                                            <option *ngFor="let semester of semesters" [ngValue]="semester.id">
+                                                {{ 'SEMESTER' | translate }} {{ semester.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-4 p-1 text-right">
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                            <i class="fa fa-plus"></i> {{ 'ADD_DEPARTMENTS_AND_SUBJECTS' | translate }}
+                                        </button>
+                                        <button type="button" class="btn btn-theme-primary" (click)="downloadService.download('public/storage/subjects.csv')" *ngIf="showAddFeature === true">
+                                            <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && subjectsDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="subjectsDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'SUBJECT_CODE' | translate }}</th>
+                                                <th>{{ 'FACULTY' | translate }}</th>
+                                                <th>{{ 'SYLLABUS' | translate }}</th>
+                                                <th>{{ 'THUMBNAIL' | translate }}</th>
+                                            </tr>
+                                            <tr *ngFor="let subject of subjects;let i = index">
+                                                <td>
+                                                    {{ i + 1 }}
+                                                </td>
+                                                <td>
+                                                    {{ subject.name | verifyData }}
+                                                </td>
+                                                <td>
+                                                    {{ subject.code | verifyData }}
+                                                </td>
+                                                <td *ngIf="subject.faculty">
+                                                    {{ subject.faculty }}
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#assign-faculty'"
+                                                    (click)="initialiseAssignModal(subject,1)">
+                                                        <i class="fas fa-pen"></i>
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="!subject.faculty">
+                                                    <button class="btn btn-theme-primary btn-sm" data-toggle="modal" [attr.data-target]="'#assign-faculty'"
+                                                    (click)="initialiseAssignModal(subject,0)">
+                                                        <i class="fas fa-user-plus"></i> {{ 'ASSIGN' | translate }}
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="subject.syllabus">
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadService.download(subject.syllabus)">
+                                                        <i class="fa fa-download"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    (click)="initialiseModal(0,subject)">
+                                                        <i class="fas fa-pen"></i>
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="!subject.syllabus">
+                                                    <button type="button" class="btn btn-theme-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    (click)="initialiseModal(0,subject)">
+                                                        <i class="pr-1 fa fa-upload"></i> {{ 'UPLOAD' | translate }}
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="subject.bg_image">
+                                                    <button class="btn btn-theme-primary btn-sm" (click)="downloadService.download(subject.bg_image)">
+                                                        <i class="fa fa-download"></i>
+                                                    </button>
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    (click)="initialiseModal(1,subject)">
+                                                        <i class="fas fa-pen"></i>
+                                                    </button>
+                                                </td>
+                                                <td *ngIf="!subject.bg_image">
+                                                    <button type="button" class="btn btn-theme-primary btn-sm" data-toggle="modal" [attr.data-target]="'#upload-files'"
+                                                    (click)="initialiseModal(1,subject)">
+                                                        <i class="pr-1 fa fa-upload"></i> {{ 'UPLOAD' | translate }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <app-admin-list-error [errorId]=5 [errorCode]="subjectsDataStatus" *ngIf="subjectsDataStatus === 0 || subjectsDataStatus === 3">
+                                </app-admin-list-error>
+                            </div>
+                            <app-admin-list-error [errorId]=5 [errorCode]="filterDataStatus" *ngIf="filterDataStatus === 0 || filterDataStatus === 3" [hidden]="showAddFeature === true">
+                            </app-admin-list-error>
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addSubjects()" [formGroup]="addSubjectsForm">
+                                        <div class="form-group">
+                                            <label for="subjects">{{ 'FILE' | translate }}</label><br/>
+                                            <input type="file" (change)="onFileChange($event,'subjects',1)"
+                                            accept=".csv">
+                                        </div>
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+                                        </button>
+                                        <button type="button" class="btn btn-danger ml-2" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal fade" id="upload-files">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" *ngIf="fileType === 0">{{ 'UPLOAD_SYLLABUS' | translate }}</h4>
+                <h4 class="modal-title" *ngIf="fileType === 1">{{ 'UPLOAD_THUMBNAIL' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="uploadSubjectAttachment()" [formGroup]="addAttachmentForm"
+                id="addAttachmentForm">
+                    <div class="form-group mb-4 mt-2">
+                        <label for="attachment" *ngIf="fileType === 0">{{ 'SYLLABUS_FILE' | translate }}</label>
+                        <label for="attachment" *ngIf="fileType === 1">{{ 'THUMBNAIL' | translate }}</label><br/>
+                        <input type="file" (change)="onFileChange($event,'attachment',2)"
+                        [accept]="(fileType === 0)?'.pdf':'image/*'">
+                    </div>
+                    <button class="btn btn-theme-primary"
+                    [disabled]="!this.addAttachmentForm.valid">
+                        <i class="pr-1 fa fa-upload"></i> {{ 'UPLOAD' | translate }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="assign-faculty">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'ASSIGN_FACULTY' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="assignFaculties()" [formGroup]="assignFacultyForm">
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'FACULTY' | translate }} *</label>
+                        <select class="custom-select form-control select2" id="faculty_id" formControlName="faculty_id" [hidden]="facultiesDataStatus != 1" required>
+                            <option [value]=null selected disabled>{{ 'SELECT_FACULTY' | translate }}</option>
+                            <option *ngFor="let faculty of faculties" [ngValue]="faculty.id">
+                                {{ faculty.name }}
+                            </option>
+                        </select>
+                        <div class="error-message" *ngIf="facultiesDataStatus === 0">
+                            {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('DEPARTMENTS' | translate) } }}
+                        </div>
+                        <div class="error-message" *ngIf="facultiesDataStatus === 3">
+                            {{ 'STANDARD_ERROR' | translate }}
+                        </div>
+                    </div>
+                    <app-form-validator [data]="validateAssignFacultyFormValue('faculty_id')"></app-form-validator>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!assignFacultyForm.valid">
+                        <i class="fa fa-plus-circle"></i> {{ (assignFacultyType ? ('UPDATE' | translate) : ('SUBMIT' | translate)) }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

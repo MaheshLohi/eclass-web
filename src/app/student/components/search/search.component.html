@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <app-student-navbar></app-student-navbar>
+    <app-student-sidebar></app-student-sidebar>
+    <div class="content-wrapper">
+        <div class="content col-lg-12 p-4">
+            <form name="searchForm" class="col-lg-8 col-12 m-auto" (submit)="getSearchResults()">
+                <input type="search" [(ngModel)]="searchString" [ngModelOptions]="{ standalone: true }" 
+                class="form-control custom-search-input" placeholder="{{ 'SEARCH_MESSAGE' | translate }}">
+            </form>
+        </div>
+        <section class="content col-lg-12 row p-4" *ngIf="searchResultsDataStatus === 1">
+            <div class="col-lg-3 col-md-4 col-12 mt-1" *ngFor="let result of searchResults">
+                <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(result)">
+                    <div class="card-body p-2">
+                        <div class="img-container">
+                            <img class="img-fluid br-4" [src]='_constants.DOMAIN_URL + result.thumbnail' 
+                            (error)="_miscellaneous.setDefaultThumbnailImage($event)">
+                        </div>
+                        <div class="card-header-title">
+                            {{ result.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <app-student-list-error [errorId]=5 [errorCode]="searchResultsDataStatus" *ngIf="searchResultsDataStatus === 0 || searchResultsDataStatus === 3">
+        </app-student-list-error>
+    </div>
+    <app-footer></app-footer>
+</div>

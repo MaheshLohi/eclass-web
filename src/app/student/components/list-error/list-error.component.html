@@ -1,0 +1,38 @@
+<section class="content">
+    <div class="text-center no-data-container">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+            <span class="swal2-x-mark">
+                <span class="swal2-x-mark-line-left"></span>
+                <span class="swal2-x-mark-line-right"></span>
+            </span>
+        </div>
+        <div class="message" *ngIf="errorCode === 0"> 
+            <span *ngIf="errorId === 0">
+                {{ 'NO_SUBJECTS_FOUND_STUDENT' | translate }}
+            </span> 
+            <span *ngIf="errorId === 1">
+                {{ 'NO_CHAPTERS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 2">
+                {{ 'NO_EXAMINATIONS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 3">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('WISHLISTS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 4">
+                {{ 'NO_TOPICS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 5">
+                {{ 'NO_SEARCH_RESULTS_FOUND_STUDENT' | translate }}
+            </span>
+            <span *ngIf="errorId === 6">
+                {{ 'SUBJECT_DETAILS_NOT_FOUND_STUDENT' | translate }}
+            </span>
+        </div>
+        <div class="message" *ngIf="errorCode === 3"> 
+            <span>
+                {{ 'STANDARD_ERROR' | translate }}
+            </span> 
+        </div>
+    </div>
+</section>

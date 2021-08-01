@@ -1,0 +1,152 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-super-admin-sidebar></app-super-admin-sidebar>
+    <div class="content-wrapper">
+        <app-breadcrumb [title]="'ADMINS'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-lg-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title custom-title">{{ 'ADMINS' | translate }}</h3>
+                                <div class="col-lg-7 card-tools text-right">
+                                    <button type="button" class="btn btn-theme-primary" 
+                                    (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <i class="fa fa-plus"></i> {{ 'ADD_ADMIN' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && adminDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="adminDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'EMAIL_ADDRESS' | translate }}</th>
+                                                <th>{{ 'INSTITUTE_NAME' | translate }}</th>
+                                                <th>{{ 'STATUS' | translate }}</th>
+                                                <th></th>
+                                            </tr>
+                                            <tr *ngFor="let admin of admins;let i = index">
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ admin.name | verifyData }}</td>
+                                                <td>{{ admin.email | verifyData }}</td>
+                                                <td>{{ admin.inst_name | verifyData }}</td>
+                                                <td>
+                                                    <span class="badge bg-danger mr-1">{{ 'INACTIVE' | translate }}</span>
+                                                    <div class="custom-control custom-switch d-inline-block">
+                                                        <input type="checkbox" class="custom-control-input" [(ngModel)]="admin.status" id="{{ admin.name }}" (change)="updateStatus(admin)">
+                                                        <label class="custom-control-label" for="{{ admin.name }}">
+                                                            <span class="badge bg-success">{{ 'ACTIVE' | translate }}</span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" 
+                                                    data-toggle="modal" [attr.data-target]="'#update-admin'"
+                                                    (click)="initiateEditModal(admin)">
+                                                        <i class="fas fa-pen pr-1"></i> {{ 'UPDATE' | translate }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <app-sAdmin-list-error [errorId]=1 [errorCode]="adminDataStatus" *ngIf="adminDataStatus === 0 || adminDataStatus === 3">
+                                </app-sAdmin-list-error>
+                            </div>
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addAdmin()" [formGroup]="addAdminForm">
+                                        <div class="form-group mb-0">
+                                            <label for="name">{{ 'ADMIN_NAME' | translate }} *</label>
+                                            <input type="text" class="form-control" formControlName="name" 
+                                            placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddAdminFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                                        <div class="form-group mb-0">
+                                            <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
+                                            <input type="email" class="form-control" formControlName="email" 
+                                            placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddAdminFormValue('email')" [validateEmail]=true></app-form-validator>
+                                        <div class="form-group mb-0">
+                                            <label for="password">{{ 'PASSWORD' | translate }} *</label>
+                                            <input type="password" class="form-control" formControlName="password" 
+                                            placeholder="{{ 'PASSWORD' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddAdminFormValue('password')" [validatePasswordLength]=true></app-form-validator>
+                                        <div class="form-group mb-0">
+                                            <label>{{ 'INSTITUTE_NAME' | translate }} *</label>
+                                            <select class="custom-select" formControlName="inst_id" [hidden]="instituteDataStatus != 1" required>
+                                                <option [value]=null selected disabled>{{ 'SELECT_INSTITUTE' | translate }}</option>
+                                                <option *ngFor="let institute of institutes" [ngValue]="institute.id">
+                                                    {{ institute.name }}
+                                                </option>
+                                            </select>
+                                            <div class="error-message" *ngIf="instituteDataStatus === 0">
+                                                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('INSTITUTE' | translate) } }}
+                                            </div>
+                                            <div class="error-message" *ngIf="instituteDataStatus === 3">
+                                                {{ 'STANDARD_ERROR' | translate }}
+                                            </div>
+                                        </div>
+                                        <app-form-validator [data]="validateAddAdminFormValue('inst_id')"></app-form-validator>
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal fade" id="update-admin">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'UPDATE_ADMIN' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="updateAdmin()" [formGroup]="editForm">
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'ADMIN_NAME' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="name" 
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
+                        <input type="email" class="form-control" 
+                        formControlName="email" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditFormValue('email')" [validateEmail]=true></app-form-validator>
+                    <div class="form-group">
+                        <label for="password">{{ 'PASSWORD' | translate }}</label>
+                        <input type="password" class="form-control" formControlName="password" 
+                        placeholder="{{ 'PASSWORD' | translate }}">
+                    </div>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!editForm.valid">
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

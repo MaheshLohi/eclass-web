@@ -1,0 +1,28 @@
+<section class="content">
+    <div class="text-center no-data-container">
+        <div class="swal2-icon swal2-error swal2-icon-show" style="display: flex;">
+            <span class="swal2-x-mark">
+                <span class="swal2-x-mark-line-left"></span>
+                <span class="swal2-x-mark-line-right"></span>
+            </span>
+        </div>
+        <div class="message" *ngIf="errorCode === 0"> 
+            <span *ngIf="errorId === 0">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('INSTITUTES' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('INSTITUTES' | translate) } }}
+            </span> 
+            <span *ngIf="errorId === 1">
+                {{ 'NO_DATA_FOUND_MESSAGE1' | translate: { value : ('ADMINS' | translate) } }}<br/> 
+                {{ 'PLEASE_ADD_FEATURE_TO_CONTINUE' | translate: { value : ('ADMINS' | translate) } }}
+            </span>
+            <span *ngIf="errorId === 2">
+                {{ 'DASHBOARD_ERROR' | translate }}
+            </span>
+        </div>
+        <div class="message" *ngIf="errorCode === 3"> 
+            <span>
+                {{ 'STANDARD_ERROR' | translate }}
+            </span> 
+        </div>
+    </div>
+</section>

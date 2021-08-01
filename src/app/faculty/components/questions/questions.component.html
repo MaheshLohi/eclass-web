@@ -1,0 +1,56 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-faculty-sidebar></app-faculty-sidebar>
+    <div class="content-wrapper">
+        <div class="col-md-12 pt-4">
+            <section class="faculty-questions-list" *ngIf="questionsListStatus === 1">
+                <div *ngFor="let question of questionsList; let i = index">
+                    <div class="card mb-2">
+                        <div class="card-header">
+                            <h3 class="card-title text-bold">{{ 'QUESTION' | translate }} {{ i+1 }}</h3>
+                        </div>
+                        <div class="card-body">
+                            <div class="direct-chat-messages">
+                                <div class="direct-chat-msg">
+                                    <div class="direct-chat-infos clearfix">
+                                        <span class="direct-chat-name float-left">
+                                            {{ question.usn }}
+                                        </span>
+                                    </div>
+                                    <img class="direct-chat-img" [src]="question.profile_pic"
+                                    (error)="_miscellaneous.setDefaultStudentLogo($event)">
+                                    <div class="direct-chat-text">
+                                        {{ question.question }}
+                                    </div>
+                                </div>
+                                <div class="direct-chat-msg right" *ngIf="question.answer">
+                                    <div class="direct-chat-infos clearfix">
+                                        <span class="direct-chat-name float-right">{{ 'YOU' | translate }}</span>
+                                    </div>
+                                    <img class="direct-chat-img" src="assets/images/default_usericon.png"
+                                    (error)="_miscellaneous.setDefaultAdminLogo($event)">
+                                    <div class="direct-chat-text">
+                                        {{ question.answer }}
+                                    </div>
+                                </div>
+                                <div *ngIf="!question.answer">
+                                    <div class="form-group">
+                                        <label>{{ 'REPLAY' | translate }}</label>
+                                        <textarea class="form-control" rows="3" placeholder="{{ 'REPLAY' | translate }}"
+                                        [(ngModel)]="question.replay"></textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-theme-primary" [disabled]="!question.replay" (click)="submitReplay(question)">
+                                        {{ 'SUBMIT' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <app-faculty-list-error [errorId]=1 [errorCode]="questionsListStatus" *ngIf="questionsListStatus === 0 || questionsListStatus === 3">
+            </app-faculty-list-error>
+        </div>
+    </div>
+    <app-footer></app-footer>
+</div>

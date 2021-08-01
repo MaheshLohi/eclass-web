@@ -1,0 +1,149 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-super-admin-sidebar></app-super-admin-sidebar>
+    <div class="content-wrapper">
+        <app-breadcrumb [title]="'INSTITUTES'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-lg-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <h3 class="card-title custom-title">{{ 'INSTITUTES' | translate }}</h3>
+                                <div class="col-lg-7 card-tools text-right">
+                                    <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                        <i class="fa fa-plus"></i> {{ 'ADD_INSTITUTE' | translate }}
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && instituteDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="instituteDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'PHONE_NUMBER' | translate }}</th>
+                                                <th>{{ 'ADDRESS' | translate }}</th>
+                                                <th>{{ 'STATUS' | translate }}</th>
+                                                <th></th>
+                                            </tr>
+                                            <tr *ngFor="let institute of institutes;let i = index">
+                                                <td>{{ i + 1 }}</td>
+                                                <td>
+                                                    <img [src]="_constants.DOMAIN_URL + institute.logo" class="img-circle img-size-32 mr-2"
+                                                    (error)="_miscellaneous.setDefaultInstituteLogo($event)">
+                                                    {{ institute.name | verifyData }}
+                                                </td>
+                                                <td>{{ institute.phone_number | verifyData }}</td>
+                                                <td>{{ institute.address | verifyData }}</td>
+                                                <td>
+                                                    <span class="badge bg-danger mr-1">{{ 'INACTIVE' | translate }}</span>
+                                                    <div class="custom-control custom-switch d-inline-block">
+                                                        <input type="checkbox" class="custom-control-input" [(ngModel)]="institute.status" id="{{ institute.name }}" (change)="updateStatus(institute)">
+                                                        <label class="custom-control-label" for="{{ institute.name }}">
+                                                            <span class="badge bg-success">{{ 'ACTIVE' | translate }}</span>
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-theme-primary btn-sm ml-1" 
+                                                    data-toggle="modal" [attr.data-target]="'#update-institute'"
+                                                    (click)="initiateEditModal(institute)">
+                                                        <i class="fas fa-pen pr-1"></i> {{ 'UPDATE' | translate }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <app-sAdmin-list-error [errorId]=0 [errorCode]="instituteDataStatus" *ngIf="instituteDataStatus === 0 || instituteDataStatus === 3">
+                                </app-sAdmin-list-error>
+                            </div>
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addInstitute()" [formGroup]="addDataForm" id="addDataForm">
+                                        <div class="form-group mb-0">
+                                            <label for="name">{{ 'INSTITUTE_NAME' | translate }} *</label>
+                                            <input type="text" class="form-control" formControlName="name" 
+                                            placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddDataFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                                        <div class="form-group mb-0">
+                                            <label for="address">{{ 'ADDRESS' | translate }} *</label>
+                                            <input type="text" class="form-control" formControlName="address" 
+                                            placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddDataFormValue('address')"></app-form-validator>
+                                        <div class="form-group mb-0">
+                                            <label for="name">{{ 'PHONE_NUMBER' | translate }} *</label>
+                                            <input type="number" class="form-control" formControlName="phone_number" 
+                                            placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddDataFormValue('phone_number')"></app-form-validator>
+                                        <div class="form-group">
+                                            <label for="logo">{{ 'LOGO' | translate }} *</label><br/>
+                                            <input type="file" (change)="onFileChange($event,'logo',1)" accept="image/*" 
+                                            required>
+                                        </div>
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal fade" id="update-institute">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'UPDATE_INSTITUTE' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="updateInstitute()" [formGroup]="editDataForm" id="editDataForm">
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'INSTITUTE_NAME' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="name" 
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditDataFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="address">{{ 'ADDRESS' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="address" 
+                        placeholder="{{ 'ENTER_ADDRESS' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditDataFormValue('address')"></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'PHONE_NUMBER' | translate }} *</label>
+                        <input type="number" class="form-control" formControlName="phone_number" 
+                        placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditDataFormValue('phone_number')"></app-form-validator>
+                    <div class="form-group">
+                        <label for="logo">{{ 'LOGO' | translate }}</label><br/>
+                        <input type="file" (change)="onFileChange($event,'logo',2)" accept="image/*">
+                    </div>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!editDataForm.valid">
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

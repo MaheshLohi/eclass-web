@@ -1,0 +1,22 @@
+<div class="col-md-12 mt-3" *ngIf="recentVideosDataStatus === 1">
+    <section class="content recent-videos">
+        <div class="col-md-12">
+            <h3 class="pb-2 text-dark">{{ 'RECENT_VIDEOS' | translate }}</h3>
+            <section class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 col-12 mt-1" *ngFor="let video of recentVideos">
+                    <div class="card card-widget mb-3 custom-card" (click)="navigateToTopics(video)">
+                        <div class="card-body p-2">
+                            <div class="img-container">
+                                <img class="img-fluid br-4" [src]='_constants.DOMAIN_URL + video.thumbnail' 
+                                (error)="_miscellaneous.setDefaultThumbnailImage($event)">
+                            </div>
+                            <div class="card-header-title">
+                                {{ video.name }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </section>
+</div>

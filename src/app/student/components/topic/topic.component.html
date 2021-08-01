@@ -1,0 +1,99 @@
+<div class="wrapper">
+    <app-student-navbar></app-student-navbar>
+    <app-student-sidebar></app-student-sidebar>
+    <div class="content-wrapper">
+      	<section class="content">
+            <div class="container-fluid">
+                <div class="w-100 pt-4" [hidden]="topicsDataStatus !== 1">
+                    <div class="card card-primary card-outline">
+                        <div class="col-lg-12 row card-body">
+                            <div class="col-lg-8 pr-0">
+                                <div id="vimeo-player"></div>
+                            </div>
+                            <div class="col-lg-4 pl-0">
+                                <div class="topics-list">
+                                    <table class="table table-bordered table-head-fixed text-nowrap m-0">
+                                        <tbody>
+                                            <tr class="bg-theme"><td><b>{{ 'COURSE_CONTENT' | translate }}</b></td></tr>
+                                            <tr class="bg-white" *ngFor="let topic of topics" (click)="selectTopic(topic)"
+                                            [ngClass]="{'active-topic': topic.id === selectedTopic.id}">
+                                                <td><span class="topic-heading">{{ topic.name }}</span><i class="fas fa-play-circle pr-1 text-muted float-right"></i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="col-lg-8">
+                                <div class="pt-2">
+                                    <div class="topic-title mb-2"><b>{{ selectedTopic.name }}</b>
+                                        <div class="cursor-pointer d-inline-block float-right" *ngIf="!selectedTopic.is_wishlist">
+                                            <button class="btn btn-theme-primary" (click)="updateTopicWishlist(1)">
+                                                <i class="fa fa-plus"></i>
+                                                {{ 'ADD_TO_WISHLIST' | translate }}
+                                            </button>
+                                        </div>
+                                        <div class="cursor-pointer d-inline-block float-right" *ngIf="selectedTopic.is_wishlist">
+                                            <button class="btn btn-theme-primary" (click)="updateTopicWishlist(0)">
+                                                <i class="fa fa-check"></i>
+                                                {{ 'WISHLISTED' | translate }}
+                                            </button>
+                                        </div>
+                                    </div>
+                                    {{ 'RELATED_VIDEOS' | translate }} :
+                                    <a href="{{ selectedTopic.related_videos }}" target="_blank">
+                                        {{ selectedTopic.related_videos | verifyData }}
+                                    </a>
+                                    <br/>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <hr/> 
+                                <div class="card card-primary card-outline card-outline-tabs">
+                                    <div class="card-header p-0 border-bottom-0">
+                                        <ul class="nav nav-tabs" id="custom-tabs-four-tab" role="tablist">
+                                            <li class="nav-item">
+                                                <a class="nav-link active" data-toggle="pill" href="#tab-details" role="tab" aria-controls="tab-details" aria-selected="true">
+                                                   {{ 'CHAPTER_DETAILS' | translate }}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="pill" href="#comments" role="tab" aria-controls="comments" aria-selected="false">
+                                                    {{ 'QUESTIONS' | translate }}
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a class="nav-link" data-toggle="pill" href="#faqs" role="tab" aria-controls="faqs" aria-selected="false">
+                                                    {{ 'FAQS' | translate }}
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="tab-content">
+                                            <div class="tab-pane fade show active" id="tab-details" role="tabpanel" aria-labelledby="tab-details">
+                                                <b>{{ 'NAME' | translate }}</b> : {{ chapterDetails.name }} <br/>
+                                                <b>{{ 'DESCRIPTION' | translate }}</b> : {{ chapterDetails.description }} <br/>
+                                                <b>{{ 'FACULTY' | translate }}</b> : {{ chapterDetails.faculty }}<br/>
+                                                <button class="btn btn-theme-primary mt-2" (click)="_download.download(chapterDetails.notes)">
+                                                    <i class="pr-1 fa fa-download"></i> {{ 'DOWNLOAD_NOTES' | translate }}
+                                                </button>
+                                            </div>
+                                            <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments">
+                                                <app-student-questions [topicId]="selectedTopic.id"></app-student-questions>
+                                            </div>
+                                            <div class="tab-pane fade" id="faqs" role="tabpanel" aria-labelledby="faqs">
+                                                <app-student-faq [topicId]="selectedTopic.id"></app-student-faq>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <app-student-list-error [errorId]=4 [errorCode]="topicsDataStatus" *ngIf="topicsDataStatus === 0 || topicsDataStatus === 3">
+                </app-student-list-error>
+            </div>
+        </section>
+    </div>
+</div>

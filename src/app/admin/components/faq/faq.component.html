@@ -1,0 +1,120 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper">
+        <app-breadcrumb [title]="'FAQS'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-lg-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <form class="col-lg-12 row" role="form">
+                                    <div class="col-lg-4 p-1">
+                                        <select class="custom-select form-control" required
+                                        (change)="onTopicChange()" [(ngModel)] ="topicId" [ngModelOptions]="{standalone: true}">
+                                            <option [value]=null selected disabled>{{ 'SELECT_TOPIC' | translate }}</option>
+                                            <option *ngFor="let topic of topics" [ngValue]="topic.id">
+                                                {{ topic.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-8 p-1 text-right">
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false">
+                                            <i class="fa fa-plus"></i> {{ 'ADD_FAQ' | translate }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && faqsDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="faqsDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>{{ 'FREQUENTLY_ASKED_QUESTIONS' | translate }}</th>
+                                            </tr>
+                                            <tr *ngFor="let faq of faqs;let i = index">
+                                                <td>
+													<b>{{ i + 1 }}.&nbsp;{{ faq.question }}</b><br/>
+                                                    {{ faq.answer }}<br/>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm" data-toggle="modal" [attr.data-target]="'#editData'"
+                                                    (click)="initialiseEditModal(faq)">
+                                                        <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate }}
+                                                    </button>
+                                                    <button class="btn btn-danger mt-2 btn-sm ml-1" (click)="deleteFaq(faq)">
+                                                        <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <app-admin-list-error [errorId]=2 [errorCode]="faqsDataStatus" *ngIf="faqsDataStatus === 0 || faqsDataStatus === 3">
+                                </app-admin-list-error>
+                            </div>
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addFaq()" [formGroup]="addDataForm">
+                                        <div class="form-group mb-0">
+                                            <label for="question">{{ 'QUESTION' | translate }} *</label>
+                                            <input type="text" class="form-control" formControlName="question" 
+                                            placeholder="{{ 'ENTER_QUESTION' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddDataFormValue('question')" [validateNameMinLength]=true></app-form-validator>
+                                        <div class="form-group mb-0">
+                                            <label for="answer">{{ 'ANSWER' | translate }} *</label>
+                                            <input type="text" class="form-control" formControlName="answer" 
+                                            placeholder="{{ 'ENTER_ANSWER' | translate }}" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddDataFormValue('answer')"></app-form-validator>
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal fade" id="editData">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'UPDATE_FAQ' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="updateFaq()" [formGroup]="editDataForm">
+                    <div class="form-group mb-0">
+                        <label for="question">{{ 'QUESTION' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="question" 
+                        placeholder="{{ 'ENTER_QUESTION' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditDataFormValue('question')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="answer">{{ 'ANSWER' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="answer" 
+                        placeholder="{{ 'ENTER_ANSWER' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateEditDataFormValue('answer')"></app-form-validator>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="disableEditFeatureForm()">
+                        <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

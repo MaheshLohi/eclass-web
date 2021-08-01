@@ -1,0 +1,28 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper">
+      	<app-breadcrumb [title]="'DASHBOARD'"></app-breadcrumb>
+		<section class="content" *ngIf="dashboardDataStatus === 1">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-lg-3 col-6" *ngFor="let reportCard of dashboardReportCards">
+						<div class="small-box" [ngClass]="reportCard.className">
+							<div class="inner">
+								<h3>{{ reportCard.value | verifyData : 'number' }}</h3>
+								<p>{{ reportCard.name | translate }}</p>
+							</div>
+							<div class="icon">
+								<i class="{{ reportCard.icon }}"></i>
+							</div>
+							<a routerLink="{{ reportCard.link }}" class="small-box-footer">{{ 'MORE_INFO' | translate }} <i class="fas fa-arrow-circle-right"></i></a>
+						</div>
+					</div> 
+				</div>
+			</div>
+		</section>
+		<app-admin-list-error [errorId]=0 [errorCode]="dashboardDataStatus" *ngIf="dashboardDataStatus === 0 || dashboardDataStatus === 3">
+		</app-admin-list-error>
+    </div>
+    <app-footer></app-footer>
+</div>

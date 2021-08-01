@@ -1,0 +1,89 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper" *ngIf="filterDataStatus === 1">
+        <app-breadcrumb [title]="'FACULTIES'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-lg-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-header">
+                                <form class="col-lg-12 row" role="form" [formGroup]="filterForm">
+                                    <div class="col-lg-6 p-1">
+                                        <select class="custom-select form-control" formControlName="department_id"
+                                        (change)="getFaculties()" required>
+                                            <option [value]=null selected disabled>{{ 'SELECT_DEPARTMENT' | translate }}</option>
+                                            <option *ngFor="let department of departments" [ngValue]="department.id">
+                                                {{ department.name }}
+                                            </option>
+                                        </select>
+                                    </div>
+                                    <div class="col-lg-6 p-1 text-right">
+                                        <button type="button" class="btn btn-theme-primary" (click)="showAddFeatureView(true)" *ngIf="showAddFeature === false"
+                                        [disabled]="!this.filterForm.valid">
+                                            <i class="fa fa-plus"></i> {{ 'ADD_FACULTIES' | translate }}
+                                        </button>
+                                        <button type="button" class="btn btn-theme-primary" (click)="_download.download('public/storage/faculties.csv')" *ngIf="showAddFeature === true">
+                                            <i class="fa fa-download"></i>&nbsp;{{ 'DOWNLOAD_EXCEL_TEMPLATE' | translate }}
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="card-body scroll-x-auto" *ngIf="showAddFeature === false && facultiesDataStatus != 2">
+                                <div class="col-lg-12" *ngIf="facultiesDataStatus === 1">
+                                    <table class="table table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>{{ 'NAME' | translate }}</th>
+                                                <th>{{ 'EMAIL_ADDRESS' | translate }}</th>
+                                                <th>{{ 'PHONE_NUMBER' | translate }}</th>
+                                                <th></th>
+                                            </tr>
+                                            <tr *ngFor="let faculty of faculties;let i = index">
+                                                <td>{{ i + 1 }}</td>
+                                                <td>{{ faculty.name | verifyData }}</td>
+                                                <td>{{ faculty.email | verifyData }}</td>
+                                                <td>{{ faculty.phone_number | verifyData }}</td>
+                                                <td>
+                                                    <button type="button" class="btn btn-danger btn-sm" (click)="deleteFaculty(faculty)">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>        
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <app-admin-list-error [errorId]=2 [errorCode]="facultiesDataStatus" *ngIf="facultiesDataStatus === 0 || facultiesDataStatus === 3">
+                                </app-admin-list-error>
+                            </div>
+                            <div class="card-body" [hidden]="showAddFeature === false">
+                                <div class="col-lg-12">
+                                    <form role="form" (ngSubmit)="addFaculties()" [formGroup]="addDataForm" id="addDataForm">
+                                        <div class="form-group">
+                                            <label for="faculties">{{ 'FILE' | translate }}</label><br/>
+                                            <input type="file" (change)="onFileChange($event,'faculties')" accept=".csv" required>
+                                        </div>
+                                        <app-form-validator [data]="validateAddFormValue('faculties')"></app-form-validator>
+                                        <button type="submit" class="btn btn-theme-primary" [disabled]="disableAddFeatureForm()">
+                                            <i class="fa fa-plus-circle"></i> {{ 'SUBMIT' | translate }}
+                                        </button>
+                                        <button class="btn btn-danger ml-2" type="button" (click)="showAddFeatureView(false)">
+                                            <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="content-wrapper" *ngIf="filterDataStatus === 0 || filterDataStatus === 3">
+        <app-admin-list-error [errorId]=1 [errorCode]="filterDataStatus">
+        </app-admin-list-error>
+    </div>
+    <app-footer></app-footer>
+</div>
