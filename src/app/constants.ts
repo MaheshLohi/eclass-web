@@ -78,6 +78,8 @@ export class Constants {
     STUDENT_RECENT_VIDEOS_LIST_URL = this.STUDENT_URL + 'recent-videos'; 
     SEND_OTP_URL = this.STUDENT_URL + 'otp'; 
     VERIFY_OTP_URL = this.STUDENT_URL + 'verify-otp'; 
+    VERIFY_STUDENT_EMAIL = this.STUDENT_URL + 'verify-email';
+    FORGOT_STUDENT_EMAIL = this.STUDENT_URL + 'forgot-password';
 
     FACULTY_SUBJECTS_LIST_URL = this.ADMIN_URL + 'faculty-subjects';
     FACULTY_QUESTIONS_LIST_URL = this.ADMIN_URL + 'subject-questions/';
