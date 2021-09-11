@@ -34,7 +34,8 @@
                             </div>
                         </div>
                         <p class="mt-1">
-                            <a href="forgot-password.html">{{ 'FORGOT_PASSWORD_LINK' | translate }}</a>
+                            <a  *ngIf="loginType === 'student'" href="#" data-toggle="modal" data-target="#myModal">{{ 'FORGOT_PASSWORD_LINK' | translate }}</a>
+                            <a  *ngIf="loginType !== 'student'" href="#/school/login" >{{ 'FORGOT_PASSWORD_LINK' | translate }}</a>
                         </p>
                     </form>
                 </div>
@@ -47,3 +48,41 @@
         </div>
     </div>
 </div>
+
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Forgot Password</h4>
+        </div>
+        <div class="modal-body">
+            <form role="form" (ngSubmit)="forgotPassword()" [formGroup]="forgotPasswordForm" id="forgotPasswordForm">
+                <div class="form-group mb-0">
+                    <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
+                    <input type="email" class="form-control br-basic-form" name="email" 
+                    formControlName="email" [email]="true" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
+                </div>
+                <app-form-validator [data]="validateForgotPasswordFormValue('email')" [validateEmail]=true></app-form-validator> 
+                <div class="form-group mb-0 mt-1">
+                    <label for="uan">{{ 'UAN' | translate }} *</label>
+                    <input type="text" class="form-control br-basic-form" name="uan" 
+                    formControlName="usn"  placeholder="{{ 'USN' | translate }}" required>
+                </div>
+                <app-form-validator [data]="validateForgotPasswordFormValue('usn')" [validateUsn]=true></app-form-validator>
+
+                <button type="submit" [disabled]="!forgotPasswordForm.valid" class="btn btn-theme-primary">
+                   {{ 'Send' | translate }}
+                </button>
+                </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+      
+    </div>
+  </div>
