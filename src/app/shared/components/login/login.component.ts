@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { LoginService } from '@sharedServices/login/login.service';
+import { ToasterService } from '@sharedServices/toaster/toaster.service';
+
 
 @Component({
   	selector: 'app-login',
@@ -15,14 +17,23 @@ export class LoginComponent implements OnInit {
 	loginForm : FormGroup;
 	loginType : string;
 	showPassword : boolean = false;
+	forgotPasswordForm : FormGroup;
+	validateUsn  : boolean = false;
 
 	constructor(private _router: Router,
 	private _loader: LoaderService,
+	private toaster: ToasterService,
+
 	private _login: LoginService) { 
 		this.loginForm = new FormGroup({
 			'email' : new FormControl("", []),
 			'password' : new FormControl("", [Validators.minLength(6)])
 		});
+
+		this.forgotPasswordForm = new FormGroup({
+			'email' : new FormControl("", []),
+			'usn' : new FormControl("", [])
+			});
 	};
 
 	validateLoginForm(formName) {
@@ -84,4 +95,23 @@ export class LoginComponent implements OnInit {
 			default:this._router.navigate(['/superAdmin/dashboard']);
 		}
 	};
+
+
+	validateForgotPasswordFormValue(formName) {
+		return this.forgotPasswordForm.get(formName); 
+	};
+
+	forgotPassword ()
+	{
+		let data = this.forgotPasswordForm.value;
+		this._loader.showLoader();
+		this._login.forgotPassword(data)
+		.subscribe((response:any) => {
+			this._loader.hideLoader();
+			this.toaster.showSuccess(response.status.message);
+		}, (errorCode) => {
+			this._loader.hideLoader();
+		});
+
+	}
 }

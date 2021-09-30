@@ -59,6 +59,7 @@ import { StudentProfileComponent } from '@studentComponents/profile/profile.comp
 import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboard.component';
 import { FacultySidebarComponent } from '@facultyComponents/sidebar/sidebar.component';
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
+
 import { FacultyChaptersComponent } from '@facultyComponents/chapter/chapter.component';
 
 import { FacultyExaminationComponent } from '@facultyComponents/examination/examination.component';

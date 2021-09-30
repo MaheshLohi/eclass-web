@@ -28,7 +28,6 @@ export class FacultySidebarComponent implements OnInit {
 
 	ngOnInit() {
 		this.userType = this._constants.FACULTY;
-	
 		this.userDetails = this._storage.getData("userDetails");
 		this.sidemenus = [{
 			name : "DASHBOARD",
@@ -38,6 +37,7 @@ export class FacultySidebarComponent implements OnInit {
 			name : "QUESTIONS",
 			icon : "fa fa-question-circle",
 			link : '/'+ this.userType +'/subjects'
+
 		},
 
 		{
@@ -56,6 +56,8 @@ export class FacultySidebarComponent implements OnInit {
 			link : '/'+ this.userType +"/students"
 		},
 		];
+		}];
+
 	};
 	  
 	minimizeSidemenu() {

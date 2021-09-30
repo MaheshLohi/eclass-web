@@ -1,6 +1,6 @@
 export class Constants {
-    //DOMAIN_URL = 'http://143.110.188.198/'
-    DOMAIN_URL = 'http://laravel.test/'
+
+    DOMAIN_URL = 'http://api.rewindedu.in/'
     BASE_URL = this.DOMAIN_URL + 'api/';
 
     LANGUAGE_ARRAY = ['en','ka'];
@@ -79,6 +79,11 @@ export class Constants {
     STUDENT_RECENT_VIDEOS_LIST_URL = this.STUDENT_URL + 'recent-videos'; 
     SEND_OTP_URL = this.STUDENT_URL + 'otp'; 
     VERIFY_OTP_URL = this.STUDENT_URL + 'verify-otp'; 
+<<<<<<< HEAD
+=======
+    VERIFY_STUDENT_EMAIL = this.STUDENT_URL + 'verify-email';
+    FORGOT_STUDENT_EMAIL = this.STUDENT_URL + 'forgot-password';
+>>>>>>> 1582c7da1ac5e2f2ad405c197324688aa566cbb9
 
     FACULTY_SUBJECTS_LIST_URL = this.ADMIN_URL + 'faculty-subjects';
     FACULTY_QUESTIONS_LIST_URL = this.ADMIN_URL + 'subject-questions/';

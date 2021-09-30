@@ -41,4 +41,16 @@ export class StudentSubjectService {
 			})
 		)
 	};
+
+	verifyAccount(verifyData) : Observable<any> {
+		return this.http.post<any>(this.constants.VERIFY_STUDENT_EMAIL, verifyData)
+		.pipe(
+			map(response => { 
+				if (response && response.status) {
+				  	return response; 
+				}
+				throw 0;
+			})
+		)
+	};
 }
