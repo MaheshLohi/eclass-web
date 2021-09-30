@@ -28,14 +28,13 @@ export class StudentSubjectComponent implements OnInit{
 	featureType : number;
 	verifyForm : FormGroup;
 	userDetails : any = {};
+
 	constructor(public _constants : Constants,
 	public _download : DownloadService,
 	public _miscellaneous : MiscellaneousService,
 	private _loader: LoaderService,
 	private _router: Router,
 
-	private _subjects : StudentSubjectService) { };
-	ngOnInit() {
 	private storageService : StorageService,
 	private toaster: ToasterService,
 	private translate: TranslateService,
@@ -112,4 +111,5 @@ export class StudentSubjectComponent implements OnInit{
 	logout() {
 		this._session.handleLogout();
 	};
+	
 }

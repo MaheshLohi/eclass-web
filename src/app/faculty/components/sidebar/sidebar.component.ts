@@ -33,7 +33,8 @@ export class FacultySidebarComponent implements OnInit {
 			name : "DASHBOARD",
 			icon : "fa fa-home",
 			link : '/'+ this.userType +'/dashboard'
-		},{
+		},
+		{
 			name : "QUESTIONS",
 			icon : "fa fa-question-circle",
 			link : '/'+ this.userType +'/subjects'
@@ -56,7 +57,7 @@ export class FacultySidebarComponent implements OnInit {
 			link : '/'+ this.userType +"/students"
 		},
 		];
-		}];
+		
 
 	};
 	  
