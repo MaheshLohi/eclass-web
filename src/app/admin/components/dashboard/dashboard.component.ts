@@ -69,7 +69,8 @@ export class AdminDashboardComponent implements OnInit {
 			className : 'bg-warning',
 			icon : 'fas fa-chalkboard-teacher',
 			value : this.dashboardData.faculties_count
-		}]
+		}
+		]
 	} 
 
 }

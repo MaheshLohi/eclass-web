@@ -1,5 +1,6 @@
 export class Constants {
-    DOMAIN_URL = 'http://159.89.167.37/'
+    //DOMAIN_URL = 'http://143.110.188.198/'
+    DOMAIN_URL = 'http://laravel.test/'
     BASE_URL = this.DOMAIN_URL + 'api/';
 
     LANGUAGE_ARRAY = ['en','ka'];

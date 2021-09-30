@@ -59,6 +59,10 @@ import { StudentProfileComponent } from '@studentComponents/profile/profile.comp
 import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboard.component';
 import { FacultySidebarComponent } from '@facultyComponents/sidebar/sidebar.component';
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
+import { FacultyChaptersComponent } from '@facultyComponents/chapter/chapter.component';
+
+import { FacultyExaminationComponent } from '@facultyComponents/examination/examination.component';
+
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
 import { StudentListErrorComponent } from '@studentComponents/list-error/list-error.component';
 import { FacultyListErrorComponent } from '@facultyComponents/list-error/list-error.component';
@@ -109,6 +113,8 @@ import { StudentRecentVideosComponent } from '@studentComponents/recent-videos/r
 		FacultyDashboardComponent,
 		FacultySidebarComponent,
 		FacultySubjectsComponent,
+		FacultyChaptersComponent,
+		FacultyExaminationComponent,
 		FacultyQuestionsComponent,
 		StudentListErrorComponent,
 		FacultyListErrorComponent,
