@@ -7,7 +7,7 @@ import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneou
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
 declare var $: any; 
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl ,Validators } from '@angular/forms';
 import { StorageService } from '@sharedServices/storage/storage.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -41,12 +41,18 @@ export class StudentSubjectComponent implements OnInit{
 	private _session : SessionHandlerService,
 	private _subjects : StudentSubjectService) { 
 		this.verifyForm = new FormGroup({
-			'email' : new FormControl("", [])
+			'name' : new FormControl("", [Validators.minLength(3)]),
+			'department_name' : new FormControl("", []),
+			'usn' : new FormControl("", []),
+			'email' : new FormControl("", []),
+			'phone_number' : new FormControl("", [Validators.minLength(10),Validators.maxLength(10)])
 			});
 	}
 	
 	ngOnInit() {
 		this.userDetails = this.storageService.getData("userDetails");
+		this.verifyForm.controls['department_name'].setValue(this.userDetails.department_name);
+		this.verifyForm.controls['usn'].setValue(this.userDetails.usn);
 		if(!this.userDetails.is_verified){
 			$('#myModal').modal({
 				backdrop: 'static',

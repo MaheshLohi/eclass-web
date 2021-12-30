@@ -186,6 +186,7 @@
     "SELECT_INSTITUTE" : "Select Institute",
     "ADD_INSTITUTE" : "Add Institute",
     "UPDATE_INSTITUTE" : "Update Institute",
-    "INSTITUTE_STATUS" : "Institute Status" 
+    "INSTITUTE_STATUS" : "Institute Status" ,
    
+    "PHONE_NO_ERROR" : "Phone no must contain atleast 10 numbers"
 }

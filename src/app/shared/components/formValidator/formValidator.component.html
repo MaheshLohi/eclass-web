@@ -12,5 +12,8 @@
         <span class="form-input-error" *ngIf="validateNameMinLength && data.errors.minlength">
             {{ 'NAME_ERROR' | translate }}
         </span>
+        <span class="form-input-error" *ngIf="validatePhoneNoMinLength && data.errors.minlength">
+            {{ 'PHONE_NO_ERROR' | translate }}
+        </span>
     </div>
 </div>
