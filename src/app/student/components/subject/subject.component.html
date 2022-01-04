@@ -48,12 +48,41 @@
         <div class="modal-body">
             <form role="form" (ngSubmit)="verifyAccount()" [formGroup]="verifyForm" id="verifyForm">
                 <div class="form-group mb-0">
+                    <label for="name">{{ 'NAME' | translate }} *</label>
+                    <input type="text"  class="form-control" name="name" 
+                    formControlName="name" placeholder="{{ 'NAME' | translate }}" required>
+                </div>
+                <app-form-validator [data]="validateVerifyFormValue('name')" [validateNameMinLength]=true></app-form-validator> 
+
+                <div class="form-group mb-0">
                     <label for="email">{{ 'EMAIL_ADDRESS' | translate }} *</label>
                     <input type="email" class="form-control" name="email" 
                     formControlName="email" [email]="true" placeholder="{{ 'EMAIL_ADDRESS' | translate }}" required>
                 </div>
                 <app-form-validator [data]="validateVerifyFormValue('email')" [validateEmail]=true></app-form-validator> 
-               
+            
+                <div class="form-group mb-0">
+                    <label for="phone_number">{{ 'PHONE_NUMBER' | translate }} *</label>
+                    <input type="text"  class="form-control" name="phone_number" 
+                    formControlName="phone_number" placeholder="{{ 'PHONE_NUMBER' | translate }}" required>
+                </div>
+                <app-form-validator [data]="validateVerifyFormValue('phone_number')"  [validatePhoneNoMinLength]=true></app-form-validator> 
+                
+                <div class="form-group mb-0">
+                    <label for="department_name">{{ 'DEPARTMENT' | translate }} *</label>
+                    <input type="text"  class="form-control" name="department_name" 
+                    formControlName="department_name" placeholder="{{ 'DEPARTMENT' | translate }}" readonly required>
+                </div>
+                <app-form-validator [data]="validateVerifyFormValue('department_name')" ></app-form-validator> 
+
+                <div class="form-group mb-0">
+                    <label for="usn">{{ 'USN' | translate }} *</label>
+                    <input type="text"  class="form-control" name="usn" 
+                    formControlName="usn" placeholder="{{ 'USN' | translate }}" readonly required>
+                </div>
+                <app-form-validator [data]="validateVerifyFormValue('usn')" ></app-form-validator> 
+                
+                  
                 <button type="submit"  [disabled]="!verifyForm.valid" class="btn btn-theme-primary">
                    {{ 'Verify' | translate }}
                 </button>

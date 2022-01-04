@@ -12,6 +12,7 @@ export class FormValidatorComponent implements OnChanges {
 	@Input() validateEmail? : boolean = false;
 	@Input() validateNameMinLength? : boolean = false;
 	@Input() validatePasswordLength? : boolean = false;
+	@Input() validatePhoneNoMinLength? : boolean = false;
 
   	ngOnChanges(changes: SimpleChanges) {
 		for (let propName in changes) { 
