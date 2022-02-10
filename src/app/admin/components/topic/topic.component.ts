@@ -155,4 +155,18 @@ export class AdminTopicComponent implements OnInit {
 			this._loader.hideLoader();
 		});
 	};
+
+	deleteTopic(topic) {
+		if(confirm("Are you sure you want to delete?")) {
+		  this._loader.showLoader();
+		  this._topic.deleteTopic(topic)
+		  .subscribe(() => {
+			  this._loader.hideLoader();
+			  this.getTopicsList();
+			  this._toaster.showSuccess(this._translate.instant("TOPIC_DELETED_SUCCESSFULLY",{ value : this._translate.instant("TOPIC")} ));
+		  }, () => {
+			  this._loader.hideLoader();
+		  });
+	   }
+	  };
 }

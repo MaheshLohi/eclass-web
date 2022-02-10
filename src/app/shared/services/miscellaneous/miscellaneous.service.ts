@@ -33,6 +33,8 @@ export class MiscellaneousService {
 		this.toasterStatus = toasterStatus ? toasterStatus : false;
 		if(error && error.error && error.error.message) {
 			this._toaster.showError(error.error.message);
+		} else if(error && error.error && error.error.error) {
+			this._toaster.showError(error.error.error);
 		}
 		else {
 			this._toaster.showError(this._translate.instant("STANDARD_ERROR"));

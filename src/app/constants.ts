@@ -62,6 +62,7 @@ export class Constants {
     INSTITUTE_STATUS_UPDATE_URL = this.ADMIN_URL + 'toggle-institute';
     INSTITUTE_UPDATE_URL = this.ADMIN_URL + 'update-institute';
     EXAM_PAPER_DELETE_URL = this.ADMIN_URL + 'examination/';
+    ADMIN_TOPICS_DELETE_URL = this.ADMIN_URL + 'delete-chapter-details/';
 
     //students API
     STUDENT_SUBJECTS_LIST_URL = this.STUDENT_URL + 'student-subjects/';
