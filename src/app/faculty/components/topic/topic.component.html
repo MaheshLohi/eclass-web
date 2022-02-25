@@ -1,0 +1,114 @@
+<div class="wrapper">
+    <app-navbar></app-navbar>
+    <app-admin-sidebar></app-admin-sidebar>
+    <div class="content-wrapper" [hidden]="topicsDataStatus !== 1">
+        <app-breadcrumb [title]="'TOPICS'"></app-breadcrumb>
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row"> 
+                    <div class="col-12">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body row">
+                                <div class="col-lg-6">
+                                    <div id="vimeo-player"></div>
+                                    <div class="pt-2">
+                                        <div class="topic-title mb-2">
+                                            <b>{{ selectedTopic.name }}</b>
+                                        </div>
+                                        {{ 'RELATED_VIDEOS' | translate }} :
+                                        <a href='{{ selectedTopic.related_videos[0] }}' target="_blank">
+                                            {{ selectedTopic.related_videos[0] | verifyData }}
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 topics-list p-0">
+                                    <table class="table table-striped mb-0">
+                                        <tbody>
+                                            <tr class="bg-theme">
+                                                <th>{{ 'TOPIC' | translate }}</th>
+                                            </tr>
+                                            <tr *ngFor="let topic of topics;let i = index">
+                                                <td>
+                                                    <b>{{ i + 1 }}.{{ topic.name | verifyData }}</b><br/>
+                                                    {{ 'KEYWORDS' | translate }} : {{ topic.keywords | verifyData }}<br/>
+                                                    {{ 'RELATED_VIDEOS' | translate }} : 
+                                                    <a href="{{ topic.related_videos }}" target="_blank">
+                                                        {{ topic.related_videos | verifyData }}
+                                                    </a><br/>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm mr-1" (click)="selectTopic(topic)">
+                                                        <i class="pr-1 fa fa-play-circle"></i> {{ 'PLAY' | translate }}
+                                                    </button>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm mr-1" data-toggle="modal" [attr.data-target]="'#update-topic'"
+                                                    (click)="editTopic(topic)">
+                                                        <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate }}
+                                                    </button>
+                                                    <button class="btn btn-danger mt-2 btn-sm mr-1">
+                                                        <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate }}
+                                                    </button>
+                                                    <button class="btn btn-theme-primary mt-2 btn-sm" (click)="navigateToFaqs(topic)">
+                                                        <i class="pr-1 fa fa-eye"></i> {{ 'FAQS' | translate }}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="content-wrapper" *ngIf="topicsDataStatus === 0 || topicsDataStatus === 3">
+        <app-admin-list-error [errorId]=6 [errorCode]="topicsDataStatus">
+        </app-admin-list-error>
+    </div>
+    <app-footer></app-footer>
+</div>
+<div class="modal fade" id="update-topic">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">{{ 'UPDATE_TOPIC' | translate }}</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form role="form" (ngSubmit)="updateTopic()" [formGroup]="editTopicForm" id="editTopicForm">
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'TOPIC_NAME' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="name" 
+                        placeholder="{{ 'ENTER_NAME' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateUpdateTopicFormValue('name')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'KEYWORDS' | translate }}</label>
+                        <input type="text" class="form-control" formControlName="keywords" 
+                        placeholder="{{ 'ENTER_KEYWORDS' | translate }}">
+                    </div>
+                    <app-form-validator [data]="validateUpdateTopicFormValue('keywords')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'RELATED_VIDEOS' | translate }}</label>
+                        <input type="text" class="form-control" formControlName="related_videos" 
+                        placeholder="{{ 'ENTER_RELATED_VIDEOS' | translate }}">
+                    </div>
+                    <app-form-validator [data]="validateUpdateTopicFormValue('related_videos')" [validateNameMinLength]=true></app-form-validator>
+                    <div class="form-group mb-0">
+                        <label for="name">{{ 'VIDEO_ID' | translate }} *</label>
+                        <input type="text" class="form-control" formControlName="video_id" 
+                        placeholder="{{ 'VIDEO_ID' | translate }}" required>
+                    </div>
+                    <app-form-validator [data]="validateUpdateTopicFormValue('video_id')"></app-form-validator>
+                    <button type="submit" class="btn btn-theme-primary" [disabled]="!editTopicForm.valid">
+                        <i class="fa fa-plus-circle"></i> {{ 'UPDATE' | translate }}
+                    </button>
+                    <button class="btn btn-danger ml-2" type="button" data-dismiss="modal">
+                        <i class="fa fa-reply"></i> {{ 'BACK' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

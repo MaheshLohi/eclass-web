@@ -6,14 +6,13 @@ import { DownloadService } from '@sharedServices/download/download.service';
 import { MiscellaneousService } from '@sharedServices/miscellaneous/miscellaneous.service';
 import { LoaderService } from '@sharedServices/loader/loader.service';
 import { StudentSubjectService } from '@studentServices/subject/subject.service';
+
 declare var $: any; 
 import { FormGroup, FormControl ,Validators } from '@angular/forms';
 import { StorageService } from '@sharedServices/storage/storage.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 import { TranslateService } from '@ngx-translate/core';
 import { SessionHandlerService } from '@sharedServices/sessionHandler/sessionHandler.service';
-
-
 
 
 @Component({
@@ -35,6 +34,7 @@ export class StudentSubjectComponent implements OnInit{
 	public _miscellaneous : MiscellaneousService,
 	private _loader: LoaderService,
 	private _router: Router,
+
 	private storageService : StorageService,
 	private toaster: ToasterService,
 	private translate: TranslateService,
@@ -60,6 +60,7 @@ export class StudentSubjectComponent implements OnInit{
 			});
 			$('#myModal').modal('show');
 		}
+
 		this.featureType = (this._router.url === "/student/home") ? 1 : 2;
 	}
 
