@@ -1,5 +1,6 @@
 export class Constants {
-    DOMAIN_URL = 'https://api.rewindedu.in/'
+    DOMAIN_URL = 'https://api.rewindedu.in/';
+
     BASE_URL = this.DOMAIN_URL + 'api/';
 
     LANGUAGE_ARRAY = ['en','ka'];
