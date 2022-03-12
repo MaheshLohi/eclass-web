@@ -42,7 +42,7 @@
                                                     (click)="editTopic(topic)">
                                                         <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate }}
                                                     </button>
-                                                    <button class="btn btn-danger mt-2 btn-sm mr-1">
+                                                    <button class="btn btn-danger mt-2 btn-sm mr-1" (click)="deleteTopic(topic)">
                                                         <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate }}
                                                     </button>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm" (click)="navigateToFaqs(topic)">

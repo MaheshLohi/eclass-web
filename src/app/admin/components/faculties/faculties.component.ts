@@ -124,6 +124,7 @@ export class AdminFacultiesComponent implements OnInit {
 	};
 
 	deleteFaculty(faculty) {
+	  if(confirm("Are you sure you want to delete?")) {
 		this._loader.showLoader();
 		this._faculty.deleteFaculty(faculty)
 		.subscribe(() => {
@@ -133,5 +134,6 @@ export class AdminFacultiesComponent implements OnInit {
 		}, () => {
 			this._loader.hideLoader();
 		});
+	 }
 	};
 }
