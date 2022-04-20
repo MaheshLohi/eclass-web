@@ -34,7 +34,10 @@ import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.c
 import { FacultyChaptersComponent } from '@facultyComponents/chapter/chapter.component';
 import { FacultyExaminationComponent } from '@facultyComponents/examination/examination.component';
 
+import { FacultyTopicComponent } from '@facultyComponents/topic/topic.component';
+
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
+import { FacultyFaqComponent } from '@facultyComponents/faq/faq.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -72,6 +75,13 @@ const routes: Routes = [
 	{ path: 'faculty/examination', component: FacultyExaminationComponent, canActivate: [AuthGuard]},
 
 	{ path: 'faculty/questions/:subjectId', component: FacultyQuestionsComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/topics/:chapterId', component: FacultyTopicComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/students', component: FacultySubjectsComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/faqs/:chapterId', component: FacultyFaqComponent, canActivate: [AuthGuard]},
+
 	{ path: '**', component: PageNotFoundComponent }
 ];
 
