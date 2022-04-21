@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
 				break;
 			case 2:	this._router.navigate(['/student/home']);
 				break;
-			case 3:	this._router.navigate(['/faculty/dashboard']);
+			case 3:	this._router.navigate(['/admin/dashboard']);
 				break;
 			case 4:	this._router.navigate(['/faculty/dashboard']);
 				break;
