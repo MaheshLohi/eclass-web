@@ -87,5 +87,5 @@ export class Constants {
     FACULTY_QUESTIONS_LIST_URL = this.ADMIN_URL + 'subject-questions/';
     FACULTY_SUBMIT_REPLAY_URL = this.ADMIN_URL + 'answer';
 
-    FACULTY_TEST_URL = "https://test.rewindedu.in";
+    FACULTY_TEST_URL = "https://test.rewindedu.in/login";
 }
