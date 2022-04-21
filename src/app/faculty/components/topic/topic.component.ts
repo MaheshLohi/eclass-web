@@ -16,7 +16,7 @@ import { AdminTopicService } from '@adminServices/topic/topic.service';
   	templateUrl: './topic.component.html',
   	styleUrls: ['./topic.component.scss']
 })
-export class AdminTopicComponent implements OnInit {
+export class FacultyTopicComponent implements OnInit {
 
 	chapterId : number;
 	topicsDataStatus : number = 2;
@@ -118,13 +118,13 @@ export class AdminTopicComponent implements OnInit {
 	changeRouteParams() {
 		let data = {};
 		data['topicId'] = this.selectedTopic.id;
-		this._router.navigate(['admin/topics', this.chapterId],{ queryParams: data });
+		this._router.navigate(['faculty/topics', this.chapterId],{ queryParams: data });
 	};
 
 	navigateToFaqs(topic) {
 		let data = {};
 		data['topicId'] = topic.id;
-		this._router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
+		this._router.navigate(['faculty/faqs', this.chapterId],{ queryParams: data });
 	};
 
 	editTopic(topic) {
