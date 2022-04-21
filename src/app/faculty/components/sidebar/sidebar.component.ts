@@ -33,11 +33,38 @@ export class FacultySidebarComponent implements OnInit {
 			name : "DASHBOARD",
 			icon : "fa fa-home",
 			link : '/'+ this.userType +'/dashboard'
-		},{
+		},
+		{
 			name : "QUESTIONS",
 			icon : "fa fa-question-circle",
 			link : '/'+ this.userType +'/subjects'
-		}];
+
+		},
+
+		{
+			name : "CHAPTERS",
+			icon : "fas fa-pen",
+			link : '/'+ this.userType +"/chapters"
+		},
+		{
+			name : "EXAMINATIONS",
+			icon : "fas fa-clipboard",
+			link : '/'+ this.userType +"/examination"
+		},
+		{
+			name : "STUDENTS",
+			icon : "fas fa-graduation-cap",
+			link : '/'+ this.userType +"/students"
+		},
+		{
+			name : "TEST",
+			icon : "fas fa-clipboard",
+			link : this._constants.FACULTY_TEST_URL,
+			out_side : "yes"
+		},
+		];
+		
+
 	};
 	  
 	minimizeSidemenu() {

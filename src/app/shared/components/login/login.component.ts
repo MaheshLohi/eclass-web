@@ -7,7 +7,6 @@ import { LoginService } from '@sharedServices/login/login.service';
 import { ToasterService } from '@sharedServices/toaster/toaster.service';
 
 
-
 @Component({
   	selector: 'app-login',
   	templateUrl: './login.component.html',
@@ -24,11 +23,13 @@ export class LoginComponent implements OnInit {
 	constructor(private _router: Router,
 	private _loader: LoaderService,
 	private toaster: ToasterService,
+
 	private _login: LoginService) { 
 		this.loginForm = new FormGroup({
 			'email' : new FormControl("", []),
 			'password' : new FormControl("", [Validators.minLength(6)])
 		});
+
 		this.forgotPasswordForm = new FormGroup({
 			'email' : new FormControl("", []),
 			'usn' : new FormControl("", [])
@@ -87,13 +88,14 @@ export class LoginComponent implements OnInit {
 				break;
 			case 2:	this._router.navigate(['/student/home']);
 				break;
-			case 3:	this._router.navigate(['/admin/dashboard']);
+			case 3:	this._router.navigate(['/faculty/dashboard']);
 				break;
 			case 4:	this._router.navigate(['/faculty/dashboard']);
 				break;
 			default:this._router.navigate(['/superAdmin/dashboard']);
 		}
 	};
+
 
 	validateForgotPasswordFormValue(formName) {
 		return this.forgotPasswordForm.get(formName); 
@@ -112,5 +114,4 @@ export class LoginComponent implements OnInit {
 		});
 
 	}
-
 }

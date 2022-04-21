@@ -16,7 +16,7 @@ import { AdminTopicService } from '@adminServices/topic/topic.service';
   	templateUrl: './topic.component.html',
   	styleUrls: ['./topic.component.scss']
 })
-export class AdminTopicComponent implements OnInit {
+export class FacultyTopicComponent implements OnInit {
 
 	chapterId : number;
 	topicsDataStatus : number = 2;
@@ -118,13 +118,13 @@ export class AdminTopicComponent implements OnInit {
 	changeRouteParams() {
 		let data = {};
 		data['topicId'] = this.selectedTopic.id;
-		this._router.navigate(['admin/topics', this.chapterId],{ queryParams: data });
+		this._router.navigate(['faculty/topics', this.chapterId],{ queryParams: data });
 	};
 
 	navigateToFaqs(topic) {
 		let data = {};
 		data['topicId'] = topic.id;
-		this._router.navigate(['admin/faqs', this.chapterId],{ queryParams: data });
+		this._router.navigate(['faculty/faqs', this.chapterId],{ queryParams: data });
 	};
 
 	editTopic(topic) {
@@ -155,18 +155,4 @@ export class AdminTopicComponent implements OnInit {
 			this._loader.hideLoader();
 		});
 	};
-
-	deleteTopic(topic) {
-		if(confirm("Are you sure you want to delete?")) {
-		  this._loader.showLoader();
-		  this._topic.deleteTopic(topic)
-		  .subscribe(() => {
-			  this._loader.hideLoader();
-			  this.getTopicsList();
-			  this._toaster.showSuccess(this._translate.instant("TOPIC_DELETED_SUCCESSFULLY",{ value : this._translate.instant("TOPIC")} ));
-		  }, () => {
-			  this._loader.hideLoader();
-		  });
-	   }
-	  };
 }

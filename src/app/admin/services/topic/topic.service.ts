@@ -42,4 +42,9 @@ export class AdminTopicService {
 		formData.append('chapter_details_id', topicFormData.chapter_details_id);
 		return this.http.post<any>(this.constants.UPDATE_TOPIC_URL, formData);
 	}
+
+
+	deleteTopic(topic): Observable<any> {
+		return this.http.delete<any>(this.constants.ADMIN_TOPICS_DELETE_URL + topic.id);
+	}
 }

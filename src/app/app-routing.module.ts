@@ -31,7 +31,13 @@ import { StudentCreateProfileComponent } from '@app/student/components/profile/c
 
 import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboard.component';
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
+import { FacultyChaptersComponent } from '@facultyComponents/chapter/chapter.component';
+import { FacultyExaminationComponent } from '@facultyComponents/examination/examination.component';
+
+import { FacultyTopicComponent } from '@facultyComponents/topic/topic.component';
+
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
+import { FacultyFaqComponent } from '@facultyComponents/faq/faq.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -64,7 +70,18 @@ const routes: Routes = [
 	
 	{ path: 'faculty/dashboard', component: FacultyDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'faculty/subjects', component: FacultySubjectsComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/chapters', component: FacultyChaptersComponent, canActivate: [AuthGuard]},
+	{ path: 'faculty/examination', component: FacultyExaminationComponent, canActivate: [AuthGuard]},
+
 	{ path: 'faculty/questions/:subjectId', component: FacultyQuestionsComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/topics/:chapterId', component: FacultyTopicComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/students', component: FacultySubjectsComponent, canActivate: [AuthGuard]},
+
+	{ path: 'faculty/faqs/:chapterId', component: FacultyFaqComponent, canActivate: [AuthGuard]},
+
 	{ path: '**', component: PageNotFoundComponent }
 ];
 

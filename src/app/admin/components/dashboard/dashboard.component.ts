@@ -70,6 +70,7 @@ export class AdminDashboardComponent implements OnInit {
 			icon : 'fas fa-chalkboard-teacher',
 			value : this.dashboardData.faculties_count
 		}]
+
 	} 
 
 }

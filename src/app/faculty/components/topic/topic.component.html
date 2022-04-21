@@ -1,6 +1,6 @@
 <div class="wrapper">
     <app-navbar></app-navbar>
-    <app-admin-sidebar></app-admin-sidebar>
+    <app-faculty-sidebar></app-faculty-sidebar>
     <div class="content-wrapper" [hidden]="topicsDataStatus !== 1">
         <app-breadcrumb [title]="'TOPICS'"></app-breadcrumb>
         <section class="content">
@@ -42,7 +42,7 @@
                                                     (click)="editTopic(topic)">
                                                         <i class="pr-1 fa fa-pen"></i> {{ 'EDIT' | translate }}
                                                     </button>
-                                                    <button class="btn btn-danger mt-2 btn-sm mr-1" (click)="deleteTopic(topic)">
+                                                    <button class="btn btn-danger mt-2 btn-sm mr-1">
                                                         <i class="pr-1 fa fa-trash"></i> {{ 'DELETE' | translate }}
                                                     </button>
                                                     <button class="btn btn-theme-primary mt-2 btn-sm" (click)="navigateToFaqs(topic)">
