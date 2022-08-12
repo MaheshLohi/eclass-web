@@ -1,5 +1,5 @@
 export class Constants {
-    DOMAIN_URL = 'https://api.rewindedu.in/';
+    DOMAIN_URL = 'https://api.gradlit.in/';
 
     BASE_URL = this.DOMAIN_URL + 'api/';
 
