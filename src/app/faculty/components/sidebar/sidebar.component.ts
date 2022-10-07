@@ -54,9 +54,8 @@ export class FacultySidebarComponent implements OnInit {
 		{
 			name : "TEST",
 			icon : "fas fa-clipboard",
-			link : this._constants.FACULTY_TEST_URL,
-			out_side : "yes"
-		},
+			link : '/'+ this.userType +"/mcq"
+		}
 		];
 		
 

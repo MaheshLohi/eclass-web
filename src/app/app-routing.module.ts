@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from '@sharedComponents/pageNotFound/pageNotFou
 import { SuperAdminDashboardComponent } from '@superAdminComponents/dashboard/dashboard.component';
 import { SuperAdminInstitutesComponent } from '@superAdminComponents/institutes/institutes.component';
 import { SuperAdminAdminsComponent } from '@superAdminComponents/admins/admins.component';
+import { McqComponent } from '@superAdminComponents/mcq/mcq.component';
 
 import { AdminDashboardComponent } from '@adminComponents/dashboard/dashboard.component';
 import { AdminFacultiesComponent } from '@adminComponents/faculties/faculties.component';
@@ -18,6 +19,8 @@ import { AdminChapterComponent } from '@adminComponents/chapter/chapter.componen
 import { AdminFaqComponent } from '@adminComponents/faq/faq.component';
 import { AdminTopicComponent } from '@adminComponents/topic/topic.component';
 import { AdminExaminationComponent } from '@adminComponents/examination/examination.component';
+import { AdminMcqComponent } from '@adminComponents/mcq/mcq.component';
+
 
 import { StudentSubjectComponent } from '@studentComponents/subject/subject.component';
 import { StudentTopicComponent } from '@studentComponents/topic/topic.component';
@@ -28,6 +31,8 @@ import { StudentHelpComponent } from '@studentComponents/help/help.component';
 import { StudentSearchComponent } from '@studentComponents/search/search.component';
 import { StudentProfileComponent } from '@studentComponents/profile/profile.component';
 import { StudentCreateProfileComponent } from '@app/student/components/profile/create-profile/create-profile.component';
+import { StudentMcqComponent } from '@studentComponents/mcq/mcq.component';
+
 
 import { FacultyDashboardComponent } from '@facultyComponents/dashboard/dashboard.component';
 import { FacultySubjectsComponent } from '@facultyComponents/subjects/subjects.component';
@@ -38,6 +43,7 @@ import { FacultyTopicComponent } from '@facultyComponents/topic/topic.component'
 
 import { FacultyQuestionsComponent } from '@facultyComponents/questions/questions.component';
 import { FacultyFaqComponent } from '@facultyComponents/faq/faq.component';
+import { FacultyMcqComponent } from '@facultyComponents/mcq/mcq.component';
 
 const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -46,6 +52,7 @@ const routes: Routes = [
 	{ path: 'superAdmin/dashboard', component: SuperAdminDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'superAdmin/institutes', component: SuperAdminInstitutesComponent, canActivate: [AuthGuard]},
 	{ path: 'superAdmin/admins', component: SuperAdminAdminsComponent, canActivate: [AuthGuard]},
+	{ path: 'superAdmin/mcq', component: McqComponent, canActivate: [AuthGuard]},
 
 	{ path: 'admin/dashboard', component: AdminDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/faculties', component: AdminFacultiesComponent, canActivate: [AuthGuard]},
@@ -56,6 +63,8 @@ const routes: Routes = [
 	{ path: 'admin/examination', component: AdminExaminationComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/faqs/:chapterId', component: AdminFaqComponent, canActivate: [AuthGuard]},
 	{ path: 'admin/topics/:chapterId', component: AdminTopicComponent, canActivate: [AuthGuard]},
+	{ path: 'admin/mcq', component: AdminMcqComponent, canActivate: [AuthGuard]},
+	
 
 	{ path: 'student/home', component: StudentSubjectComponent, canActivate: [AuthGuard]},
 	{ path: 'student/contents/:subjectId', component: StudentContentComponent, canActivate: [AuthGuard]},
@@ -67,7 +76,8 @@ const routes: Routes = [
 	{ path: 'student/search', component: StudentSearchComponent, canActivate: [AuthGuard]},
 	{ path: 'student/profile', component: StudentProfileComponent, canActivate: [AuthGuard]},
 	{ path: 'student/create-profile', component: StudentCreateProfileComponent, canActivate: [AuthGuard]},
-	
+	{ path: 'student/mcq', component: StudentMcqComponent, canActivate: [AuthGuard]},
+
 	{ path: 'faculty/dashboard', component: FacultyDashboardComponent, canActivate: [AuthGuard]},
 	{ path: 'faculty/subjects', component: FacultySubjectsComponent, canActivate: [AuthGuard]},
 
@@ -81,6 +91,7 @@ const routes: Routes = [
 	{ path: 'faculty/students', component: FacultySubjectsComponent, canActivate: [AuthGuard]},
 
 	{ path: 'faculty/faqs/:chapterId', component: FacultyFaqComponent, canActivate: [AuthGuard]},
+	{ path: 'faculty/mcq', component: FacultyMcqComponent, canActivate: [AuthGuard]},
 
 	{ path: '**', component: PageNotFoundComponent }
 ];

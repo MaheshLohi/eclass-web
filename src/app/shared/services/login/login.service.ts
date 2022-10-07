@@ -53,4 +53,16 @@ export class LoginService {
 			})
 		)
 	};
+
+	adminForgotPassword(data) : Observable<any> {
+		return this._http.post<any>(this._constants.FORGOT_ADMIn_EMAIL, data)
+		.pipe(
+			map(response => { 
+				if (response && response.status) {
+				  	return response; 
+				}
+				throw 0;
+			})
+		)
+	};
 }

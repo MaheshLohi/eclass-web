@@ -57,12 +57,12 @@ export class StudentSidebarComponent implements OnInit {
 			name : "PROFILE",
 			icon : "fa fa-user",
 			link : '/'+ this.userType +'/profile'
-		},{
+		},
+		{
 			name : "TEST",
 			icon : "fas fa-clipboard",
-			link : this._constants.FACULTY_TEST_URL,
-			out_side : "yes"
-		},
+			link : '/'+ this.userType +"/mcq"
+		}
 	];
 	};
 	  

@@ -41,6 +41,10 @@ export class SuperAdminSidebarComponent implements OnInit {
 			name : "ADMINS",
 			icon : "fas fa-chalkboard-teacher",
 			link : '/'+ this.userType +"/admins"
+		},{
+			name : "TEST",
+			icon : "fas fa-clipboard",
+			link : '/'+ this.userType +"/mcq"
 		}];
 	};
 	  
