@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
 	showPassword : boolean = false;
 	forgotPasswordForm : FormGroup;
 	validateUsn  : boolean = false;
+	adminForgotPasswordForm : FormGroup;
 
 	constructor(private _router: Router,
 	private _loader: LoaderService,
@@ -34,6 +35,10 @@ export class LoginComponent implements OnInit {
 			'email' : new FormControl("", []),
 			'usn' : new FormControl("", [])
 			});
+
+		this.adminForgotPasswordForm = new FormGroup({
+			'email' : new FormControl("", [])
+			});	
 	};
 
 	validateLoginForm(formName) {
@@ -106,6 +111,24 @@ export class LoginComponent implements OnInit {
 		let data = this.forgotPasswordForm.value;
 		this._loader.showLoader();
 		this._login.forgotPassword(data)
+		.subscribe((response:any) => {
+			this._loader.hideLoader();
+			this.toaster.showSuccess(response.status.message);
+		}, (errorCode) => {
+			this._loader.hideLoader();
+		});
+
+	}
+
+	validateAdminForgotPasswordFormValue(formName) {
+		return this.adminForgotPasswordForm.get(formName); 
+	};
+
+	adminForgotPassword ()
+	{
+		let data = this.adminForgotPasswordForm.value;
+		this._loader.showLoader();
+		this._login.adminForgotPassword(data)
 		.subscribe((response:any) => {
 			this._loader.hideLoader();
 			this.toaster.showSuccess(response.status.message);

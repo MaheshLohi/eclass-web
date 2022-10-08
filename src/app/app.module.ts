@@ -74,6 +74,10 @@ import { SuperAdminListErrorComponent } from '@superAdminComponents/list-error/l
 import { AdminListErrorComponent } from '@adminComponents/list-error/list-error.component';
 import { StudentCreateProfileComponent } from '@app/student/components/profile/create-profile/create-profile.component';
 import { StudentRecentVideosComponent } from '@studentComponents/recent-videos/recent-videos.component';
+import { McqComponent } from './superAdmin/components/mcq/mcq.component';
+import { StudentMcqComponent } from '@studentComponents/mcq/mcq.component';
+import { FacultyMcqComponent } from '@facultyComponents/mcq/mcq.component';
+import { AdminMcqComponent } from '@adminComponents/mcq/mcq.component';
 
 @NgModule({
 	declarations: [
@@ -127,7 +131,11 @@ import { StudentRecentVideosComponent } from '@studentComponents/recent-videos/r
 		SuperAdminListErrorComponent,
 		AdminListErrorComponent,
 		StudentCreateProfileComponent,
-		StudentRecentVideosComponent
+		StudentRecentVideosComponent,
+		McqComponent,
+		StudentMcqComponent,
+		FacultyMcqComponent,
+		AdminMcqComponent
 	],
 	imports: [
 		BrowserModule,

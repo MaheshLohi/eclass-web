@@ -88,4 +88,6 @@ export class Constants {
     FACULTY_SUBMIT_REPLAY_URL = this.ADMIN_URL + 'answer';
 
     FACULTY_TEST_URL = "http://test.gradlit.in/login";
+    MCQ_DIRECT_LOGIN_TOKEN = this.BASE_URL + "get-mcq-token";
+    FORGOT_ADMIn_EMAIL = this.ADMIN_URL + 'forgot-password';
 }

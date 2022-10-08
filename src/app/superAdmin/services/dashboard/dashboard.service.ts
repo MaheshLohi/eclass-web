@@ -24,4 +24,16 @@ export class SuperAdminDashboardService {
 			})
 		)
 	};
+
+	getDirectLoginUrl(): Observable<any> {
+		return this.http.get<any>(this.constants.MCQ_DIRECT_LOGIN_TOKEN)
+		.pipe(
+			map(response => { 
+				if (response && response) {
+				  	return response; 
+				}
+				throw 0;
+			})
+		)
+	};
 }

@@ -63,13 +63,12 @@ export class AdminSidebarComponent implements OnInit {
 			name : "FACULTIES",
 			icon : "fas fa-chalkboard-teacher",
 			link : '/'+ this.userType +"/faculties"
-		},
+		} ,
 		{
 			name : "TEST",
 			icon : "fas fa-clipboard",
-			link : this._constants.FACULTY_TEST_URL,
-			out_side : "yes"
-		},
+			link : '/'+ this.userType +"/mcq"
+		}
 	];
 	};
 	  
