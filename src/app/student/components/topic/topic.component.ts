@@ -66,6 +66,8 @@ export class StudentTopicComponent implements OnInit {
 			this.topics = response.chapter_details.data;
 			if(this.queryParams.topicId) {
 				let index = _.findIndex(this.topics, { id: parseInt(this.queryParams.topicId)});
+				console.log("qqqqqqqqqqqqqqqqqqqqqq");
+				console.log(this.topics[0]);
 				this.prepareVimeoPlayer((index > -1)? this.topics[index] : this.topics[0]);
 			}
 			else {
@@ -91,7 +93,7 @@ export class StudentTopicComponent implements OnInit {
 	selectTopic(topic) {
 		if(topic !== this.selectedTopic) {
             this.selectedTopic = topic; 
-			this.changeRouteParams();
+			this.changeRouteParams(); 
 			this.changeVimeoSource();
         }
 	};
