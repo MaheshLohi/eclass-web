@@ -12,6 +12,7 @@ import { LoaderService } from '@sharedServices/loader/loader.service';
 import { AdminDepartmentService } from '@adminServices/department/department.service';
 import { AdminChapterService } from '@adminServices/chapter/chapter.service';
 import { AdminSubjectsService } from '@adminServices/subjects/subjects.service';
+import Player from '@vimeo/player';
 
 @Component({
   	selector: 'app-faculty-chapter',
@@ -23,7 +24,7 @@ export class FacultyChaptersComponent implements OnInit {
 	departments : any = [];
 	semesters : any = [];
 	chapters : any = [];
-	subjects : any = [];
+	subjects : any = []; 
 	availableForms = ["filterForm","addChapterForm","addTopicForm","editChapterForm"];
 	filterDataStatus : number = 2;
 	chaptersDataStatus : number = 2;
@@ -33,6 +34,8 @@ export class FacultyChaptersComponent implements OnInit {
 	addChapterForm : FormGroup;
 	addTopicForm : FormGroup;
 	editChapterForm : FormGroup;
+	player : any;
+	showPreviewError : any = true;
 	  
 	constructor(public _constants : Constants,
 	public _download : DownloadService,
@@ -236,4 +239,18 @@ export class FacultyChaptersComponent implements OnInit {
 			this._loader.hideLoader();
 		});
 	};
+
+	previewVedio() {
+		if(this.addTopicForm.value.video_id) {
+			this.showPreviewError=false;
+			this.player = new Player('vimeo-player', { 
+				id: Number(this.addTopicForm.value.video_id),
+				loop: true, responsive : true,
+				portrait : true, title : false,
+				autoplay : true
+			});
+		} else {
+			this.showPreviewError=true;
+		}
+	}
 }
