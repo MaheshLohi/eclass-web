@@ -14436,8 +14436,6 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
               var index = lodash__WEBPACK_IMPORTED_MODULE_4__["findIndex"](_this95.topics, {
                 id: parseInt(_this95.queryParams.topicId)
               });
-              console.log("qqqqqqqqqqqqqqqqqqqqqq");
-              console.log(_this95.topics[0]);
 
               _this95.prepareVimeoPlayer(index > -1 ? _this95.topics[index] : _this95.topics[0]);
             } else {

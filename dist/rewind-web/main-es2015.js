@@ -8803,8 +8803,6 @@ let StudentTopicComponent = class StudentTopicComponent {
             this.topics = response.chapter_details.data;
             if (this.queryParams.topicId) {
                 let index = lodash__WEBPACK_IMPORTED_MODULE_4__["findIndex"](this.topics, { id: parseInt(this.queryParams.topicId) });
-                console.log("qqqqqqqqqqqqqqqqqqqqqq");
-                console.log(this.topics[0]);
                 this.prepareVimeoPlayer((index > -1) ? this.topics[index] : this.topics[0]);
             }
             else {
