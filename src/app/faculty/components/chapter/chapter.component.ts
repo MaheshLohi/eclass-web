@@ -242,15 +242,28 @@ export class FacultyChaptersComponent implements OnInit {
 
 	previewVedio() {
 		if(this.addTopicForm.value.video_id) {
+			if(this.player)
+			{
+				document.querySelector('div#vimeo-player').innerHTML = "";
+				this.player.destroy();
+			}
 			this.showPreviewError=false;
+			
 			this.player = new Player('vimeo-player', { 
 				id: Number(this.addTopicForm.value.video_id),
 				loop: true, responsive : true,
 				portrait : true, title : false,
 				autoplay : true
 			});
+
 		} else {
 			this.showPreviewError=true;
 		}
+	}
+
+	stopVedio()
+	{
+		document.querySelector('div#vimeo-player').innerHTML = "";
+		this.player.destroy();
 	}
 }
